@@ -1,0 +1,7 @@
+.wys/
+*.DS_Store
+.vscode/
+bottles/
+.wys/
+.godot/
+src/out/
