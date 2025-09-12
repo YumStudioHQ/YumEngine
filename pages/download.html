@@ -1,0 +1,45 @@
+<!-- download.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YumEngine Downloads</title>
+    <link rel="stylesheet" href="../assets/style/yum.css" />
+  </head>
+  <body>
+    <header>
+      <h1>YumEngine Downloads</h1>
+      <p>Get the latest build of YumEngine for your platform</p>
+    </header>
+
+    <section id="downloads">
+      <h2>Downloads</h2>
+      <p>Get the latest official builds:</p>
+      <p>Current Engine Version: <span id="engine-version">Loading...</span></p>
+      <h4>
+        Important! We're planning releases as soon as possible. Internal engine
+        is still in development.
+      </h4>
+
+      <div class="downloads-container">
+        <div class="download-card">
+          <img src="../assets/icons/github-mark.png" alt="GitHub" />
+          <h3>GitHub</h3>
+          <p>Source code</p>
+          <a href="https://github.com/wys-prog/yum" class="btn">Go!</a>
+        </div>
+      </div>
+    </section>
+
+    <script src="../assets/version/engine_version.js"></script>
+    <script>
+      document.getElementById("engine-version").innerText =
+        YUM_ENGINE_VERSION.full;
+    </script>
+
+    <footer>
+      <p>&copy; 2025 Yum Studio | <a href="../../index.html">Home</a></p>
+    </footer>
+  </body>
+</html>

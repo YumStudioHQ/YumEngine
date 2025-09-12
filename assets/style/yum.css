@@ -1,0 +1,294 @@
+/* RESET & BASE */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Orbitron', sans-serif;
+  background: #0b0b0f;
+  color: #fff;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+a { color: inherit; text-decoration: none; }
+
+/* HEADER / HERO */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #1F1F2E, #2E3C5D, #4A90E2, #6ACAF0);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+  animation: rotateBG 60s linear infinite;
+  top: -50%;
+  left: -50%;
+  z-index: 0;
+}
+header h1 {
+  position: relative;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4rem;
+  color: #E0F7FF;
+  text-shadow:
+    0 0 6px #A0DFFF,
+    0 0 12px #70BFFF,
+    0 0 25px #4A90E2;
+  animation: flicker 2s infinite;
+  z-index: 1;
+}
+header p {
+  position: relative;
+  margin-top: 20px;
+  font-size: 1.3rem;
+  color: #D0F0FF;
+  text-shadow: 0 0 5px #A0DFFF;
+  z-index: 1;
+}
+.tech span {
+  font-weight: bold;
+  text-shadow: 0 0 10px #70BFFF, 0 0 20px #4A90E2;
+  animation: glow 2s infinite alternate;
+  margin: 0 5px;
+}
+
+/* SECTIONS */
+section {
+  padding: 100px 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+section h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  color: #6ACAF0;
+  text-shadow: 0 0 6px #6ACAF0, 0 0 15px #4A90E2;
+}
+section p {
+  max-width: 850px;
+  margin: 0 auto 25px;
+  line-height: 1.7;
+  color: #ccc;
+  text-shadow: 0 0 2px #fff;
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 14px 28px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  color: #fff;
+  border: 2px solid #6ACAF0;
+  border-radius: 12px;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.05));
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn:hover {
+  background: #6ACAF0;
+  color: #0b0b0f;
+  box-shadow: 0 0 25px #6ACAF0, 0 0 50px #4A90E2;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: -100%;
+  background: rgba(255,255,255,0.2);
+  transform: skewX(-20deg);
+  transition: all 0.5s ease;
+}
+.btn:hover::after { left: 100%; }
+
+/* KEYFRAMES */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes rotateBG {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.3; }
+}
+@keyframes glow {
+  from { text-shadow: 0 0 10px #70BFFF, 0 0 20px #4A90E2; }
+  to { text-shadow: 0 0 20px #70BFFF, 0 0 40px #4A90E2, 0 0 60px #6ACAF0; }
+}
+
+/* DEV CARDS */
+.devs-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+.dev-card {
+  background: #111;
+  border: 2px solid #6ACAF0;
+  border-radius: 16px;
+  padding: 25px;
+  width: 220px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.dev-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+  animation: rotateBG 80s linear infinite;
+  z-index: 0;
+}
+.dev-card:hover {
+  transform: translateY(-12px) rotateZ(-1deg);
+  box-shadow: 0 0 25px #6ACAF0, 0 0 50px #4A90E2, 0 0 75px #6ACAF0;
+}
+.dev-card img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 12px;
+  border: 2px solid #4A90E2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.dev-card img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #6ACAF0, 0 0 30px #4A90E2;
+}
+
+/* BADGES */
+.badge {
+  display: inline-block;
+  padding: 6px 14px;
+  margin: 5px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4A90E2, #6ACAF0);
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 0 0 5px #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.badge:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 10px #4A90E2, 0 0 20px #6ACAF0;
+}
+
+/* FOOTER */
+footer {
+  padding: 50px 20px;
+  background: #111;
+  color: #888;
+  text-align: center;
+  font-size: 0.9rem;
+}
+footer a { color: #6ACAF0; text-shadow: 0 0 3px #6ACAF0; }
+
+/* HOW IT WORKS */
+#how-it-works ul {
+  list-style: disc inside;
+  margin-bottom: 20px;
+}
+#how-it-works li {
+  margin-bottom: 14px;
+  color: #ccc;
+  text-shadow: 0 0 2px #fff;
+}
+
+/* DOWNLOADS */
+#downloads {
+  padding: 100px 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  background: #0f0f16;
+}
+
+.downloads-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.download-card {
+  background: #111;
+  border: 2px solid #6ACAF0;
+  border-radius: 16px;
+  padding: 25px;
+  width: 250px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.download-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+  animation: rotateBG 80s linear infinite;
+  z-index: 0;
+}
+.download-card:hover {
+  transform: translateY(-12px) rotateZ(-1deg);
+  box-shadow: 0 0 25px #6ACAF0, 0 0 50px #4A90E2, 0 0 75px #6ACAF0;
+}
+.download-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 2px solid #4A90E2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.download-card img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #6ACAF0, 0 0 30px #4A90E2;
+}
+.download-card h3 {
+  color: #6ACAF0;
+  margin-bottom: 10px;
+  text-shadow: 0 0 6px #6ACAF0, 0 0 12px #4A90E2;
+}
+.download-card p {
+  color: #ccc;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-bottom: 15px;
+  text-shadow: 0 0 2px #fff;
+}
+.download-card .btn {
+  font-size: 0.9rem;
+  padding: 10px 20px;
+}
