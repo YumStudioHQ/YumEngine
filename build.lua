@@ -4,21 +4,21 @@
 -- =========================
 CXX            = "g++-15"
 CC             = "gcc-15"
-SRC_PATH       = "/Users/wys/Documents/yumrt/src/lua/src/"
-LUA_SRC        = "/Users/wys/Documents/yumrt/src/lua/lua/"
-YUM_SRC        = "/Users/wys/Documents/yumrt/src/lua/src/YumEngine.cpp" -- Path to YumEngine!
-OUT            = "yum.dylib"
+SRC_PATH       = "src/lua/src/"
+LUA_SRC        = "src/lua/lua/"
+YUM_SRC        = "src/lua/src/YumEngine.cpp" -- Path to YumEngine!
+OUT            = "yum"
 YUM_OUT        = "YumEngine" -- You can add extention, but compilers do it automatically
 LUA_FLAGS      = { "-O2", }
 YUM_FLAGS      = { "-O2", "-Wall", "-Wextra", "-std=c++23" }
 ENG_FLAGS      = YUM_FLAGS -- Same flags for Engine and Yum — but you can still change them!
 LINK_FLAGS     = { "-shared", "-fPIC" }
-VERSION_FILE   = "/Users/wys/Documents/yumrt/src/lua/src/inc/engine_version.h"
+VERSION_FILE   = "src/lua/src/inc/engine_version.h"
 VERSION_PREFIX = "YUM_ENGINE"
 VERSION_BRANCH = "stable"   -- your branch name
 VERSION_STUDIO = "yum-official" -- your studio name
 
-WEBSITE_JS_FILE = "/Users/wys/Documents/yumrt/website/assets/version/engine_version.js"
+WEBSITE_JS_FILE = "engine_version.js"
 
 -- =========================
 -- HELPERS
