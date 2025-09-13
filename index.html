@@ -8,7 +8,10 @@
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://yumstudiohq.github.io/YumStudioHQ/assets/style/yum-style.css">
+    <link
+      rel="stylesheet"
+      href="https://yumstudiohq.github.io/YumStudioHQ/assets/style/yum-style.css"
+    />
   </head>
   <body>
     <header>
@@ -19,7 +22,7 @@
         <span class="godot">Godot</span>
       </p>
       <p>Current Engine Version: <span id="engine-version">Loading...</span></p>
-      <a href="#downloads" class="btn">Get Started</a>
+      <a href="./pages/download.html" class="btn">Get Started</a>
     </header>
 
     <section id="overview">
@@ -93,22 +96,14 @@ lua build.lua build
     <section id="devs">
       <h2>Developers</h2>
       <div class="devs-container">
-        <div class="dev-card">
-          <img
-            src="assets/devs/bacf0edf1db0b954590709929ad5807b.jpg"
-            alt="Wys"
-          />
-          <h3>Wys</h3>
-          <p>Lead Developer</p>
-          <a href="https://github.com/wys-prog" target="_blank">GitHub</a>
-        </div>
       </div>
     </section>
 
     <footer>
       <p>
         &copy; 2025 Yum Studio —
-        <a href="https://github.com/wys-prog/yum">GitHub</a>
+        <a href="https://github.com/YumStudioHQ/YumEngine">GitHub</a>
+        <a href="https://yumstudiohq.github.io/YumStudioHQ/">Home</a>
       </p>
     </footer>
   </body>
@@ -116,5 +111,28 @@ lua build.lua build
   <script>
     document.getElementById("engine-version").innerText =
       YUM_ENGINE_VERSION.full;
+
+    const jsonURL =
+      "https://yumstudiohq.github.io/YumStudioHQ/assets/json/devs.json";
+
+    const container = document.getElementById("devs-container");
+
+    fetch(jsonURL)
+      .then((response) => response.json())
+      .then((devs) => {
+        devs.forEach((dev) => {
+          const card = document.createElement("div");
+          card.className = "dev-card";
+          card.innerHTML = `
+        <a href="${dev.github}" target="_blank">
+          <img src="${dev.pfp}" alt="${dev.name}">
+        </a>
+        <h3>${dev.name}</h3>
+        <p>${dev.type}</p>
+      `;
+          container.appendChild(card);
+        });
+      })
+      .catch((err) => console.error("Error loading devs:", err));
   </script>
 </html>
