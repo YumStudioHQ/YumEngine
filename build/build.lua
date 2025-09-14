@@ -2,18 +2,18 @@
 -- CONFIGURATION (edit me!)
 -- DON'T FORGET THE '/' OR '\' AT THE END OF PATHS
 -- =========================
-CXX            = "g++-15"
-CC             = "gcc-15"
-SRC_PATH       = "src/lua/src/"
-LUA_SRC        = "src/lua/lua/"
-YUM_SRC        = "src/lua/src/YumEngine.cpp" -- Path to YumEngine!
+CXX            = "x86_64-w64-mingw32-g++"
+CC             = "x86_64-w64-mingw32-gcc"
+SRC_PATH       = "../src/lua/src/"
+LUA_SRC        = "../src/lua/lua/"
+YUM_SRC        = "../src/lua/src/YumEngine.cpp" -- Path to YumEngine!
 OUT            = "yum"
 YUM_OUT        = "YumEngine" -- You can add extention, but compilers do it automatically
-LUA_FLAGS      = { "-O2", }
-YUM_FLAGS      = { "-O2", "-Wall", "-Wextra", "-std=c++23" }
+LUA_FLAGS      = { "-O2", "-static-libstdc++", '-static-libgcc', '-static' }
+YUM_FLAGS      = { "-O2", "-Wall", "-Wextra", "-std=c++23", "-static-libstdc++", '-static-libgcc', '-static' }
 ENG_FLAGS      = YUM_FLAGS -- Same flags for Engine and Yum — but you can still change them!
-LINK_FLAGS     = { "-shared", "-fPIC" }
-VERSION_FILE   = "src/lua/src/inc/engine_version.h"
+LINK_FLAGS     = { "-shared", "-fPIC", "-static-libstdc++", '-static-libgcc', '-static' }
+VERSION_FILE   = "../src/lua/src/inc/engine_version.h"
 VERSION_PREFIX = "YUM_ENGINE"
 VERSION_BRANCH = "stable"   -- your branch name
 VERSION_STUDIO = "yum-official" -- your studio name
