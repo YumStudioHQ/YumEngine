@@ -19,6 +19,7 @@ YUM_OUTATR int32_t YumSubsystem_isValidUID(YumSubsystem *s, uint64_t uid);
 YUM_OUTATR int32_t YumLuaSubsystem_load(YumSubsystem *s, uint64_t uid, const char *src, bool isFile);
 YUM_OUTATR bool YumLuaSubsystem_good(YumSubsystem *s, uint64_t uid);
 YUM_OUTATR YumVector *YumLuaSubsystem_call(YumSubsystem *s, uint64_t uid, const char *name, const YumVector *args);
+YUM_OUTATR int32_t YumLuaSubsystem_pushCallback(YumSubsystem *s, uint64_t uid, const char *name, YumVector (*YumCallbackFn)(YumVector));
 
 #ifdef __cplusplus
 }

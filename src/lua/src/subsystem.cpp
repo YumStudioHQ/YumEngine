@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <iostream>
 #include <stdexcept>
+#include <functional>
 #include <unordered_map>
 
 #include "inc/subsystem.hpp"
@@ -63,12 +64,12 @@ namespace Yumcxx {
     if (isAFileThatIHaveToLoad) {
       if (luaL_loadfile(lua->get(), s.c_str()) != LUA_OK) {
         ((*G_err()) << "yum: err: cannot load '" << s << "': " << lua_tostring(lua->get(), -1) << std::endl);
-        return YumCode::YUM_ERROR;
+        return YUM_ERROR;
       }
     } else {
       if (luaL_dostring(lua->get(), s.c_str()) != LUA_OK) {
         ((*G_err()) << "yum: err: cannot load <string>: " << lua_tostring(lua->get(), -1) << std::endl);
-        return YumCode::YUM_ERROR;
+        return YUM_ERROR;
       }
     }
     return YUM_OK;
@@ -77,6 +78,72 @@ namespace Yumcxx {
   bool LuaSubsystem::good() {
     return lua->get() != nullptr;
   }
+
+  int32_t LuaSubsystem::pushCallback(const std::string &name, const std::function<Vector(Vector)> &cb) {
+    if (!cb) {
+      (*G_err()) << "yum: err: pushing null callback" << std::endl;
+      return YUM_ERROR;
+    } else if (name.empty()) {
+      (*G_err()) << "yum: err: pushing unnamed callback (illegal)" << std::endl;
+      return YUM_ERROR;
+    }
+
+    auto cb_ptr = std::make_shared<std::function<Vector(Vector)>>(cb);
+    auto deleter = [name](std::function<Vector(Vector)>* p) {
+      std::cout << "yum: G_sys: resource destroyed for callback: " << name << 
+      "(0x" << std::hex << std::setw(16) << std::setfill('0') << p << ")" << std::endl;
+      delete p;
+    };
+    auto cb_shared = std::shared_ptr<std::function<Vector(Vector)>>(cb_ptr.get(), deleter);
+    
+    callbacks[name] = cb_shared;
+    (*G_out()) << "yum: G_sys: callback pushed: " << name << 
+      "(0x" << std::hex << std::setw(16) << std::setfill('0') << callbacks[name].get() << ")" << std::endl;
+
+    auto luaRptr = ((*lua).get());
+
+    // Store the callback in a static map for retrieval in the static function
+    static std::unordered_map<std::string, std::shared_ptr<std::function<Vector(Vector)>>> &callback_map = callbacks;
+
+    // Static function to be used as lua_CFunction
+    auto static_lua_callback = [](lua_State *L) -> int {
+      const char* cb_name = lua_tostring(L, lua_upvalueindex(1));
+      if (!cb_name) return 0;
+
+      auto it = callback_map.find(cb_name);
+      if (it == callback_map.end()) return 0;
+
+      int nargs = lua_gettop(L);
+      Vector args;
+      for (int i = 1; i <= nargs; ++i) {
+        if (lua_isinteger(L, i)) args.append(lua_tointeger(L, i));
+        else if (lua_isnumber(L, i)) args.append(lua_tonumber(L, i));
+        else if (lua_isboolean(L, i)) args.append((bool)lua_toboolean(L, i));
+        else if (lua_isstring(L, i)) args.append(lua_tostring(L, i));
+      }
+
+      Vector result = (*(it->second))(args);
+
+      for (int i = 0; i < result.size(); ++i) {
+        auto me = result.at(i);
+        if (me.is_int()) lua_pushinteger(L, me.as_int());
+        else if (me.is_float()) lua_pushnumber(L, me.as_float());
+        else if (me.is_bool()) lua_pushboolean(L, me.as_bool());
+        else if (me.is_string()) lua_pushstring(L, me.as_string().c_str());
+        else lua_pushnil(L);
+      }
+
+      return result.size();
+    };
+
+    lua_pushstring(luaRptr, name.c_str());
+    lua_pushcclosure(luaRptr, static_lua_callback, 1);
+    lua_setglobal(luaRptr, name.c_str());
+
+    return YUM_OK;
+  }
+
+  #pragma region Subsystem
 
   uint64_t Subsystem::uid_new() {
     static uint64_t counter = 0;
@@ -116,6 +183,10 @@ namespace Yumcxx {
     ** Then if u dont follow rules, u get segfaults. */
   }
 }
+
+#pragma endregion
+
+#pragma region C Interface 
 
 extern "C" {
   // -------- Subsystem --------
@@ -158,4 +229,22 @@ extern "C" {
     Yumcxx::Vector v = lua->call(std::string(name), *args);
     return new Yumcxx::Vector(std::move(v));
   }
+
+
+  YUM_OUTATR int32_t YumLuaSubsystem_pushCallback(YumSubsystem *s, uint64_t uid, const char *name, YumVector (*cb)(YumVector)) {
+      /* ---------- */
+    if (!s || !name || !cb) return YUM_ERROR;
+    if (!s->isValidUID(uid)) return YUM_ERROR;
+
+    auto lua = s->get(uid);
+
+    lua->pushCallback(name, [&cb](Yumcxx::Vector v) -> Yumcxx::Vector {
+      return cb(v);
+    });
+
+    return YUM_OK;
+  }
+
 }
+
+#pragma endregion
