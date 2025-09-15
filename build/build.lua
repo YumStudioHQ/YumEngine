@@ -10,7 +10,7 @@ YUM_SRC        = "../src/lua/src/YumEngine.cpp" -- Path to YumEngine!
 OUT            = "yum"
 YUM_OUT        = "YumEngine" -- You can add extention, but compilers do it automatically
 LUA_FLAGS      = { "-O2", }
-YUM_FLAGS      = { "-O2", "-Wall", "-Wextra", "-std=c++23" }
+YUM_FLAGS      = { "-O2", "-Wall", "-Wextra", "-std=c++23", "-D_YUM_STUDIO_OFFICIAL_COMPILER" }
 ENG_FLAGS      = YUM_FLAGS -- Same flags for Engine and Yum — but you can still change them!
 LINK_FLAGS     = { "-shared", "-fPIC", "-static-libstdc++", }
 VERSION_FILE   = "../src/lua/src/inc/engine_version.h"

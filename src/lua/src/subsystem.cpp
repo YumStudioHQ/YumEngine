@@ -79,33 +79,42 @@ namespace Yumcxx {
     return lua->get() != nullptr;
   }
 
-  int32_t LuaSubsystem::pushCallback(const std::string &name, const std::function<Vector(Vector)> &cb) {
+  int32_t LuaSubsystem::pushCallback(
+    const std::string &name,
+    const std::function<Vector(Vector)> &cb,
+    const std::string &ns
+  ) {
     if (!cb) {
       (*G_err()) << "yum: err: pushing null callback" << std::endl;
       return YUM_ERROR;
-    } else if (name.empty()) {
+    }
+    if (name.empty()) {
       (*G_err()) << "yum: err: pushing unnamed callback (illegal)" << std::endl;
       return YUM_ERROR;
     }
 
-    auto cb_ptr = std::make_shared<std::function<Vector(Vector)>>(cb);
-    auto deleter = [name](std::function<Vector(Vector)>* p) {
-      std::cout << "yum: G_sys: resource destroyed for callback: " << name << 
-      "(0x" << std::hex << std::setw(16) << std::setfill('0') << p << ")" << std::endl;
-      delete p;
-    };
-    auto cb_shared = std::shared_ptr<std::function<Vector(Vector)>>(cb_ptr.get(), deleter);
-    
-    callbacks[name] = cb_shared;
-    (*G_out()) << "yum: G_sys: callback pushed: " << name << 
-      "(0x" << std::hex << std::setw(16) << std::setfill('0') << callbacks[name].get() << ")" << std::endl;
+    auto cb_shared = std::shared_ptr<std::function<Vector(Vector)>>(
+      new std::function<Vector(Vector)>(cb),
+      [name](std::function<Vector(Vector)>* p) {
+        std::cout << "yum: G_sys: resource destroyed for callback: "
+                  << name << "(0x" << std::hex << std::setw(16)
+                  << std::setfill('0') << p << ")" << std::endl;
+        delete p;
+      }
+    );
 
-    auto luaRptr = ((*lua).get());
+    // store in global map
+    callbacks[(ns.empty() ? name : ns + "." + name)] = cb_shared;
 
-    // Store the callback in a static map for retrieval in the static function
+    (*G_out()) << "yum: G_sys: callback pushed: "
+               << (ns.empty() ? name : ns + "." + name)
+               << "(0x" << std::hex << std::setw(16)
+               << std::setfill('0') << cb_shared.get() << ")" << std::endl;
+
+    lua_State* L = lua->get();
+
     static std::unordered_map<std::string, std::shared_ptr<std::function<Vector(Vector)>>> &callback_map = callbacks;
 
-    // Static function to be used as lua_CFunction
     auto static_lua_callback = [](lua_State *L) -> int {
       const char* cb_name = lua_tostring(L, lua_upvalueindex(1));
       if (!cb_name) return 0;
@@ -136,12 +145,22 @@ namespace Yumcxx {
       return result.size();
     };
 
-    lua_pushstring(luaRptr, name.c_str());
-    lua_pushcclosure(luaRptr, static_lua_callback, 1);
-    lua_setglobal(luaRptr, name.c_str());
+    // Register either globally or in namespace
+    if (ns.empty()) {
+      lua_pushstring(L, (ns + "." + name).c_str());
+      lua_pushcclosure(L, static_lua_callback, 1);
+      lua_setglobal(L, name.c_str());
+    } else {
+      ensureNamespace(L, ns); // leaves ns table on stack
+      lua_pushstring(L, (ns + "." + name).c_str());
+      lua_pushcclosure(L, static_lua_callback, 1);
+      lua_setfield(L, -2, name.c_str()); // ns[name] = callback
+      lua_pop(L, 1); // pop namespace
+    }
 
     return YUM_OK;
   }
+
 
   #pragma region Subsystem
 
@@ -224,25 +243,60 @@ extern "C" {
   }
 
   YUM_OUTATR YumVector *YumLuaSubsystem_call(YumSubsystem *s, uint64_t uid, const char *name, const YumVector *args) {
-    auto subsystem = (s);
-    auto lua = subsystem->get(uid);
-    Yumcxx::Vector v = lua->call(std::string(name), *args);
-    return new Yumcxx::Vector(std::move(v));
+    try {
+      auto subsystem = (s);
+      auto lua = subsystem->get(uid);
+      Yumcxx::Vector v = lua->call(std::string(name), *args);
+      return new Yumcxx::Vector(std::move(v));
+    } catch (const std::bad_function_call &e) {
+      (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
+    } catch (const std::bad_alloc &e) {
+      (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
+    } catch (const std::runtime_error &e) {
+      (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
+    } catch (const std::exception &e) {
+      (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
+    } catch (...) {
+      (*G_err()) << "yum: G_sys: err: unknown exception caught" << std::endl;
+    }
+
+    return nullptr;
   }
 
 
-  YUM_OUTATR int32_t YumLuaSubsystem_pushCallback(YumSubsystem *s, uint64_t uid, const char *name, YumVector (*cb)(YumVector)) {
-      /* ---------- */
-    if (!s || !name || !cb) return YUM_ERROR;
-    if (!s->isValidUID(uid)) return YUM_ERROR;
+  YUM_OUTATR int32_t YumLuaSubsystem_pushCallback(
+    YumSubsystem *s, 
+    uint64_t uid, 
+    const char *name, 
+    void (*cb)(const YumVector* in, YumVector* out),
+    const char *ns
+  ) {
+    try {
+      if (!s || !name || !cb) return YUM_ERROR;
+      if (!s->isValidUID(uid)) return YUM_ERROR;
 
-    auto lua = s->get(uid);
+      auto lua = s->get(uid);
 
-    lua->pushCallback(name, [&cb](Yumcxx::Vector v) -> Yumcxx::Vector {
-      return cb(v);
-    });
+      lua->pushCallback(name, [cb](Yumcxx::Vector v) -> Yumcxx::Vector {
+        Yumcxx::Vector out;
+        cb(&v, &out);
+        return out;
+      }, /* args: const std::string &ns */ ns);
 
-    return YUM_OK;
+      return YUM_OK;
+    } catch (const std::bad_function_call &e) {
+      (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
+    } catch (const std::bad_alloc &e) {
+      (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
+    } catch (const std::runtime_error &e) {
+      (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
+    } catch (const std::exception &e) {
+      (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
+    } catch (...) {
+      (*G_err()) << "yum: G_sys: err: unknown exception caught" << std::endl;
+    }
+
+    return YUM_ERROR;
   }
 
 }

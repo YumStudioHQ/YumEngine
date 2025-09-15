@@ -31,7 +31,18 @@ namespace Yumcxx {
     Vector call(const std::string&, const Vector&);
     int32_t load(const std::string&, bool); /* true: file, false: string */
     bool good();
-    int32_t pushCallback(const std::string&, const std::function<Vector(Vector)>&);
+    int32_t pushCallback(const std::string&, const std::function<Vector(Vector)>&, const std::string& = "");
+
+    inline static void ensureNamespace(lua_State* L, const std::string& ns) {
+      lua_getglobal(L, ns.c_str());  // push ns onto stack
+      if (lua_isnil(L, -1)) {
+        lua_pop(L, 1);             // remove nil
+        lua_newtable(L);           // create new table
+        lua_setglobal(L, ns.c_str());
+        lua_getglobal(L, ns.c_str()); // push it again
+      }
+      // stack now has namespace table
+    }
   };
 
   class Subsystem {
