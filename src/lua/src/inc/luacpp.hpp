@@ -12,7 +12,7 @@ namespace Yumcxx {
     lua_State *state;
   
   public:
-    inline LuaCxx(bool libs = false) : state(luaL_newstate()) {
+    inline LuaCxx(bool libs = true) : state(luaL_newstate()) {
       if (libs) luaL_openlibs(state);
     }
 
@@ -20,7 +20,7 @@ namespace Yumcxx {
 
     inline ~LuaCxx() {
       if (state) {
-        ((*G_out()) << "yum: destroying lua_State 0x" << std::hex << std::setw(16) << std::setfill('0') << state);
+        ((*G_out()) << "yum: destroying lua_State 0x" << std::hex << std::setw(16) << std::setfill('0') << state << std::endl);
         lua_close(state);
       }
     }

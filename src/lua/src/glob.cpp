@@ -10,3 +10,8 @@ std::shared_ptr<std::ostream> &G_err() {
   static std::shared_ptr<std::ostream> os{&std::cerr, [](void*){}};
   return os;
 }
+
+std::shared_ptr<std::istream> &G_in() {
+  static std::shared_ptr<std::istream> is{&std::cin, [](void*){}};
+  return is;
+}

@@ -27,7 +27,7 @@ namespace Yumcxx {
     if (lua_isinteger(l, i)) return Variant(lua_tointeger(l, i));
     else if (lua_isnumber(l, i)) return Variant(lua_tonumber(l, i));
     else if (lua_isboolean(l, i)) return Variant((bool)lua_toboolean(l, i));
-    else if (lua_isstring(l, i)) return Variant(lua_tostring(l, i));
+    else if (lua_isstring(l, i)) return Variant(std::string(lua_tostring(l, i)));
     else return Variant(); // nil
   }
 
@@ -40,35 +40,72 @@ namespace Yumcxx {
   }
 
   Vector LuaSubsystem::call(const std::string &n, const Vector &args) {
-    int base = lua_gettop(lua->get());
-    lua_getglobal(lua->get(), n.c_str());
-    args.foreach([this](const Variant &v) { push(v); });
+    lua_State* L = lua->get();
+    int base = lua_gettop(L);
 
-    if (lua_pcall(lua->get(), args.size(), LUA_MULTRET, 0) != LUA_OK) {
-      ((*G_err()) << "yum: err: error during " << n << "() call: " << lua_tostring(lua->get(), -1) << std::endl);
-      lua_pop(lua->get(), 1);
-      return Vector();
+    // Split "godot._ready" into {"godot", "_ready"}
+    std::istringstream iss(n);
+    std::string token;
+    std::vector<std::string> parts;
+    while (std::getline(iss, token, '.')) {
+      if (!token.empty()) parts.push_back(token);
     }
 
-    int nresults = lua_gettop(lua->get()) - base;
+    if (parts.empty()) {
+      throw std::runtime_error("Invalid function name: " + n);
+    }
+
+    // Get first global
+    lua_getglobal(L, parts[0].c_str());
+
+    // Walk down namespace
+    for (size_t i = 1; i < parts.size(); ++i) {
+      if (!lua_istable(L, -1)) {
+        lua_pop(L, 1);
+        throw std::runtime_error("Path " + n + " is not valid");
+      }
+      lua_getfield(L, -1, parts[i].c_str());
+      lua_remove(L, -2); // pop table
+    }
+
+    // Now top of stack should be the function
+    if (!lua_isfunction(L, -1)) {
+      lua_pop(L, 1);
+      throw std::runtime_error("Path " + n + " is not a function");
+    }
+
+    // Push arguments
+    args.foreach([this](const Variant &v) { push(v); });
+
+    // Call
+    if (lua_pcall(L, args.size(), LUA_MULTRET, 0) != LUA_OK) {
+      ((*G_err()) << "yum: err: error during " << n 
+                  << "() call: " << lua_tostring(L, -1) << std::endl);
+      lua_pop(L, 1);
+      return {};
+    }
+
+    // Collect return values
+    int nresults = lua_gettop(L) - base;
     Vector ret;
     for (int i = 0; i < nresults; i++) {
       ret.append(ati(base + 1 + i));
     }
 
-    lua_pop(lua->get(), nresults);
+    lua_pop(L, nresults);
     return ret;
   }
 
+
   int32_t LuaSubsystem::load(const std::string &s, bool isAFileThatIHaveToLoad) {
     if (isAFileThatIHaveToLoad) {
-      if (luaL_loadfile(lua->get(), s.c_str()) != LUA_OK) {
+      if (luaL_dofile(lua->get(), s.c_str()) != LUA_OK) {
         ((*G_err()) << "yum: err: cannot load '" << s << "': " << lua_tostring(lua->get(), -1) << std::endl);
         return YUM_ERROR;
       }
     } else {
       if (luaL_dostring(lua->get(), s.c_str()) != LUA_OK) {
-        ((*G_err()) << "yum: err: cannot load <string>: " << lua_tostring(lua->get(), -1) << std::endl);
+        ((*G_err()) << "yum: err: cannot load ; " << lua_tostring(lua->get(), -1) << std::endl);
         return YUM_ERROR;
       }
     }
@@ -128,7 +165,7 @@ namespace Yumcxx {
         if (lua_isinteger(L, i)) args.append(lua_tointeger(L, i));
         else if (lua_isnumber(L, i)) args.append(lua_tonumber(L, i));
         else if (lua_isboolean(L, i)) args.append((bool)lua_toboolean(L, i));
-        else if (lua_isstring(L, i)) args.append(lua_tostring(L, i));
+        else if (lua_isstring(L, i)) args.append(std::string(lua_tostring(L, i)));
       }
 
       Vector result = (*(it->second))(args);
@@ -161,6 +198,39 @@ namespace Yumcxx {
     return YUM_OK;
   }
 
+  bool LuaSubsystem::hasMethod(const std::string &path) {
+    if (path.empty()) return false;
+
+    std::istringstream iss(path);
+    std::string token;
+    std::vector<std::string> parts;
+
+    while (std::getline(iss, token, '.')) {
+      if (!token.empty())
+        parts.push_back(token);
+    }
+
+    if (parts.empty())
+      return false;
+
+    auto L = lua->get();
+    lua_getglobal(L, parts[0].c_str());
+
+    for (size_t i = 1; i < parts.size(); i++) {
+      if (!lua_istable(L, -1)) {
+        lua_pop(L, 1);
+        return false;
+      }
+
+      lua_getfield(L, -1, parts[i].c_str());
+      lua_remove(L, -2);
+    }
+
+    bool ok = lua_isfunction(L, -1);
+    lua_pop(L, 1);
+
+    return ok;
+  }
 
   #pragma region Subsystem
 
@@ -217,7 +287,7 @@ extern "C" {
     delete (s);
   }
 
-  YUM_OUTATR uint64_t YumSubsystem_newState(YumSubsystem *s, int lstdlibs) {
+  YUM_OUTATR uint64_t YumSubsystem_newState(YumSubsystem *s, int32_t lstdlibs) {
     return (s)->newState((lstdlibs == 0));
   }
 
@@ -231,13 +301,13 @@ extern "C" {
 
 // -------- LuaSubsystem --------
 
-  YUM_OUTATR int32_t YumLuaSubsystem_load(YumSubsystem *s, uint64_t uid, const char *src, bool isFile) {
+  YUM_OUTATR int32_t YumLuaSubsystem_load(YumSubsystem *s, uint64_t uid, const char *src, int32_t isFile) {
     auto subsystem = (s);
     auto lua = subsystem->get(uid);
     return lua->load(std::string(src), isFile);
   }
 
-  YUM_OUTATR bool YumLuaSubsystem_good(YumSubsystem *s, uint64_t uid) {
+  YUM_OUTATR int32_t YumLuaSubsystem_good(YumSubsystem *s, uint64_t uid) {
     auto subsystem = (s);
     return subsystem->get(uid)->good();
   }
@@ -299,6 +369,15 @@ extern "C" {
     return YUM_ERROR;
   }
 
+  YUM_OUTATR int32_t YumLuaSubsystem_hasMethod(
+    YumSubsystem *s, 
+    uint64_t uid, 
+    const char *path) {
+      if (!s || !path) return YUM_ERROR;
+      if (!s->isValidUID(uid)) return YUM_ERROR;
+
+      return (*(*s).get(uid)).hasMethod(path);
+    }
 }
 
 #pragma endregion

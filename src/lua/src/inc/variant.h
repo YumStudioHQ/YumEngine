@@ -30,10 +30,10 @@ YUM_OUTATR int         YumVariant_asBool(const YumVariant* var);
 YUM_OUTATR const char* YumVariant_asString(const YumVariant* var); 
 
 /* type checks */
-YUM_OUTATR int YumVariant_isInt(const YumVariant* var);
-YUM_OUTATR int YumVariant_isFloat(const YumVariant* var);
-YUM_OUTATR int YumVariant_isBool(const YumVariant* var);
-YUM_OUTATR int YumVariant_isString(const YumVariant* var);
+YUM_OUTATR int32_t YumVariant_isInt(const YumVariant* var);
+YUM_OUTATR int32_t YumVariant_isFloat(const YumVariant* var);
+YUM_OUTATR int32_t YumVariant_isBool(const YumVariant* var);
+YUM_OUTATR int32_t YumVariant_isString(const YumVariant* var);
 
 #ifdef __cplusplus
 }

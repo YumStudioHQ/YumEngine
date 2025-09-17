@@ -15,9 +15,11 @@
 #include "vector.hpp"
 
 namespace Yumcxx {
+  using ManagedCallback = std::function<Vector(Vector)>;
+
   class LuaSubsystem {
   private:
-    std::unordered_map<std::string, std::shared_ptr<std::function<Vector(Vector)>>> callbacks;
+    std::unordered_map<std::string, std::shared_ptr<ManagedCallback>> callbacks;
     std::shared_ptr<LuaCxx> lua;
   
     void push(const Variant&);
@@ -31,7 +33,9 @@ namespace Yumcxx {
     Vector call(const std::string&, const Vector&);
     int32_t load(const std::string&, bool); /* true: file, false: string */
     bool good();
-    int32_t pushCallback(const std::string&, const std::function<Vector(Vector)>&, const std::string& = "");
+    int32_t pushCallback(const std::string&, const ManagedCallback&, const std::string& = "");
+    int32_t pushCallback(const std::string&, const std::shared_ptr<ManagedCallback>&, const std::string& = "");
+    bool hasMethod(const std::string&);
 
     inline static void ensureNamespace(lua_State* L, const std::string& ns) {
       lua_getglobal(L, ns.c_str());  // push ns onto stack

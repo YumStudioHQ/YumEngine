@@ -58,7 +58,7 @@ YUM_OUTATR void YumVariant_setFloat(YumVariant *var, double v) {
   if (var) var->set(v);
 }
 
-YUM_OUTATR void YumVariant_setBool(YumVariant *var, int v) {
+YUM_OUTATR void YumVariant_setBool(YumVariant *var, int32_t v) {
   if (var) var->set(v != 0);
 }
 
@@ -75,8 +75,8 @@ YUM_OUTATR double YumVariant_asFloat(const YumVariant *var) {
   return var ? var->as_float() : 0.0;
 }
 
-YUM_OUTATR int YumVariant_asBool(const YumVariant *var) {
-  return var ? static_cast<int>(var->as_bool()) : 0;
+YUM_OUTATR int32_t YumVariant_asBool(const YumVariant *var) {
+  return var ? static_cast<int32_t>(var->as_bool()) : 0;
 }
 
 YUM_OUTATR const char *YumVariant_asString(const YumVariant *var) {
@@ -87,20 +87,20 @@ YUM_OUTATR const char *YumVariant_asString(const YumVariant *var) {
 }
 
 // Type checks
-YUM_OUTATR int YumVariant_isInt(const YumVariant *var) {
-  return var ? static_cast<int>(var->is_int()) : 0;
+YUM_OUTATR int32_t YumVariant_isInt(const YumVariant *var) {
+  return var ? static_cast<int32_t>(var->is_int()) : 0;
 }
 
-YUM_OUTATR int YumVariant_isFloat(const YumVariant *var) {
-  return var ? static_cast<int>(var->is_float()) : 0;
+YUM_OUTATR int32_t YumVariant_isFloat(const YumVariant *var) {
+  return var ? static_cast<int32_t>(var->is_float()) : 0;
 }
 
-YUM_OUTATR int YumVariant_isBool(const YumVariant *var) {
-  return var ? static_cast<int>(var->is_bool()) : 0;
+YUM_OUTATR int32_t YumVariant_isBool(const YumVariant *var) {
+  return var ? static_cast<int32_t>(var->is_bool()) : 0;
 }
 
-YUM_OUTATR int YumVariant_isString(const YumVariant *var) {
-  return var ? static_cast<int>(var->is_string()) : 0;
+YUM_OUTATR int32_t YumVariant_isString(const YumVariant *var) {
+  return var ? static_cast<int32_t>(var->is_string()) : 0;
 }
 
 } // extern "C"
