@@ -13,6 +13,17 @@
 #include "inc/glob.hpp"
 #include "inc/yumdec.h"
 
+static inline std::vector<std::string> splitDot(const std::string& path) {
+  std::vector<std::string> parts;
+  size_t start = 0, dot;
+  while ((dot = path.find('.', start)) != std::string::npos) {
+    parts.emplace_back(path.substr(start, dot - start));
+    start = dot + 1;
+  }
+  parts.emplace_back(path.substr(start));
+  return parts;
+}
+
 namespace Yumcxx {
   LuaSubsystem::LuaSubsystem() { /* Might end with segfaults... */ }
 
@@ -43,41 +54,32 @@ namespace Yumcxx {
     lua_State* L = lua->get();
     int base = lua_gettop(L);
 
-    // Split "godot._ready" into {"godot", "_ready"}
-    std::istringstream iss(n);
-    std::string token;
-    std::vector<std::string> parts;
-    while (std::getline(iss, token, '.')) {
-      if (!token.empty()) parts.push_back(token);
-    }
-
+    // So now, "Godot.Reference.CoolShit.Function()"
+    // will be {"Godot", "Reference", "CoolShit", "Function()"}
+    auto parts = splitDot(n);
+    
     if (parts.empty()) {
       throw std::runtime_error("Invalid function name: " + n);
     }
 
-    // Get first global
     lua_getglobal(L, parts[0].c_str());
 
-    // Walk down namespace
     for (size_t i = 1; i < parts.size(); ++i) {
       if (!lua_istable(L, -1)) {
         lua_pop(L, 1);
         throw std::runtime_error("Path " + n + " is not valid");
       }
       lua_getfield(L, -1, parts[i].c_str());
-      lua_remove(L, -2); // pop table
+      lua_remove(L, -2);
     }
 
-    // Now top of stack should be the function
     if (!lua_isfunction(L, -1)) {
       lua_pop(L, 1);
       throw std::runtime_error("Path " + n + " is not a function");
     }
 
-    // Push arguments
     args.foreach([this](const Variant &v) { push(v); });
 
-    // Call
     if (lua_pcall(L, args.size(), LUA_MULTRET, 0) != LUA_OK) {
       ((*G_err()) << "yum: err: error during " << n 
                   << "() call: " << lua_tostring(L, -1) << std::endl);
@@ -85,7 +87,6 @@ namespace Yumcxx {
       return {};
     }
 
-    // Collect return values
     int nresults = lua_gettop(L) - base;
     Vector ret;
     for (int i = 0; i < nresults; i++) {
