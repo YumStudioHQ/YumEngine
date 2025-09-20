@@ -289,7 +289,7 @@ extern "C" {
   }
 
   YUM_OUTATR uint64_t YumSubsystem_newState(YumSubsystem *s, int32_t lstdlibs) {
-    return (s)->newState((lstdlibs == 0));
+    return (s)->newState((lstdlibs != 0));
   }
 
   YUM_OUTATR void YumSubsystem_deleteState(YumSubsystem *s, uint64_t uid) {
