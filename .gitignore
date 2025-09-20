@@ -6,3 +6,4 @@ bottles/
 .godot/
 src/out/
 build/
+src/lua/src/release
