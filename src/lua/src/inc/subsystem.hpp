@@ -69,10 +69,3 @@ namespace Yumcxx {
 
 using YumSubsystem = Yumcxx::Subsystem;
 using YumLuaSubsystem = Yumcxx::LuaSubsystem;
-
-#ifdef _YUM_STUDIO_OFFICIAL_COMPILER
-#warning "__YY: Y_addTech(): [?] G_out() 'in C interface'"
-#warning "__YY: Y_addTech(): [?] G_err() 'in C interface'"
-#warning "__YY: Y_addTech(): [?] stream 'in C interface'"
-#warning "__YY: Y_addTech(): [?] BinStream 'in C interface'"
-#endif

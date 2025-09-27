@@ -339,7 +339,7 @@ extern "C" {
     YumSubsystem *s, 
     uint64_t uid, 
     const char *name, 
-    void (*cb)(const YumVector* in, YumVector* out),
+    void (*cb)(const YumVector *in, YumVector *out),
     const char *ns
   ) {
     try {
