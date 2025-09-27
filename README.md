@@ -1,9 +1,16 @@
 # YumEngine — Lua & Godot Runtime
 
-**Current Engine Version:** 1.7.xx-stable <br>
-**[Website](https://yumstudiohq.github.io/YumEngine/)**
+## Version
+
+<!-- YUM_VERSION_START -->
+- **Engine version:** `1.8.28`
+- **Studio:** `yum-official`
+- **Branch:** `stable`
+<!-- YUM_VERSION_END -->
 
 ---
+
+**[Website](https://yumstudiohq.github.io/YumEngine/)**
 
 ## Overview
 
