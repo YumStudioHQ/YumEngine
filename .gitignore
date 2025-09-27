@@ -7,3 +7,4 @@ bottles/
 src/out/
 build/
 src/lua/src/release
+src/lua/src/build

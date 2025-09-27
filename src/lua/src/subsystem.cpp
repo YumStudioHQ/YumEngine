@@ -35,7 +35,7 @@ namespace Yumcxx {
 
   Variant LuaSubsystem::ati(int i) {
     auto l = lua->get();
-    if (lua_isinteger(l, i)) return Variant(lua_tointeger(l, i));
+    if (lua_isinteger(l, i)) return Variant((int64_t)lua_tointeger(l, i));
     else if (lua_isnumber(l, i)) return Variant(lua_tonumber(l, i));
     else if (lua_isboolean(l, i)) return Variant((bool)lua_toboolean(l, i));
     else if (lua_isstring(l, i)) return Variant(std::string(lua_tostring(l, i)));
@@ -163,8 +163,8 @@ namespace Yumcxx {
       int nargs = lua_gettop(L);
       Vector args;
       for (int i = 1; i <= nargs; ++i) {
-        if (lua_isinteger(L, i)) args.append(lua_tointeger(L, i));
-        else if (lua_isnumber(L, i)) args.append(lua_tonumber(L, i));
+        if (lua_isinteger(L, i)) args.append((int64_t)lua_tointeger(L, i));
+        else if (lua_isnumber(L, i)) args.append((double)lua_tonumber(L, i));
         else if (lua_isboolean(L, i)) args.append((bool)lua_toboolean(L, i));
         else if (lua_isstring(L, i)) args.append(std::string(lua_tostring(L, i)));
       }
