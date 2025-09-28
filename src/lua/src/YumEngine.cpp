@@ -3,6 +3,7 @@
 #include <format>
 #include <cstdlib>
 #include <sstream>
+#include <fstream>
 #include <iostream>
 #include <filesystem>
 #include <functional>
@@ -23,7 +24,6 @@ inline std::string trim(std::string &str) {
 int main(int argc, char *const argv[]) {
     (*G_out()) << std::format("YumEngine -- {}.{}.YumEngine.{}.{}.{}", YUM_ENGINE_VERSION_STUDIO, YUM_ENGINE_VERSION_BRANCH, YUM_ENGINE_VERSION_MAJOR,  YUM_ENGINE_VERSION_MINOR, YUM_ENGINE_VERSION_PATCH) << std::endl << std::endl;
 
-    throw std::runtime_error("Not implemented.");
 
     return 0;
 }

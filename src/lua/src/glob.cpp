@@ -60,21 +60,21 @@ public:
 
 extern "C" {
   YUM_OUTATR void Yum_open_G_out(const char *path) {
-    G_out() = std::make_shared<std::ofstream>(std::ofstream(path));
+    (*G_out()).rdbuf(std::ofstream(path).rdbuf());
   }
 
   YUM_OUTATR void Yum_open_G_err(const char *path) {
-    G_err() = std::make_shared<std::ofstream>(std::ofstream(path));
+    (*G_err()).rdbuf(std::ofstream(path).rdbuf());
   }
 
   YUM_OUTATR void Yum_open_G_in(const char *path) {
-    G_in() = std::make_shared<std::ifstream>(std::ifstream(path));
+    (*G_in()).rdbuf(std::ifstream(path).rdbuf());
   }
 
   YUM_OUTATR void Yum_redirect_G_out(void (*cb)(const char *s)) {
     G_out() = std::make_shared<CallbackBasedStream>([cb](const std::string &s) {
       cb(s.c_str());
-    });
+    });    
   }
 
   YUM_OUTATR void Yum_redirect_G_err(void (*cb)(const char *s)) {
