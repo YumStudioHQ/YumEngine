@@ -69,6 +69,10 @@ YUM_OUTATR void YumVariant_setString(YumVariant *var, const char *str) {
   if (var && str) var->set(std::string(str));
 }
 
+YUM_OUTATR void YumVariant_setRawBytes(YumVariant *var, YumBinaryBlob blob) {
+  if (var) var->set(blob);
+}
+
 // Getters
 YUM_OUTATR int64_t YumVariant_asInt(const YumVariant *var) {
   return var ? var->as_int() : 0;
@@ -83,7 +87,7 @@ YUM_OUTATR int32_t YumVariant_asBool(const YumVariant *var) {
 }
 
 YUM_OUTATR const char *YumVariant_asString(const YumVariant *var) {
-  static std::string temp;
+  thread_local std::string temp;
   if (var) temp = var->as_string();
   else temp.clear();
   return temp.c_str();
