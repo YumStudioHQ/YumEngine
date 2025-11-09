@@ -6,10 +6,11 @@
 namespace Yumcxx {
 
     Variant::Variant() = default;
-    Variant::Variant(int64_t i)             : value_(i) {}
-    Variant::Variant(double d)              : value_(d) {}
-    Variant::Variant(const std::string &s)  : value_(s) {}
-    Variant::Variant(bool b)                : value_(b) {}
+    Variant::Variant(int64_t i)              : value_(i) {}
+    Variant::Variant(double d)               : value_(d) {}
+    Variant::Variant(const std::string &s)   : value_(s) {}
+    Variant::Variant(bool b)                 : value_(b) {}
+    Variant::Variant(const YumBinaryBlob &b) : value_(b) {}
 
     // Copy & Move
     Variant::Variant(const Variant &) = default;
@@ -18,17 +19,19 @@ namespace Yumcxx {
     Variant &Variant::operator=(Variant &&) noexcept = default;
 
     // Setters
-    void Variant::set(int64_t i)             { value_ = i; }
-    void Variant::set(double d)              { value_ = d; }
-    void Variant::set(const std::string &s)  { value_ = s; }
-    void Variant::set(bool b)                { value_ = b; }
-    void Variant::clear()                    { value_ = std::monostate{}; }
+    void Variant::set(int64_t i)              { value_ = i; }
+    void Variant::set(double d)               { value_ = d; }
+    void Variant::set(const std::string &s)   { value_ = s; }
+    void Variant::set(bool b)                 { value_ = b; }
+    void Variant::set(const YumBinaryBlob &b) { value_ = b; }
+    void Variant::clear()                     { value_ = std::monostate{}; }
 
     // Getters
     int64_t Variant::as_int() const           { return std::get<int64_t>(value_); }
     double Variant::as_float() const          { return std::get<double>(value_); }
     const std::string &Variant::as_string() const { return std::get<std::string>(value_); }
     bool Variant::as_bool() const             { return std::get<bool>(value_); }
+    YumBinaryBlob Variant::as_binary() const  { return std::get<YumBinaryBlob>(value_); }
     bool Variant::has_value() const           { return !std::holds_alternative<std::monostate>(value_); }
 
     // Type checks
@@ -36,7 +39,7 @@ namespace Yumcxx {
     bool Variant::is_float() const            { return std::holds_alternative<double>(value_); }
     bool Variant::is_string() const           { return std::holds_alternative<std::string>(value_); }
     bool Variant::is_bool() const             { return std::holds_alternative<bool>(value_); }
-
+    bool Variant::is_binary() const           { return std::holds_alternative<YumBinaryBlob>(value_); }
 }
 
 extern "C" {
@@ -86,6 +89,10 @@ YUM_OUTATR const char *YumVariant_asString(const YumVariant *var) {
   return temp.c_str();
 }
 
+YUM_OUTATR YumBinaryBlob YumVariant_asBinary(const YumVariant *var) {
+  return var ? var->as_binary() : YumBinaryBlob{.start = nullptr, .size = 0};
+}
+
 // Type checks
 YUM_OUTATR int32_t YumVariant_isInt(const YumVariant *var) {
   return var ? static_cast<int32_t>(var->is_int()) : 0;
@@ -101,6 +108,10 @@ YUM_OUTATR int32_t YumVariant_isBool(const YumVariant *var) {
 
 YUM_OUTATR int32_t YumVariant_isString(const YumVariant *var) {
   return var ? static_cast<int32_t>(var->is_string()) : 0;
+}
+
+YUM_OUTATR int32_t YumVariant_isBinary(const YumVariant *var) {
+  return var ? static_cast<int32_t>(var->is_binary()) : 0;
 }
 
 } // extern "C"

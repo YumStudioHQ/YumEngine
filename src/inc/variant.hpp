@@ -4,11 +4,13 @@
 #include <string>
 #include <variant>
 
-namespace Yumcxx {
+#include "yumdec.h"
 
+namespace Yumcxx {
   class Variant {
   private:
-    using ValueType = std::variant<std::monostate, int64_t, double, std::string, bool>;
+    using ValueType = std::variant<std::monostate, int64_t, 
+      double, std::string, bool, YumBinaryBlob>;
     ValueType value_;
 
   public:
@@ -17,6 +19,7 @@ namespace Yumcxx {
     Variant(double d);
     Variant(const std::string &s);
     Variant(bool b);
+    Variant(const YumBinaryBlob &b);
 
     // Copy & Move
     Variant(const Variant &);
@@ -29,6 +32,7 @@ namespace Yumcxx {
     void set(double d);
     void set(const std::string &s);
     void set(bool b);
+    void set(const YumBinaryBlob &blob);
     void clear();
 
     // Getters
@@ -36,6 +40,7 @@ namespace Yumcxx {
     double as_float() const;
     const std::string &as_string() const;
     bool as_bool() const;
+    YumBinaryBlob as_binary() const;
     bool has_value() const;
 
     // Type checks
@@ -43,6 +48,7 @@ namespace Yumcxx {
     bool is_float() const;
     bool is_string() const;
     bool is_bool() const;
+    bool is_binary() const;
   };
 
 } // namespace Yumcxx
