@@ -22,7 +22,7 @@ namespace Yumcxx {
     std::unordered_map<std::string, std::shared_ptr<ManagedCallback>> callbacks;
     std::shared_ptr<LuaCxx> lua;
   
-    void push(const Variant&);
+    void pushOnLuaStack(const Variant&);
     Variant ati(int);
 
   public:

@@ -1,6 +1,7 @@
 #include <format>
 #include <chrono>
 #include <memory>
+#include <cstring>
 #include <cstdint>
 #include <iostream>
 #include <stdexcept>
@@ -39,14 +40,28 @@ namespace Yumcxx {
     else if (lua_isnumber(l, i)) return Variant(lua_tonumber(l, i));
     else if (lua_isboolean(l, i)) return Variant((bool)lua_toboolean(l, i));
     else if (lua_isstring(l, i)) return Variant(std::string(lua_tostring(l, i)));
-    else return Variant(); // nil
+    else if (lua_istable(l, i)) {
+      lua_getfield(l, i, "__yum_type");
+      const char* t = lua_tostring(l, -1);
+      lua_pop(l, 1);
+      if (t && strcmp(t, "binary") == 0) {
+        lua_getfield(l, i, "data");
+        size_t len;
+        const char *data = lua_tolstring(l, -1, &len);
+        lua_pop(l, 1);
+        return Variant(YumBinaryBlob{.start = (const uint8_t*)data, .size = len});
+      }
+    }
+    
+    return Variant(); // nil
   }
 
-  void LuaSubsystem::push(const Variant &v) {
+  void LuaSubsystem::pushOnLuaStack(const Variant &v) {
     if (v.is_int()) lua_pushinteger(lua->get(), v.as_int());
     else if (v.is_float()) lua_pushnumber(lua->get(), v.as_float());
     else if (v.is_bool()) lua_pushboolean(lua->get(), v.as_bool());
     else if (v.is_string()) lua_pushstring(lua->get(), v.as_string().c_str());
+    else if (v.is_binary()) lua_pushlstring(lua->get(), (const char*)v.as_binary().start, v.as_binary().size);
     else lua_pushnil(lua->get());
   }
 
@@ -78,7 +93,7 @@ namespace Yumcxx {
       throw std::runtime_error("Path " + n + " is not a function");
     }
 
-    args.foreach([this](const Variant &v) { push(v); });
+    args.foreach([this](const Variant &v) { pushOnLuaStack(v); });
 
     if (lua_pcall(L, args.size(), LUA_MULTRET, 0) != LUA_OK) {
       ((*G_err()) << "yum: err: error during " << n 
@@ -167,6 +182,19 @@ namespace Yumcxx {
         else if (lua_isnumber(L, i)) args.append((double)lua_tonumber(L, i));
         else if (lua_isboolean(L, i)) args.append((bool)lua_toboolean(L, i));
         else if (lua_isstring(L, i)) args.append(std::string(lua_tostring(L, i)));
+        else if (lua_istable(L, i)) {
+          lua_getfield(L, i, "__yum_type");
+          const char *t = lua_tostring(L, -1);
+          lua_pop(L, 1);
+
+          if (t && strcmp(t, "binary") == 0) {
+            lua_getfield(L, i, "data");
+            size_t len;
+            const char *data = lua_tolstring(L, -1, &len);
+            lua_pop(L, 1);
+            args.append(YumBinaryBlob{.start = (const uint8_t*)data, .size = len});
+          }    
+        }
       }
 
       Vector result = (*(it->second))(args);
