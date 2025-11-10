@@ -177,6 +177,7 @@ namespace Yumcxx {
         else if (me.is_float()) lua_pushnumber(L, me.as_float());
         else if (me.is_bool()) lua_pushboolean(L, me.as_bool());
         else if (me.is_string()) lua_pushstring(L, me.as_string().c_str());
+        else if (me.is_binary()) lua_pushlstring(L, (const char*)me.as_binary().start, me.as_binary().size);
         else lua_pushnil(L);
       }
 
@@ -279,7 +280,10 @@ namespace Yumcxx {
 #pragma region C Interface 
 
 extern "C" {
-  // -------- Subsystem --------
+  /**
+   * @brief creates a new subsystem.
+   * @return a new C pointer. Free it with YumSubsystem_delete(...).
+   */
   YUM_OUTATR YumSubsystem *YumSubsystem_new(void) {
     return new Yumcxx::Subsystem();
   }

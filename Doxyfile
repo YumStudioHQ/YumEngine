@@ -1,0 +1,24 @@
+# -----------------------------------------------------------------
+# Doxyfile for Yum C API — Markdown-friendly setup
+# -----------------------------------------------------------------
+PROJECT_NAME           = "Yum C API"
+OUTPUT_DIRECTORY       = docs
+EXTRACT_ALL            = YES
+RECURSIVE              = YES
+
+# Input
+INPUT                  = src/
+FILE_PATTERNS          = *.h, *.hpp
+
+# Output (XML only, for Doxybook2)
+GENERATE_XML           = NO
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+GENERATE_MAN           = NO
+GENERATE_RTF           = NO
+GENERATE_DOCBOOK       = NO
+
+# Misc
+FULL_PATH_NAMES        = NO
+OUTPUT_LANGUAGE        = English
+MARKDOWN_SUPPORT       = YES
