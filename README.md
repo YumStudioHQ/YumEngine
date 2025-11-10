@@ -11,6 +11,7 @@
 ---
 
 **[Website](https://yumstudiohq.github.io/YumEngine/)**
+**[Documentation](./docs/html/)**
 
 ## Overview
 
