@@ -1,6 +1,8 @@
 #include "inc/variant.hpp"
 #include "inc/yumdec.h"
+#include "inc/glob.hpp"
 
+#include <format>
 #include <string>
 
 namespace Yumcxx {
@@ -75,26 +77,61 @@ YUM_OUTATR void YumVariant_setRawBytes(YumVariant *var, YumBinaryBlob blob) {
 
 // Getters
 YUM_OUTATR int64_t YumVariant_asInt(const YumVariant *var) {
-  return var ? var->as_int() : 0;
+  try {
+    return var ? var->as_int() : 0;
+  } catch (const std::exception &e) {
+    (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
+    return 0;
+  } catch (...) {
+    (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
+  }
 }
 
 YUM_OUTATR double YumVariant_asFloat(const YumVariant *var) {
-  return var ? var->as_float() : 0.0;
+  try {
+    return var ? var->as_float() : 0.0;
+  } catch (const std::exception &e) {
+    (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
+    return 0.0;
+  } catch (...) {
+    (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
+  }
 }
 
 YUM_OUTATR int32_t YumVariant_asBool(const YumVariant *var) {
-  return var ? static_cast<int32_t>(var->as_bool()) : 0;
+  try {
+    return var ? static_cast<int32_t>(var->as_bool()) : 0;
+  } catch (const std::exception &e) {
+    (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
+    return 0;
+  } catch (...) {
+    (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
+  }
 }
 
 YUM_OUTATR const char *YumVariant_asString(const YumVariant *var) {
-  thread_local std::string temp;
-  if (var) temp = var->as_string();
-  else temp.clear();
-  return temp.c_str();
+  try {
+    thread_local std::string temp;
+    if (var) temp = var->as_string();
+    else temp.clear();
+    return temp.c_str();
+  } catch (const std::exception &e) {
+    (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
+    return "";
+  } catch (...) {
+    (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
+  }
 }
 
 YUM_OUTATR YumBinaryBlob YumVariant_asBinary(const YumVariant *var) {
-  return var ? var->as_binary() : YumBinaryBlob{.start = nullptr, .size = 0};
+  try {
+    return var ? var->as_binary() : YumBinaryBlob{.start = nullptr, .size = 0};
+  } catch (const std::exception &e) {
+    (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
+    return YumBinaryBlob {.start = nullptr, .size = 0};
+  } catch (...) {
+    (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
+  }
 }
 
 // Type checks
