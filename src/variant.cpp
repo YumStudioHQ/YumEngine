@@ -84,6 +84,7 @@ YUM_OUTATR int64_t YumVariant_asInt(const YumVariant *var) {
     return 0;
   } catch (...) {
     (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
+    return 0;
   }
 }
 
@@ -95,6 +96,7 @@ YUM_OUTATR double YumVariant_asFloat(const YumVariant *var) {
     return 0.0;
   } catch (...) {
     (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
+    return 0.0;
   }
 }
 
@@ -106,6 +108,7 @@ YUM_OUTATR int32_t YumVariant_asBool(const YumVariant *var) {
     return 0;
   } catch (...) {
     (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
+    return 0;
   }
 }
 
@@ -120,6 +123,7 @@ YUM_OUTATR const char *YumVariant_asString(const YumVariant *var) {
     return "";
   } catch (...) {
     (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
+    return "";
   }
 }
 
@@ -131,6 +135,7 @@ YUM_OUTATR YumBinaryBlob YumVariant_asBinary(const YumVariant *var) {
     return YumBinaryBlob {.start = nullptr, .size = 0};
   } catch (...) {
     (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
+    return YumBinaryBlob {.start = nullptr, .size = 0};
   }
 }
 
