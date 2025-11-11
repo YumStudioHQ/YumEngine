@@ -1,7 +1,12 @@
 var searchData=
 [
-  ['load_0',['load',['../class_yumcxx_1_1_lua_subsystem.html#ab17613141b480a3b58a773acca5c5afc',1,'Yumcxx::LuaSubsystem']]],
-  ['luacpp_2ehpp_1',['luacpp.hpp',['../luacpp_8hpp.html',1,'']]],
-  ['luacxx_2',['LuaCxx',['../class_yumcxx_1_1_lua_cxx.html',1,'Yumcxx::LuaCxx'],['../class_yumcxx_1_1_lua_cxx.html#a07d4e56dadf4eece7718b8146b09c4dc',1,'Yumcxx::LuaCxx::LuaCxx()']]],
-  ['luasubsystem_3',['LuaSubsystem',['../class_yumcxx_1_1_lua_subsystem.html',1,'Yumcxx::LuaSubsystem'],['../class_yumcxx_1_1_lua_subsystem.html#a0d18f5d2cc29ab4d7867ae691d235745',1,'Yumcxx::LuaSubsystem::LuaSubsystem()'],['../class_yumcxx_1_1_lua_subsystem.html#a3d94396c573bf6a540dc5e1c9cb34edb',1,'Yumcxx::LuaSubsystem::LuaSubsystem(const std::shared_ptr&lt; LuaCxx &gt; &amp;lua)']]]
+  ['integer_0',['INTEGER',['../class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27ea6004795103d85c40ce62298364f4926c',1,'YumEngine::Variant']]],
+  ['is_5fbinary_1',['is_binary',['../class_yum_engine_1_1_variant.html#a4c148b3b5bccd1044cb04efdc3cc7855',1,'YumEngine::Variant']]],
+  ['is_5fbool_2',['is_bool',['../class_yum_engine_1_1_variant.html#a0c40a1671f35dd9e2a2d2ed0474af4db',1,'YumEngine::Variant']]],
+  ['is_5ffloat_3',['is_float',['../class_yum_engine_1_1_variant.html#a0e3d3f8cf8c3f11fae9c2563c839df07',1,'YumEngine::Variant']]],
+  ['is_5fint_4',['is_int',['../class_yum_engine_1_1_variant.html#a4b279faabbf7a37c01197bc338fdba9e',1,'YumEngine::Variant']]],
+  ['is_5fstring_5',['is_string',['../class_yum_engine_1_1_variant.html#ab5f0870fdd502a61a7dae5e3a50664e9',1,'YumEngine::Variant']]],
+  ['is_5ftable_6',['is_table',['../class_yum_engine_1_1_variant.html#ad6ceaed66a5c89e151775647e9be5740',1,'YumEngine::Variant']]],
+  ['isrunning_7',['isRunning',['../class_yum_engine_1_1_sub_process_base.html#ac7cce038f2be5e4b9882e16dfaa6d0f4',1,'YumEngine::SubProcessBase']]],
+  ['isvaliduid_8',['isValidUID',['../class_yum_engine_1_1_subsystem.html#ab419e6009481687068aef1718ff50f27',1,'YumEngine::Subsystem']]]
 ];

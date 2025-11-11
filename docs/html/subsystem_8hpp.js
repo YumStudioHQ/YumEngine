@@ -1,8 +1,8 @@
 var subsystem_8hpp =
 [
-    [ "Yumcxx::LuaSubsystem", "class_yumcxx_1_1_lua_subsystem.html", "class_yumcxx_1_1_lua_subsystem" ],
-    [ "Yumcxx::Subsystem", "class_yumcxx_1_1_subsystem.html", "class_yumcxx_1_1_subsystem" ],
-    [ "Yumcxx::ManagedCallback", "namespace_yumcxx.html#a4249284cb46dadf6651266a202ce3013", null ],
-    [ "YumLuaSubsystem", "subsystem_8hpp.html#a5e7cbab496ad8ea545089c2209dc0a63", null ],
-    [ "YumSubsystem", "subsystem_8hpp.html#a39819831e0365f40db3532fb19c48d1d", null ]
+    [ "YumEngine::LuaSubsystem", "class_yum_engine_1_1_lua_subsystem.html", "class_yum_engine_1_1_lua_subsystem" ],
+    [ "YumEngine::Subsystem", "class_yum_engine_1_1_subsystem.html", "class_yum_engine_1_1_subsystem" ],
+    [ "YumEngine::ManagedCallback", "namespace_yum_engine.html#aa597e95b4587dfebdfec0bce41b1c285", null ],
+    [ "YumLuaSubsystem", "subsystem_8hpp.html#a412fe12fc3a2526c3cd620766329faea", null ],
+    [ "YumSubsystem", "subsystem_8hpp.html#ab94217a540b1c527c6a060dff0076bc9", null ]
 ];

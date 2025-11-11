@@ -1,11 +1,5 @@
 var searchData=
 [
-  ['g_5ferr_0',['G_err',['../glob_8hpp.html#a4a56131d496db85828f3ff3492aa43bb',1,'glob.hpp']]],
-  ['g_5fin_1',['G_in',['../glob_8hpp.html#a51423b025d785fa535c6f05013689b71',1,'glob.hpp']]],
-  ['g_5fout_2',['G_out',['../glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51',1,'glob.hpp']]],
-  ['get_3',['get',['../class_yumcxx_1_1_lua_cxx.html#ab8e5b1bee763cdc95e62aab9f3cd1bdf',1,'Yumcxx::LuaCxx::get()'],['../class_yumcxx_1_1_subsystem.html#af8679e88b4aa1c619225fc9992d3c5a9',1,'Yumcxx::Subsystem::get()']]],
-  ['getenv_4',['GetEnv',['../namespace_yum_engine.html#ad0d0b2732aecd4c1984cb6e2948422f3',1,'YumEngine']]],
-  ['getenvactor_5',['GetEnvActor',['../namespace_yum_engine_1_1_actors.html#aee6369b0783c9792807febe083c9ef2d',1,'YumEngine::Actors']]],
-  ['glob_2ehpp_6',['glob.hpp',['../glob_8hpp.html',1,'']]],
-  ['good_7',['good',['../class_yumcxx_1_1_lua_subsystem.html#a9b9a27381c04d12fc08f55f16f59eae8',1,'Yumcxx::LuaSubsystem']]]
+  ['foreach_0',['foreach',['../class_yum_engine_1_1_vector.html#a9709e5769bfbc138bb6d7b32dee6fb85',1,'YumEngine::Vector::foreach(const std::function&lt; void(const Variant &amp;)&gt; &amp;func) const'],['../class_yum_engine_1_1_vector.html#adf830b9572a5d577996e4d7b8f9f59d2',1,'YumEngine::Vector::foreach(const std::function&lt; void(Variant &amp;)&gt; &amp;func)'],['../class_yum_engine_1_1_yum_table.html#ab01a1588523a589ac110adb2b1d7e6ea',1,'YumEngine::YumTable::foreach()']]],
+  ['from_5flua_1',['from_lua',['../namespace_yum_engine_1_1utils.html#acf2b832110b195927e5dc6bb6719ac4e',1,'YumEngine::utils']]]
 ];

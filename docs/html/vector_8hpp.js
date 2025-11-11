@@ -1,5 +1,5 @@
 var vector_8hpp =
 [
-    [ "Yumcxx::Vector", "class_yumcxx_1_1_vector.html", "class_yumcxx_1_1_vector" ],
-    [ "YumVector", "vector_8hpp.html#a4e2113477371820e8669ee1ed0d21ca4", null ]
+    [ "YumEngine::Vector", "class_yum_engine_1_1_vector.html", "class_yum_engine_1_1_vector" ],
+    [ "YumVector", "vector_8hpp.html#abfa74bdc558b2fdf617c7d6a0c3ce84a", null ]
 ];

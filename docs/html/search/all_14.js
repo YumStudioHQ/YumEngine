@@ -1,8 +1,12 @@
 var searchData=
 [
-  ['_7eluacxx_0',['~LuaCxx',['../class_yumcxx_1_1_lua_cxx.html#a5b3d8edeb4645a545024f017c6a075d5',1,'Yumcxx::LuaCxx']]],
-  ['_7eluasubsystem_1',['~LuaSubsystem',['../class_yumcxx_1_1_lua_subsystem.html#af5767cd215d8fa3f164dfb5f675f0118',1,'Yumcxx::LuaSubsystem']]],
-  ['_7esubprocessbase_2',['~SubProcessBase',['../class_yum_engine_1_1_sub_process_base.html#ab7a744f09f81d0f817ae4fc3bb59d00c',1,'YumEngine::SubProcessBase']]],
-  ['_7esubsystem_3',['~Subsystem',['../class_yumcxx_1_1_subsystem.html#a254ee804b44f2facb13633f0bef7288e',1,'Yumcxx::Subsystem']]],
-  ['_7evector_4',['~Vector',['../class_yumcxx_1_1_vector.html#a38390e81ad0f7e0fb4f09f7bc553b24e',1,'Yumcxx::Vector']]]
+  ['values_0',['values',['../class_yum_engine_1_1_yum_table.html#a02761097bd3fb5f56ac34888448af4a2',1,'YumEngine::YumTable']]],
+  ['valuetype_1',['ValueType',['../class_yum_engine_1_1_variant.html#a41851cbf0ef246aa036a7c61252c8890',1,'YumEngine::Variant']]],
+  ['variant_2',['Variant',['../class_yum_engine_1_1_variant.html',1,'YumEngine::Variant'],['../class_yum_engine_1_1_variant.html#a89543f3b189c03b5b97bdbef72e9d924',1,'YumEngine::Variant::Variant()'],['../class_yum_engine_1_1_variant.html#af33c52e31b8f07d1cd48deb085dbfc77',1,'YumEngine::Variant::Variant(int64_t i)'],['../class_yum_engine_1_1_variant.html#aa03503223b9609abc812ebf2eed1bcb7',1,'YumEngine::Variant::Variant(double d)'],['../class_yum_engine_1_1_variant.html#ad7c93350915ca144c4943bfdf28c3a37',1,'YumEngine::Variant::Variant(const std::string &amp;s)'],['../class_yum_engine_1_1_variant.html#a570556fdaba8bd187722f795ae130640',1,'YumEngine::Variant::Variant(bool b)'],['../class_yum_engine_1_1_variant.html#a53bfe1d60572ed1b0637bd6596c0d02c',1,'YumEngine::Variant::Variant(const YumBinaryBlob &amp;b)'],['../class_yum_engine_1_1_variant.html#a2b5cb12e5cc1157cb95a0a3b753ab56f',1,'YumEngine::Variant::Variant(const Table &amp;t)'],['../class_yum_engine_1_1_variant.html#aad2a075177658a901cbc27d9eceddb06',1,'YumEngine::Variant::Variant(const Variant &amp;other)'],['../class_yum_engine_1_1_variant.html#aa4db3412306c454daedbd02771fed364',1,'YumEngine::Variant::Variant(Variant &amp;&amp;other) noexcept']]],
+  ['variant_2eh_3',['variant.h',['../variant_8h.html',1,'']]],
+  ['variant_2ehpp_4',['variant.hpp',['../variant_8hpp.html',1,'']]],
+  ['variantkind_5',['VariantKind',['../class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27e',1,'YumEngine::Variant']]],
+  ['vector_6',['Vector',['../class_yum_engine_1_1_vector.html',1,'YumEngine::Vector'],['../class_yum_engine_1_1_vector.html#ab8782d180cc11322f081232d1e57f6f4',1,'YumEngine::Vector::Vector()']]],
+  ['vector_2eh_7',['vector.h',['../vector_8h.html',1,'']]],
+  ['vector_2ehpp_8',['vector.hpp',['../vector_8hpp.html',1,'']]]
 ];

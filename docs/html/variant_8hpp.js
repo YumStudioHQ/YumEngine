@@ -1,5 +1,6 @@
 var variant_8hpp =
 [
-    [ "Yumcxx::Variant", "class_yumcxx_1_1_variant.html", "class_yumcxx_1_1_variant" ],
-    [ "YumVariant", "variant_8hpp.html#affeb1de683df242c58cca3333638e785", null ]
+    [ "YumEngine::Variant", "class_yum_engine_1_1_variant.html", "class_yum_engine_1_1_variant" ],
+    [ "YumVariant", "variant_8hpp.html#abd5d508d6adfcd8b8d44576095db7cd7", null ],
+    [ "YumEngine::operator==", "namespace_yum_engine.html#aaa1b6ecd52e97b797b2367cbc239df27", null ]
 ];

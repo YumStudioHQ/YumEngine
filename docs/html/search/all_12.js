@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['variant_0',['Variant',['../class_yumcxx_1_1_variant.html',1,'Yumcxx::Variant'],['../class_yumcxx_1_1_variant.html#af37a4215a10605bf90063432966a6fe8',1,'Yumcxx::Variant::Variant()'],['../class_yumcxx_1_1_variant.html#ac4cc907546f24e3105276e042ed22a35',1,'Yumcxx::Variant::Variant(int64_t i)'],['../class_yumcxx_1_1_variant.html#ab16936c6c561ccb82e0bc129643deb5d',1,'Yumcxx::Variant::Variant(double d)'],['../class_yumcxx_1_1_variant.html#ad7016be049648c927a46f931727efcd0',1,'Yumcxx::Variant::Variant(const std::string &amp;s)'],['../class_yumcxx_1_1_variant.html#ac474a7a4fa1df454afb89b7cb5619909',1,'Yumcxx::Variant::Variant(bool b)'],['../class_yumcxx_1_1_variant.html#a0ebc278109f6a8325ebce11612ecc56e',1,'Yumcxx::Variant::Variant(const YumBinaryBlob &amp;b)'],['../class_yumcxx_1_1_variant.html#a18aee996c4190f1b42b886156a5866eb',1,'Yumcxx::Variant::Variant(const Variant &amp;other)'],['../class_yumcxx_1_1_variant.html#a558c3b82d34e354f4f582392b3d8f902',1,'Yumcxx::Variant::Variant(Variant &amp;&amp;other) noexcept']]],
-  ['variant_2eh_1',['variant.h',['../variant_8h.html',1,'']]],
-  ['variant_2ehpp_2',['variant.hpp',['../variant_8hpp.html',1,'']]],
-  ['vector_3',['Vector',['../class_yumcxx_1_1_vector.html',1,'Yumcxx::Vector'],['../class_yumcxx_1_1_vector.html#a7cfec9c15303983fde32565c8b795e5e',1,'Yumcxx::Vector::Vector()']]],
-  ['vector_2eh_4',['vector.h',['../vector_8h.html',1,'']]],
-  ['vector_2ehpp_5',['vector.hpp',['../vector_8hpp.html',1,'']]]
+  ['table_0',['TABLE',['../class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27ead36fbaadfec750b42848225a9163d66a',1,'YumEngine::Variant']]],
+  ['table_1',['Table',['../class_yum_engine_1_1_variant.html#a2c27c1ac7aa4f9bea27d72f84d7739c1',1,'YumEngine::Variant']]],
+  ['then_2',['then',['../class_action.html#a559a3cc287c5d479d9caef350ff3a009',1,'Action::then(std::function&lt; NextOut(Out)&gt; f) const'],['../class_action.html#a97fa5fcf8d110ee60d4edbc45a8b527a',1,'Action::then(std::function&lt; void(Out)&gt; f) const'],['../class_action_3_01_in_00_01void_01_4.html#a7b02cbfb1af9f1e9165d2b4fa6bcb620',1,'Action&lt; In, void &gt;::then()'],['../class_action_3_01void_00_01_out_01_4.html#a4e32046a3cab33b0d3479932862ef5f7',1,'Action&lt; void, Out &gt;::then()'],['../class_action_3_01void_00_01void_01_4.html#ab89cfa00757916c3ca805222fb8ecb22',1,'Action&lt; void, void &gt;::then()']]]
 ];

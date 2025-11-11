@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['pop_0',['pop',['../class_yumcxx_1_1_vector.html#ad3068d7af7dc2ec6ab3eb9917330ee48',1,'Yumcxx::Vector']]],
-  ['proc_2ehpp_1',['proc.hpp',['../proc_8hpp.html',1,'']]],
-  ['pushcallback_2',['pushCallback',['../class_yumcxx_1_1_lua_subsystem.html#ac2ada6e34b9bc431e3012c09cf9a9968',1,'Yumcxx::LuaSubsystem::pushCallback(const std::string &amp;name, const ManagedCallback &amp;cb, const std::string &amp;ns=&quot;&quot;)'],['../class_yumcxx_1_1_lua_subsystem.html#a2f2a4076b7c57d68a7d5a3963b28931c',1,'Yumcxx::LuaSubsystem::pushCallback(const std::string &amp;name, const std::shared_ptr&lt; ManagedCallback &gt; &amp;cb, const std::string &amp;ns=&quot;&quot;)']]]
+  ['newstate_0',['newState',['../class_yum_engine_1_1_subsystem.html#a6cc703785f6385c5b06a1720b0114502',1,'YumEngine::Subsystem']]],
+  ['nil_1',['NIL',['../class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27ea580cd0e05d219b6a136ab369b95caf7d',1,'YumEngine::Variant']]],
+  ['number_2',['NUMBER',['../class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27eaa148345650767beae25bc9ccf25734bb',1,'YumEngine::Variant']]]
 ];

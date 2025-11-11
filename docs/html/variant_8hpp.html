@@ -91,8 +91,10 @@ $(function(){initNavTree('variant_8hpp.html','',''); });
   <div class="headertitle"><div class="title">variant.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
+<div class="textblock"><code>#include &lt;memory&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
+<code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
 <code>#include &lt;variant&gt;</code><br />
 <code>#include &quot;<a class="el" href="yumdec_8h_source.html">yumdec.h</a>&quot;</code><br />
 </div>
@@ -100,26 +102,30 @@ $(function(){initNavTree('variant_8hpp.html','',''); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:Yumcxx_3A_3AVariant" id="r_Yumcxx_3A_3AVariant"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yumcxx_1_1_variant.html">Yumcxx::Variant</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dynamically typed value container used for Lua &lt;-&gt; C++ communication.  <a href="class_yumcxx_1_1_variant.html#details">More...</a><br /></td></tr>
+<tr class="memitem:YumEngine_3A_3AVariant" id="r_YumEngine_3A_3AVariant"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1_variant.html">YumEngine::Variant</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dynamically typed value container used for Lua &lt;-&gt; C++ communication.  <a href="class_yum_engine_1_1_variant.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:Yumcxx" id="r_Yumcxx"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_yumcxx.html">Yumcxx</a></td></tr>
+<tr class="memitem:YumEngine" id="r_YumEngine"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_yum_engine.html">YumEngine</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:affeb1de683df242c58cca3333638e785" id="r_affeb1de683df242c58cca3333638e785"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#affeb1de683df242c58cca3333638e785">YumVariant</a> = <a class="el" href="class_yumcxx_1_1_variant.html">Yumcxx::Variant</a></td></tr>
+<tr class="memitem:abd5d508d6adfcd8b8d44576095db7cd7" id="r_abd5d508d6adfcd8b8d44576095db7cd7"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd5d508d6adfcd8b8d44576095db7cd7">YumVariant</a> = <a class="el" href="class_yum_engine_1_1_variant.html">YumEngine::Variant</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:aaa1b6ecd52e97b797b2367cbc239df27" id="r_aaa1b6ecd52e97b797b2367cbc239df27"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_yum_engine.html#aaa1b6ecd52e97b797b2367cbc239df27">YumEngine::operator==</a> (const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;a, const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;b)</td></tr>
 </table>
 <a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
-<a id="affeb1de683df242c58cca3333638e785" name="affeb1de683df242c58cca3333638e785"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#affeb1de683df242c58cca3333638e785">&#9670;&#160;</a></span>YumVariant</h2>
+<a id="abd5d508d6adfcd8b8d44576095db7cd7" name="abd5d508d6adfcd8b8d44576095db7cd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd5d508d6adfcd8b8d44576095db7cd7">&#9670;&#160;</a></span>YumVariant</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="variant_8h.html#ac64b9c2856032ab17ce19a3f15deadb5">YumVariant</a> = <a class="el" href="class_yumcxx_1_1_variant.html">Yumcxx::Variant</a></td>
+          <td class="memname">using <a class="el" href="variant_8h.html#ac64b9c2856032ab17ce19a3f15deadb5">YumVariant</a> = <a class="el" href="class_yum_engine_1_1_variant.html">YumEngine::Variant</a></td>
         </tr>
       </table>
 </div><div class="memdoc">

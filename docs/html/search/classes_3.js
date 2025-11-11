@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['variant_0',['Variant',['../class_yumcxx_1_1_variant.html',1,'Yumcxx']]],
-  ['vector_1',['Vector',['../class_yumcxx_1_1_vector.html',1,'Yumcxx']]]
+  ['subprocessbase_0',['SubProcessBase',['../class_yum_engine_1_1_sub_process_base.html',1,'YumEngine']]],
+  ['subsystem_1',['Subsystem',['../class_yum_engine_1_1_subsystem.html',1,'YumEngine']]]
 ];

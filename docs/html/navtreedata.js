@@ -39,7 +39,10 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "Variables", "functions_vars.html", null ],
+        [ "Typedefs", "functions_type.html", null ],
+        [ "Enumerations", "functions_enum.html", null ],
+        [ "Enumerator", "functions_eval.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -59,7 +62,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "action_8hpp.html",
-"vector_8h.html#a0632060fcb3117ed6b63fafb3ef2757d"
+"namespace_yum_engine_1_1utils.html#aaa82bb3e2a9fe6a739ea334f0d8da07c"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';
