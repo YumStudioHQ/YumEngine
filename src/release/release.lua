@@ -170,7 +170,16 @@ end
 
 print("> Building project...")
 
-local major, minor, patch = update_version_header(VERSION_FILE, VERSION_PREFIX, arg[1] or "patch")
+-- Handle command-line args safely
+local bump = "patch"
+if type(arg) == "table" and arg[1] then
+  bump = arg[1]
+else
+  print("[WARN] No bump argument provided, defaulting to 'patch'")
+end
+
+local major, minor, patch = update_version_header(VERSION_FILE, VERSION_PREFIX, bump)
+
 generate_version_js(major, minor, patch)
 update_readme(major, minor, patch)
 build_project(major, minor, patch)

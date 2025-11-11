@@ -91,6 +91,9 @@ $(function(){initNavTree('vector_8hpp.html','',''); });
   <div class="headertitle"><div class="title">vector.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Lightweight container for <a class="el" href="namespace_yum_engine.html">YumEngine</a> Variant values.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &quot;<a class="el" href="variant_8hpp_source.html">variant.hpp</a>&quot;</code><br />
@@ -100,6 +103,7 @@ $(function(){initNavTree('vector_8hpp.html','',''); });
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:Yumcxx_3A_3AVector" id="r_Yumcxx_3A_3AVector"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yumcxx_1_1_vector.html">Yumcxx::Vector</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimal, type-safe container for <span class="tt"><a class="el" href="class_yumcxx_1_1_variant.html" title="Dynamically typed value container used for Lua &lt;-&gt; C++ communication.">Variant</a></span> values.  <a href="class_yumcxx_1_1_vector.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -109,7 +113,11 @@ Namespaces</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:a4e2113477371820e8669ee1ed0d21ca4" id="r_a4e2113477371820e8669ee1ed0d21ca4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4e2113477371820e8669ee1ed0d21ca4">YumVector</a> = <a class="el" href="class_yumcxx_1_1_vector.html">Yumcxx::Vector</a></td></tr>
 </table>
-<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Lightweight container for <a class="el" href="namespace_yum_engine.html">YumEngine</a> Variant values. </p>
+<p>This header defines <span class="tt"><a class="el" href="class_yumcxx_1_1_vector.html" title="Minimal, type-safe container for Variant values.">Yumcxx::Vector</a></span>, a minimal wrapper around <span class="tt">std::vector&lt;Variant&gt;</span>. It is designed to bridge C++ and C APIs in the <a class="el" href="namespace_yum_engine.html">YumEngine</a> runtime.</p>
+<p>Only a subset of essential methods is provided to simplify language bindings and to maintain ABI stability across native and scripting layers. </p>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
 <a id="a4e2113477371820e8669ee1ed0d21ca4" name="a4e2113477371820e8669ee1ed0d21ca4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e2113477371820e8669ee1ed0d21ca4">&#9670;&#160;</a></span>YumVector</h2>
 

@@ -1,6 +1,13 @@
-/* variant.h — Yum C API wrapper
- ** Exposes Yumcxx::Variant for C and dynamic loading
- */
+/*********************************************************
+ *                                                       *
+ *                       YumEngine                       *
+ *                                                       *
+ *            This file is free & open source            *
+ *        https://github.com/YumStudioHQ/YumEngine       *
+ *                          from                         *
+ *                         MONOE                         *
+ *                                                       *
+ *********************************************************/
 #ifndef ___YUMGUARD_VARIANT_H___
 #define ___YUMGUARD_VARIANT_H___
 #include <stdint.h>

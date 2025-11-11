@@ -1,8 +1,18 @@
+/*********************************************************
+ *                                                       *
+ *                       YumEngine                       *
+ *                                                       *
+ *            This file is free & open source            *
+ *        https://github.com/YumStudioHQ/YumEngine       *
+ *                          from                         *
+ *                         MONOE                         *
+ *                                                       *
+ *********************************************************/
+#pragma once
+
 /**
  * @brief defines global functions for YumEngine backend.
- */
-
-#pragma once
+*/
 
 #include <memory>
 #include <iostream>

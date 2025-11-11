@@ -1,3 +1,13 @@
+/*********************************************************
+ *                                                       *
+ *                       YumEngine                       *
+ *                                                       *
+ *            This file is free & open source            *
+ *        https://github.com/YumStudioHQ/YumEngine       *
+ *                          from                         *
+ *                         MONOE                         *
+ *                                                       *
+ *********************************************************/
 #include <format>
 #include <chrono>
 #include <memory>
@@ -8,6 +18,7 @@
 #include <functional>
 #include <unordered_map>
 
+#include "inc/lua_yumtable.hpp"
 #include "inc/subsystem.hpp"
 #include "inc/variant.hpp"
 #include "inc/vector.hpp"
@@ -25,7 +36,7 @@ static inline std::vector<std::string> splitDot(const std::string& path) {
   return parts;
 }
 
-namespace Yumcxx {
+namespace YumEngine {
   LuaSubsystem::LuaSubsystem() { /* Might end with segfaults... */ }
 
   LuaSubsystem::LuaSubsystem(const std::shared_ptr<LuaCxx> &p) {
@@ -34,35 +45,16 @@ namespace Yumcxx {
 
   LuaSubsystem::~LuaSubsystem() {/* Destructor doesn't have to do anything — LuaCxx will handle that! */}
 
-  Variant LuaSubsystem::ati(int i) {
-    auto l = lua->get();
-    if (lua_isinteger(l, i)) return Variant((int64_t)lua_tointeger(l, i));
-    else if (lua_isnumber(l, i)) return Variant(lua_tonumber(l, i));
-    else if (lua_isboolean(l, i)) return Variant((bool)lua_toboolean(l, i));
-    else if (lua_isstring(l, i)) return Variant(std::string(lua_tostring(l, i)));
-    else if (lua_istable(l, i)) {
-      lua_getfield(l, i, "__yum_type");
-      const char* t = lua_tostring(l, -1);
-      lua_pop(l, 1);
-      if (t && strcmp(t, "binary") == 0) {
-        lua_getfield(l, i, "data");
-        size_t len;
-        const char *data = lua_tolstring(l, -1, &len);
-        lua_pop(l, 1);
-        return Variant(YumBinaryBlob{.start = (const uint8_t*)data, .size = len});
-      }
-    }
-    
-    return Variant(); // nil
-  }
-
   void LuaSubsystem::pushOnLuaStack(const Variant &v) {
-    if (v.is_int()) lua_pushinteger(lua->get(), v.as_int());
-    else if (v.is_float()) lua_pushnumber(lua->get(), v.as_float());
-    else if (v.is_bool()) lua_pushboolean(lua->get(), v.as_bool());
-    else if (v.is_string()) lua_pushstring(lua->get(), v.as_string().c_str());
-    else if (v.is_binary()) lua_pushlstring(lua->get(), (const char*)v.as_binary().start, v.as_binary().size);
-    else lua_pushnil(lua->get());
+    switch (v.get_kind()) {
+      case Variant::INTEGER: lua_pushinteger(lua->get(), v.as_int()); break;
+      case Variant::NUMBER:  lua_pushnumber(lua->get(), v.as_float()); break;
+      case Variant::BOOLEAN: lua_pushboolean(lua->get(), v.as_bool()); break;
+      case Variant::STRING:  lua_pushstring(lua->get(), v.as_string().c_str()); break;
+      case Variant::BINARY:  lua_pushlstring(lua->get(), (const char*)v.as_binary().start, v.as_binary().size); break;
+      case Variant::TABLE:   utils::set_table(lua->get(), (*v.as_table())); break;
+      default: lua_pushnil(lua->get()); break;
+    }
   }
 
   Vector LuaSubsystem::call(const std::string &n, const Vector &args) {
@@ -105,13 +97,12 @@ namespace Yumcxx {
     int nresults = lua_gettop(L) - base;
     Vector ret;
     for (int i = 0; i < nresults; i++) {
-      ret.append(ati(base + 1 + i));
+      ret.append(utils::from_lua(L, base + 1 + i));
     }
 
     lua_pop(L, nresults);
     return ret;
   }
-
 
   int32_t LuaSubsystem::load(const std::string &s, bool isAFileThatIHaveToLoad) {
     if (isAFileThatIHaveToLoad) {
@@ -313,7 +304,7 @@ extern "C" {
    * @return a new C pointer. Free it with YumSubsystem_delete(...).
    */
   YUM_OUTATR YumSubsystem *YumSubsystem_new(void) {
-    return new Yumcxx::Subsystem();
+    return new YumEngine::Subsystem();
   }
 
   YUM_OUTATR void YumSubsystem_delete(YumSubsystem *s) {
@@ -349,8 +340,8 @@ extern "C" {
     try {
       auto subsystem = (s);
       auto lua = subsystem->get(uid);
-      Yumcxx::Vector v = lua->call(std::string(name), *args);
-      return new Yumcxx::Vector(std::move(v));
+      YumEngine::Vector v = lua->call(std::string(name), *args);
+      return new YumEngine::Vector(std::move(v));
     } catch (const std::bad_function_call &e) {
       (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
     } catch (const std::bad_alloc &e) {
@@ -380,8 +371,8 @@ extern "C" {
 
       auto lua = s->get(uid);
 
-      lua->pushCallback(name, [cb](Yumcxx::Vector v) -> Yumcxx::Vector {
-        Yumcxx::Vector out;
+      lua->pushCallback(name, [cb](YumEngine::Vector v) -> YumEngine::Vector {
+        YumEngine::Vector out;
         cb(&v, &out);
         return out;
       }, /* args: const std::string &ns */ ns);

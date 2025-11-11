@@ -5,6 +5,7 @@ bottles/
 .wys/
 .godot/
 src/out/
-build/
+out/
 src/lua/src/release
 src/lua/src/build
+*.o

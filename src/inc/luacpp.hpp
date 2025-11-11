@@ -1,3 +1,13 @@
+/*********************************************************
+ *                                                       *
+ *                       YumEngine                       *
+ *                                                       *
+ *            This file is free & open source            *
+ *        https://github.com/YumStudioHQ/YumEngine       *
+ *                          from                         *
+ *                         MONOE                         *
+ *                                                       *
+ *********************************************************/
 #pragma once
 
 #include <iomanip>
@@ -6,7 +16,10 @@
 
 #include "glob.hpp"
 
-namespace Yumcxx {
+namespace YumEngine {
+  /**
+   * @brief Holds a `lua_State*`, and frees it when destroyed.
+   */
   class LuaCxx {
   private:
     lua_State *state;

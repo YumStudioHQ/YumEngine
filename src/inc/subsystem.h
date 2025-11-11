@@ -1,3 +1,13 @@
+/*********************************************************
+ *                                                       *
+ *                       YumEngine                       *
+ *                                                       *
+ *            This file is free & open source            *
+ *        https://github.com/YumStudioHQ/YumEngine       *
+ *                          from                         *
+ *                         MONOE                         *
+ *                                                       *
+ *********************************************************/
 #ifndef ___YUM_SUBSYSTEM_H___
 #define ___YUM_SUBSYSTEM_H___
 

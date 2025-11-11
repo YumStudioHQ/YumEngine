@@ -3,7 +3,7 @@
 ## Version
 
 <!-- YUM_VERSION_START -->
-- **Engine version:** `1.9.13`
+- **Engine version:** `2.0.2`
 - **Studio:** `yum-official`
 - **Branch:** `stable`
 <!-- YUM_VERSION_END -->
@@ -50,14 +50,15 @@ Official builds are precompiled. You usually **don’t need to compile** anythin
 To build manually:
 
 ```bash
-lua build.lua build [patch|minor|major]
+lua release.lua [patch|minor|major]
 ````
 
 **Notes:**
 
-* Adjust compiler paths or flags in `build.lua` if needed.
-* Version bumping is handled automatically via `build.lua version [patch|minor|major]`.
+* Adjust compiler paths or flags in `release.lua` if needed.
+* Version bumping is handled automatically via `release.lua version [patch|minor|major]`.
 * A `version.js` file is generated for website integration.
+* release [file](./src/release/release.lua)
 
 ---
 
@@ -84,7 +85,8 @@ We are a small, experimental studio passionate about cross-language runtime engi
 
 ## Contributors
 
-* **Wys** — Lead Developer ([GitHub](https://github.com/wys-prog))
+* **MONOE** — Lead Developer ([GitHub](https://github.com/wys-prog))
+* **YumStudio** — Someone ... ([GitHub](https://github.com/yumstudiohq))
 
 ---
 
@@ -92,6 +94,3 @@ We are a small, experimental studio passionate about cross-language runtime engi
 
 [License](./LICENSE)
 
----
-
-> ⚠️ YumEngine is currently under active development. Some features may change or be incomplete. Use at your own risk.

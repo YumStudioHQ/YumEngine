@@ -92,25 +92,50 @@ $(function(){initNavTree('class_yumcxx_1_1_lua_subsystem.html','','class_yumcxx_
 </div><!--header-->
 <div class="contents">
 
+<p>Represents a single Lua execution context and its native callback bindings.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="subsystem_8hpp_source.html">subsystem.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr id="pub-methods-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Constructors and Destructor</div></td></tr>
 <tr class="memitem:a0d18f5d2cc29ab4d7867ae691d235745" id="r_a0d18f5d2cc29ab4d7867ae691d235745"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d18f5d2cc29ab4d7867ae691d235745">LuaSubsystem</a> ()</td></tr>
-<tr class="memitem:a70c321bff45ef60bc932d403a5046175" id="r_a70c321bff45ef60bc932d403a5046175"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a70c321bff45ef60bc932d403a5046175">LuaSubsystem</a> (const std::shared_ptr&lt; <a class="el" href="class_yumcxx_1_1_lua_cxx.html">LuaCxx</a> &gt; &amp;)</td></tr>
+<tr class="memdesc:a0d18f5d2cc29ab4d7867ae691d235745"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new <a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a> with a fresh Lua state.  <br /></td></tr>
+<tr class="memitem:a3d94396c573bf6a540dc5e1c9cb34edb" id="r_a3d94396c573bf6a540dc5e1c9cb34edb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3d94396c573bf6a540dc5e1c9cb34edb">LuaSubsystem</a> (const std::shared_ptr&lt; <a class="el" href="class_yumcxx_1_1_lua_cxx.html">LuaCxx</a> &gt; &amp;lua)</td></tr>
+<tr class="memdesc:a3d94396c573bf6a540dc5e1c9cb34edb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a> using an existing <a class="el" href="class_yumcxx_1_1_lua_cxx.html" title="Holds a lua_State*, and frees it when destroyed.">LuaCxx</a> instance.  <br /></td></tr>
 <tr class="memitem:af5767cd215d8fa3f164dfb5f675f0118" id="r_af5767cd215d8fa3f164dfb5f675f0118"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af5767cd215d8fa3f164dfb5f675f0118">~LuaSubsystem</a> ()</td></tr>
-<tr class="memitem:a8b61790772d048cde94ba73166bebcb6" id="r_a8b61790772d048cde94ba73166bebcb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_yumcxx_1_1_vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8b61790772d048cde94ba73166bebcb6">call</a> (const std::string &amp;, const <a class="el" href="class_yumcxx_1_1_vector.html">Vector</a> &amp;)</td></tr>
-<tr class="memitem:a01d66d6d9d63320cc9b75a14d7f3dffe" id="r_a01d66d6d9d63320cc9b75a14d7f3dffe"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01d66d6d9d63320cc9b75a14d7f3dffe">load</a> (const std::string &amp;, bool)</td></tr>
+<tr class="memdesc:af5767cd215d8fa3f164dfb5f675f0118"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a> and cleans up resources.  <br /></td></tr>
+<tr id="pub-methods-1" class="groupHeader"><td colspan="2"><div class="groupHeader">Execution and Loading</div></td></tr>
+<tr class="memitem:a699981aa67d4f8253df098cbca62e947" id="r_a699981aa67d4f8253df098cbca62e947"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_yumcxx_1_1_vector.html">Vector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a699981aa67d4f8253df098cbca62e947">call</a> (const std::string &amp;name, const <a class="el" href="class_yumcxx_1_1_vector.html">Vector</a> &amp;args)</td></tr>
+<tr class="memdesc:a699981aa67d4f8253df098cbca62e947"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls a Lua function by name.  <br /></td></tr>
+<tr class="memitem:ab17613141b480a3b58a773acca5c5afc" id="r_ab17613141b480a3b58a773acca5c5afc"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab17613141b480a3b58a773acca5c5afc">load</a> (const std::string &amp;source, bool isFile)</td></tr>
+<tr class="memdesc:ab17613141b480a3b58a773acca5c5afc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads Lua source code.  <br /></td></tr>
 <tr class="memitem:a9b9a27381c04d12fc08f55f16f59eae8" id="r_a9b9a27381c04d12fc08f55f16f59eae8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b9a27381c04d12fc08f55f16f59eae8">good</a> ()</td></tr>
-<tr class="memitem:a58021433d6cefc3fb22453d4f1e5147c" id="r_a58021433d6cefc3fb22453d4f1e5147c"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a58021433d6cefc3fb22453d4f1e5147c">pushCallback</a> (const std::string &amp;, const <a class="el" href="namespace_yumcxx.html#a4249284cb46dadf6651266a202ce3013">ManagedCallback</a> &amp;, const std::string &amp;=&quot;&quot;)</td></tr>
-<tr class="memitem:afca2710e8ff3b7cb2885c1285fe1b7f5" id="r_afca2710e8ff3b7cb2885c1285fe1b7f5"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afca2710e8ff3b7cb2885c1285fe1b7f5">pushCallback</a> (const std::string &amp;, const std::shared_ptr&lt; <a class="el" href="namespace_yumcxx.html#a4249284cb46dadf6651266a202ce3013">ManagedCallback</a> &gt; &amp;, const std::string &amp;=&quot;&quot;)</td></tr>
-<tr class="memitem:a39cef18b89240bc8e6f568015bd88a44" id="r_a39cef18b89240bc8e6f568015bd88a44"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a39cef18b89240bc8e6f568015bd88a44">hasMethod</a> (const std::string &amp;)</td></tr>
+<tr class="memdesc:a9b9a27381c04d12fc08f55f16f59eae8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the underlying Lua state is valid.  <br /></td></tr>
+<tr id="pub-methods-2" class="groupHeader"><td colspan="2"><div class="groupHeader">Callback Management</div></td></tr>
+<tr class="memitem:ac2ada6e34b9bc431e3012c09cf9a9968" id="r_ac2ada6e34b9bc431e3012c09cf9a9968"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac2ada6e34b9bc431e3012c09cf9a9968">pushCallback</a> (const std::string &amp;name, const <a class="el" href="namespace_yumcxx.html#a4249284cb46dadf6651266a202ce3013">ManagedCallback</a> &amp;cb, const std::string &amp;ns=&quot;&quot;)</td></tr>
+<tr class="memdesc:ac2ada6e34b9bc431e3012c09cf9a9968"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a new native callback callable from Lua.  <br /></td></tr>
+<tr class="memitem:a2f2a4076b7c57d68a7d5a3963b28931c" id="r_a2f2a4076b7c57d68a7d5a3963b28931c"><td class="memItemLeft" align="right" valign="top">int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f2a4076b7c57d68a7d5a3963b28931c">pushCallback</a> (const std::string &amp;name, const std::shared_ptr&lt; <a class="el" href="namespace_yumcxx.html#a4249284cb46dadf6651266a202ce3013">ManagedCallback</a> &gt; &amp;cb, const std::string &amp;ns=&quot;&quot;)</td></tr>
+<tr class="memdesc:a2f2a4076b7c57d68a7d5a3963b28931c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a managed callback using a shared pointer.  <br /></td></tr>
+<tr class="memitem:aad73c1ebe3de9be15f2631689ee6622d" id="r_aad73c1ebe3de9be15f2631689ee6622d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad73c1ebe3de9be15f2631689ee6622d">hasMethod</a> (const std::string &amp;name)</td></tr>
+<tr class="memdesc:aad73c1ebe3de9be15f2631689ee6622d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a Lua method is defined.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr id="pub-static-methods-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Utility</div></td></tr>
 <tr class="memitem:a21152ffadb1696b3ee25a599d6449530" id="r_a21152ffadb1696b3ee25a599d6449530"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a21152ffadb1696b3ee25a599d6449530">ensureNamespace</a> (lua_State *L, const std::string &amp;ns)</td></tr>
+<tr class="memdesc:a21152ffadb1696b3ee25a599d6449530"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensures that a Lua namespace exists in the global environment.  <br /></td></tr>
 </table>
-<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a single Lua execution context and its native callback bindings. </p>
+<p><span class="tt"><a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a></span> encapsulates a Lua state (<span class="tt"><a class="el" href="class_yumcxx_1_1_lua_cxx.html" title="Holds a lua_State*, and frees it when destroyed.">LuaCxx</a></span>), along with a set of registered native callbacks. It provides mechanisms for:</p><ul>
+<li>Registering and invoking native callbacks from Lua.</li>
+<li>Loading and executing Lua code (either from file or string).</li>
+<li>Maintaining and cleaning up Lua-managed resources.</li>
+</ul>
+<dl class="section note"><dt>Note</dt><dd>Callbacks are owned by the language runtime that registered them. The backend only manages the lifetime of their wrapper, not the callback itself. </dd></dl>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0d18f5d2cc29ab4d7867ae691d235745" name="a0d18f5d2cc29ab4d7867ae691d235745"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0d18f5d2cc29ab4d7867ae691d235745">&#9670;&#160;</a></span>LuaSubsystem() <span class="overload">[1/2]</span></h2>
 
@@ -126,10 +151,12 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Creates a new <a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a> with a fresh Lua state. </p>
+
 </div>
 </div>
-<a id="a70c321bff45ef60bc932d403a5046175" name="a70c321bff45ef60bc932d403a5046175"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a70c321bff45ef60bc932d403a5046175">&#9670;&#160;</a></span>LuaSubsystem() <span class="overload">[2/2]</span></h2>
+<a id="a3d94396c573bf6a540dc5e1c9cb34edb" name="a3d94396c573bf6a540dc5e1c9cb34edb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d94396c573bf6a540dc5e1c9cb34edb">&#9670;&#160;</a></span>LuaSubsystem() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -137,11 +164,19 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">Yumcxx::LuaSubsystem::LuaSubsystem </td>
           <td>(</td>
-          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="class_yumcxx_1_1_lua_cxx.html">LuaCxx</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="class_yumcxx_1_1_lua_cxx.html">LuaCxx</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>lua</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Creates a <a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a> using an existing <a class="el" href="class_yumcxx_1_1_lua_cxx.html" title="Holds a lua_State*, and frees it when destroyed.">LuaCxx</a> instance. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lua</td><td>Shared pointer to an existing <a class="el" href="class_yumcxx_1_1_lua_cxx.html" title="Holds a lua_State*, and frees it when destroyed.">LuaCxx</a> context. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -160,11 +195,13 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Destroys the <a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a> and cleans up resources. </p>
+
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a8b61790772d048cde94ba73166bebcb6" name="a8b61790772d048cde94ba73166bebcb6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b61790772d048cde94ba73166bebcb6">&#9670;&#160;</a></span>call()</h2>
+<a id="a699981aa67d4f8253df098cbca62e947" name="a699981aa67d4f8253df098cbca62e947"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a699981aa67d4f8253df098cbca62e947">&#9670;&#160;</a></span>call()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -172,15 +209,25 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="class_yumcxx_1_1_vector.html">Vector</a> Yumcxx::LuaSubsystem::call </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="class_yumcxx_1_1_vector.html">Vector</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="class_yumcxx_1_1_vector.html">Vector</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Calls a Lua function by name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name of the Lua function. </td></tr>
+    <tr><td class="paramname">args</td><td>Arguments to pass to the function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A <span class="tt"><a class="el" href="class_yumcxx_1_1_vector.html" title="Minimal, type-safe container for Variant values.">Vector</a></span> containing the function’s return values. </dd></dl>
 
 </div>
 </div>
@@ -211,6 +258,16 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Ensures that a Lua namespace exists in the global environment. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">L</td><td>Pointer to the Lua state. </td></tr>
+    <tr><td class="paramname">ns</td><td>Namespace name.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>If the namespace table does not exist, it is created. </p>
+
 </div>
 </div>
 <a id="a9b9a27381c04d12fc08f55f16f59eae8" name="a9b9a27381c04d12fc08f55f16f59eae8"></a>
@@ -228,10 +285,13 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Checks whether the underlying Lua state is valid. </p>
+<dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> if the Lua state is valid; otherwise <span class="tt">false</span>. </dd></dl>
+
 </div>
 </div>
-<a id="a39cef18b89240bc8e6f568015bd88a44" name="a39cef18b89240bc8e6f568015bd88a44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39cef18b89240bc8e6f568015bd88a44">&#9670;&#160;</a></span>hasMethod()</h2>
+<a id="aad73c1ebe3de9be15f2631689ee6622d" name="aad73c1ebe3de9be15f2631689ee6622d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad73c1ebe3de9be15f2631689ee6622d">&#9670;&#160;</a></span>hasMethod()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -239,16 +299,25 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">bool Yumcxx::LuaSubsystem::hasMethod </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Checks whether a Lua method is defined. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name of the Lua function. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> if the method exists, otherwise <span class="tt">false</span>. </dd></dl>
+
 </div>
 </div>
-<a id="a01d66d6d9d63320cc9b75a14d7f3dffe" name="a01d66d6d9d63320cc9b75a14d7f3dffe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01d66d6d9d63320cc9b75a14d7f3dffe">&#9670;&#160;</a></span>load()</h2>
+<a id="ab17613141b480a3b58a773acca5c5afc" name="ab17613141b480a3b58a773acca5c5afc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab17613141b480a3b58a773acca5c5afc">&#9670;&#160;</a></span>load()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -256,20 +325,30 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">int32_t Yumcxx::LuaSubsystem::load </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>source</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>isFile</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Loads Lua source code. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>File path or source string. </td></tr>
+    <tr><td class="paramname">isFile</td><td>If <span class="tt">true</span>, loads from file; if <span class="tt">false</span>, treats <span class="tt">source</span> as raw Lua code. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Zero on success, or a non-zero error code. </dd></dl>
+
 </div>
 </div>
-<a id="a58021433d6cefc3fb22453d4f1e5147c" name="a58021433d6cefc3fb22453d4f1e5147c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58021433d6cefc3fb22453d4f1e5147c">&#9670;&#160;</a></span>pushCallback() <span class="overload">[1/2]</span></h2>
+<a id="ac2ada6e34b9bc431e3012c09cf9a9968" name="ac2ada6e34b9bc431e3012c09cf9a9968"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2ada6e34b9bc431e3012c09cf9a9968">&#9670;&#160;</a></span>pushCallback() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -277,25 +356,36 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">int32_t Yumcxx::LuaSubsystem::pushCallback </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="namespace_yumcxx.html#a4249284cb46dadf6651266a202ce3013">ManagedCallback</a> &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype">const <a class="el" href="namespace_yumcxx.html#a4249284cb46dadf6651266a202ce3013">ManagedCallback</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>cb</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>&#160;)</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>ns</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Registers a new native callback callable from Lua. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name under which the callback will be exposed to Lua. </td></tr>
+    <tr><td class="paramname">cb</td><td>Function to be registered. </td></tr>
+    <tr><td class="paramname">ns</td><td>Optional Lua namespace to register under (defaults to global scope). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Zero on success, or a non-zero error code. </dd></dl>
+
 </div>
 </div>
-<a id="afca2710e8ff3b7cb2885c1285fe1b7f5" name="afca2710e8ff3b7cb2885c1285fe1b7f5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afca2710e8ff3b7cb2885c1285fe1b7f5">&#9670;&#160;</a></span>pushCallback() <span class="overload">[2/2]</span></h2>
+<a id="a2f2a4076b7c57d68a7d5a3963b28931c" name="a2f2a4076b7c57d68a7d5a3963b28931c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f2a4076b7c57d68a7d5a3963b28931c">&#9670;&#160;</a></span>pushCallback() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -303,20 +393,31 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">int32_t Yumcxx::LuaSubsystem::pushCallback </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="namespace_yumcxx.html#a4249284cb46dadf6651266a202ce3013">ManagedCallback</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="namespace_yumcxx.html#a4249284cb46dadf6651266a202ce3013">ManagedCallback</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>cb</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>&#160;)</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>ns</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Registers a managed callback using a shared pointer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>Name under which the callback will be exposed to Lua. </td></tr>
+    <tr><td class="paramname">cb</td><td>Shared pointer to the callback function. </td></tr>
+    <tr><td class="paramname">ns</td><td>Optional Lua namespace to register under (defaults to global scope). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Zero on success, or a non-zero error code. </dd></dl>
 
 </div>
 </div>

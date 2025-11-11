@@ -1,3 +1,13 @@
+/*********************************************************
+ *                                                       *
+ *                       YumEngine                       *
+ *                                                       *
+ *            This file is free & open source            *
+ *        https://github.com/YumStudioHQ/YumEngine       *
+ *                          from                         *
+ *                         MONOE                         *
+ *                                                       *
+ *********************************************************/
 /* vector.cpp — Definition */
 
 #include <vector>
@@ -7,7 +17,7 @@
 #include "inc/vector.hpp"
 #include "inc/yumdec.h"
 
-namespace Yumcxx {
+namespace YumEngine {
   Vector::Vector() : internal() {}
   Vector::~Vector() {}
   void Vector::append(const Variant &v) { internal.push_back(v); }

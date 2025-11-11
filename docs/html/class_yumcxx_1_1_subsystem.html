@@ -92,18 +92,38 @@ $(function(){initNavTree('class_yumcxx_1_1_subsystem.html','','class_yumcxx_1_1_
 </div><!--header-->
 <div class="contents">
 
+<p>UID-based manager for multiple <a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a> instances.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="subsystem_8hpp_source.html">subsystem.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr id="pub-methods-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Constructors and Destructor</div></td></tr>
 <tr class="memitem:a4d45ccaad94fecc85e9850f25f9d505f" id="r_a4d45ccaad94fecc85e9850f25f9d505f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4d45ccaad94fecc85e9850f25f9d505f">Subsystem</a> ()</td></tr>
+<tr class="memdesc:a4d45ccaad94fecc85e9850f25f9d505f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an empty <a class="el" href="class_yumcxx_1_1_subsystem.html" title="UID-based manager for multiple LuaSubsystem instances.">Subsystem</a> manager.  <br /></td></tr>
 <tr class="memitem:a254ee804b44f2facb13633f0bef7288e" id="r_a254ee804b44f2facb13633f0bef7288e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a254ee804b44f2facb13633f0bef7288e">~Subsystem</a> ()</td></tr>
-<tr class="memitem:a05f90ed046aff7c2dbd278e08562287b" id="r_a05f90ed046aff7c2dbd278e08562287b"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05f90ed046aff7c2dbd278e08562287b">newState</a> (bool=false)</td></tr>
-<tr class="memitem:a27b4b4d199f06a028c3ef3b994b0bb10" id="r_a27b4b4d199f06a028c3ef3b994b0bb10"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a27b4b4d199f06a028c3ef3b994b0bb10">deleteState</a> (uint64_t)</td></tr>
-<tr class="memitem:af5a3dcccd53f94777f428865bbde3bfe" id="r_af5a3dcccd53f94777f428865bbde3bfe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af5a3dcccd53f94777f428865bbde3bfe">isValidUID</a> (uint64_t)</td></tr>
-<tr class="memitem:a242c305cc19ec5c8eea7201847eae8c4" id="r_a242c305cc19ec5c8eea7201847eae8c4"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_yumcxx_1_1_lua_subsystem.html">LuaSubsystem</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a242c305cc19ec5c8eea7201847eae8c4">get</a> (uint64_t)</td></tr>
+<tr class="memdesc:a254ee804b44f2facb13633f0bef7288e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="class_yumcxx_1_1_subsystem.html" title="UID-based manager for multiple LuaSubsystem instances.">Subsystem</a> and all associated Lua states.  <br /></td></tr>
+<tr id="pub-methods-1" class="groupHeader"><td colspan="2"><div class="groupHeader">Lua State Management</div></td></tr>
+<tr class="memitem:a150f0262ce3cfdf18051961562feed6a" id="r_a150f0262ce3cfdf18051961562feed6a"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a150f0262ce3cfdf18051961562feed6a">newState</a> (bool withLibs=false)</td></tr>
+<tr class="memdesc:a150f0262ce3cfdf18051961562feed6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new Lua state and assigns it a unique ID.  <br /></td></tr>
+<tr class="memitem:a677d188dd0854963aa9bf11e554370cf" id="r_a677d188dd0854963aa9bf11e554370cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a677d188dd0854963aa9bf11e554370cf">deleteState</a> (uint64_t uid)</td></tr>
+<tr class="memdesc:a677d188dd0854963aa9bf11e554370cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes a Lua state by its unique ID.  <br /></td></tr>
+<tr class="memitem:a2d94ff78d1284200b26901ed46b4e9a1" id="r_a2d94ff78d1284200b26901ed46b4e9a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d94ff78d1284200b26901ed46b4e9a1">isValidUID</a> (uint64_t uid)</td></tr>
+<tr class="memdesc:a2d94ff78d1284200b26901ed46b4e9a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether a given UID corresponds to a valid <a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a>.  <br /></td></tr>
+<tr class="memitem:af8679e88b4aa1c619225fc9992d3c5a9" id="r_af8679e88b4aa1c619225fc9992d3c5a9"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_yumcxx_1_1_lua_subsystem.html">LuaSubsystem</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af8679e88b4aa1c619225fc9992d3c5a9">get</a> (uint64_t uid)</td></tr>
+<tr class="memdesc:af8679e88b4aa1c619225fc9992d3c5a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves a <a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a> by its unique ID.  <br /></td></tr>
 </table>
-<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>UID-based manager for multiple <a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a> instances. </p>
+<p>The <span class="tt"><a class="el" href="class_yumcxx_1_1_subsystem.html" title="UID-based manager for multiple LuaSubsystem instances.">Subsystem</a></span> class acts as a container that manages multiple Lua states, each represented by a <span class="tt"><a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a></span> object and identified by a unique 64-bit ID (UID).</p>
+<p>It is responsible for:</p><ul>
+<li>Creating and deleting Lua states.</li>
+<li>Ensuring unique identifiers for each instance.</li>
+<li>Providing access to existing LuaSubsystems.</li>
+</ul>
+<p>Uses <span class="tt">std::shared_ptr</span> for automatic memory management and safe sharing. </p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4d45ccaad94fecc85e9850f25f9d505f" name="a4d45ccaad94fecc85e9850f25f9d505f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4d45ccaad94fecc85e9850f25f9d505f">&#9670;&#160;</a></span>Subsystem()</h2>
 
@@ -118,6 +138,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Creates an empty <a class="el" href="class_yumcxx_1_1_subsystem.html" title="UID-based manager for multiple LuaSubsystem instances.">Subsystem</a> manager. </p>
 
 </div>
 </div>
@@ -136,11 +158,13 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Destroys the <a class="el" href="class_yumcxx_1_1_subsystem.html" title="UID-based manager for multiple LuaSubsystem instances.">Subsystem</a> and all associated Lua states. </p>
+
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a27b4b4d199f06a028c3ef3b994b0bb10" name="a27b4b4d199f06a028c3ef3b994b0bb10"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a27b4b4d199f06a028c3ef3b994b0bb10">&#9670;&#160;</a></span>deleteState()</h2>
+<a id="a677d188dd0854963aa9bf11e554370cf" name="a677d188dd0854963aa9bf11e554370cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a677d188dd0854963aa9bf11e554370cf">&#9670;&#160;</a></span>deleteState()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -148,16 +172,24 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void Yumcxx::Subsystem::deleteState </td>
           <td>(</td>
-          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>uid</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Deletes a Lua state by its unique ID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uid</td><td>Unique ID of the Lua state to delete. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
-<a id="a242c305cc19ec5c8eea7201847eae8c4" name="a242c305cc19ec5c8eea7201847eae8c4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a242c305cc19ec5c8eea7201847eae8c4">&#9670;&#160;</a></span>get()</h2>
+<a id="af8679e88b4aa1c619225fc9992d3c5a9" name="af8679e88b4aa1c619225fc9992d3c5a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8679e88b4aa1c619225fc9992d3c5a9">&#9670;&#160;</a></span>get()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -165,16 +197,25 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">std::shared_ptr&lt; <a class="el" href="class_yumcxx_1_1_lua_subsystem.html">LuaSubsystem</a> &gt; Yumcxx::Subsystem::get </td>
           <td>(</td>
-          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>uid</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Retrieves a <a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a> by its unique ID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uid</td><td>Unique ID of the desired <a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a>. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Shared pointer to the <a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a>, or <span class="tt">nullptr</span> if invalid. </dd></dl>
+
 </div>
 </div>
-<a id="af5a3dcccd53f94777f428865bbde3bfe" name="af5a3dcccd53f94777f428865bbde3bfe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5a3dcccd53f94777f428865bbde3bfe">&#9670;&#160;</a></span>isValidUID()</h2>
+<a id="a2d94ff78d1284200b26901ed46b4e9a1" name="a2d94ff78d1284200b26901ed46b4e9a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d94ff78d1284200b26901ed46b4e9a1">&#9670;&#160;</a></span>isValidUID()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -182,16 +223,25 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">bool Yumcxx::Subsystem::isValidUID </td>
           <td>(</td>
-          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>uid</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Checks whether a given UID corresponds to a valid <a class="el" href="class_yumcxx_1_1_lua_subsystem.html" title="Represents a single Lua execution context and its native callback bindings.">LuaSubsystem</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">uid</td><td>Unique ID to check. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> if the UID is valid, otherwise <span class="tt">false</span>. </dd></dl>
+
 </div>
 </div>
-<a id="a05f90ed046aff7c2dbd278e08562287b" name="a05f90ed046aff7c2dbd278e08562287b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05f90ed046aff7c2dbd278e08562287b">&#9670;&#160;</a></span>newState()</h2>
+<a id="a150f0262ce3cfdf18051961562feed6a" name="a150f0262ce3cfdf18051961562feed6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a150f0262ce3cfdf18051961562feed6a">&#9670;&#160;</a></span>newState()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -199,11 +249,20 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">uint64_t Yumcxx::Subsystem::newState </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em></em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span></td><td>)</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>withLibs</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Creates a new Lua state and assigns it a unique ID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">withLibs</td><td>If <span class="tt">true</span>, loads standard Lua libraries; otherwise creates a bare state. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The unique ID assigned to the new state. </dd></dl>
 
 </div>
 </div>

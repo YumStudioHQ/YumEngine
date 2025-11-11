@@ -1,9 +1,15 @@
+/*********************************************************
+ *                                                       *
+ *                       YumEngine                       *
+ *                                                       *
+ *            This file is free & open source            *
+ *        https://github.com/YumStudioHQ/YumEngine       *
+ *                          from                         *
+ *                         MONOE                         *
+ *                                                       *
+ *********************************************************/
 #ifndef ___YUM_VECTOR_H___
 #define ___YUM_VECTOR_H___
-#include <stdint.h>
-
-#include "yumdec.h"
-#include "variant.h"
 
 /**
  * @file vector.h
@@ -15,6 +21,10 @@
  * Vectors are used to represent Lua argument lists and return values
  * when interacting through the Yum C API.
  */
+
+#include <stdint.h>
+#include "yumdec.h"
+#include "variant.h"
 
 #ifdef __cplusplus
 extern "C" {

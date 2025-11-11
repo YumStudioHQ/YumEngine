@@ -1,47 +1,62 @@
+/*********************************************************
+ *                                                       *
+ *                       YumEngine                       *
+ *                                                       *
+ *            This file is free & open source            *
+ *        https://github.com/YumStudioHQ/YumEngine       *
+ *                          from                         *
+ *                         MONOE                         *
+ *                                                       *
+ *********************************************************/
 #include "inc/variant.hpp"
 #include "inc/yumdec.h"
 #include "inc/glob.hpp"
 
 #include <format>
 #include <string>
+#include <memory>
 
-namespace Yumcxx {
+namespace YumEngine {
 
-    Variant::Variant() = default;
-    Variant::Variant(int64_t i)              : value_(i) {}
-    Variant::Variant(double d)               : value_(d) {}
-    Variant::Variant(const std::string &s)   : value_(s) {}
-    Variant::Variant(bool b)                 : value_(b) {}
-    Variant::Variant(const YumBinaryBlob &b) : value_(b) {}
+  Variant::Variant()                       : value_(std::monostate{}), kind_(NIL) { }
+  Variant::Variant(int64_t i)              : value_(i), kind_(INTEGER) {}
+  Variant::Variant(double d)               : value_(d), kind_(NUMBER) {}
+  Variant::Variant(const std::string &s)   : value_(s), kind_(STRING) {}
+  Variant::Variant(bool b)                 : value_(b), kind_(BOOLEAN) {}
+  Variant::Variant(const YumBinaryBlob &b) : value_(b), kind_(BINARY) {}
+  Variant::Variant(const Table &table)     : value_(table), kind_(TABLE) {}
 
-    // Copy & Move
-    Variant::Variant(const Variant &) = default;
-    Variant::Variant(Variant &&) noexcept = default;
-    Variant &Variant::operator=(const Variant &) = default;
-    Variant &Variant::operator=(Variant &&) noexcept = default;
+  // Copy & Move
+  Variant::Variant(const Variant &) = default;
+  Variant::Variant(Variant &&) noexcept = default;
+  Variant &Variant::operator=(const Variant &) = default;
+  Variant &Variant::operator=(Variant &&) noexcept = default;
 
-    // Setters
-    void Variant::set(int64_t i)              { value_ = i; }
-    void Variant::set(double d)               { value_ = d; }
-    void Variant::set(const std::string &s)   { value_ = s; }
-    void Variant::set(bool b)                 { value_ = b; }
-    void Variant::set(const YumBinaryBlob &b) { value_ = b; }
-    void Variant::clear()                     { value_ = std::monostate{}; }
+  // Setters
+  void Variant::set(int64_t i)              { value_ = i; kind_ = INTEGER; }
+  void Variant::set(double d)               { value_ = d; kind_ = NUMBER; }
+  void Variant::set(const std::string &s)   { value_ = s; kind_ = STRING; }
+  void Variant::set(bool b)                 { value_ = b; kind_ = BOOLEAN; }
+  void Variant::set(const YumBinaryBlob &b) { value_ = b; kind_ = BINARY; }
+  void Variant::set(const Table &table)     { value_ = table; kind_ = TABLE; }
+  void Variant::clear()                     { value_ = std::monostate{}; kind_ = NIL; }
 
-    // Getters
-    int64_t Variant::as_int() const           { return std::get<int64_t>(value_); }
-    double Variant::as_float() const          { return std::get<double>(value_); }
-    const std::string &Variant::as_string() const { return std::get<std::string>(value_); }
-    bool Variant::as_bool() const             { return std::get<bool>(value_); }
-    YumBinaryBlob Variant::as_binary() const  { return std::get<YumBinaryBlob>(value_); }
-    bool Variant::has_value() const           { return !std::holds_alternative<std::monostate>(value_); }
+  // Getters
+  int64_t Variant::as_int() const           { return std::get<int64_t>(value_); }
+  double Variant::as_float() const          { return std::get<double>(value_); }
+  const std::string &Variant::as_string() const { return std::get<std::string>(value_); }
+  bool Variant::as_bool() const             { return std::get<bool>(value_); }
+  YumBinaryBlob Variant::as_binary() const  { return std::get<YumBinaryBlob>(value_); }
+  Variant::Table Variant::as_table() const  { return std::get<Table>(value_); }
+  bool Variant::has_value() const           { return !std::holds_alternative<std::monostate>(value_); }
 
-    // Type checks
-    bool Variant::is_int() const              { return std::holds_alternative<int64_t>(value_); }
-    bool Variant::is_float() const            { return std::holds_alternative<double>(value_); }
-    bool Variant::is_string() const           { return std::holds_alternative<std::string>(value_); }
-    bool Variant::is_bool() const             { return std::holds_alternative<bool>(value_); }
-    bool Variant::is_binary() const           { return std::holds_alternative<YumBinaryBlob>(value_); }
+  // Type checks
+  bool Variant::is_int() const              { return std::holds_alternative<int64_t>(value_); }
+  bool Variant::is_float() const            { return std::holds_alternative<double>(value_); }
+  bool Variant::is_string() const           { return std::holds_alternative<std::string>(value_); }
+  bool Variant::is_bool() const             { return std::holds_alternative<bool>(value_); }
+  bool Variant::is_binary() const           { return std::holds_alternative<YumBinaryBlob>(value_); }
+  bool Variant::is_table() const            { return std::holds_alternative<std::shared_ptr<YumTable>>(value_); }
 }
 
 extern "C" {
@@ -139,6 +154,8 @@ YUM_OUTATR YumBinaryBlob YumVariant_asBinary(const YumVariant *var) {
   }
 }
 
+
+
 // Type checks
 YUM_OUTATR int32_t YumVariant_isInt(const YumVariant *var) {
   return var ? static_cast<int32_t>(var->is_int()) : 0;
@@ -158,6 +175,10 @@ YUM_OUTATR int32_t YumVariant_isString(const YumVariant *var) {
 
 YUM_OUTATR int32_t YumVariant_isBinary(const YumVariant *var) {
   return var ? static_cast<int32_t>(var->is_binary()) : 0;
+}
+
+YUM_OUTATR int32_t YumVariant_isTable(const YumVariant *var) {
+  return var ? static_cast<int32_t>(var->is_table()) : 0;
 }
 
 } // extern "C"
