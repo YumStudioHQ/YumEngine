@@ -25,7 +25,7 @@
 #include "inc/vector.hpp"
 #include "inc/glob.hpp"
 #include "inc/yumdec.h"
-#include "inc/gc.hpp"
+#include "inc/pinlist.hpp"
 
 static inline std::vector<std::string> splitDot(const std::string& path) {
   std::vector<std::string> parts;

@@ -13,8 +13,8 @@ var namespace_yum_engine =
       [ "set_table", "namespace_yum_engine_1_1utils.html#aaa82bb3e2a9fe6a739ea334f0d8da07c", null ]
     ] ],
     [ "SubProcessBase", "class_yum_engine_1_1_sub_process_base.html", "class_yum_engine_1_1_sub_process_base" ],
-    [ "pinlist", "class_yum_engine_1_1pinlist.html", "class_yum_engine_1_1pinlist" ],
     [ "LuaCxx", "class_yum_engine_1_1_lua_cxx.html", "class_yum_engine_1_1_lua_cxx" ],
+    [ "pinlist", "class_yum_engine_1_1pinlist.html", "class_yum_engine_1_1pinlist" ],
     [ "LuaSubsystem", "class_yum_engine_1_1_lua_subsystem.html", "class_yum_engine_1_1_lua_subsystem" ],
     [ "Subsystem", "class_yum_engine_1_1_subsystem.html", "class_yum_engine_1_1_subsystem" ],
     [ "Variant", "class_yum_engine_1_1_variant.html", "class_yum_engine_1_1_variant" ],

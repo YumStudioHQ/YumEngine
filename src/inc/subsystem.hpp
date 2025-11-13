@@ -32,7 +32,7 @@
 #include "luacpp.hpp"
 #include "vector.hpp"
 
-#include "gc.hpp"
+#include "pinlist.hpp"
 
 namespace YumEngine {
 
