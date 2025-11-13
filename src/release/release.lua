@@ -162,6 +162,7 @@ function build_project(major, minor, patch)
 
   --print(string.format("Compiled: %s.%s.%s.%d.%d.%d",
   --  VERSION_STUDIO, VERSION_BRANCH, OUT, major, minor, patch))
+  run("/Users/wys/Documents/Yum\\ Studio/Yum\\ Engine/src/build/doc.sh")
   run("/Users/wys/Documents/Yum\\ Studio/Yum\\ Engine/src/build/macos/mac.sh")
   run("/Users/wys/Documents/Yum\\ Studio/Yum\\ Engine/src/build/windows/win.sh")
   run("/Users/wys/Documents/Yum\\ Studio/Yum\\ Engine/src/build/windows32/win32.sh")

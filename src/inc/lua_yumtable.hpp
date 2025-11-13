@@ -30,6 +30,16 @@
 namespace YumEngine::utils {
   inline void set_table(lua_State *L, const YumTable &table);
 
+  inline void push_uid(lua_State *L, const YumUID &uid) {
+    lua_newtable(L);
+    lua_pushstring(L, "__yumuid");
+    lua_pushinteger(L, uid.bytes);
+    lua_settable(L, -3);
+    /**
+     * note : __yumuid is a key that holds uid's bytes. It has nothing to do with __yum_type.
+     */
+  }
+
   inline void push(lua_State *L, const Variant &key) {
     switch (key.get_kind()) {
       case Variant::INTEGER: lua_pushinteger(L, key.as_int()); break;
@@ -43,7 +53,8 @@ namespace YumEngine::utils {
       case Variant::TABLE: {
         set_table(L, (*key.as_table())); // Variant::as_table() returns a std::shared_ptr<T>
       } break;
-      case Variant::NIL: lua_pushnil(L); break; // Todo
+      case Variant::UID: push_uid(L, key.as_uid());
+      case Variant::NIL: lua_pushnil(L); break; // Todo?
       default: break;
     }
   }
@@ -105,6 +116,14 @@ namespace YumEngine::utils {
       case LUA_TTABLE: {
         // Recursively convert sub-table
         YumTable sub = get_table(L, idx);
+
+        if (sub.has_key("__yumuid")) {
+          return Variant(YumUID{.bytes = sub.at("__yumuid").as_int()});
+        } else if (sub.has_key("__yum_type") && sub.at("__yum_type").as_string() == "binary") {
+          size_t len;
+          const char *str = lua_tolstring(L, idx, &len);
+          return Variant(YumBinaryBlob{.start = (const uint8_t*)str, .size = len});
+        }
         return Variant(std::make_shared<YumTable>(std::move(sub)));
       }
       default:

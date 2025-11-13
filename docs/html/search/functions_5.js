@@ -1,12 +1,7 @@
 var searchData=
 [
-  ['g_5ferr_0',['G_err',['../glob_8hpp.html#a4a56131d496db85828f3ff3492aa43bb',1,'glob.hpp']]],
-  ['g_5fin_1',['G_in',['../glob_8hpp.html#a51423b025d785fa535c6f05013689b71',1,'glob.hpp']]],
-  ['g_5fout_2',['G_out',['../glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51',1,'glob.hpp']]],
-  ['get_3',['get',['../class_yum_engine_1_1_lua_cxx.html#aaec9632bd6518cb4ed5c38b269bdbba5',1,'YumEngine::LuaCxx::get()'],['../class_yum_engine_1_1_subsystem.html#a66e8a79271e32c299e00329735a29fe0',1,'YumEngine::Subsystem::get()']]],
-  ['get_5fkind_4',['get_kind',['../class_yum_engine_1_1_variant.html#a36f0ecdb37e9468bbd0bc71ff8b40f92',1,'YumEngine::Variant']]],
-  ['get_5ftable_5',['get_table',['../namespace_yum_engine_1_1utils.html#acd80c401575a7c7a18d982dba3565460',1,'YumEngine::utils']]],
-  ['getenv_6',['GetEnv',['../namespace_yum_engine.html#ad0d0b2732aecd4c1984cb6e2948422f3',1,'YumEngine']]],
-  ['getenvactor_7',['GetEnvActor',['../namespace_yum_engine_1_1_actors.html#aee6369b0783c9792807febe083c9ef2d',1,'YumEngine::Actors']]],
-  ['good_8',['good',['../class_yum_engine_1_1_lua_subsystem.html#a8e9f955aec72f259151f527a15eab3ae',1,'YumEngine::LuaSubsystem']]]
+  ['finalize_0',['finalize',['../class_yum_engine_1_1pinlist.html#a2b189b7383b77f10b618b0698c24e79d',1,'YumEngine::pinlist']]],
+  ['foreach_1',['foreach',['../class_yum_engine_1_1_vector.html#a9709e5769bfbc138bb6d7b32dee6fb85',1,'YumEngine::Vector::foreach(const std::function&lt; void(const Variant &amp;)&gt; &amp;func) const'],['../class_yum_engine_1_1_vector.html#adf830b9572a5d577996e4d7b8f9f59d2',1,'YumEngine::Vector::foreach(const std::function&lt; void(Variant &amp;)&gt; &amp;func)'],['../class_yum_engine_1_1_yum_table.html#ab01a1588523a589ac110adb2b1d7e6ea',1,'YumEngine::YumTable::foreach()']]],
+  ['free_2',['free',['../class_yum_engine_1_1_yum_object.html#a2909e091cf408a02678e902debe6e7e3',1,'YumEngine::YumObject']]],
+  ['from_5flua_3',['from_lua',['../namespace_yum_engine_1_1utils.html#acf2b832110b195927e5dc6bb6719ac4e',1,'YumEngine::utils']]]
 ];

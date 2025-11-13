@@ -8,6 +8,7 @@
  *                         MONOE                         *
  *                                                       *
  *********************************************************/
+#include "inc/yumtable.hpp"
 #include "inc/variant.hpp"
 #include "inc/yumdec.h"
 #include "inc/glob.hpp"
@@ -25,6 +26,7 @@ namespace YumEngine {
   Variant::Variant(bool b)                 : value_(b), kind_(BOOLEAN) {}
   Variant::Variant(const YumBinaryBlob &b) : value_(b), kind_(BINARY) {}
   Variant::Variant(const Table &table)     : value_(table), kind_(TABLE) {}
+  Variant::Variant(const YumUID &uid)      : value_(uid), kind_(UID) {}
 
   // Copy & Move
   Variant::Variant(const Variant &) = default;
@@ -39,6 +41,7 @@ namespace YumEngine {
   void Variant::set(bool b)                 { value_ = b; kind_ = BOOLEAN; }
   void Variant::set(const YumBinaryBlob &b) { value_ = b; kind_ = BINARY; }
   void Variant::set(const Table &table)     { value_ = table; kind_ = TABLE; }
+  void Variant::set(const YumUID &uid)      { value_ = uid; kind_ = UID; }
   void Variant::clear()                     { value_ = std::monostate{}; kind_ = NIL; }
 
   // Getters
@@ -48,6 +51,7 @@ namespace YumEngine {
   bool Variant::as_bool() const             { return std::get<bool>(value_); }
   YumBinaryBlob Variant::as_binary() const  { return std::get<YumBinaryBlob>(value_); }
   Variant::Table Variant::as_table() const  { return std::get<Table>(value_); }
+  YumUID Variant::as_uid() const            { return std::get<YumUID>(value_); }
   bool Variant::has_value() const           { return !std::holds_alternative<std::monostate>(value_); }
 
   // Type checks
@@ -57,6 +61,7 @@ namespace YumEngine {
   bool Variant::is_bool() const             { return std::holds_alternative<bool>(value_); }
   bool Variant::is_binary() const           { return std::holds_alternative<YumBinaryBlob>(value_); }
   bool Variant::is_table() const            { return std::holds_alternative<std::shared_ptr<YumTable>>(value_); }
+  bool Variant::is_uid() const              { return std::holds_alternative<YumUID>(value_); }
 }
 
 extern "C" {
@@ -66,6 +71,7 @@ YUM_OUTATR YumVariant *YumVariant_new(void) {
 }
 
 YUM_OUTATR void YumVariant_delete(YumVariant *var) {
+  var->free();
   delete var;
 }
 
@@ -88,6 +94,10 @@ YUM_OUTATR void YumVariant_setString(YumVariant *var, const char *str) {
 
 YUM_OUTATR void YumVariant_setRawBytes(YumVariant *var, YumBinaryBlob blob) {
   if (var) var->set(blob);
+}
+
+YUM_OUTATR void YumVariant_setUid(YumVariant *var, YumUID uid) {
+  if (var) var->set(uid);
 }
 
 // Getters
@@ -154,7 +164,29 @@ YUM_OUTATR YumBinaryBlob YumVariant_asBinary(const YumVariant *var) {
   }
 }
 
+YUM_OUTATR YumUID YumVariant_asUID(const YumVariant *var) {
+    try {
+    return var ? var->as_uid() : YumUID{.bytes=0};
+  } catch (const std::exception &e) {
+    (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
+    return YumUID{.bytes=0};
+  } catch (...) {
+    (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
+    return YumUID{.bytes=0};
+  }
+}
 
+YUM_OUTATR YumCTable *YumVariant_asTable(const YumVariant *var) {
+  try {
+    return var ? var->as_table().get() : nullptr;
+  } catch (const std::exception &e) {
+    (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
+    return nullptr;
+  } catch (...) {
+    (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
+    return nullptr;
+  }
+}
 
 // Type checks
 YUM_OUTATR int32_t YumVariant_isInt(const YumVariant *var) {
@@ -179,6 +211,10 @@ YUM_OUTATR int32_t YumVariant_isBinary(const YumVariant *var) {
 
 YUM_OUTATR int32_t YumVariant_isTable(const YumVariant *var) {
   return var ? static_cast<int32_t>(var->is_table()) : 0;
+}
+
+YUM_OUTATR int32_t YumVariant_isUid(const YumVariant *var) {
+  return var ? static_cast<int32_t>(var->is_uid()) : 0;
 }
 
 } // extern "C"

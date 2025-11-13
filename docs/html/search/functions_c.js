@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['pop_0',['pop',['../class_yum_engine_1_1_vector.html#a7421f1399126ba7ad8cce5d662fc135b',1,'YumEngine::Vector']]],
-  ['push_1',['push',['../namespace_yum_engine_1_1utils.html#ad85167c9f4378eb1c13b337b40c5adfa',1,'YumEngine::utils']]],
-  ['pushcallback_2',['pushCallback',['../class_yum_engine_1_1_lua_subsystem.html#a5c5f5cf7f69de99fc0e36fa0a44a3c0c',1,'YumEngine::LuaSubsystem::pushCallback(const std::string &amp;name, const ManagedCallback &amp;cb, const std::string &amp;ns=&quot;&quot;)'],['../class_yum_engine_1_1_lua_subsystem.html#abd08ed570e2a5cebff16133778846b6e',1,'YumEngine::LuaSubsystem::pushCallback(const std::string &amp;name, const std::shared_ptr&lt; ManagedCallback &gt; &amp;cb, const std::string &amp;ns=&quot;&quot;)']]]
+  ['operator_28_29_0',['operator()',['../structstd_1_1hash_3_01_yum_engine_1_1_variant_01_4.html#acc84ce00ea5e97c1e5d108b0546d7d7b',1,'std::hash&lt; YumEngine::Variant &gt;']]],
+  ['operator_3d_1',['operator=',['../class_yum_engine_1_1_variant.html#a1e98b20c59090494645bb4cbba2e79eb',1,'YumEngine::Variant::operator=(const Variant &amp;other)'],['../class_yum_engine_1_1_variant.html#aed24c85536040ae133cd73b17c5f88d5',1,'YumEngine::Variant::operator=(Variant &amp;&amp;other) noexcept']]],
+  ['operator_3d_3d_2',['operator==',['../namespace_yum_engine.html#aaa1b6ecd52e97b797b2367cbc239df27',1,'YumEngine']]]
 ];

@@ -1,7 +1,7 @@
 var class_yum_engine_1_1_variant =
 [
     [ "Table", "class_yum_engine_1_1_variant.html#a2c27c1ac7aa4f9bea27d72f84d7739c1", null ],
-    [ "ValueType", "class_yum_engine_1_1_variant.html#a41851cbf0ef246aa036a7c61252c8890", null ],
+    [ "ValueType", "class_yum_engine_1_1_variant.html#a8182d6553daa4c45a31f29cf4f567611", null ],
     [ "VariantKind", "class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27e", [
       [ "NIL", "class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27ea580cd0e05d219b6a136ab369b95caf7d", null ],
       [ "INTEGER", "class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27ea6004795103d85c40ce62298364f4926c", null ],
@@ -9,7 +9,8 @@ var class_yum_engine_1_1_variant =
       [ "STRING", "class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27ea48c6e4e9b5c3882cd4e59b3106715f87", null ],
       [ "BOOLEAN", "class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27eaa35025ce102d174500645615dd2c58ff", null ],
       [ "BINARY", "class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27ea60aa3a98090de890ae0f10ef616eb4ec", null ],
-      [ "TABLE", "class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27ead36fbaadfec750b42848225a9163d66a", null ]
+      [ "TABLE", "class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27ead36fbaadfec750b42848225a9163d66a", null ],
+      [ "UID", "class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27ea67ae3b530ea7b3ae0bc8a56c1f8cf851", null ]
     ] ],
     [ "Variant", "class_yum_engine_1_1_variant.html#a89543f3b189c03b5b97bdbef72e9d924", null ],
     [ "Variant", "class_yum_engine_1_1_variant.html#af33c52e31b8f07d1cd48deb085dbfc77", null ],
@@ -18,6 +19,7 @@ var class_yum_engine_1_1_variant =
     [ "Variant", "class_yum_engine_1_1_variant.html#a570556fdaba8bd187722f795ae130640", null ],
     [ "Variant", "class_yum_engine_1_1_variant.html#a53bfe1d60572ed1b0637bd6596c0d02c", null ],
     [ "Variant", "class_yum_engine_1_1_variant.html#a2b5cb12e5cc1157cb95a0a3b753ab56f", null ],
+    [ "Variant", "class_yum_engine_1_1_variant.html#abb8e3eee1526c7f7a3a67ac3a201948b", null ],
     [ "Variant", "class_yum_engine_1_1_variant.html#aad2a075177658a901cbc27d9eceddb06", null ],
     [ "Variant", "class_yum_engine_1_1_variant.html#aa4db3412306c454daedbd02771fed364", null ],
     [ "as_binary", "class_yum_engine_1_1_variant.html#a6757c9fb9ecc7ce7f4f93bf904c87ec4", null ],
@@ -26,6 +28,7 @@ var class_yum_engine_1_1_variant =
     [ "as_int", "class_yum_engine_1_1_variant.html#abee68021e06e1540e9243a8feddad280", null ],
     [ "as_string", "class_yum_engine_1_1_variant.html#a6d58d52ecc89a5b1ae19fd08296d6830", null ],
     [ "as_table", "class_yum_engine_1_1_variant.html#a55ef611fd31826142b9a71796a853fa8", null ],
+    [ "as_uid", "class_yum_engine_1_1_variant.html#afb22c71718bfcf5080f405ecc6c732fb", null ],
     [ "clear", "class_yum_engine_1_1_variant.html#a8a099e40baa8b87cb0a5a9fd2f497b47", null ],
     [ "get_kind", "class_yum_engine_1_1_variant.html#a36f0ecdb37e9468bbd0bc71ff8b40f92", null ],
     [ "has_value", "class_yum_engine_1_1_variant.html#a802f0de7a492e64051c45ca245838079", null ],
@@ -35,12 +38,14 @@ var class_yum_engine_1_1_variant =
     [ "is_int", "class_yum_engine_1_1_variant.html#a4b279faabbf7a37c01197bc338fdba9e", null ],
     [ "is_string", "class_yum_engine_1_1_variant.html#ab5f0870fdd502a61a7dae5e3a50664e9", null ],
     [ "is_table", "class_yum_engine_1_1_variant.html#ad6ceaed66a5c89e151775647e9be5740", null ],
+    [ "is_uid", "class_yum_engine_1_1_variant.html#a32156070cdd0eaa5883926efe4e384da", null ],
     [ "operator=", "class_yum_engine_1_1_variant.html#a1e98b20c59090494645bb4cbba2e79eb", null ],
     [ "operator=", "class_yum_engine_1_1_variant.html#aed24c85536040ae133cd73b17c5f88d5", null ],
     [ "set", "class_yum_engine_1_1_variant.html#a0837a463649742e0404e8d005fff9a61", null ],
     [ "set", "class_yum_engine_1_1_variant.html#a3a848276bdf8b872a51b8cc6ec946301", null ],
     [ "set", "class_yum_engine_1_1_variant.html#a0330d7cb1c9c4e115c994b245fa091f1", null ],
     [ "set", "class_yum_engine_1_1_variant.html#ab6e9dffa8763c6ba8bf6103408168b69", null ],
+    [ "set", "class_yum_engine_1_1_variant.html#ab5f1f745b0979d414674e1249e4a00bd", null ],
     [ "set", "class_yum_engine_1_1_variant.html#ab38dedf24f4cf1b3abc87f5913072b36", null ],
     [ "set", "class_yum_engine_1_1_variant.html#a8834d41f79cf4aec66da3aa6e30705c9", null ]
 ];

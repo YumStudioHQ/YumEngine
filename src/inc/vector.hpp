@@ -24,6 +24,7 @@
 #include <vector>
 #include <functional>
 #include "variant.hpp"
+#include "yumobject.hpp"
 
 namespace YumEngine {
 
@@ -48,10 +49,15 @@ namespace YumEngine {
    *     std::cout << v.as_string() << std::endl;
    * @endcode
    */
-  class Vector {
+  class Vector : public YumObject {
   private:
     /** @brief Internal storage for Variant values. */
     std::vector<Variant> internal;
+
+  protected:
+    inline void _free() const override {
+      for (const auto &V : internal) { V.free(); }
+    }
 
   public:
     /** @name Constructors and Destructor */
@@ -85,6 +91,23 @@ namespace YumEngine {
      * @brief Clears all elements from the container.
      */
     void clear();
+
+    /** @} */
+
+    /** @name Memory management */
+    /** @{ */
+
+    /**
+     * @brief Reserves n bytes.
+     * @param n count of bytes to reserve.
+     */
+    void reserve(uint64_t n);
+
+    /**
+     * @brief Reserves n bytes before an allocation.
+     * @param n count of elements that will be added to the vector.
+     */
+    void preappend(uint64_t n);
 
     /** @} */
 

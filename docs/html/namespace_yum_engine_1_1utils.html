@@ -95,6 +95,7 @@ $(function(){initNavTree('namespace_yum_engine_1_1utils.html','',''); });
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aaa82bb3e2a9fe6a739ea334f0d8da07c" id="r_aaa82bb3e2a9fe6a739ea334f0d8da07c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa82bb3e2a9fe6a739ea334f0d8da07c">set_table</a> (lua_State *L, const <a class="el" href="class_yum_engine_1_1_yum_table.html">YumTable</a> &amp;table)</td></tr>
+<tr class="memitem:a7ef2087e39efcafd34fb2a1345776390" id="r_a7ef2087e39efcafd34fb2a1345776390"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ef2087e39efcafd34fb2a1345776390">push_uid</a> (lua_State *L, const <a class="el" href="struct_yum_u_i_d.html">YumUID</a> &amp;uid)</td></tr>
 <tr class="memitem:ad85167c9f4378eb1c13b337b40c5adfa" id="r_ad85167c9f4378eb1c13b337b40c5adfa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad85167c9f4378eb1c13b337b40c5adfa">push</a> (lua_State *L, const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;key)</td></tr>
 <tr class="memitem:a703a35b89af8b947dff0b9617995ac56" id="r_a703a35b89af8b947dff0b9617995ac56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a703a35b89af8b947dff0b9617995ac56">set_field</a> (lua_State *L, const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;key, const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;value)</td></tr>
 <tr class="memitem:acf2b832110b195927e5dc6bb6719ac4e" id="r_acf2b832110b195927e5dc6bb6719ac4e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_yum_engine_1_1_variant.html">Variant</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf2b832110b195927e5dc6bb6719ac4e">from_lua</a> (lua_State *L, int idx)</td></tr>
@@ -185,6 +186,36 @@ Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7ef2087e39efcafd34fb2a1345776390" name="a7ef2087e39efcafd34fb2a1345776390"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ef2087e39efcafd34fb2a1345776390">&#9670;&#160;</a></span>push_uid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YumEngine::utils::push_uid </td>
+          <td>(</td>
+          <td class="paramtype">lua_State *</td>          <td class="paramname"><span class="paramname"><em>L</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="struct_yum_u_i_d.html">YumUID</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>uid</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>note : __yumuid is a key that holds uid's bytes. It has nothing to do with __yum_type.</p>
 
 </div>
 </div>

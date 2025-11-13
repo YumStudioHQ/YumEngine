@@ -20,6 +20,8 @@
 namespace YumEngine {
   Vector::Vector() : internal() {}
   Vector::~Vector() {}
+  void Vector::preappend(uint64_t n) { internal.resize(internal.size() + n); }
+  void Vector::reserve(uint64_t b) { internal.reserve(b); }
   void Vector::append(const Variant &v) { internal.push_back(v); }
   void Vector::pop() { internal.pop_back(); }
   void Vector::clear() { internal.clear(); }
@@ -37,6 +39,7 @@ YUM_OUTATR YumVector *YumVector_new(void) {
 }
 
 YUM_OUTATR void YumVector_delete(YumVector *vec) {
+  vec->free();
   delete vec;
 }
 

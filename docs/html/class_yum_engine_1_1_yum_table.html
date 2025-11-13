@@ -96,6 +96,15 @@ $(function(){initNavTree('class_yum_engine_1_1_yum_table.html','','class_yum_eng
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="yumtable_8hpp_source.html">yumtable.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for YumEngine::YumTable:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_yum_engine_1_1_yum_table.png" usemap="#YumEngine_3A_3AYumTable_map" alt=""/>
+  <map id="YumEngine_3A_3AYumTable_map" name="YumEngine_3A_3AYumTable_map">
+<area href="class_yum_engine_1_1_yum_object.html" title="Base type of each YumEngine&#39;s types since V2.1.x minor fix." alt="YumEngine::YumObject" shape="rect" coords="0,0,144,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -112,6 +121,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae3feec674d283ddd92f79ad050ffa9cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets @key to @value.  <br /></td></tr>
 <tr class="memitem:ab01a1588523a589ac110adb2b1d7e6ea" id="r_ab01a1588523a589ac110adb2b1d7e6ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab01a1588523a589ac110adb2b1d7e6ea">foreach</a> (const std::function&lt; void(const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;, const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;)&gt; &amp;fun) const</td></tr>
 <tr class="memdesc:ab01a1588523a589ac110adb2b1d7e6ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">iterates all elements of the table by giving to the given callback the key and its value.  <br /></td></tr>
+<tr class="inherit_header pub_methods_class_yum_engine_1_1_yum_object"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_yum_engine_1_1_yum_object')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="class_yum_engine_1_1_yum_object.html">YumEngine::YumObject</a></td></tr>
+<tr class="memitem:aeb69033607b6e81699cfba65b87e4fff inherit pub_methods_class_yum_engine_1_1_yum_object" id="r_aeb69033607b6e81699cfba65b87e4fff"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1_yum_object.html#aeb69033607b6e81699cfba65b87e4fff">isfreed</a> () const</td></tr>
+<tr class="memitem:a2909e091cf408a02678e902debe6e7e3 inherit pub_methods_class_yum_engine_1_1_yum_object" id="r_a2909e091cf408a02678e902debe6e7e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1_yum_object.html#a2909e091cf408a02678e902debe6e7e3">free</a> () const</td></tr>
+<tr class="memdesc:a2909e091cf408a02678e902debe6e7e3 inherit pub_methods_class_yum_engine_1_1_yum_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">frees the current object.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a3d806ca685ca1675d717f8ff2887dd59" id="r_a3d806ca685ca1675d717f8ff2887dd59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3d806ca685ca1675d717f8ff2887dd59">_free</a> () const override</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Simple key-value container for <span class="tt"><a class="el" href="class_yum_engine_1_1_variant.html" title="Dynamically typed value container used for Lua &lt;-&gt; C++ communication.">Variant</a></span> objects. </p>
@@ -122,12 +139,39 @@ Public Member Functions</h2></td></tr>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">if</span> (tbl.<a class="code hl_function" href="#a4338768b9e8a5c89b19742b3add2b8e6">has_key</a>(<a class="code hl_class" href="class_yum_engine_1_1_variant.html">Variant</a>(<span class="stringliteral">&quot;score&quot;</span>)))</div>
 <div class="line">    std::cout &lt;&lt; tbl.<a class="code hl_function" href="#ab78aad58d3b72e8633e6b8d5c80707fc">at</a>(<a class="code hl_class" href="class_yum_engine_1_1_variant.html">Variant</a>(<span class="stringliteral">&quot;score&quot;</span>)).<a class="code hl_function" href="class_yum_engine_1_1_variant.html#abee68021e06e1540e9243a8feddad280">as_int</a>() &lt;&lt; std::endl;</div>
-<div class="ttc" id="aclass_yum_engine_1_1_variant_html"><div class="ttname"><a href="class_yum_engine_1_1_variant.html">YumEngine::Variant</a></div><div class="ttdoc">Dynamically typed value container used for Lua &lt;-&gt; C++ communication.</div><div class="ttdef"><b>Definition</b> variant.hpp:41</div></div>
+<div class="ttc" id="aclass_yum_engine_1_1_variant_html"><div class="ttname"><a href="class_yum_engine_1_1_variant.html">YumEngine::Variant</a></div><div class="ttdoc">Dynamically typed value container used for Lua &lt;-&gt; C++ communication.</div><div class="ttdef"><b>Definition</b> variant.hpp:42</div></div>
 <div class="ttc" id="aclass_yum_engine_1_1_variant_html_abee68021e06e1540e9243a8feddad280"><div class="ttname"><a href="class_yum_engine_1_1_variant.html#abee68021e06e1540e9243a8feddad280">YumEngine::Variant::as_int</a></div><div class="ttdeci">int64_t as_int() const</div><div class="ttdoc">Returns the Variant as an integer.</div></div>
-<div class="ttc" id="aclass_yum_engine_1_1_yum_table_html"><div class="ttname"><a href="class_yum_engine_1_1_yum_table.html">YumEngine::YumTable</a></div><div class="ttdoc">Simple key-value container for Variant objects.</div><div class="ttdef"><b>Definition</b> yumtable.hpp:87</div></div>
-<div class="ttc" id="aclass_yum_engine_1_1_yum_table_html_a4338768b9e8a5c89b19742b3add2b8e6"><div class="ttname"><a href="#a4338768b9e8a5c89b19742b3add2b8e6">YumEngine::YumTable::has_key</a></div><div class="ttdeci">bool has_key(const Variant &amp;var) const</div><div class="ttdoc">Checks whether a given key exists in the table.</div><div class="ttdef"><b>Definition</b> yumtable.hpp:101</div></div>
-<div class="ttc" id="aclass_yum_engine_1_1_yum_table_html_ab78aad58d3b72e8633e6b8d5c80707fc"><div class="ttname"><a href="#ab78aad58d3b72e8633e6b8d5c80707fc">YumEngine::YumTable::at</a></div><div class="ttdeci">Variant at(const Variant &amp;key) const</div><div class="ttdoc">Returns a value associated with a given key.</div><div class="ttdef"><b>Definition</b> yumtable.hpp:133</div></div>
+<div class="ttc" id="aclass_yum_engine_1_1_yum_table_html"><div class="ttname"><a href="class_yum_engine_1_1_yum_table.html">YumEngine::YumTable</a></div><div class="ttdoc">Simple key-value container for Variant objects.</div><div class="ttdef"><b>Definition</b> yumtable.hpp:90</div></div>
+<div class="ttc" id="aclass_yum_engine_1_1_yum_table_html_a4338768b9e8a5c89b19742b3add2b8e6"><div class="ttname"><a href="#a4338768b9e8a5c89b19742b3add2b8e6">YumEngine::YumTable::has_key</a></div><div class="ttdeci">bool has_key(const Variant &amp;var) const</div><div class="ttdoc">Checks whether a given key exists in the table.</div><div class="ttdef"><b>Definition</b> yumtable.hpp:112</div></div>
+<div class="ttc" id="aclass_yum_engine_1_1_yum_table_html_ab78aad58d3b72e8633e6b8d5c80707fc"><div class="ttname"><a href="#ab78aad58d3b72e8633e6b8d5c80707fc">YumEngine::YumTable::at</a></div><div class="ttdeci">Variant at(const Variant &amp;key) const</div><div class="ttdoc">Returns a value associated with a given key.</div><div class="ttdef"><b>Definition</b> yumtable.hpp:144</div></div>
 </div><!-- fragment --> </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a3d806ca685ca1675d717f8ff2887dd59" name="a3d806ca685ca1675d717f8ff2887dd59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d806ca685ca1675d717f8ff2887dd59">&#9670;&#160;</a></span>_free()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YumEngine::YumTable::_free </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel protected">protected</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_yum_engine_1_1_yum_object.html#ac09d1f1429e4add55b7f5a6c70cc98aa">YumEngine::YumObject</a>.</p>
+
+</div>
+</div>
 <a id="ab78aad58d3b72e8633e6b8d5c80707fc" name="ab78aad58d3b72e8633e6b8d5c80707fc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab78aad58d3b72e8633e6b8d5c80707fc">&#9670;&#160;</a></span>at()</h2>
 

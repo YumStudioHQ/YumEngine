@@ -1,5 +1,6 @@
 var class_yum_engine_1_1_yum_table =
 [
+    [ "_free", "class_yum_engine_1_1_yum_table.html#a3d806ca685ca1675d717f8ff2887dd59", null ],
     [ "at", "class_yum_engine_1_1_yum_table.html#ab78aad58d3b72e8633e6b8d5c80707fc", null ],
     [ "foreach", "class_yum_engine_1_1_yum_table.html#ab01a1588523a589ac110adb2b1d7e6ea", null ],
     [ "has_key", "class_yum_engine_1_1_yum_table.html#a4338768b9e8a5c89b19742b3add2b8e6", null ],

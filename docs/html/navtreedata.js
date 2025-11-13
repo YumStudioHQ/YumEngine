@@ -36,6 +36,7 @@ var NAVTREE =
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],
@@ -62,7 +63,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "action_8hpp.html",
-"namespace_yum_engine_1_1utils.html#aaa82bb3e2a9fe6a739ea334f0d8da07c"
+"engine__version_8h.html#ae9864fb455edee9dc6fcfe23cb6c6937"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

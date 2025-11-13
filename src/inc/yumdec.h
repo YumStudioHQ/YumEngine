@@ -28,9 +28,19 @@ enum YumCode {
   YUM_NOT_INIT,
 };
 
+/**
+ * @brief Safe binary-blob type.
+ */
 typedef struct {
   const uint8_t *start;
   uint64_t       size;
 } YumBinaryBlob;
+
+/**
+ * @brief data representing an UID. It promises you 8 bytes, managed as an integer in Lua.
+ */
+typedef struct {
+  int64_t bytes;
+} YumUID;
 
 #endif // ___YUM_DEC_H___

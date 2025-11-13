@@ -1,6 +1,7 @@
 var dir_6bc6ad22483805bbbda55258ad2a62ea =
 [
     [ "engine_version.h", "engine__version_8h.html", "engine__version_8h" ],
+    [ "gc.hpp", "gc_8hpp.html", "gc_8hpp" ],
     [ "glob.hpp", "glob_8hpp.html", "glob_8hpp" ],
     [ "lua_yumtable.hpp", "lua__yumtable_8hpp.html", "lua__yumtable_8hpp" ],
     [ "luacpp.hpp", "luacpp_8hpp.html", "luacpp_8hpp" ],
@@ -12,6 +13,7 @@ var dir_6bc6ad22483805bbbda55258ad2a62ea =
     [ "vector.hpp", "vector_8hpp.html", "vector_8hpp" ],
     [ "yum.hpp", "yum_8hpp.html", null ],
     [ "yumdec.h", "yumdec_8h.html", "yumdec_8h" ],
+    [ "yumobject.hpp", "yumobject_8hpp.html", "yumobject_8hpp" ],
     [ "yumtable.h", "yumtable_8h.html", "yumtable_8h" ],
     [ "yumtable.hpp", "yumtable_8hpp.html", "yumtable_8hpp" ]
 ];

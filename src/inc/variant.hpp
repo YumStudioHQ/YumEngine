@@ -17,6 +17,7 @@
 #include <variant>
 
 #include "yumdec.h"
+#include "yumobject.hpp"
 
 namespace YumEngine {
   class YumTable;
@@ -38,7 +39,7 @@ namespace YumEngine {
  * @note For high-level bindings, prefer using language-specific wrappers or helpers
  *       rather than constructing `YumBinaryBlob` manually.
  */
-class Variant {
+class Variant : public YumObject {
 public:
   enum VariantKind {
     NIL,
@@ -47,12 +48,13 @@ public:
     STRING,
     BOOLEAN,
     BINARY,
-    TABLE
+    TABLE,
+    UID,
   };
 
   using Table = std::shared_ptr<YumTable>;
   using ValueType = std::variant<std::monostate, int64_t, double, std::string, bool, YumBinaryBlob,
-  std::shared_ptr<YumTable>>;
+  std::shared_ptr<YumTable>, YumUID>;
 
 private:
   ValueType value_;
@@ -102,6 +104,12 @@ public:
    * @param t Lua table.
    */
   Variant(const Table &t);
+
+  /**
+   * @brief Constructs a Variant from a UID.
+   * @param uid A UID.
+   */
+  Variant(const YumUID &uid);
 
   /** @} */
 
@@ -176,6 +184,12 @@ public:
   void set(const Table &table);
 
   /**
+   * @brief Sets the Variant to a UID.
+   * @param uid the UID
+   */
+  void set(const YumUID &uid);
+
+  /**
    * @brief Clears the stored value, resetting to nil.
    */
   void clear();
@@ -223,9 +237,16 @@ public:
   /**
    * @brief Returns the Variant as a Lua table.
    * @return A table.
-   * @throws std::bad_variant_access if type is not binary.
+   * @throws std::bad_variant_access if type is not table.
    */
   Table as_table() const;
+
+  /**
+   * @brief Returns the Variant as a UID.
+   * @return A UID.
+   * @throws std::bad_variant_access if type is not uid.
+   */
+  YumUID as_uid() const;
 
   /**
    * @brief Checks if the Variant currently holds a non-nil value.
@@ -255,6 +276,8 @@ public:
 
   /** @brief Returns true if the Variant a Lua table. */
   bool is_table() const;
+
+  bool is_uid() const;
   /** @} */
 
   VariantKind get_kind() const { return kind_; }
@@ -277,6 +300,7 @@ inline bool operator==(const Variant &a, const Variant &b) {
         if (ba.size != bb.size) return false;
         return std::memcmp(ba.start, bb.start, ba.size) == 0;
       }
+      case Variant::UID:    return a.as_uid().bytes == b.as_uid().bytes;
       default: return false;
     }
   }

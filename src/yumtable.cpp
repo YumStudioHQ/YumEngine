@@ -20,6 +20,7 @@ extern "C" {
   }
 
   YUM_OUTATR void YumCTable_delete(const YumCTable *table) {
+    table->free();
     delete table;
   }
 

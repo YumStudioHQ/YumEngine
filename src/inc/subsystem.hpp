@@ -32,6 +32,8 @@
 #include "luacpp.hpp"
 #include "vector.hpp"
 
+#include "gc.hpp"
+
 namespace YumEngine {
 
   /**
@@ -191,6 +193,9 @@ namespace YumEngine {
     /** @brief Map of active LuaSubsystem instances indexed by UID. */
     std::unordered_map<uint64_t, std::shared_ptr<LuaSubsystem>> luaSubsystems;
 
+    /** @brief Garbage Collector (can free unfreed resources when destroyed correctly) */
+    mutable pinlist pinlist_;
+
   public:
     /** @name Constructors and Destructor */
     /** @{ */
@@ -232,6 +237,8 @@ namespace YumEngine {
      * @return Shared pointer to the LuaSubsystem, or `nullptr` if invalid.
      */
     std::shared_ptr<LuaSubsystem> get(uint64_t uid);
+
+    inline pinlist *get_pinlist() const { return &pinlist_; }
 
     /** @} */
   };

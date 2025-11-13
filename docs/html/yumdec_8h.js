@@ -1,6 +1,7 @@
 var yumdec_8h =
 [
     [ "YumBinaryBlob", "struct_yum_binary_blob.html", "struct_yum_binary_blob" ],
+    [ "YumUID", "struct_yum_u_i_d.html", "struct_yum_u_i_d" ],
     [ "YUM_METADATA", "yumdec_8h.html#a1b35045f512ef5d8953dd505948b6eea", null ],
     [ "YUM_OUTATR", "yumdec_8h.html#a7ab3ca0a5739f24486b177fe6e9acefd", null ],
     [ "YUM_VERSION", "yumdec_8h.html#a7c50719e8480b706286b50554fa6e71e", null ],

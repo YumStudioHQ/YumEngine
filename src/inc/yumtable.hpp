@@ -25,6 +25,7 @@
 #include "yumdec.h"
 #include "variant.hpp"
 #include "vector.hpp"
+#include "yumobject.hpp"
 
 #include <string>
 #include <cstdint>
@@ -44,6 +45,7 @@ namespace std {
         y ^= (y >> 47);
         return static_cast<size_t>(y);
       };
+      
       switch (v.get_kind()) {
         case Kind::INTEGER: return mix(h ^ std::hash<long long>()(v.as_int()));
         case Kind::NUMBER:  return mix(h ^ std::hash<double>()(v.as_float()));
@@ -56,6 +58,7 @@ namespace std {
           return mix(h ^ std::hash<size_t>()(bin.size) ^
                      (reinterpret_cast<size_t>(bin.start) >> 4));
         }
+        case Kind::UID:     return mix(h) ^ std::hash<uint64_t>()(v.as_uid().bytes);
         default: return h;
       }
     }
@@ -84,10 +87,18 @@ namespace YumEngine {
    *     std::cout << tbl.at(Variant("score")).as_int() << std::endl;
    * @endcode
    */
-  class YumTable {
+  class YumTable : public YumObject {
   private:
     /** @brief Internal associative storage (maps Variant → Variant). */
     std::unordered_map<Variant, Variant> map;
+
+  protected:
+    inline void _free() const override {
+      for (const auto &[K, V] : map) {
+        K.free();
+        V.free();
+      }
+    }
 
   public:
     /** @name Lookup and Access */

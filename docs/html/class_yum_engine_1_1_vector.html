@@ -96,6 +96,15 @@ $(function(){initNavTree('class_yum_engine_1_1_vector.html','','class_yum_engine
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="vector_8hpp_source.html">vector.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for YumEngine::Vector:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_yum_engine_1_1_vector.png" usemap="#YumEngine_3A_3AVector_map" alt=""/>
+  <map id="YumEngine_3A_3AVector_map" name="YumEngine_3A_3AVector_map">
+<area href="class_yum_engine_1_1_yum_object.html" title="Base type of each YumEngine&#39;s types since V2.1.x minor fix." alt="YumEngine::YumObject" shape="rect" coords="0,0,144,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -111,18 +120,31 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a7421f1399126ba7ad8cce5d662fc135b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the last element from the container.  <br /></td></tr>
 <tr class="memitem:a091fbd3b5d9b4fdfb134fde906faaff9" id="r_a091fbd3b5d9b4fdfb134fde906faaff9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a091fbd3b5d9b4fdfb134fde906faaff9">clear</a> ()</td></tr>
 <tr class="memdesc:a091fbd3b5d9b4fdfb134fde906faaff9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears all elements from the container.  <br /></td></tr>
-<tr id="pub-methods-2" class="groupHeader"><td colspan="2"><div class="groupHeader">Element Access</div></td></tr>
+<tr id="pub-methods-2" class="groupHeader"><td colspan="2"><div class="groupHeader">Memory management</div></td></tr>
+<tr class="memitem:affd710ab9c6346d5428b364f3d40f0c3" id="r_affd710ab9c6346d5428b364f3d40f0c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#affd710ab9c6346d5428b364f3d40f0c3">reserve</a> (uint64_t n)</td></tr>
+<tr class="memdesc:affd710ab9c6346d5428b364f3d40f0c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves n bytes.  <br /></td></tr>
+<tr class="memitem:ae6ab8eea078d3f02a64be6220d29dd89" id="r_ae6ab8eea078d3f02a64be6220d29dd89"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae6ab8eea078d3f02a64be6220d29dd89">preappend</a> (uint64_t n)</td></tr>
+<tr class="memdesc:ae6ab8eea078d3f02a64be6220d29dd89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reserves n bytes before an allocation.  <br /></td></tr>
+<tr id="pub-methods-3" class="groupHeader"><td colspan="2"><div class="groupHeader">Element Access</div></td></tr>
 <tr class="memitem:ad0caee198f5cd458773c02bee32c220b" id="r_ad0caee198f5cd458773c02bee32c220b"><td class="memItemLeft" align="right" valign="top">int64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad0caee198f5cd458773c02bee32c220b">size</a> () const</td></tr>
 <tr class="memdesc:ad0caee198f5cd458773c02bee32c220b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of elements in the container.  <br /></td></tr>
 <tr class="memitem:a84406b579b849253141fd95517983fd0" id="r_a84406b579b849253141fd95517983fd0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84406b579b849253141fd95517983fd0">at</a> (int64_t index)</td></tr>
 <tr class="memdesc:a84406b579b849253141fd95517983fd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesses an element at the specified index.  <br /></td></tr>
 <tr class="memitem:a491923f76f9bbd9f8ce0b36a02caaece" id="r_a491923f76f9bbd9f8ce0b36a02caaece"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a491923f76f9bbd9f8ce0b36a02caaece">at</a> (int64_t index) const</td></tr>
 <tr class="memdesc:a491923f76f9bbd9f8ce0b36a02caaece"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesses an element at the specified index (const version).  <br /></td></tr>
-<tr id="pub-methods-3" class="groupHeader"><td colspan="2"><div class="groupHeader">Iteration Helpers (C++ Only)</div></td></tr>
+<tr id="pub-methods-4" class="groupHeader"><td colspan="2"><div class="groupHeader">Iteration Helpers (C++ Only)</div></td></tr>
 <tr class="memitem:a9709e5769bfbc138bb6d7b32dee6fb85" id="r_a9709e5769bfbc138bb6d7b32dee6fb85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9709e5769bfbc138bb6d7b32dee6fb85">foreach</a> (const std::function&lt; void(const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;)&gt; &amp;func) const</td></tr>
 <tr class="memdesc:a9709e5769bfbc138bb6d7b32dee6fb85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterates over all elements (read-only).  <br /></td></tr>
 <tr class="memitem:adf830b9572a5d577996e4d7b8f9f59d2" id="r_adf830b9572a5d577996e4d7b8f9f59d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adf830b9572a5d577996e4d7b8f9f59d2">foreach</a> (const std::function&lt; void(<a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;)&gt; &amp;func)</td></tr>
 <tr class="memdesc:adf830b9572a5d577996e4d7b8f9f59d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterates over all elements (mutable access).  <br /></td></tr>
+<tr class="inherit_header pub_methods_class_yum_engine_1_1_yum_object"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_yum_engine_1_1_yum_object')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="class_yum_engine_1_1_yum_object.html">YumEngine::YumObject</a></td></tr>
+<tr class="memitem:aeb69033607b6e81699cfba65b87e4fff inherit pub_methods_class_yum_engine_1_1_yum_object" id="r_aeb69033607b6e81699cfba65b87e4fff"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1_yum_object.html#aeb69033607b6e81699cfba65b87e4fff">isfreed</a> () const</td></tr>
+<tr class="memitem:a2909e091cf408a02678e902debe6e7e3 inherit pub_methods_class_yum_engine_1_1_yum_object" id="r_a2909e091cf408a02678e902debe6e7e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1_yum_object.html#a2909e091cf408a02678e902debe6e7e3">free</a> () const</td></tr>
+<tr class="memdesc:a2909e091cf408a02678e902debe6e7e3 inherit pub_methods_class_yum_engine_1_1_yum_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">frees the current object.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-methods" class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:aa6ac585ed411f03a6ca526f30c0eeae2" id="r_aa6ac585ed411f03a6ca526f30c0eeae2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6ac585ed411f03a6ca526f30c0eeae2">_free</a> () const override</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Minimal, type-safe container for <span class="tt"><a class="el" href="class_yum_engine_1_1_variant.html" title="Dynamically typed value container used for Lua &lt;-&gt; C++ communication.">Variant</a></span> values. </p>
@@ -134,8 +156,8 @@ Public Member Functions</h2></td></tr>
 <div class="line"> </div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; v : args)</div>
 <div class="line">    std::cout &lt;&lt; v.as_string() &lt;&lt; std::endl;</div>
-<div class="ttc" id="aclass_yum_engine_1_1_variant_html"><div class="ttname"><a href="class_yum_engine_1_1_variant.html">YumEngine::Variant</a></div><div class="ttdoc">Dynamically typed value container used for Lua &lt;-&gt; C++ communication.</div><div class="ttdef"><b>Definition</b> variant.hpp:41</div></div>
-<div class="ttc" id="aclass_yum_engine_1_1_vector_html"><div class="ttname"><a href="class_yum_engine_1_1_vector.html">YumEngine::Vector</a></div><div class="ttdoc">Minimal, type-safe container for Variant values.</div><div class="ttdef"><b>Definition</b> vector.hpp:51</div></div>
+<div class="ttc" id="aclass_yum_engine_1_1_variant_html"><div class="ttname"><a href="class_yum_engine_1_1_variant.html">YumEngine::Variant</a></div><div class="ttdoc">Dynamically typed value container used for Lua &lt;-&gt; C++ communication.</div><div class="ttdef"><b>Definition</b> variant.hpp:42</div></div>
+<div class="ttc" id="aclass_yum_engine_1_1_vector_html"><div class="ttname"><a href="class_yum_engine_1_1_vector.html">YumEngine::Vector</a></div><div class="ttdoc">Minimal, type-safe container for Variant values.</div><div class="ttdef"><b>Definition</b> vector.hpp:52</div></div>
 <div class="ttc" id="aclass_yum_engine_1_1_vector_html_a1ac16b7ab240e737d4b2f8d945b0cb92"><div class="ttname"><a href="#a1ac16b7ab240e737d4b2f8d945b0cb92">YumEngine::Vector::append</a></div><div class="ttdeci">void append(const Variant &amp;value)</div><div class="ttdoc">Appends a new Variant to the container.</div></div>
 </div><!-- fragment --> </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab8782d180cc11322f081232d1e57f6f4" name="ab8782d180cc11322f081232d1e57f6f4"></a>
@@ -177,6 +199,33 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="aa6ac585ed411f03a6ca526f30c0eeae2" name="aa6ac585ed411f03a6ca526f30c0eeae2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6ac585ed411f03a6ca526f30c0eeae2">&#9670;&#160;</a></span>_free()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YumEngine::Vector::_free </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel override">override</span><span class="mlabel protected">protected</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_yum_engine_1_1_yum_object.html#ac09d1f1429e4add55b7f5a6c70cc98aa">YumEngine::YumObject</a>.</p>
+
+</div>
+</div>
 <a id="a1ac16b7ab240e737d4b2f8d945b0cb92" name="a1ac16b7ab240e737d4b2f8d945b0cb92"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1ac16b7ab240e737d4b2f8d945b0cb92">&#9670;&#160;</a></span>append()</h2>
 
@@ -351,6 +400,56 @@ Public Member Functions</h2></td></tr>
 
 <p>Removes the last element from the container. </p>
 <p>If the container is empty, this operation has no effect. </p>
+
+</div>
+</div>
+<a id="ae6ab8eea078d3f02a64be6220d29dd89" name="ae6ab8eea078d3f02a64be6220d29dd89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6ab8eea078d3f02a64be6220d29dd89">&#9670;&#160;</a></span>preappend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YumEngine::Vector::preappend </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reserves n bytes before an allocation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>count of elements that will be added to the vector. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="affd710ab9c6346d5428b364f3d40f0c3" name="affd710ab9c6346d5428b364f3d40f0c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affd710ab9c6346d5428b364f3d40f0c3">&#9670;&#160;</a></span>reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void YumEngine::Vector::reserve </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t</td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reserves n bytes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>count of bytes to reserve. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

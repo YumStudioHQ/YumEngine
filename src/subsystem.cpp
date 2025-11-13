@@ -19,11 +19,13 @@
 #include <unordered_map>
 
 #include "inc/lua_yumtable.hpp"
+#include "inc/yumobject.hpp"
 #include "inc/subsystem.hpp"
 #include "inc/variant.hpp"
 #include "inc/vector.hpp"
 #include "inc/glob.hpp"
 #include "inc/yumdec.h"
+#include "inc/gc.hpp"
 
 static inline std::vector<std::string> splitDot(const std::string& path) {
   std::vector<std::string> parts;
@@ -168,36 +170,26 @@ namespace YumEngine {
 
       int nargs = lua_gettop(L);
       Vector args;
-      for (int i = 1; i <= nargs; ++i) {
-        if (lua_isinteger(L, i)) args.append((int64_t)lua_tointeger(L, i));
-        else if (lua_isnumber(L, i)) args.append((double)lua_tonumber(L, i));
-        else if (lua_isboolean(L, i)) args.append((bool)lua_toboolean(L, i));
-        else if (lua_isstring(L, i)) args.append(std::string(lua_tostring(L, i)));
-        else if (lua_istable(L, i)) {
-          lua_getfield(L, i, "__yum_type");
-          const char *t = lua_tostring(L, -1);
-          lua_pop(L, 1);
+      args.reserve(nargs); // In order to avoid append-during re-allocations.
 
-          if (t && strcmp(t, "binary") == 0) {
-            lua_getfield(L, i, "data");
-            size_t len;
-            const char *data = lua_tolstring(L, -1, &len);
-            lua_pop(L, 1);
-            args.append(YumBinaryBlob{.start = (const uint8_t*)data, .size = len});
-          }    
-        }
+      for (int i = 1; i <= nargs; ++i) {
+        args.append(utils::from_lua(L, i));
       }
 
       Vector result = (*(it->second))(args);
 
       for (int i = 0; i < result.size(); ++i) {
         auto me = result.at(i);
-        if (me.is_int()) lua_pushinteger(L, me.as_int());
-        else if (me.is_float()) lua_pushnumber(L, me.as_float());
-        else if (me.is_bool()) lua_pushboolean(L, me.as_bool());
-        else if (me.is_string()) lua_pushstring(L, me.as_string().c_str());
-        else if (me.is_binary()) lua_pushlstring(L, (const char*)me.as_binary().start, me.as_binary().size);
-        else lua_pushnil(L);
+        switch (me.get_kind()) {
+          case Variant::INTEGER: lua_pushinteger(L, me.as_int()); break;
+          case Variant::NUMBER: lua_pushnumber(L, me.as_float()); break;
+          case Variant::STRING: lua_pushstring(L, me.as_string().c_str()); break;
+          case Variant::BOOLEAN: lua_pushboolean(L, me.as_bool()); break;
+          case Variant::BINARY: lua_pushlstring(L, (const char*)me.as_binary().start, me.as_binary().size); break;
+          case Variant::TABLE: utils::set_table(L, (*me.as_table())); break;
+          case Variant::UID: utils::push_uid(L, me.as_uid()); break;
+          default: lua_pushnil(L); break;
+        }
       }
 
       return result.size();
@@ -336,12 +328,17 @@ extern "C" {
     return subsystem->get(uid)->good();
   }
 
-  YUM_OUTATR YumVector *YumLuaSubsystem_call(YumSubsystem *s, uint64_t uid, const char *name, const YumVector *args) {
+  YUM_OUTATR YumVector *YumLuaSubsystem_call(YumSubsystem *subsystem, uint64_t uid, const char *name, const YumVector *args) {
     try {
-      auto subsystem = (s);
       auto lua = subsystem->get(uid);
       YumEngine::Vector v = lua->call(std::string(name), *args);
-      return new YumEngine::Vector(std::move(v));
+      auto ptr = new YumEngine::Vector(std::move(v));
+      auto list = subsystem->get_pinlist();
+      list->pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
+        .object = ptr,
+        .freed = false
+      }));
+      return ptr;
     } catch (const std::bad_function_call &e) {
       (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
     } catch (const std::bad_alloc &e) {
