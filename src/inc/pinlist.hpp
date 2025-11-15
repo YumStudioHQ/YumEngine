@@ -7,7 +7,7 @@
  *            This file is free & open source            *
  *        https://github.com/YumStudioHQ/YumEngine       *
  *                          from                         *
- *                         MONOE                         *
+ *                         MONOE.                        *
  *                                                       *
  *********************************************************/
 
@@ -26,8 +26,11 @@
 #include <memory>
 #include <cstdint>
 #include <iomanip>
+#include <stdexcept>
 
 namespace YumEngine {
+  extern bool is_engine_init();
+
   class pinlist {
   private:
     YumListElement *top = nullptr;
@@ -72,6 +75,7 @@ namespace YumEngine {
     }
 
     inline void pin(YumObjectReference *element) {
+      if (!is_engine_init()) throw std::runtime_error("pinned element while using un-initialized engine");
       if (!element) return;
 
       YumListElement* newNode = new YumListElement({
@@ -91,10 +95,5 @@ namespace YumEngine {
 
       it->child = newNode;
     }
-
-
   };
-
-
-  pinlist &G_pinlist();
 }

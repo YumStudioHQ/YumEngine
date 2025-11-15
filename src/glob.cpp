@@ -5,9 +5,10 @@
  *            This file is free & open source            *
  *        https://github.com/YumStudioHQ/YumEngine       *
  *                          from                         *
- *                         MONOE                         *
+ *                         MONOE.                        *
  *                                                       *
  *********************************************************/
+
 #include <memory>
 #include <fstream>
 #include <sstream>
@@ -30,13 +31,6 @@ std::shared_ptr<std::ostream> &G_err() {
 std::shared_ptr<std::istream> &G_in() {
   thread_local std::shared_ptr<std::istream> is{&std::cin, [](void*){}};
   return is;
-}
-
-namespace YumEngine {
-  pinlist &G_pinlist() {
-    thread_local pinlist pin = pinlist();
-    return pin;
-  }
 }
 
 class CallbackBuf : public std::streambuf {

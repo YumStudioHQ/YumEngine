@@ -10,6 +10,7 @@ var hierarchy =
     [ "YumEngine::pinlist", "class_yum_engine_1_1pinlist.html", null ],
     [ "YumEngine::SubProcessBase", "class_yum_engine_1_1_sub_process_base.html", null ],
     [ "YumEngine::Subsystem", "class_yum_engine_1_1_subsystem.html", null ],
+    [ "YumEngine::YGlob", "class_yum_engine_1_1_y_glob.html", null ],
     [ "YumBinaryBlob", "struct_yum_binary_blob.html", null ],
     [ "YumEngine::YumListElement", "struct_yum_engine_1_1_yum_list_element.html", null ],
     [ "YumEngine::YumObject", "class_yum_engine_1_1_yum_object.html", [

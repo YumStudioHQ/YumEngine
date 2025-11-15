@@ -14,6 +14,7 @@ var annotated_dup =
       [ "YumObject", "class_yum_engine_1_1_yum_object.html", "class_yum_engine_1_1_yum_object" ],
       [ "YumObjectReference", "struct_yum_engine_1_1_yum_object_reference.html", "struct_yum_engine_1_1_yum_object_reference" ],
       [ "YumListElement", "struct_yum_engine_1_1_yum_list_element.html", "struct_yum_engine_1_1_yum_list_element" ],
+      [ "YGlob", "class_yum_engine_1_1_y_glob.html", "class_yum_engine_1_1_y_glob" ],
       [ "YumTable", "class_yum_engine_1_1_yum_table.html", "class_yum_engine_1_1_yum_table" ]
     ] ],
     [ "Action", "class_action.html", "class_action" ],

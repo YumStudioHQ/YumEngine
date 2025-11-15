@@ -4,6 +4,9 @@ var namespace_yum_engine =
       [ "EnsureEnvActor", "namespace_yum_engine_1_1_actors.html#a34864e7dd629751b2df943ca52bf0bb1", null ],
       [ "GetEnvActor", "namespace_yum_engine_1_1_actors.html#aee6369b0783c9792807febe083c9ef2d", null ]
     ] ],
+    [ "string_formats", "namespace_yum_engine_1_1string__formats.html", [
+      [ "crash_header", "namespace_yum_engine_1_1string__formats.html#a44351b96c8ba5cbe853c682bd2c966bf", null ]
+    ] ],
     [ "utils", "namespace_yum_engine_1_1utils.html", [
       [ "from_lua", "namespace_yum_engine_1_1utils.html#acf2b832110b195927e5dc6bb6719ac4e", null ],
       [ "get_table", "namespace_yum_engine_1_1utils.html#acd80c401575a7c7a18d982dba3565460", null ],
@@ -22,10 +25,14 @@ var namespace_yum_engine =
     [ "YumObject", "class_yum_engine_1_1_yum_object.html", "class_yum_engine_1_1_yum_object" ],
     [ "YumObjectReference", "struct_yum_engine_1_1_yum_object_reference.html", "struct_yum_engine_1_1_yum_object_reference" ],
     [ "YumListElement", "struct_yum_engine_1_1_yum_list_element.html", "struct_yum_engine_1_1_yum_list_element" ],
+    [ "YGlob", "class_yum_engine_1_1_y_glob.html", "class_yum_engine_1_1_y_glob" ],
     [ "YumTable", "class_yum_engine_1_1_yum_table.html", "class_yum_engine_1_1_yum_table" ],
     [ "ManagedCallback", "namespace_yum_engine.html#aa597e95b4587dfebdfec0bce41b1c285", null ],
-    [ "G_pinlist", "namespace_yum_engine.html#af08062036b85b933ad003ff5fbc344bd", null ],
+    [ "dump_registers", "namespace_yum_engine.html#a2a0cb1dc9f8637e691caef41e13d0f73", null ],
+    [ "dump_yum", "namespace_yum_engine.html#a5d816fb094b95c6b0ec973f02df1b249", null ],
+    [ "G_yglob", "namespace_yum_engine.html#a039028d3bd47533df36fcc4b5b4d5622", null ],
     [ "GetEnv", "namespace_yum_engine.html#ad0d0b2732aecd4c1984cb6e2948422f3", null ],
+    [ "is_engine_init", "namespace_yum_engine.html#aac27697820deff292c045867ccc7d586", null ],
     [ "operator==", "namespace_yum_engine.html#aaa1b6ecd52e97b797b2367cbc239df27", null ],
     [ "SetEnv", "namespace_yum_engine.html#a020049d08be3845a10f7f6657a818666", null ],
     [ "UnsetEnv", "namespace_yum_engine.html#ab3c10b4d042d9c9e871d29acb2d1f339", null ]

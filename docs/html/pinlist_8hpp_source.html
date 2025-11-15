@@ -100,7 +100,7 @@ $(function(){initNavTree('pinlist_8hpp_source.html','',''); });
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> *            This file is free &amp; open source            *</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> *        https://github.com/YumStudioHQ/YumEngine       *</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> *                          from                         *</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> *                         MONOE                         *</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> *                         MONOE.                        *</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"> *                                                       *</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> *********************************************************/</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
@@ -114,97 +114,95 @@ $(function(){initNavTree('pinlist_8hpp_source.html','',''); });
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &lt;iomanip&gt;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_yum_engine.html">YumEngine</a> {</div>
-<div class="foldopen" id="foldopen00031" data-start="{" data-end="};">
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="class_yum_engine_1_1pinlist.html">   31</a></span>  <span class="keyword">class </span><a class="code hl_function" href="class_yum_engine_1_1pinlist.html#ab67581d6240d2104d973c8c4158c6b25">pinlist</a> {</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_struct" href="struct_yum_engine_1_1_yum_list_element.html">YumListElement</a> *top = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordtype">bool</span> finalized = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="class_yum_engine_1_1pinlist.html#ab67581d6240d2104d973c8c4158c6b25">   37</a></span>    <span class="keyword">inline</span> <a class="code hl_function" href="class_yum_engine_1_1pinlist.html#ab67581d6240d2104d973c8c4158c6b25">pinlist</a>() {}</div>
-<div class="foldopen" id="foldopen00038" data-start="{" data-end="}">
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="class_yum_engine_1_1pinlist.html#a9b86f6334adf1c2f204dc5e5daa3c1c2">   38</a></span>    <span class="keyword">inline</span> <a class="code hl_function" href="class_yum_engine_1_1pinlist.html#a9b86f6334adf1c2f204dc5e5daa3c1c2">~pinlist</a>() {</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>      <span class="keywordflow">if</span> (!finalized) {</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        (*<a class="code hl_function" href="glob_8hpp.html#a4a56131d496db85828f3ff3492aa43bb">G_err</a>()) &lt;&lt; <span class="stringliteral">&quot;yum: warning: one pinlist instance is being destroyed while not being finalized, finalizing&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <a class="code hl_function" href="class_yum_engine_1_1pinlist.html#a2b189b7383b77f10b618b0698c24e79d">finalize</a>();</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      }</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespace_yum_engine.html">YumEngine</a> {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="namespace_yum_engine.html#aac27697820deff292c045867ccc7d586">   32</a></span>  <span class="keyword">extern</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="namespace_yum_engine.html#aac27697820deff292c045867ccc7d586">is_engine_init</a>();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="};">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="class_yum_engine_1_1pinlist.html">   34</a></span>  <span class="keyword">class </span><a class="code hl_function" href="class_yum_engine_1_1pinlist.html#ab67581d6240d2104d973c8c4158c6b25">pinlist</a> {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_struct" href="struct_yum_engine_1_1_yum_list_element.html">YumListElement</a> *top = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">bool</span> finalized = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="class_yum_engine_1_1pinlist.html#ab67581d6240d2104d973c8c4158c6b25">   40</a></span>    <span class="keyword">inline</span> <a class="code hl_function" href="class_yum_engine_1_1pinlist.html#ab67581d6240d2104d973c8c4158c6b25">pinlist</a>() {}</div>
+<div class="foldopen" id="foldopen00041" data-start="{" data-end="}">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="class_yum_engine_1_1pinlist.html#a9b86f6334adf1c2f204dc5e5daa3c1c2">   41</a></span>    <span class="keyword">inline</span> <a class="code hl_function" href="class_yum_engine_1_1pinlist.html#a9b86f6334adf1c2f204dc5e5daa3c1c2">~pinlist</a>() {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      <span class="keywordflow">if</span> (!finalized) {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        (*<a class="code hl_function" href="glob_8hpp.html#a4a56131d496db85828f3ff3492aa43bb">G_err</a>()) &lt;&lt; <span class="stringliteral">&quot;yum: warning: one pinlist instance is being destroyed while not being finalized, finalizing&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <a class="code hl_function" href="class_yum_engine_1_1pinlist.html#a2b189b7383b77f10b618b0698c24e79d">finalize</a>();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>      }</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
 </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    </div>
-<div class="foldopen" id="foldopen00045" data-start="{" data-end="}">
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="class_yum_engine_1_1pinlist.html#a2b189b7383b77f10b618b0698c24e79d">   45</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_yum_engine_1_1pinlist.html#a2b189b7383b77f10b618b0698c24e79d">finalize</a>() {</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      (*<a class="code hl_function" href="glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51">G_out</a>()) &lt;&lt; <span class="stringliteral">&quot;yum: finalizing&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      <a class="code hl_struct" href="struct_yum_engine_1_1_yum_list_element.html">YumListElement</a> *it = top;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      uint64_t count = 0;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      std::vector&lt;YumListElement*&gt; toclean{};</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      <span class="keywordflow">while</span> (it != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        toclean.push_back(it);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordflow">if</span> (it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ac5dff3a1148d9b7936cd579742961a97">current</a>) {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>          (*<a class="code hl_function" href="glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51">G_out</a>()) &lt;&lt; <span class="stringliteral">&quot;yum: ref&lt;&quot;</span> &lt;&lt; std::hex &lt;&lt; it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ac5dff3a1148d9b7936cd579742961a97">current</a> &lt;&lt; <span class="stringliteral">&quot;&gt; &quot;</span>;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>          <span class="keywordflow">if</span> (it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ac5dff3a1148d9b7936cd579742961a97">current</a>-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_object_reference.html#a55f0901a2350eff0f0443a99fcb4ca15">freed</a>) {</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            (*<a class="code hl_function" href="glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51">G_out</a>()) &lt;&lt; <span class="stringliteral">&quot;already freed&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>          } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            (*<a class="code hl_function" href="glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51">G_out</a>()) &lt;&lt; <span class="stringliteral">&quot; not freed, freeing&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ac5dff3a1148d9b7936cd579742961a97">current</a>-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_object_reference.html#a0beefeab3eba733a497fc0ec0142b17a">object</a>-&gt;<a class="code hl_function" href="class_yum_engine_1_1_yum_object.html#a2909e091cf408a02678e902debe6e7e3">free</a>();</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>          }</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>          (*<a class="code hl_function" href="glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51">G_out</a>()) &lt;&lt; <span class="stringliteral">&quot;yum: got bad ref...&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        }</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        it = it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ad83da4e14fb600b42aa30e22b0f434bc">child</a>;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        count++;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>      }</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>      <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;V : toclean) <span class="keyword">delete</span> V;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>      finalized = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>      (*<a class="code hl_function" href="glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51">G_out</a>()) &lt;&lt; <span class="stringliteral">&quot;yum: finalized &quot;</span> &lt;&lt; std::dec &lt;&lt; count &lt;&lt; <span class="stringliteral">&quot; resources&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    </div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="class_yum_engine_1_1pinlist.html#a2b189b7383b77f10b618b0698c24e79d">   48</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_yum_engine_1_1pinlist.html#a2b189b7383b77f10b618b0698c24e79d">finalize</a>() {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      (*<a class="code hl_function" href="glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51">G_out</a>()) &lt;&lt; <span class="stringliteral">&quot;yum: finalizing&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>      <a class="code hl_struct" href="struct_yum_engine_1_1_yum_list_element.html">YumListElement</a> *it = top;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>      uint64_t count = 0;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>      std::vector&lt;YumListElement*&gt; toclean{};</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>      <span class="keywordflow">while</span> (it != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        toclean.push_back(it);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">if</span> (it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ac5dff3a1148d9b7936cd579742961a97">current</a>) {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>          (*<a class="code hl_function" href="glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51">G_out</a>()) &lt;&lt; <span class="stringliteral">&quot;yum: ref&lt;&quot;</span> &lt;&lt; std::hex &lt;&lt; it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ac5dff3a1148d9b7936cd579742961a97">current</a> &lt;&lt; <span class="stringliteral">&quot;&gt; &quot;</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>          <span class="keywordflow">if</span> (it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ac5dff3a1148d9b7936cd579742961a97">current</a>-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_object_reference.html#a55f0901a2350eff0f0443a99fcb4ca15">freed</a>) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            (*<a class="code hl_function" href="glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51">G_out</a>()) &lt;&lt; <span class="stringliteral">&quot;already freed&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>          } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            (*<a class="code hl_function" href="glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51">G_out</a>()) &lt;&lt; <span class="stringliteral">&quot; not freed, freeing&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ac5dff3a1148d9b7936cd579742961a97">current</a>-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_object_reference.html#a0beefeab3eba733a497fc0ec0142b17a">object</a>-&gt;<a class="code hl_function" href="class_yum_engine_1_1_yum_object.html#a2909e091cf408a02678e902debe6e7e3">free</a>();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>          }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>          (*<a class="code hl_function" href="glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51">G_out</a>()) &lt;&lt; <span class="stringliteral">&quot;yum: got bad ref...&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        it = it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ad83da4e14fb600b42aa30e22b0f434bc">child</a>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        count++;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>      }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>      <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;V : toclean) <span class="keyword">delete</span> V;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>      finalized = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>      (*<a class="code hl_function" href="glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51">G_out</a>()) &lt;&lt; <span class="stringliteral">&quot;yum: finalized &quot;</span> &lt;&lt; std::dec &lt;&lt; count &lt;&lt; <span class="stringliteral">&quot; resources&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    }</div>
 </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="class_yum_engine_1_1pinlist.html#a2c8e32487bbb6ae83d364f1dcee2124d">   74</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_yum_engine_1_1pinlist.html#a2c8e32487bbb6ae83d364f1dcee2124d">pin</a>(<a class="code hl_struct" href="struct_yum_engine_1_1_yum_object_reference.html">YumObjectReference</a> *element) {</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>      <span class="keywordflow">if</span> (!element) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      <a class="code hl_struct" href="struct_yum_engine_1_1_yum_list_element.html">YumListElement</a>* newNode = <span class="keyword">new</span> <a class="code hl_struct" href="struct_yum_engine_1_1_yum_list_element.html">YumListElement</a>({</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        .child = <span class="keyword">nullptr</span>,</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        .current = element</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>      });</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>      <span class="keywordflow">if</span> (!top) {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        top = newNode;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>      }</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>      <a class="code hl_struct" href="struct_yum_engine_1_1_yum_list_element.html">YumListElement</a>* it = top;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>      <span class="keywordflow">while</span> (it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ad83da4e14fb600b42aa30e22b0f434bc">child</a> != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        it = it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ad83da4e14fb600b42aa30e22b0f434bc">child</a>;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      }</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>      it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ad83da4e14fb600b42aa30e22b0f434bc">child</a> = newNode;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    }</div>
-</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="foldopen" id="foldopen00077" data-start="{" data-end="}">
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="class_yum_engine_1_1pinlist.html#a2c8e32487bbb6ae83d364f1dcee2124d">   77</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_yum_engine_1_1pinlist.html#a2c8e32487bbb6ae83d364f1dcee2124d">pin</a>(<a class="code hl_struct" href="struct_yum_engine_1_1_yum_object_reference.html">YumObjectReference</a> *element) {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>      <span class="keywordflow">if</span> (!<a class="code hl_function" href="namespace_yum_engine.html#aac27697820deff292c045867ccc7d586">is_engine_init</a>()) <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;pinned element while using un-initialized engine&quot;</span>);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>      <span class="keywordflow">if</span> (!element) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>      <a class="code hl_struct" href="struct_yum_engine_1_1_yum_list_element.html">YumListElement</a>* newNode = <span class="keyword">new</span> <a class="code hl_struct" href="struct_yum_engine_1_1_yum_list_element.html">YumListElement</a>({</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        .child = <span class="keyword">nullptr</span>,</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        .current = element</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      });</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>      <span class="keywordflow">if</span> (!top) {</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        top = newNode;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>      }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      <a class="code hl_struct" href="struct_yum_engine_1_1_yum_list_element.html">YumListElement</a>* it = top;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>      <span class="keywordflow">while</span> (it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ad83da4e14fb600b42aa30e22b0f434bc">child</a> != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        it = it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ad83da4e14fb600b42aa30e22b0f434bc">child</a>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>      }</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  };</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>      it-&gt;<a class="code hl_variable" href="struct_yum_engine_1_1_yum_list_element.html#ad83da4e14fb600b42aa30e22b0f434bc">child</a> = newNode;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    }</div>
 </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="namespace_yum_engine.html#af08062036b85b933ad003ff5fbc344bd">   99</a></span>  <a class="code hl_class" href="class_yum_engine_1_1pinlist.html">pinlist</a> &amp;<a class="code hl_function" href="namespace_yum_engine.html#af08062036b85b933ad003ff5fbc344bd">G_pinlist</a>();</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>}</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  };</div>
+</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>}</div>
 <div class="ttc" id="aclass_yum_engine_1_1_yum_object_html_a2909e091cf408a02678e902debe6e7e3"><div class="ttname"><a href="class_yum_engine_1_1_yum_object.html#a2909e091cf408a02678e902debe6e7e3">YumEngine::YumObject::free</a></div><div class="ttdeci">void free() const</div><div class="ttdoc">frees the current object.</div><div class="ttdef"><b>Definition</b> yumobject.hpp:30</div></div>
-<div class="ttc" id="aclass_yum_engine_1_1pinlist_html"><div class="ttname"><a href="class_yum_engine_1_1pinlist.html">YumEngine::pinlist</a></div><div class="ttdef"><b>Definition</b> pinlist.hpp:31</div></div>
-<div class="ttc" id="aclass_yum_engine_1_1pinlist_html_a2b189b7383b77f10b618b0698c24e79d"><div class="ttname"><a href="class_yum_engine_1_1pinlist.html#a2b189b7383b77f10b618b0698c24e79d">YumEngine::pinlist::finalize</a></div><div class="ttdeci">void finalize()</div><div class="ttdef"><b>Definition</b> pinlist.hpp:45</div></div>
-<div class="ttc" id="aclass_yum_engine_1_1pinlist_html_a2c8e32487bbb6ae83d364f1dcee2124d"><div class="ttname"><a href="class_yum_engine_1_1pinlist.html#a2c8e32487bbb6ae83d364f1dcee2124d">YumEngine::pinlist::pin</a></div><div class="ttdeci">void pin(YumObjectReference *element)</div><div class="ttdef"><b>Definition</b> pinlist.hpp:74</div></div>
-<div class="ttc" id="aclass_yum_engine_1_1pinlist_html_a9b86f6334adf1c2f204dc5e5daa3c1c2"><div class="ttname"><a href="class_yum_engine_1_1pinlist.html#a9b86f6334adf1c2f204dc5e5daa3c1c2">YumEngine::pinlist::~pinlist</a></div><div class="ttdeci">~pinlist()</div><div class="ttdef"><b>Definition</b> pinlist.hpp:38</div></div>
-<div class="ttc" id="aclass_yum_engine_1_1pinlist_html_ab67581d6240d2104d973c8c4158c6b25"><div class="ttname"><a href="class_yum_engine_1_1pinlist.html#ab67581d6240d2104d973c8c4158c6b25">YumEngine::pinlist::pinlist</a></div><div class="ttdeci">pinlist()</div><div class="ttdef"><b>Definition</b> pinlist.hpp:37</div></div>
+<div class="ttc" id="aclass_yum_engine_1_1pinlist_html_a2b189b7383b77f10b618b0698c24e79d"><div class="ttname"><a href="class_yum_engine_1_1pinlist.html#a2b189b7383b77f10b618b0698c24e79d">YumEngine::pinlist::finalize</a></div><div class="ttdeci">void finalize()</div><div class="ttdef"><b>Definition</b> pinlist.hpp:48</div></div>
+<div class="ttc" id="aclass_yum_engine_1_1pinlist_html_a2c8e32487bbb6ae83d364f1dcee2124d"><div class="ttname"><a href="class_yum_engine_1_1pinlist.html#a2c8e32487bbb6ae83d364f1dcee2124d">YumEngine::pinlist::pin</a></div><div class="ttdeci">void pin(YumObjectReference *element)</div><div class="ttdef"><b>Definition</b> pinlist.hpp:77</div></div>
+<div class="ttc" id="aclass_yum_engine_1_1pinlist_html_a9b86f6334adf1c2f204dc5e5daa3c1c2"><div class="ttname"><a href="class_yum_engine_1_1pinlist.html#a9b86f6334adf1c2f204dc5e5daa3c1c2">YumEngine::pinlist::~pinlist</a></div><div class="ttdeci">~pinlist()</div><div class="ttdef"><b>Definition</b> pinlist.hpp:41</div></div>
+<div class="ttc" id="aclass_yum_engine_1_1pinlist_html_ab67581d6240d2104d973c8c4158c6b25"><div class="ttname"><a href="class_yum_engine_1_1pinlist.html#ab67581d6240d2104d973c8c4158c6b25">YumEngine::pinlist::pinlist</a></div><div class="ttdeci">pinlist()</div><div class="ttdef"><b>Definition</b> pinlist.hpp:40</div></div>
 <div class="ttc" id="aglob_8hpp_html"><div class="ttname"><a href="glob_8hpp.html">glob.hpp</a></div></div>
 <div class="ttc" id="aglob_8hpp_html_a1df1a262b6eca3d85179aa8e48a83c51"><div class="ttname"><a href="glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51">G_out</a></div><div class="ttdeci">std::shared_ptr&lt; std::ostream &gt; &amp; G_out()</div><div class="ttdoc">defines global functions for YumEngine backend.</div></div>
 <div class="ttc" id="aglob_8hpp_html_a4a56131d496db85828f3ff3492aa43bb"><div class="ttname"><a href="glob_8hpp.html#a4a56131d496db85828f3ff3492aa43bb">G_err</a></div><div class="ttdeci">std::shared_ptr&lt; std::ostream &gt; &amp; G_err()</div><div class="ttdoc">Returns YumEngine&#39;s standard error output.</div></div>
-<div class="ttc" id="anamespace_yum_engine_html"><div class="ttname"><a href="namespace_yum_engine.html">YumEngine</a></div><div class="ttdef"><b>Definition</b> envm.hpp:13</div></div>
-<div class="ttc" id="anamespace_yum_engine_html_af08062036b85b933ad003ff5fbc344bd"><div class="ttname"><a href="namespace_yum_engine.html#af08062036b85b933ad003ff5fbc344bd">YumEngine::G_pinlist</a></div><div class="ttdeci">pinlist &amp; G_pinlist()</div></div>
+<div class="ttc" id="anamespace_yum_engine_html"><div class="ttname"><a href="namespace_yum_engine.html">YumEngine</a></div><div class="ttdoc">brings a global type interface for global API-system management.</div><div class="ttdef"><b>Definition</b> envm.hpp:13</div></div>
+<div class="ttc" id="anamespace_yum_engine_html_aac27697820deff292c045867ccc7d586"><div class="ttname"><a href="namespace_yum_engine.html#aac27697820deff292c045867ccc7d586">YumEngine::is_engine_init</a></div><div class="ttdeci">bool is_engine_init()</div></div>
 <div class="ttc" id="astruct_yum_engine_1_1_yum_list_element_html"><div class="ttname"><a href="struct_yum_engine_1_1_yum_list_element.html">YumEngine::YumListElement</a></div><div class="ttdef"><b>Definition</b> yumobject.hpp:43</div></div>
 <div class="ttc" id="astruct_yum_engine_1_1_yum_list_element_html_ac5dff3a1148d9b7936cd579742961a97"><div class="ttname"><a href="struct_yum_engine_1_1_yum_list_element.html#ac5dff3a1148d9b7936cd579742961a97">YumEngine::YumListElement::current</a></div><div class="ttdeci">YumObjectReference * current</div><div class="ttdef"><b>Definition</b> yumobject.hpp:45</div></div>
 <div class="ttc" id="astruct_yum_engine_1_1_yum_list_element_html_ad83da4e14fb600b42aa30e22b0f434bc"><div class="ttname"><a href="struct_yum_engine_1_1_yum_list_element.html#ad83da4e14fb600b42aa30e22b0f434bc">YumEngine::YumListElement::child</a></div><div class="ttdeci">YumListElement * child</div><div class="ttdef"><b>Definition</b> yumobject.hpp:44</div></div>

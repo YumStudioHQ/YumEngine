@@ -5,9 +5,10 @@
  *            This file is free & open source            *
  *        https://github.com/YumStudioHQ/YumEngine       *
  *                          from                         *
- *                         MONOE                         *
+ *                         MONOE.                        *
  *                                                       *
  *********************************************************/
+
 #ifndef ___YUMGUARD_VARIANT_H___
 #define ___YUMGUARD_VARIANT_H___
 #include <stdint.h>
