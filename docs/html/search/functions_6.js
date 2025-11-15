@@ -7,8 +7,9 @@ var searchData=
   ['get_4',['get',['../class_yum_engine_1_1_lua_cxx.html#aaec9632bd6518cb4ed5c38b269bdbba5',1,'YumEngine::LuaCxx::get()'],['../class_yum_engine_1_1_subsystem.html#a66e8a79271e32c299e00329735a29fe0',1,'YumEngine::Subsystem::get()'],['../class_yum_engine_1_1_y_glob.html#a462de28f53714621bae4761b81dcc798',1,'YumEngine::YGlob::get()']]],
   ['get_5fkind_5',['get_kind',['../class_yum_engine_1_1_variant.html#a36f0ecdb37e9468bbd0bc71ff8b40f92',1,'YumEngine::Variant']]],
   ['get_5fpinlist_6',['get_pinlist',['../class_yum_engine_1_1_lua_subsystem.html#a1dabdd7b0d5ce0e25ac9d83f67525961',1,'YumEngine::LuaSubsystem']]],
-  ['get_5ftable_7',['get_table',['../namespace_yum_engine_1_1utils.html#acd80c401575a7c7a18d982dba3565460',1,'YumEngine::utils']]],
-  ['getenv_8',['GetEnv',['../namespace_yum_engine.html#ad0d0b2732aecd4c1984cb6e2948422f3',1,'YumEngine']]],
-  ['getenvactor_9',['GetEnvActor',['../namespace_yum_engine_1_1_actors.html#aee6369b0783c9792807febe083c9ef2d',1,'YumEngine::Actors']]],
-  ['good_10',['good',['../class_yum_engine_1_1_lua_subsystem.html#a8e9f955aec72f259151f527a15eab3ae',1,'YumEngine::LuaSubsystem']]]
+  ['get_5fstacktrace_7',['get_stacktrace',['../dumper_8hpp.html#a8059b4519f66c045d586214af4452130',1,'dumper.hpp']]],
+  ['get_5ftable_8',['get_table',['../namespace_yum_engine_1_1utils.html#acd80c401575a7c7a18d982dba3565460',1,'YumEngine::utils']]],
+  ['getenv_9',['GetEnv',['../namespace_yum_engine.html#ad0d0b2732aecd4c1984cb6e2948422f3',1,'YumEngine']]],
+  ['getenvactor_10',['GetEnvActor',['../namespace_yum_engine_1_1_actors.html#aee6369b0783c9792807febe083c9ef2d',1,'YumEngine::Actors']]],
+  ['good_11',['good',['../class_yum_engine_1_1_lua_subsystem.html#a8e9f955aec72f259151f527a15eab3ae',1,'YumEngine::LuaSubsystem']]]
 ];

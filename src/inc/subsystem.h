@@ -5,10 +5,11 @@
  *            This file is free & open source            *
  *        https://github.com/YumStudioHQ/YumEngine       *
  *                          from                         *
- *                         MONOE                         *
+ *                         MONOE.                        *
  *                                                       *
  *********************************************************/
-#ifndef ___YUM_SUBSYSTEM_H___
+
+ #ifndef ___YUM_SUBSYSTEM_H___
 #define ___YUM_SUBSYSTEM_H___
 
 #include <stdint.h>

@@ -5,9 +5,10 @@
  *            This file is free & open source            *
  *        https://github.com/YumStudioHQ/YumEngine       *
  *                          from                         *
- *                         MONOE                         *
+ *                         MONOE.                        *
  *                                                       *
  *********************************************************/
+
 /**
  * @file yum.hpp
  * @brief Includes all headers for the YumEngine C++ API.

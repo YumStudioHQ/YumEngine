@@ -5,9 +5,10 @@
  *            This file is free & open source            *
  *        https://github.com/YumStudioHQ/YumEngine       *
  *                          from                         *
- *                         MONOE                         *
+ *                         MONOE.                        *
  *                                                       *
  *********************************************************/
+
 #pragma once
 
 /**

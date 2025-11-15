@@ -5,7 +5,7 @@
  *            This file is free & open source            *
  *        https://github.com/YumStudioHQ/YumEngine       *
  *                          from                         *
- *                         MONOE                         *
+ *                         MONOE.                        *
  *                                                       *
  *********************************************************/
 
@@ -44,4 +44,6 @@ extern "C" {
     return 1;
 #endif
   }
+
+  YUM_OUTATR void YUM_EXPLODE ( void ) { throw std::runtime_error ("EXPLOSION"); }
 }

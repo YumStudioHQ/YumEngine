@@ -5,9 +5,10 @@
  *            This file is free & open source            *
  *        https://github.com/YumStudioHQ/YumEngine       *
  *                          from                         *
- *                         MONOE                         *
+ *                         MONOE.                        *
  *                                                       *
  *********************************************************/
+
 #ifndef ___YUM_DEC_H___
 #define ___YUM_DEC_H___
 
