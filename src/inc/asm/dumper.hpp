@@ -74,3 +74,46 @@
 #  endif
 # endif
 #endif
+
+#include <vector>
+#include <string>
+
+#if defined(_WIN32)
+    #include <windows.h>
+    #include <dbghelp.h>
+#elif defined(__linux__) || defined(__APPLE__)
+    #include <execinfo.h>
+    #include <cstdlib>
+#endif
+
+inline std::vector<std::string> get_stacktrace(unsigned int max_frames = 64) {
+    std::vector<std::string> trace {};
+
+#if defined(_WIN32)
+
+    void* stack[64];
+    USHORT frames = CaptureStackBackTrace(0, max_frames, stack, nullptr);
+    for (USHORT i = 0; i < frames; ++i) {
+        char buf[256];
+        snprintf(buf, sizeof(buf), "%p", stack[i]);
+        trace.emplace_back(buf);
+    }
+
+#elif defined(__linux__) || defined(__APPLE__)
+
+    void* stack[64];
+    int frames = backtrace(stack, static_cast<int>(max_frames));
+    char** symbols = backtrace_symbols(stack, frames);
+
+    if (symbols) {
+        for (int i = 0; i < frames; ++i)
+            trace.emplace_back(symbols[i]);
+        free(symbols);
+    }
+
+#else
+   trace.push_back("cannot get stacktrace");
+#endif
+
+    return trace;
+}
