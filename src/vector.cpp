@@ -13,6 +13,7 @@
 #include <vector>
 #include <functional>
 
+#include "inc/pinlist.hpp"
 #include "inc/variant.hpp"
 #include "inc/vector.hpp"
 #include "inc/yumdec.h"
@@ -35,7 +36,12 @@ namespace YumEngine {
 extern "C" {
 
 YUM_OUTATR YumVector *YumVector_new(void) {
-  return new YumVector();
+auto vec = new YumVector();
+YumEngine::G_pinlist().pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
+  .object = vec,
+  .freed = false,
+}));
+  return vec;
 }
 
 YUM_OUTATR void YumVector_delete(YumVector *vec) {

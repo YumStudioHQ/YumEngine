@@ -41,9 +41,7 @@ namespace YumEngine {
   };
 
   struct YumListElement {
-    YumListElement     *parent;
     YumListElement     *child;
-    YumListElement     *head;
     YumObjectReference *current;
   };
 }

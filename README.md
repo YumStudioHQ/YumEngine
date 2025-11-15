@@ -3,7 +3,7 @@
 ## Version
 
 <!-- YUM_VERSION_START -->
-- **Engine version:** `2.1.0`
+- **Engine version:** `2.2.0`
 - **Studio:** `yum-official`
 - **Branch:** `stable`
 <!-- YUM_VERSION_END -->

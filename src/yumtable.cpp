@@ -10,13 +10,20 @@
  *                         MONOE                         *
  *                                                       *
  *********************************************************/
+
 #include "inc/glob.hpp"
 #include "inc/yumdec.h"
 #include "inc/yumtable.hpp"
+#include "inc/pinlist.hpp"
 
 extern "C" {
   YUM_OUTATR YumCTable *YumCTable_new(void) {
-    return new YumCTable();
+    auto table = new YumCTable();
+    YumEngine::G_pinlist().pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
+      .object = table,
+      .freed = false,
+    }));
+    return table;
   }
 
   YUM_OUTATR void YumCTable_delete(const YumCTable *table) {

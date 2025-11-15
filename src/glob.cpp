@@ -15,20 +15,28 @@
 #include <functional>
 
 #include "inc/yumdec.h"
+#include "inc/pinlist.hpp"
 
 std::shared_ptr<std::ostream> &G_out() {
-  static std::shared_ptr<std::ostream> os{&std::cout, [](void*){}};
+  thread_local std::shared_ptr<std::ostream> os{&std::cout, [](void*){}};
   return os;
 }
 
 std::shared_ptr<std::ostream> &G_err() {
-  static std::shared_ptr<std::ostream> os{&std::cerr, [](void*){}};
+  thread_local std::shared_ptr<std::ostream> os{&std::cerr, [](void*){}};
   return os;
 }
 
 std::shared_ptr<std::istream> &G_in() {
-  static std::shared_ptr<std::istream> is{&std::cin, [](void*){}};
+  thread_local std::shared_ptr<std::istream> is{&std::cin, [](void*){}};
   return is;
+}
+
+namespace YumEngine {
+  pinlist &G_pinlist() {
+    thread_local pinlist pin = pinlist();
+    return pin;
+  }
 }
 
 class CallbackBuf : public std::streambuf {

@@ -8,7 +8,9 @@
  *                         MONOE                         *
  *                                                       *
  *********************************************************/
+
 #include "inc/yumtable.hpp"
+#include "inc/pinlist.hpp"
 #include "inc/variant.hpp"
 #include "inc/yumdec.h"
 #include "inc/glob.hpp"
@@ -67,7 +69,13 @@ namespace YumEngine {
 extern "C" {
 
 YUM_OUTATR YumVariant *YumVariant_new(void) {
-  return new YumVariant();
+  auto var = new YumVariant();
+  YumEngine::G_pinlist().pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
+    .object = var,
+    .freed = false,
+  }));
+
+  return var;
 }
 
 YUM_OUTATR void YumVariant_delete(YumVariant *var) {

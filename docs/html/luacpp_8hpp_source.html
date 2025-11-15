@@ -127,7 +127,7 @@ $(function(){initNavTree('luacpp_8hpp_source.html','',''); });
 <div class="foldopen" id="foldopen00034" data-start="{" data-end="}">
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="class_yum_engine_1_1_lua_cxx.html#aa44c22897843b75420fd7eaa219130c1">   34</a></span>    <span class="keyword">inline</span> <a class="code hl_function" href="class_yum_engine_1_1_lua_cxx.html#aa44c22897843b75420fd7eaa219130c1">~LuaCxx</a>() {</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>      <span class="keywordflow">if</span> (state) {</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        ((*<a class="code hl_function" href="glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51">G_out</a>()) &lt;&lt; <span class="stringliteral">&quot;yum: destroying lua_State 0x&quot;</span> &lt;&lt; std::hex &lt;&lt; std::setw(16) &lt;&lt; std::setfill(<span class="charliteral">&#39;0&#39;</span>) &lt;&lt; state &lt;&lt; std::endl);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        ((*<a class="code hl_function" href="glob_8hpp.html#a1df1a262b6eca3d85179aa8e48a83c51">G_out</a>()) &lt;&lt; <span class="stringliteral">&quot;yum: destroying lua_State 0x&quot;</span> &lt;&lt; std::hex &lt;&lt; state  &lt;&lt; std::setfill(<span class="charliteral">&#39;0&#39;</span>) &lt;&lt; std::endl);</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        lua_close(state);</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>      }</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    }</div>
