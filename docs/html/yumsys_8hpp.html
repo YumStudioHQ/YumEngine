@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Yum C API: yumtable.hpp File Reference</title>
+<title>Yum C API: yumsys.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('yumtable_8hpp.html','',''); });
+$(function(){initNavTree('yumsys_8hpp.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -88,51 +88,28 @@ $(function(){initNavTree('yumtable_8hpp.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">yumtable.hpp File Reference</div></div>
+  <div class="headertitle"><div class="title">yumsys.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="yumdec_8h_source.html">yumdec.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="variant_8hpp_source.html">variant.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="vector_8hpp_source.html">vector.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="yumobject_8hpp_source.html">yumobject.hpp</a>&quot;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;cstdint&gt;</code><br />
-<code>#include &lt;cstring&gt;</code><br />
-<code>#include &lt;unordered_map&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="pinlist_8hpp_source.html">pinlist.hpp</a>&quot;</code><br />
+<code>#include &lt;stdexcept&gt;</code><br />
 </div>
-<p><a href="yumtable_8hpp_source.html">Go to the source code of this file.</a></p>
+<p><a href="yumsys_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:std_3A_3Ahash_3C_20YumEngine_3A_3AVariant_20_3E" id="r_std_3A_3Ahash_3C_20YumEngine_3A_3AVariant_20_3E"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structstd_1_1hash_3_01_yum_engine_1_1_variant_01_4.html">std::hash&lt; YumEngine::Variant &gt;</a></td></tr>
-<tr class="memitem:YumEngine_3A_3AYumTable" id="r_YumEngine_3A_3AYumTable"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1_yum_table.html">YumEngine::YumTable</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple key-value container for <span class="tt"><a class="el" href="class_yum_engine_1_1_variant.html" title="Dynamically typed value container used for Lua &lt;-&gt; C++ communication.">Variant</a></span> objects.  <a href="class_yum_engine_1_1_yum_table.html#details">More...</a><br /></td></tr>
+<tr class="memitem:YumEngine_3A_3AYGlob" id="r_YumEngine_3A_3AYGlob"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1_y_glob.html">YumEngine::YGlob</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:std" id="r_std"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacestd.html">std</a></td></tr>
 <tr class="memitem:YumEngine" id="r_YumEngine"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_yum_engine.html">YumEngine</a></td></tr>
 <tr class="memdesc:namespace_yum_engine"><td class="mdescLeft">&#160;</td><td class="mdescRight">brings a global type interface for global API-system management. <br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a754011c9e656e2dedd7f393514cf4c8e" id="r_a754011c9e656e2dedd7f393514cf4c8e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a754011c9e656e2dedd7f393514cf4c8e">YumCTable</a> = <a class="el" href="class_yum_engine_1_1_yum_table.html">YumEngine::YumTable</a></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a039028d3bd47533df36fcc4b5b4d5622" id="r_a039028d3bd47533df36fcc4b5b4d5622"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_yum_engine_1_1_y_glob.html">YGlob</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_yum_engine.html#a039028d3bd47533df36fcc4b5b4d5622">YumEngine::G_yglob</a> ()</td></tr>
+<tr class="memitem:aac27697820deff292c045867ccc7d586" id="r_aac27697820deff292c045867ccc7d586"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_yum_engine.html#aac27697820deff292c045867ccc7d586">YumEngine::is_engine_init</a> ()</td></tr>
 </table>
-<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
-<a id="a754011c9e656e2dedd7f393514cf4c8e" name="a754011c9e656e2dedd7f393514cf4c8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a754011c9e656e2dedd7f393514cf4c8e">&#9670;&#160;</a></span>YumCTable</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="yumtable_8h.html#a3b6d251422e8c2ca930d79cc9ea59920">YumCTable</a> = <a class="el" href="class_yum_engine_1_1_yum_table.html">YumEngine::YumTable</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
@@ -146,7 +123,7 @@ Typedefs</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_6bc6ad22483805bbbda55258ad2a62ea.html">inc</a></li><li class="navelem"><a href="yumtable_8hpp.html">yumtable.hpp</a></li>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_6bc6ad22483805bbbda55258ad2a62ea.html">inc</a></li><li class="navelem"><a href="yumsys_8hpp.html">yumsys.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

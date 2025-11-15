@@ -15,11 +15,12 @@
 #include "inc/yumdec.h"
 #include "inc/yumtable.hpp"
 #include "inc/pinlist.hpp"
+#include "inc/yumsys.hpp"
 
 extern "C" {
   YUM_OUTATR YumCTable *YumCTable_new(void) {
     auto table = new YumCTable();
-    YumEngine::G_pinlist().pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
+    YumEngine::G_yglob().get().pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
       .object = table,
       .freed = false,
     }));

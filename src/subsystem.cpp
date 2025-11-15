@@ -26,6 +26,7 @@
 #include "inc/glob.hpp"
 #include "inc/yumdec.h"
 #include "inc/pinlist.hpp"
+#include "inc/yumsys.hpp"
 
 static inline std::vector<std::string> splitDot(const std::string& path) {
   std::vector<std::string> parts;
@@ -402,7 +403,7 @@ extern "C" {
 
   YUM_OUTATR void YumCloseAPI() {
     (*G_out()) << "yum: G_sys: closing YumEngine API" << std::endl;
-    YumEngine::G_pinlist().finalize();
+    YumEngine::G_yglob().free();
     (*G_out()) << "yum: bye." << std::endl;
   }
 }

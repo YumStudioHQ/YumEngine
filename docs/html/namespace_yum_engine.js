@@ -22,10 +22,12 @@ var namespace_yum_engine =
     [ "YumObject", "class_yum_engine_1_1_yum_object.html", "class_yum_engine_1_1_yum_object" ],
     [ "YumObjectReference", "struct_yum_engine_1_1_yum_object_reference.html", "struct_yum_engine_1_1_yum_object_reference" ],
     [ "YumListElement", "struct_yum_engine_1_1_yum_list_element.html", "struct_yum_engine_1_1_yum_list_element" ],
+    [ "YGlob", "class_yum_engine_1_1_y_glob.html", "class_yum_engine_1_1_y_glob" ],
     [ "YumTable", "class_yum_engine_1_1_yum_table.html", "class_yum_engine_1_1_yum_table" ],
     [ "ManagedCallback", "namespace_yum_engine.html#aa597e95b4587dfebdfec0bce41b1c285", null ],
-    [ "G_pinlist", "namespace_yum_engine.html#af08062036b85b933ad003ff5fbc344bd", null ],
+    [ "G_yglob", "namespace_yum_engine.html#a039028d3bd47533df36fcc4b5b4d5622", null ],
     [ "GetEnv", "namespace_yum_engine.html#ad0d0b2732aecd4c1984cb6e2948422f3", null ],
+    [ "is_engine_init", "namespace_yum_engine.html#aac27697820deff292c045867ccc7d586", null ],
     [ "operator==", "namespace_yum_engine.html#aaa1b6ecd52e97b797b2367cbc239df27", null ],
     [ "SetEnv", "namespace_yum_engine.html#a020049d08be3845a10f7f6657a818666", null ],
     [ "UnsetEnv", "namespace_yum_engine.html#ab3c10b4d042d9c9e871d29acb2d1f339", null ]

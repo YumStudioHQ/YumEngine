@@ -12,6 +12,7 @@
 #include "inc/yumtable.hpp"
 #include "inc/pinlist.hpp"
 #include "inc/variant.hpp"
+#include "inc/yumsys.hpp"
 #include "inc/yumdec.h"
 #include "inc/glob.hpp"
 
@@ -70,7 +71,7 @@ extern "C" {
 
 YUM_OUTATR YumVariant *YumVariant_new(void) {
   auto var = new YumVariant();
-  YumEngine::G_pinlist().pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
+  YumEngine::G_yglob().get().pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
     .object = var,
     .freed = false,
   }));

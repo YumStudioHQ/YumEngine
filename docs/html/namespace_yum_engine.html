@@ -91,6 +91,9 @@ $(function(){initNavTree('namespace_yum_engine.html','',''); });
   <div class="headertitle"><div class="title">YumEngine Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>brings a global type interface for global API-system management.  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -112,9 +115,10 @@ Classes</h2></td></tr>
 <tr class="memitem:Vector" id="r_Vector"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1_vector.html">Vector</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimal, type-safe container for <span class="tt"><a class="el" href="class_yum_engine_1_1_variant.html" title="Dynamically typed value container used for Lua &lt;-&gt; C++ communication.">Variant</a></span> values.  <a href="class_yum_engine_1_1_vector.html#details">More...</a><br /></td></tr>
 <tr class="memitem:YumObject" id="r_YumObject"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1_yum_object.html">YumObject</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base type of each <a class="el" href="namespace_yum_engine.html">YumEngine</a>'s types since V2.1.x minor fix.  <a href="class_yum_engine_1_1_yum_object.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base type of each <a class="el" href="namespace_yum_engine.html" title="brings a global type interface for global API-system management.">YumEngine</a>'s types since V2.1.x minor fix.  <a href="class_yum_engine_1_1_yum_object.html#details">More...</a><br /></td></tr>
 <tr class="memitem:YumObjectReference" id="r_YumObjectReference"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_yum_engine_1_1_yum_object_reference.html">YumObjectReference</a></td></tr>
 <tr class="memitem:YumListElement" id="r_YumListElement"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_yum_engine_1_1_yum_list_element.html">YumListElement</a></td></tr>
+<tr class="memitem:YGlob" id="r_YGlob"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1_y_glob.html">YGlob</a></td></tr>
 <tr class="memitem:YumTable" id="r_YumTable"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1_yum_table.html">YumTable</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple key-value container for <span class="tt"><a class="el" href="class_yum_engine_1_1_variant.html" title="Dynamically typed value container used for Lua &lt;-&gt; C++ communication.">Variant</a></span> objects.  <a href="class_yum_engine_1_1_yum_table.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
@@ -128,10 +132,13 @@ Functions</h2></td></tr>
 <tr class="memitem:ad0d0b2732aecd4c1984cb6e2948422f3" id="r_ad0d0b2732aecd4c1984cb6e2948422f3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad0d0b2732aecd4c1984cb6e2948422f3">GetEnv</a> (const std::string &amp;key)</td></tr>
 <tr class="memitem:a020049d08be3845a10f7f6657a818666" id="r_a020049d08be3845a10f7f6657a818666"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a020049d08be3845a10f7f6657a818666">SetEnv</a> (const std::string &amp;key, const std::string &amp;value)</td></tr>
 <tr class="memitem:ab3c10b4d042d9c9e871d29acb2d1f339" id="r_ab3c10b4d042d9c9e871d29acb2d1f339"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3c10b4d042d9c9e871d29acb2d1f339">UnsetEnv</a> (const std::string &amp;key)</td></tr>
-<tr class="memitem:af08062036b85b933ad003ff5fbc344bd" id="r_af08062036b85b933ad003ff5fbc344bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_yum_engine_1_1pinlist.html">pinlist</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af08062036b85b933ad003ff5fbc344bd">G_pinlist</a> ()</td></tr>
+<tr class="memitem:aac27697820deff292c045867ccc7d586" id="r_aac27697820deff292c045867ccc7d586"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac27697820deff292c045867ccc7d586">is_engine_init</a> ()</td></tr>
 <tr class="memitem:aaa1b6ecd52e97b797b2367cbc239df27" id="r_aaa1b6ecd52e97b797b2367cbc239df27"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa1b6ecd52e97b797b2367cbc239df27">operator==</a> (const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;a, const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;b)</td></tr>
+<tr class="memitem:a039028d3bd47533df36fcc4b5b4d5622" id="r_a039028d3bd47533df36fcc4b5b4d5622"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_yum_engine_1_1_y_glob.html">YGlob</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a039028d3bd47533df36fcc4b5b4d5622">G_yglob</a> ()</td></tr>
 </table>
-<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>brings a global type interface for global API-system management. </p>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
 <a id="aa597e95b4587dfebdfec0bce41b1c285" name="aa597e95b4587dfebdfec0bce41b1c285"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa597e95b4587dfebdfec0bce41b1c285">&#9670;&#160;</a></span>ManagedCallback</h2>
 
@@ -150,14 +157,14 @@ Functions</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="af08062036b85b933ad003ff5fbc344bd" name="af08062036b85b933ad003ff5fbc344bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af08062036b85b933ad003ff5fbc344bd">&#9670;&#160;</a></span>G_pinlist()</h2>
+<a id="a039028d3bd47533df36fcc4b5b4d5622" name="a039028d3bd47533df36fcc4b5b4d5622"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a039028d3bd47533df36fcc4b5b4d5622">&#9670;&#160;</a></span>G_yglob()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_yum_engine_1_1pinlist.html">pinlist</a> &amp; YumEngine::G_pinlist </td>
+          <td class="memname"><a class="el" href="class_yum_engine_1_1_y_glob.html">YGlob</a> &amp; YumEngine::G_yglob </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -186,6 +193,31 @@ Functions</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aac27697820deff292c045867ccc7d586" name="aac27697820deff292c045867ccc7d586"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac27697820deff292c045867ccc7d586">&#9670;&#160;</a></span>is_engine_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool YumEngine::is_engine_init </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
