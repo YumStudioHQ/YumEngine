@@ -54,9 +54,23 @@ namespace YumEngine {
       return oss.str();
     }
 
+    inline static std::string pretty_dumped_stacktrace ( void ) {
+      std::ostringstream oss;
+      oss << "stacktrace (most recent last)" << std::endl;
+
+      auto stacktrace = get_stacktrace();
+      std::reverse(stacktrace.begin(), stacktrace.end());
+      for (size_t i = 0; i < stacktrace.size(); i++) {
+        oss << "[" << std::dec << std::setfill('0') 
+        << std::setw(2) << i << "] " << stacktrace[i] << std::endl;
+      }
+
+      return oss.str();
+    } 
+
     inline static void dump ( void ) {
       std::stringstream ss;
-      ss << dump_yum() << "\n" << pretty_dumped_registers() << "\n";
+      ss << dump_yum() << "\n" << pretty_dumped_registers() << pretty_dumped_stacktrace() << "\n";
 
       std::string line;
 
