@@ -4,6 +4,7 @@ var class_yum_engine_1_1_lua_subsystem =
     [ "LuaSubsystem", "class_yum_engine_1_1_lua_subsystem.html#a9173530a266204d2e10c15182cdc8294", null ],
     [ "~LuaSubsystem", "class_yum_engine_1_1_lua_subsystem.html#a587e8e06d42223e9e7cff477cf11d46c", null ],
     [ "call", "class_yum_engine_1_1_lua_subsystem.html#a4219d0012ffa53c6942ab28a8ba73395", null ],
+    [ "get_pinlist", "class_yum_engine_1_1_lua_subsystem.html#a1dabdd7b0d5ce0e25ac9d83f67525961", null ],
     [ "good", "class_yum_engine_1_1_lua_subsystem.html#a8e9f955aec72f259151f527a15eab3ae", null ],
     [ "hasMethod", "class_yum_engine_1_1_lua_subsystem.html#a791a3e9e97890a903de147969b451ee8", null ],
     [ "load", "class_yum_engine_1_1_lua_subsystem.html#a4b68f1dc878b4495160339b383f96cbe", null ],

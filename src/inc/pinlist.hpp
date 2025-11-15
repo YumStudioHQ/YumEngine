@@ -43,41 +43,58 @@ namespace YumEngine {
     }
     
     inline void finalize() {
+      (*G_out()) << "yum: finalizing" << std::endl;
       YumListElement *it = top;
+      uint64_t count = 0;
+      std::vector<YumListElement*> toclean{};
 
-      while (it) {
-        auto cur = it->current;
-        if (cur && !cur->freed) {
-          cur->object->free();
-          (*G_out()) << "freeing ref<0x" << std::hex << std::setfill('0') << std::setw(16) << cur << std::endl;
-          it = it->child;
-          delete cur->object;
-          delete cur;
+      while (it != nullptr) {
+        toclean.push_back(it);
+        if (it->current) {
+          (*G_out()) << "yum: ref<" << std::hex << it->current << "> ";
+          if (it->current->freed) {
+            (*G_out()) << "already freed" << std::endl;
+          } else {
+            (*G_out()) << " not freed, freeing" << std::endl;
+            it->current->object->free();
+          }
+        } else {
+          (*G_out()) << "yum: got bad ref..." << std::endl;
         }
+
+        it = it->child;
+        count++;
       }
 
+      for (const auto &V : toclean) delete V;
       finalized = true;
+      (*G_out()) << "yum: finalized " << std::dec << count << " resources" << std::endl;
     }
 
     inline void pin(YumObjectReference *element) {
-      if (!element) { return; }
-      if (top) {
-        YumListElement *obj = new YumListElement(YumListElement{
-          .parent = top,
-          .child = nullptr,
-          .head = top,
-          .current = element,
-        });
+      if (!element) return;
 
-        top->child = obj;
-      } else {
-        top = new YumListElement(YumListElement{
-          .parent = top,
-          .child = nullptr,
-          .head = nullptr,
-          .current = element,
-        });
+      YumListElement* newNode = new YumListElement({
+        .child = nullptr,
+        .current = element
+      });
+
+      if (!top) {
+        top = newNode;
+        return;
       }
+
+      YumListElement* it = top;
+      while (it->child != nullptr) {
+        it = it->child;
+      }
+
+      it->child = newNode;
     }
+
+
   };
+
+
+  pinlist &G_pinlist();
 }

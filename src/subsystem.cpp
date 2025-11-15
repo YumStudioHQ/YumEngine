@@ -45,7 +45,7 @@ namespace YumEngine {
     lua = p;
   }
 
-  LuaSubsystem::~LuaSubsystem() {/* Destructor doesn't have to do anything — LuaCxx will handle that! */}
+  LuaSubsystem::~LuaSubsystem() { pinlist_.finalize(); }
 
   void LuaSubsystem::pushOnLuaStack(const Variant &v) {
     switch (v.get_kind()) {
@@ -143,8 +143,8 @@ namespace YumEngine {
       new std::function<Vector(Vector)>(cb),
       [name](std::function<Vector(Vector)>* p) {
         std::cout << "yum: G_sys: resource destroyed for callback: "
-                  << name << "(0x" << std::hex << std::setw(16)
-                  << std::setfill('0') << p << ")" << std::endl;
+                  << name << "(0x" << std::hex
+                  << p << std::setfill('0') << ")" << std::endl;
         delete p;
       }
     );
@@ -154,8 +154,8 @@ namespace YumEngine {
 
     (*G_out()) << "yum: G_sys: callback pushed: "
                << (ns.empty() ? name : ns + "." + name)
-               << "(0x" << std::hex << std::setw(16)
-               << std::setfill('0') << cb_shared.get() << ")" << std::endl;
+               << "(0x" << std::hex << cb_shared.get()
+               << std::setfill('0') << ")" << std::endl;
 
     lua_State* L = lua->get();
 
@@ -256,7 +256,7 @@ namespace YumEngine {
     uid_base_ = (uint64_t)(std::chrono::steady_clock::now().time_since_epoch().count() / 0x1000);
   }
 
-  Subsystem::~Subsystem() {}
+  Subsystem::~Subsystem() { }
 
   uint64_t Subsystem::newState(bool lstdlibs) {
     uint64_t uid = uid_new();
@@ -333,7 +333,7 @@ extern "C" {
       auto lua = subsystem->get(uid);
       YumEngine::Vector v = lua->call(std::string(name), *args);
       auto ptr = new YumEngine::Vector(std::move(v));
-      auto list = subsystem->get_pinlist();
+      auto list = lua->get_pinlist();
       list->pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
         .object = ptr,
         .freed = false
@@ -398,7 +398,13 @@ extern "C" {
       if (!s->isValidUID(uid)) return YUM_ERROR;
 
       return (*(*s).get(uid)).hasMethod(path);
-    }
+  }
+
+  YUM_OUTATR void YumCloseAPI() {
+    (*G_out()) << "yum: G_sys: closing YumEngine API" << std::endl;
+    YumEngine::G_pinlist().finalize();
+    (*G_out()) << "yum: bye." << std::endl;
+  }
 }
 
 #pragma endregion
