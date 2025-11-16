@@ -3,6 +3,7 @@ var dir_6bc6ad22483805bbbda55258ad2a62ea =
     [ "asm", "dir_28171ffb8eff5d9c8f4ce85d349bbf03.html", "dir_28171ffb8eff5d9c8f4ce85d349bbf03" ],
     [ "format", "dir_15b4ecd666a28a0368f63a1660801f5e.html", "dir_15b4ecd666a28a0368f63a1660801f5e" ],
     [ "engine_version.h", "engine__version_8h.html", "engine__version_8h" ],
+    [ "exceptions.hpp", "exceptions_8hpp.html", null ],
     [ "glob.hpp", "glob_8hpp.html", "glob_8hpp" ],
     [ "lua_yumtable.hpp", "lua__yumtable_8hpp.html", "lua__yumtable_8hpp" ],
     [ "luacpp.hpp", "luacpp_8hpp.html", "luacpp_8hpp" ],

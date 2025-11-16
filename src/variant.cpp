@@ -15,6 +15,7 @@
 #include "inc/yumsys.hpp"
 #include "inc/yumdec.h"
 #include "inc/glob.hpp"
+#include "inc/exceptions.hpp"
 
 #include <format>
 #include <string>
@@ -115,11 +116,11 @@ YUM_OUTATR int64_t YumVariant_asInt(const YumVariant *var) {
     return var ? var->as_int() : 0;
   } catch (const std::exception &e) {
     (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
-    return 0;
   } catch (...) {
     (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
-    return 0;
   }
+  YUM_AFTER_THROW();
+  return 0;
 }
 
 YUM_OUTATR double YumVariant_asFloat(const YumVariant *var) {
@@ -127,11 +128,11 @@ YUM_OUTATR double YumVariant_asFloat(const YumVariant *var) {
     return var ? var->as_float() : 0.0;
   } catch (const std::exception &e) {
     (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
-    return 0.0;
   } catch (...) {
     (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
-    return 0.0;
   }
+  YUM_AFTER_THROW();
+  return 0.0;
 }
 
 YUM_OUTATR int32_t YumVariant_asBool(const YumVariant *var) {
@@ -139,11 +140,11 @@ YUM_OUTATR int32_t YumVariant_asBool(const YumVariant *var) {
     return var ? static_cast<int32_t>(var->as_bool()) : 0;
   } catch (const std::exception &e) {
     (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
-    return 0;
   } catch (...) {
     (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
-    return 0;
   }
+  YUM_AFTER_THROW();
+  return 0;
 }
 
 YUM_OUTATR const char *YumVariant_asString(const YumVariant *var) {
@@ -154,11 +155,11 @@ YUM_OUTATR const char *YumVariant_asString(const YumVariant *var) {
     return temp.c_str();
   } catch (const std::exception &e) {
     (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
-    return "";
   } catch (...) {
     (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
-    return "";
   }
+  YUM_AFTER_THROW();
+  return "";
 }
 
 YUM_OUTATR YumBinaryBlob YumVariant_asBinary(const YumVariant *var) {
@@ -166,11 +167,11 @@ YUM_OUTATR YumBinaryBlob YumVariant_asBinary(const YumVariant *var) {
     return var ? var->as_binary() : YumBinaryBlob{.start = nullptr, .size = 0};
   } catch (const std::exception &e) {
     (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
-    return YumBinaryBlob {.start = nullptr, .size = 0};
   } catch (...) {
     (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
-    return YumBinaryBlob {.start = nullptr, .size = 0};
   }
+  YUM_AFTER_THROW();
+  return YumBinaryBlob {.start = nullptr, .size = 0};
 }
 
 YUM_OUTATR YumUID YumVariant_asUID(const YumVariant *var) {
@@ -178,11 +179,11 @@ YUM_OUTATR YumUID YumVariant_asUID(const YumVariant *var) {
     return var ? var->as_uid() : YumUID{.bytes=0};
   } catch (const std::exception &e) {
     (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
-    return YumUID{.bytes=0};
   } catch (...) {
     (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
-    return YumUID{.bytes=0};
   }
+  YUM_AFTER_THROW();
+  return YumUID{.bytes=0};
 }
 
 YUM_OUTATR YumCTable *YumVariant_asTable(const YumVariant *var) {
@@ -190,11 +191,11 @@ YUM_OUTATR YumCTable *YumVariant_asTable(const YumVariant *var) {
     return var ? var->as_table().get() : nullptr;
   } catch (const std::exception &e) {
     (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;
-    return nullptr;
   } catch (...) {
     (*G_err()) << std::format("yum: G_sys: err: unknown exception caught") << std::endl;
-    return nullptr;
   }
+  YUM_AFTER_THROW();
+  return nullptr;
 }
 
 // Type checks
