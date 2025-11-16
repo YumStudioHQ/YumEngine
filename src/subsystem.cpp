@@ -8,6 +8,7 @@
  *                         MONOE.                        *
  *                                                       *
  *********************************************************/
+
 #include <format>
 #include <chrono>
 #include <memory>
@@ -27,6 +28,7 @@
 #include "inc/yumdec.h"
 #include "inc/pinlist.hpp"
 #include "inc/yumsys.hpp"
+#include "inc/exceptions.hpp"
 
 static inline std::vector<std::string> splitDot(const std::string& path) {
   std::vector<std::string> parts;
@@ -351,7 +353,7 @@ extern "C" {
     } catch (...) {
       (*G_err()) << "yum: G_sys: err: unknown exception caught" << std::endl;
     }
-
+    YUM_AFTER_THROW();
     return nullptr;
   }
 

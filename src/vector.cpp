@@ -18,6 +18,7 @@
 #include "inc/variant.hpp"
 #include "inc/vector.hpp"
 #include "inc/yumdec.h"
+#include "inc/exceptions.hpp"
 
 namespace YumEngine {
   Vector::Vector() : internal() {}
@@ -80,6 +81,7 @@ YUM_OUTATR const YumVariant *YumVector_at_const(const YumVector *vec, int64_t in
   try {
     return &vec->at(index);
   } catch (...) {
+    YUM_AFTER_THROW();
     return nullptr;
   }
 }
