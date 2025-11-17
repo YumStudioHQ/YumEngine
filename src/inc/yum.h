@@ -11,18 +11,17 @@
 
 /**
  * @file yum.hpp
- * @brief Includes all headers for the YumEngine C++ API.
+ * @brief Includes all headers for the YumEngine C API.
  */
 
-#pragma once
+#ifndef ___YUM_H___
+#define ___YUM_H___
 
-#include "yumdec.h"
-#include "glob.hpp"
-#include "luacpp.hpp"
-#include "vector.hpp"
-#include "yumsys.hpp"
-#include "variant.hpp"
-#include "yumtable.hpp"
-#include "yumobject.hpp"
-#include "subsystem.hpp"
-#include "engine_version.h"
+#include "variant.h"
+#include "vector.h"
+#include "yumtable.h"
+#include "subsystem.h"
+
+void YumEngine_init(void);
+
+#endif // ! ___YUM_H___

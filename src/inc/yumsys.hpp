@@ -126,3 +126,6 @@ namespace YumEngine {
   YGlob &G_yglob();
   extern bool is_engine_init();
 }
+
+/* C function */
+void YumEngine_init(void);
