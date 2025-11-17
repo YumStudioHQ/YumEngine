@@ -1,9 +1,5 @@
 var namespace_yum_engine =
 [
-    [ "Actors", "namespace_yum_engine_1_1_actors.html", [
-      [ "EnsureEnvActor", "namespace_yum_engine_1_1_actors.html#a34864e7dd629751b2df943ca52bf0bb1", null ],
-      [ "GetEnvActor", "namespace_yum_engine_1_1_actors.html#aee6369b0783c9792807febe083c9ef2d", null ]
-    ] ],
     [ "string_formats", "namespace_yum_engine_1_1string__formats.html", [
       [ "crash_header", "namespace_yum_engine_1_1string__formats.html#a44351b96c8ba5cbe853c682bd2c966bf", null ]
     ] ],
@@ -15,7 +11,6 @@ var namespace_yum_engine =
       [ "set_field", "namespace_yum_engine_1_1utils.html#a703a35b89af8b947dff0b9617995ac56", null ],
       [ "set_table", "namespace_yum_engine_1_1utils.html#aaa82bb3e2a9fe6a739ea334f0d8da07c", null ]
     ] ],
-    [ "SubProcessBase", "class_yum_engine_1_1_sub_process_base.html", "class_yum_engine_1_1_sub_process_base" ],
     [ "LuaCxx", "class_yum_engine_1_1_lua_cxx.html", "class_yum_engine_1_1_lua_cxx" ],
     [ "pinlist", "class_yum_engine_1_1pinlist.html", "class_yum_engine_1_1pinlist" ],
     [ "LuaSubsystem", "class_yum_engine_1_1_lua_subsystem.html", "class_yum_engine_1_1_lua_subsystem" ],
@@ -31,9 +26,6 @@ var namespace_yum_engine =
     [ "dump_registers", "namespace_yum_engine.html#a2a0cb1dc9f8637e691caef41e13d0f73", null ],
     [ "dump_yum", "namespace_yum_engine.html#a5d816fb094b95c6b0ec973f02df1b249", null ],
     [ "G_yglob", "namespace_yum_engine.html#a039028d3bd47533df36fcc4b5b4d5622", null ],
-    [ "GetEnv", "namespace_yum_engine.html#ad0d0b2732aecd4c1984cb6e2948422f3", null ],
     [ "is_engine_init", "namespace_yum_engine.html#aac27697820deff292c045867ccc7d586", null ],
-    [ "operator==", "namespace_yum_engine.html#aaa1b6ecd52e97b797b2367cbc239df27", null ],
-    [ "SetEnv", "namespace_yum_engine.html#a020049d08be3845a10f7f6657a818666", null ],
-    [ "UnsetEnv", "namespace_yum_engine.html#ab3c10b4d042d9c9e871d29acb2d1f339", null ]
+    [ "operator==", "namespace_yum_engine.html#aaa1b6ecd52e97b797b2367cbc239df27", null ]
 ];

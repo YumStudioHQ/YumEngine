@@ -11,6 +11,5 @@ var searchData=
   ['is_5ftable_8',['is_table',['../class_yum_engine_1_1_variant.html#ad6ceaed66a5c89e151775647e9be5740',1,'YumEngine::Variant']]],
   ['is_5fuid_9',['is_uid',['../class_yum_engine_1_1_variant.html#a32156070cdd0eaa5883926efe4e384da',1,'YumEngine::Variant']]],
   ['isfreed_10',['isfreed',['../class_yum_engine_1_1_yum_object.html#aeb69033607b6e81699cfba65b87e4fff',1,'YumEngine::YumObject']]],
-  ['isrunning_11',['isRunning',['../class_yum_engine_1_1_sub_process_base.html#ac7cce038f2be5e4b9882e16dfaa6d0f4',1,'YumEngine::SubProcessBase']]],
-  ['isvaliduid_12',['isValidUID',['../class_yum_engine_1_1_subsystem.html#ab419e6009481687068aef1718ff50f27',1,'YumEngine::Subsystem']]]
+  ['isvaliduid_11',['isValidUID',['../class_yum_engine_1_1_subsystem.html#ab419e6009481687068aef1718ff50f27',1,'YumEngine::Subsystem']]]
 ];

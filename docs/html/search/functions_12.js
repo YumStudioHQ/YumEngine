@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['values_0',['values',['../class_yum_engine_1_1_yum_table.html#a02761097bd3fb5f56ac34888448af4a2',1,'YumEngine::YumTable']]],
-  ['variant_1',['Variant',['../class_yum_engine_1_1_variant.html#a89543f3b189c03b5b97bdbef72e9d924',1,'YumEngine::Variant::Variant()'],['../class_yum_engine_1_1_variant.html#af33c52e31b8f07d1cd48deb085dbfc77',1,'YumEngine::Variant::Variant(int64_t i)'],['../class_yum_engine_1_1_variant.html#aa03503223b9609abc812ebf2eed1bcb7',1,'YumEngine::Variant::Variant(double d)'],['../class_yum_engine_1_1_variant.html#ad7c93350915ca144c4943bfdf28c3a37',1,'YumEngine::Variant::Variant(const std::string &amp;s)'],['../class_yum_engine_1_1_variant.html#a570556fdaba8bd187722f795ae130640',1,'YumEngine::Variant::Variant(bool b)'],['../class_yum_engine_1_1_variant.html#a53bfe1d60572ed1b0637bd6596c0d02c',1,'YumEngine::Variant::Variant(const YumBinaryBlob &amp;b)'],['../class_yum_engine_1_1_variant.html#a2b5cb12e5cc1157cb95a0a3b753ab56f',1,'YumEngine::Variant::Variant(const Table &amp;t)'],['../class_yum_engine_1_1_variant.html#abb8e3eee1526c7f7a3a67ac3a201948b',1,'YumEngine::Variant::Variant(const YumUID &amp;uid)'],['../class_yum_engine_1_1_variant.html#aad2a075177658a901cbc27d9eceddb06',1,'YumEngine::Variant::Variant(const Variant &amp;other)'],['../class_yum_engine_1_1_variant.html#aa4db3412306c454daedbd02771fed364',1,'YumEngine::Variant::Variant(Variant &amp;&amp;other) noexcept']]],
-  ['vector_2',['Vector',['../class_yum_engine_1_1_vector.html#ab8782d180cc11322f081232d1e57f6f4',1,'YumEngine::Vector']]]
+  ['_7eluacxx_0',['~LuaCxx',['../class_yum_engine_1_1_lua_cxx.html#aa44c22897843b75420fd7eaa219130c1',1,'YumEngine::LuaCxx']]],
+  ['_7eluasubsystem_1',['~LuaSubsystem',['../class_yum_engine_1_1_lua_subsystem.html#a587e8e06d42223e9e7cff477cf11d46c',1,'YumEngine::LuaSubsystem']]],
+  ['_7epinlist_2',['~pinlist',['../class_yum_engine_1_1pinlist.html#a9b86f6334adf1c2f204dc5e5daa3c1c2',1,'YumEngine::pinlist']]],
+  ['_7esubsystem_3',['~Subsystem',['../class_yum_engine_1_1_subsystem.html#af4162482b01c33e5f61f6dc0794784f6',1,'YumEngine::Subsystem']]],
+  ['_7evector_4',['~Vector',['../class_yum_engine_1_1_vector.html#a1e597fe20336ad35faed32dec755bc28',1,'YumEngine::Vector']]]
 ];

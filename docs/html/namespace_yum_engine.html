@@ -97,13 +97,11 @@ $(function(){initNavTree('namespace_yum_engine.html','',''); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:Actors" id="r_Actors"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_yum_engine_1_1_actors.html">Actors</a></td></tr>
 <tr class="memitem:string_5Fformats" id="r_string_5Fformats"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_yum_engine_1_1string__formats.html">string_formats</a></td></tr>
 <tr class="memitem:utils" id="r_utils"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_yum_engine_1_1utils.html">utils</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:SubProcessBase" id="r_SubProcessBase"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1_sub_process_base.html">SubProcessBase</a></td></tr>
 <tr class="memitem:LuaCxx" id="r_LuaCxx"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1_lua_cxx.html">LuaCxx</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds a <span class="tt">lua_State*</span>, and frees it when destroyed.  <a href="class_yum_engine_1_1_lua_cxx.html#details">More...</a><br /></td></tr>
 <tr class="memitem:pinlist" id="r_pinlist"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1pinlist.html">pinlist</a></td></tr>
@@ -130,9 +128,6 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad0d0b2732aecd4c1984cb6e2948422f3" id="r_ad0d0b2732aecd4c1984cb6e2948422f3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad0d0b2732aecd4c1984cb6e2948422f3">GetEnv</a> (const std::string &amp;key)</td></tr>
-<tr class="memitem:a020049d08be3845a10f7f6657a818666" id="r_a020049d08be3845a10f7f6657a818666"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a020049d08be3845a10f7f6657a818666">SetEnv</a> (const std::string &amp;key, const std::string &amp;value)</td></tr>
-<tr class="memitem:ab3c10b4d042d9c9e871d29acb2d1f339" id="r_ab3c10b4d042d9c9e871d29acb2d1f339"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3c10b4d042d9c9e871d29acb2d1f339">UnsetEnv</a> (const std::string &amp;key)</td></tr>
 <tr class="memitem:a2a0cb1dc9f8637e691caef41e13d0f73" id="r_a2a0cb1dc9f8637e691caef41e13d0f73"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2a0cb1dc9f8637e691caef41e13d0f73">dump_registers</a> ()</td></tr>
 <tr class="memitem:aac27697820deff292c045867ccc7d586" id="r_aac27697820deff292c045867ccc7d586"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac27697820deff292c045867ccc7d586">is_engine_init</a> ()</td></tr>
 <tr class="memitem:aaa1b6ecd52e97b797b2367cbc239df27" id="r_aaa1b6ecd52e97b797b2367cbc239df27"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa1b6ecd52e97b797b2367cbc239df27">operator==</a> (const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;a, const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;b)</td></tr>
@@ -227,31 +222,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad0d0b2732aecd4c1984cb6e2948422f3" name="ad0d0b2732aecd4c1984cb6e2948422f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad0d0b2732aecd4c1984cb6e2948422f3">&#9670;&#160;</a></span>GetEnv()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string YumEngine::GetEnv </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="aac27697820deff292c045867ccc7d586" name="aac27697820deff292c045867ccc7d586"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aac27697820deff292c045867ccc7d586">&#9670;&#160;</a></span>is_engine_init()</h2>
 
@@ -295,60 +265,6 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a020049d08be3845a10f7f6657a818666" name="a020049d08be3845a10f7f6657a818666"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a020049d08be3845a10f7f6657a818666">&#9670;&#160;</a></span>SetEnv()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void YumEngine::SetEnv </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab3c10b4d042d9c9e871d29acb2d1f339" name="ab3c10b4d042d9c9e871d29acb2d1f339"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3c10b4d042d9c9e871d29acb2d1f339">&#9670;&#160;</a></span>UnsetEnv()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void YumEngine::UnsetEnv </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
-          <td></td>
         </tr>
       </table>
   </td>

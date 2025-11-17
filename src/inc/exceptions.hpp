@@ -41,7 +41,9 @@
 #  endif
 # else
 #  define YUM_TRIES_THIS(C) try { C; } catch (...) { throw; }
-#  define YUM_AFTER_THROW() auto YUM__current_ex = std::current_exception(); if (YUM__current_ex) std::rethrow_exception(YUM__current_ex); else throw;
+#  define YUM_AFTER_THROW() auto YUM__current_ex = std::current_exception(); \
+          if (YUM__current_ex) std::rethrow_exception(YUM__current_ex); \
+          else throw std::runtime_error("<exception> (unknown)\tThis binary was compiled with YUM_NEVER_SWALLOWS_INNER_ERRORS = 1 ; Cannot get previous exception");
 # endif
 #else
 # define YUM_TRIES_THIS(C) YUM_TRIES_PRECISELY ( C )
