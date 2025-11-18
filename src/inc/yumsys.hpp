@@ -127,5 +127,7 @@ namespace YumEngine {
   extern bool is_engine_init();
 }
 
-/* C function */
-void YumEngine_init(void);
+extern "C" {
+  /* C function */
+  void YumEngine_init(void);
+}
