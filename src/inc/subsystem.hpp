@@ -188,6 +188,8 @@ namespace YumEngine {
    * - Providing access to existing LuaSubsystems.
    *
    * Uses `std::shared_ptr` for automatic memory management and safe sharing.
+   * 
+   * @warning YumEngine v2.2.x marked Subsystem as non-thread-safe.
    */
   class Subsystem {
   private:

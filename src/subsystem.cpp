@@ -217,14 +217,7 @@ namespace YumEngine {
   bool LuaSubsystem::hasMethod(const std::string &path) {
     if (path.empty()) return false;
 
-    std::istringstream iss(path);
-    std::string token;
-    std::vector<std::string> parts;
-
-    while (std::getline(iss, token, '.')) {
-      if (!token.empty())
-        parts.push_back(token);
-    }
+    std::vector<std::string> parts = splitDot(path);
 
     if (parts.empty())
       return false;
