@@ -155,13 +155,19 @@ namespace YumEngine {
     }
 
     /**
-     * @brief iterates all elements of the table by giving to the given callback the key and its value.
+     * @brief Iterates all elements of the table by giving to the given callback the key and its value.
      */
     inline void foreach(const std::function<void(const Variant&, const Variant&)> &fun) const {
       for(const auto &[K, V] : map) {
         fun(K, V);
       }
     }
+
+    /**
+     * @brief Returns the size of the current map. Refer to this when iterating.
+     * @return The count of elements in the current table.
+     */
+    inline uint64_t size() const { return map.size(); }
 
     /** @} */
   };

@@ -35,7 +35,13 @@ extern "C" {
   YUM_OUTATR YumVariant *YumCTable_at(const YumCTable *table, const YumVariant *key) {
     if (table && table->has_key(*key)) {
       auto val = table->at(*key);
-      return new YumVariant(std::move(val));//WAIT.
+      auto ptr = new YumVariant(std::move(val));
+      YumEngine::G_yglob().get().pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
+        .object = ptr,
+        .freed = false,
+      }));
+
+      return ptr;
     }
     return nullptr;
   }
@@ -47,7 +53,12 @@ extern "C" {
 
   YUM_OUTATR YumVector *YumCTable_keys(const YumCTable *table) {
     if (table) {
-      return new YumEngine::Vector(std::move(table->keys()));
+      auto ptr = new YumEngine::Vector(std::move(table->keys()));
+      YumEngine::G_yglob().get().pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
+        .object = ptr,
+        .freed = false,
+      }));
+      return ptr;
     }
 
     return nullptr;
@@ -55,9 +66,28 @@ extern "C" {
 
   YUM_OUTATR YumVector *YumCTable_values(const YumCTable *table) {
     if (table) {
-      return new YumEngine::Vector(std::move(table->values()));
+      auto ptr = new YumEngine::Vector(std::move(table->values()));
+      YumEngine::G_yglob().get().pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
+        .object = ptr,
+        .freed = false,
+      }));
+      return ptr;
     }
 
     return nullptr;
+  }
+
+  YUM_OUTATR void YumCTable_set(YumCTable *table, const YumVariant *key, const YumVariant *value) {
+    if (table && key && value) {
+      (*table).set((*key), (*value));
+    }
+  }
+
+  YUM_OUTATR uint64_t YumCTable_size(const YumCTable *table) {
+    if (table) {
+      return table->size();
+    }
+
+    return 0;
   }
 }
