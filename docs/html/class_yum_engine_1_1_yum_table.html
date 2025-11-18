@@ -120,7 +120,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae3feec674d283ddd92f79ad050ffa9cf" id="r_ae3feec674d283ddd92f79ad050ffa9cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3feec674d283ddd92f79ad050ffa9cf">set</a> (const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;key, const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;value)</td></tr>
 <tr class="memdesc:ae3feec674d283ddd92f79ad050ffa9cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets @key to @value.  <br /></td></tr>
 <tr class="memitem:ab01a1588523a589ac110adb2b1d7e6ea" id="r_ab01a1588523a589ac110adb2b1d7e6ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab01a1588523a589ac110adb2b1d7e6ea">foreach</a> (const std::function&lt; void(const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;, const <a class="el" href="class_yum_engine_1_1_variant.html">Variant</a> &amp;)&gt; &amp;fun) const</td></tr>
-<tr class="memdesc:ab01a1588523a589ac110adb2b1d7e6ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">iterates all elements of the table by giving to the given callback the key and its value.  <br /></td></tr>
+<tr class="memdesc:ab01a1588523a589ac110adb2b1d7e6ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterates all elements of the table by giving to the given callback the key and its value.  <br /></td></tr>
+<tr class="memitem:a99333fbb969f3a58ffac0da38dcf52a2" id="r_a99333fbb969f3a58ffac0da38dcf52a2"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99333fbb969f3a58ffac0da38dcf52a2">size</a> () const</td></tr>
+<tr class="memdesc:a99333fbb969f3a58ffac0da38dcf52a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the size of the current map. Refer to this when iterating.  <br /></td></tr>
 <tr class="inherit_header pub_methods_class_yum_engine_1_1_yum_object"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_yum_engine_1_1_yum_object')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="class_yum_engine_1_1_yum_object.html">YumEngine::YumObject</a></td></tr>
 <tr class="memitem:aeb69033607b6e81699cfba65b87e4fff inherit pub_methods_class_yum_engine_1_1_yum_object" id="r_aeb69033607b6e81699cfba65b87e4fff"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1_yum_object.html#aeb69033607b6e81699cfba65b87e4fff">isfreed</a> () const</td></tr>
 <tr class="memitem:a2909e091cf408a02678e902debe6e7e3 inherit pub_methods_class_yum_engine_1_1_yum_object" id="r_a2909e091cf408a02678e902debe6e7e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_yum_engine_1_1_yum_object.html#a2909e091cf408a02678e902debe6e7e3">free</a> () const</td></tr>
@@ -235,7 +237,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>iterates all elements of the table by giving to the given callback the key and its value. </p>
+<p>Iterates all elements of the table by giving to the given callback the key and its value. </p>
 
 </div>
 </div>
@@ -336,6 +338,34 @@ Protected Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a99333fbb969f3a58ffac0da38dcf52a2" name="a99333fbb969f3a58ffac0da38dcf52a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99333fbb969f3a58ffac0da38dcf52a2">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t YumEngine::YumTable::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the size of the current map. Refer to this when iterating. </p>
+<dl class="section return"><dt>Returns</dt><dd>The count of elements in the current table. </dd></dl>
 
 </div>
 </div>
