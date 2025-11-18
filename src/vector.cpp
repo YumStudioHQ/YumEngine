@@ -38,11 +38,11 @@ namespace YumEngine {
 extern "C" {
 
 YUM_OUTATR YumVector *YumVector_new(void) {
-auto vec = new YumVector();
-YumEngine::G_yglob().get().pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
-  .object = vec,
-  .freed = false,
-}));
+  auto vec = new YumVector();
+  YumEngine::G_yglob().get().pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
+    .object = vec,
+    .freed = false,
+  }));
   return vec;
 }
 
