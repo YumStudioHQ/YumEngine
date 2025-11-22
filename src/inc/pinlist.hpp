@@ -58,8 +58,11 @@ namespace YumEngine {
           if (it->current->freed) {
             (*G_out()) << "already freed" << std::endl;
           } else {
-            (*G_out()) << " not freed, freeing" << std::endl;
-            it->current->object->free();
+            (*G_out()) << " not freed, freeing: " << std::flush;
+            if (it->current->object) {
+              it->current->object->free();
+              (*G_out()) << "ok" << std::endl;
+            } else (*G_out()) << "fail: it->current->object is null (skipping)" << std::endl;
           }
         } else {
           (*G_out()) << "yum: got bad ref..." << std::endl;
