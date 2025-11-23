@@ -43,8 +43,7 @@ namespace YumEngine {
 
   struct YumPinnable {
     YumObject *object;
-    YumPinnable *child;
-    YumPinnable *org; // This one points to the first element.
+    YumPinnable *org;
     mutable bool object_freed = false;
   };
 }

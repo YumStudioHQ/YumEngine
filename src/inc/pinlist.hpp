@@ -1,4 +1,4 @@
-/* gc.hpp */
+/* pinlist.hpp */
 
 /*********************************************************
  *                                                       *
@@ -37,9 +37,10 @@ namespace YumEngine {
     bool finalized = false;
 
   public:
-    inline pinlist() {
-      // if (!is_engine_init()) 
-      //   throw std::runtime_error("New object of type " + std::string(typeid(this).name()) + " when the engine isn't initialized!");
+    inline pinlist(bool isglob = false) {
+      if (isglob) return;
+      if (!is_engine_init())
+        throw std::runtime_error("New object of type " + std::string(typeid(this).name()) + " when the engine isn't initialized!");
     }
 
     inline ~pinlist() {

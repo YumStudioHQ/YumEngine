@@ -34,7 +34,7 @@ namespace YumEngine {
   private:
     bool api_freed = false;
     bool init_;
-    pinlist pinner;
+    pinlist pinner = pinlist (true);
 
     inline static std::string pretty_dumped_registers ( void ) {
       std::stringstream ss ( dump_registers() );
