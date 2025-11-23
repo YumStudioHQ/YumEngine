@@ -146,8 +146,8 @@ namespace YumEngine {
       new std::function<Vector(Vector)>(cb),
       [name](std::function<Vector(Vector)>* p) {
         std::cout << "yum: G_sys: resource destroyed for callback: "
-                  << name << "(0x" << std::hex
-                  << p << std::setfill('0') << ")" << std::endl;
+                  << name << "(" << std::hex
+                  << p << std::setfill('0') << std::setw(16) << ")" << std::endl;
         delete p;
       }
     );
@@ -330,10 +330,8 @@ extern "C" {
       YumEngine::Vector v = lua->call(std::string(name), *args);
       auto ptr = new YumEngine::Vector(std::move(v));
       auto list = lua->get_pinlist();
-      list->pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
-        .object = ptr,
-        .freed = false
-      }));
+      list->pin(ptr);
+
       return ptr;
     } catch (const std::bad_function_call &e) {
       (*G_err()) << std::format("yum: G_sys: err: '{}' exception caught\nyum: G_sys: err: {}", typeid(e).name(), e.what()) << std::endl;

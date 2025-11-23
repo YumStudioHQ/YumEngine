@@ -33,11 +33,15 @@ namespace YumEngine {
 
   class pinlist {
   private:
-    YumListElement *top = nullptr;
+    YumPinnable *pintab = nullptr;
     bool finalized = false;
 
   public:
-    inline pinlist() {}
+    inline pinlist() {
+      // if (!is_engine_init()) 
+      //   throw std::runtime_error("New object of type " + std::string(typeid(this).name()) + " when the engine isn't initialized!");
+    }
+
     inline ~pinlist() {
       if (!finalized) {
         (*G_err()) << "yum: warning: one pinlist instance is being destroyed while not being finalized, finalizing" << std::endl;
@@ -47,56 +51,60 @@ namespace YumEngine {
     
     inline void finalize() {
       (*G_out()) << "yum: finalizing" << std::endl;
-      YumListElement *it = top;
       uint64_t count = 0;
-      std::vector<YumListElement*> toclean{};
+      
+      if (pintab) {
+        YumPinnable *it = pintab->org;
 
-      while (it != nullptr) {
-        toclean.push_back(it);
-        if (it->current) {
-          (*G_out()) << "yum: ref<" << std::hex << it->current << "> ";
-          if (it->current->freed) {
-            (*G_out()) << "already freed" << std::endl;
-          } else {
-            (*G_out()) << " not freed, freeing: " << std::flush;
-            if (it->current->object) {
-              it->current->object->free();
+        while (it) {
+          if (it->object) {
+            (*G_out()) << "yum: ref<" << std::hex << it->object << std::setfill('0') << std::setw(16) << "> " << std::flush;
+            if (it->object_freed) {
+              (*G_out()) << "already freed" << std::endl;
+            } else {
+              (*G_out()) << "not freed, freeing: " << std::flush;
+              it->object->free();
+              delete it->object;
               (*G_out()) << "ok" << std::endl;
-            } else (*G_out()) << "fail: it->current->object is null (skipping)" << std::endl;
-          }
-        } else {
-          (*G_out()) << "yum: got bad ref..." << std::endl;
+              it->object_freed = true;
+            }
+            count++;
+          } else (*G_out()) << "yum: one element skipped" << std::endl;
+
+          it = it->org;
         }
 
-        it = it->child;
-        count++;
+        while (pintab) {
+          YumPinnable* next = pintab->org;
+          delete pintab;
+          pintab = next;
+        }
+      } else {
+        (*G_out()) << "yum: nothing to clean" << std::endl;
       }
 
-      for (const auto &V : toclean) delete V;
       finalized = true;
       (*G_out()) << "yum: finalized " << std::dec << count << " resources" << std::endl;
     }
 
-    inline void pin(YumObjectReference *element) {
-      if (!is_engine_init()) throw std::runtime_error("pinned element while using un-initialized engine");
+    inline void pin(YumObject *element) {
       if (!element) return;
 
-      YumListElement* newNode = new YumListElement({
-        .child = nullptr,
-        .current = element
-      });
+      if (!pintab) {
+        pintab = new YumPinnable(YumPinnable {
+          .object = element,
+          .org = nullptr
+        });
+        element->set_pin(pintab);
+      } else {
+        auto node = new YumPinnable(YumPinnable {
+          .object = element,
+          .org = pintab
+        });
 
-      if (!top) {
-        top = newNode;
-        return;
+        pintab = node;
+        element->set_pin(node);
       }
-
-      YumListElement* it = top;
-      while (it->child != nullptr) {
-        it = it->child;
-      }
-
-      it->child = newNode;
     }
   };
 }

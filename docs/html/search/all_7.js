@@ -10,9 +10,10 @@ var searchData=
   ['gcc_2dx86_2ehpp_7',['gcc-x86.hpp',['../gcc-x86_8hpp.html',1,'']]],
   ['get_8',['get',['../class_yum_engine_1_1_lua_cxx.html#aaec9632bd6518cb4ed5c38b269bdbba5',1,'YumEngine::LuaCxx::get()'],['../class_yum_engine_1_1_subsystem.html#a66e8a79271e32c299e00329735a29fe0',1,'YumEngine::Subsystem::get()'],['../class_yum_engine_1_1_y_glob.html#a462de28f53714621bae4761b81dcc798',1,'YumEngine::YGlob::get()']]],
   ['get_5fkind_9',['get_kind',['../class_yum_engine_1_1_variant.html#a36f0ecdb37e9468bbd0bc71ff8b40f92',1,'YumEngine::Variant']]],
-  ['get_5fpinlist_10',['get_pinlist',['../class_yum_engine_1_1_lua_subsystem.html#a1dabdd7b0d5ce0e25ac9d83f67525961',1,'YumEngine::LuaSubsystem']]],
-  ['get_5fstacktrace_11',['get_stacktrace',['../dumper_8hpp.html#a8059b4519f66c045d586214af4452130',1,'dumper.hpp']]],
-  ['get_5ftable_12',['get_table',['../namespace_yum_engine_1_1utils.html#acd80c401575a7c7a18d982dba3565460',1,'YumEngine::utils']]],
-  ['glob_2ehpp_13',['glob.hpp',['../glob_8hpp.html',1,'']]],
-  ['good_14',['good',['../class_yum_engine_1_1_lua_subsystem.html#a8e9f955aec72f259151f527a15eab3ae',1,'YumEngine::LuaSubsystem']]]
+  ['get_5fpin_10',['get_pin',['../class_yum_engine_1_1_yum_object.html#a4594a3605c487dc07cf43588d8ab78ef',1,'YumEngine::YumObject']]],
+  ['get_5fpinlist_11',['get_pinlist',['../class_yum_engine_1_1_lua_subsystem.html#a1dabdd7b0d5ce0e25ac9d83f67525961',1,'YumEngine::LuaSubsystem']]],
+  ['get_5fstacktrace_12',['get_stacktrace',['../dumper_8hpp.html#a8059b4519f66c045d586214af4452130',1,'dumper.hpp']]],
+  ['get_5ftable_13',['get_table',['../namespace_yum_engine_1_1utils.html#acd80c401575a7c7a18d982dba3565460',1,'YumEngine::utils']]],
+  ['glob_2ehpp_14',['glob.hpp',['../glob_8hpp.html',1,'']]],
+  ['good_15',['good',['../class_yum_engine_1_1_lua_subsystem.html#a8e9f955aec72f259151f527a15eab3ae',1,'YumEngine::LuaSubsystem']]]
 ];

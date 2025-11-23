@@ -39,15 +39,14 @@ extern "C" {
 
 YUM_OUTATR YumVector *YumVector_new(void) {
   auto vec = new YumVector();
-  YumEngine::G_yglob().get().pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
-    .object = vec,
-    .freed = false,
-  }));
+
+  YumEngine::G_yglob().get().pin(vec);
   return vec;
 }
 
 YUM_OUTATR void YumVector_delete(YumVector *vec) {
   vec->free();
+  if (vec->get_pin()) vec->get_pin()->object_freed = true;
   delete vec;
 }
 

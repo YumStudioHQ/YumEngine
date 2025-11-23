@@ -11,8 +11,7 @@ var annotated_dup =
       [ "Variant", "class_yum_engine_1_1_variant.html", "class_yum_engine_1_1_variant" ],
       [ "Vector", "class_yum_engine_1_1_vector.html", "class_yum_engine_1_1_vector" ],
       [ "YumObject", "class_yum_engine_1_1_yum_object.html", "class_yum_engine_1_1_yum_object" ],
-      [ "YumObjectReference", "struct_yum_engine_1_1_yum_object_reference.html", "struct_yum_engine_1_1_yum_object_reference" ],
-      [ "YumListElement", "struct_yum_engine_1_1_yum_list_element.html", "struct_yum_engine_1_1_yum_list_element" ],
+      [ "YumPinnable", "struct_yum_engine_1_1_yum_pinnable.html", "struct_yum_engine_1_1_yum_pinnable" ],
       [ "YGlob", "class_yum_engine_1_1_y_glob.html", "class_yum_engine_1_1_y_glob" ],
       [ "YumTable", "class_yum_engine_1_1_yum_table.html", "class_yum_engine_1_1_yum_table" ]
     ] ],
