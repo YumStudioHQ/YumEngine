@@ -63,7 +63,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"gcc-armv7_8hpp_source.html"
+"gcc-armv7_8hpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

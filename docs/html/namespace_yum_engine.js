@@ -3,6 +3,7 @@ var namespace_yum_engine =
     [ "string_formats", "namespace_yum_engine_1_1string__formats.html", [
       [ "crash_header", "namespace_yum_engine_1_1string__formats.html#a44351b96c8ba5cbe853c682bd2c966bf", null ]
     ] ],
+    [ "os", "namespace_yum_engine_1_1os.html", "namespace_yum_engine_1_1os" ],
     [ "utils", "namespace_yum_engine_1_1utils.html", [
       [ "from_lua", "namespace_yum_engine_1_1utils.html#acf2b832110b195927e5dc6bb6719ac4e", null ],
       [ "get_table", "namespace_yum_engine_1_1utils.html#acd80c401575a7c7a18d982dba3565460", null ],

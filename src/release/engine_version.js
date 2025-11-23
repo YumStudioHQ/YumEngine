@@ -1,8 +1,8 @@
 const YUM_ENGINE_VERSION = {
   major: 2,
-  minor: 4,
-  patch: 20,
+  minor: 5,
+  patch: 0,
   branch: "stable",
   studio: "yum-official",
-  full: "yum-official.stable.2.4.20"
+  full: "yum-official.stable.2.5.0"
 };

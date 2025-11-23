@@ -1,14 +1,18 @@
 var searchData=
 [
-  ['set_0',['set',['../class_yum_engine_1_1_variant.html#a8834d41f79cf4aec66da3aa6e30705c9',1,'YumEngine::Variant::set(int64_t i)'],['../class_yum_engine_1_1_variant.html#ab38dedf24f4cf1b3abc87f5913072b36',1,'YumEngine::Variant::set(double d)'],['../class_yum_engine_1_1_variant.html#a3a848276bdf8b872a51b8cc6ec946301',1,'YumEngine::Variant::set(const std::string &amp;s)'],['../class_yum_engine_1_1_variant.html#a0837a463649742e0404e8d005fff9a61',1,'YumEngine::Variant::set(bool b)'],['../class_yum_engine_1_1_variant.html#ab6e9dffa8763c6ba8bf6103408168b69',1,'YumEngine::Variant::set(const YumBinaryBlob &amp;blob)'],['../class_yum_engine_1_1_variant.html#a0330d7cb1c9c4e115c994b245fa091f1',1,'YumEngine::Variant::set(const Table &amp;table)'],['../class_yum_engine_1_1_variant.html#ab5f1f745b0979d414674e1249e4a00bd',1,'YumEngine::Variant::set(const YumUID &amp;uid)'],['../class_yum_engine_1_1_yum_table.html#ae3feec674d283ddd92f79ad050ffa9cf',1,'YumEngine::YumTable::set()']]],
-  ['set_5ffield_1',['set_field',['../namespace_yum_engine_1_1utils.html#a703a35b89af8b947dff0b9617995ac56',1,'YumEngine::utils']]],
-  ['set_5fpin_2',['set_pin',['../class_yum_engine_1_1_yum_object.html#a354af82669ac5da6d7379c25bd9df490',1,'YumEngine::YumObject']]],
-  ['set_5ftable_3',['set_table',['../namespace_yum_engine_1_1utils.html#aaa82bb3e2a9fe6a739ea334f0d8da07c',1,'YumEngine::utils']]],
-  ['size_4',['size',['../struct_yum_binary_blob.html#a1f4714dd2cfaea776f2c710164f36a4d',1,'YumBinaryBlob::size'],['../class_yum_engine_1_1_vector.html#ad0caee198f5cd458773c02bee32c220b',1,'YumEngine::Vector::size()'],['../class_yum_engine_1_1_yum_table.html#a99333fbb969f3a58ffac0da38dcf52a2',1,'YumEngine::YumTable::size()']]],
-  ['start_5',['start',['../struct_yum_binary_blob.html#ace72097ea38207d96b33fef69eab80ea',1,'YumBinaryBlob']]],
-  ['std_6',['std',['../namespacestd.html',1,'']]],
-  ['string_7',['STRING',['../class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27ea48c6e4e9b5c3882cd4e59b3106715f87',1,'YumEngine::Variant']]],
-  ['subsystem_8',['Subsystem',['../class_yum_engine_1_1_subsystem.html',1,'YumEngine::Subsystem'],['../class_yum_engine_1_1_subsystem.html#a41705ce8aa8a4585c71524dbca5954a9',1,'YumEngine::Subsystem::Subsystem()']]],
-  ['subsystem_2eh_9',['subsystem.h',['../subsystem_8h.html',1,'']]],
-  ['subsystem_2ehpp_10',['subsystem.hpp',['../subsystem_8hpp.html',1,'']]]
+  ['safe_5fwrite_0',['safe_write',['../namespace_yum_engine_1_1os_1_1_p_o_s_i_x___s_y_s_t_e_m_s.html#a0dac6a52369b23cff786549f4ea87147',1,'YumEngine::os::POSIX_SYSTEMS']]],
+  ['set_1',['set',['../class_yum_engine_1_1_variant.html#a8834d41f79cf4aec66da3aa6e30705c9',1,'YumEngine::Variant::set(int64_t i)'],['../class_yum_engine_1_1_variant.html#ab38dedf24f4cf1b3abc87f5913072b36',1,'YumEngine::Variant::set(double d)'],['../class_yum_engine_1_1_variant.html#a3a848276bdf8b872a51b8cc6ec946301',1,'YumEngine::Variant::set(const std::string &amp;s)'],['../class_yum_engine_1_1_variant.html#a0837a463649742e0404e8d005fff9a61',1,'YumEngine::Variant::set(bool b)'],['../class_yum_engine_1_1_variant.html#ab6e9dffa8763c6ba8bf6103408168b69',1,'YumEngine::Variant::set(const YumBinaryBlob &amp;blob)'],['../class_yum_engine_1_1_variant.html#a0330d7cb1c9c4e115c994b245fa091f1',1,'YumEngine::Variant::set(const Table &amp;table)'],['../class_yum_engine_1_1_variant.html#ab5f1f745b0979d414674e1249e4a00bd',1,'YumEngine::Variant::set(const YumUID &amp;uid)'],['../class_yum_engine_1_1_yum_table.html#ae3feec674d283ddd92f79ad050ffa9cf',1,'YumEngine::YumTable::set()']]],
+  ['set_5ffield_2',['set_field',['../namespace_yum_engine_1_1utils.html#a703a35b89af8b947dff0b9617995ac56',1,'YumEngine::utils']]],
+  ['set_5fpin_3',['set_pin',['../class_yum_engine_1_1_yum_object.html#a354af82669ac5da6d7379c25bd9df490',1,'YumEngine::YumObject']]],
+  ['set_5ftable_4',['set_table',['../namespace_yum_engine_1_1utils.html#aaa82bb3e2a9fe6a739ea334f0d8da07c',1,'YumEngine::utils']]],
+  ['setupsignals_5',['setupSignals',['../namespace_yum_engine_1_1os_1_1_p_o_s_i_x___s_y_s_t_e_m_s.html#a878b2fdb72a38ffe03e84a925a58096e',1,'YumEngine::os::POSIX_SYSTEMS']]],
+  ['sig_5fhandler_2ehpp_6',['sig_handler.hpp',['../sig__handler_8hpp.html',1,'']]],
+  ['sig_5fposix_2ehpp_7',['sig_posix.hpp',['../sig__posix_8hpp.html',1,'']]],
+  ['size_8',['size',['../struct_yum_binary_blob.html#a1f4714dd2cfaea776f2c710164f36a4d',1,'YumBinaryBlob::size'],['../class_yum_engine_1_1_vector.html#ad0caee198f5cd458773c02bee32c220b',1,'YumEngine::Vector::size()'],['../class_yum_engine_1_1_yum_table.html#a99333fbb969f3a58ffac0da38dcf52a2',1,'YumEngine::YumTable::size()']]],
+  ['start_9',['start',['../struct_yum_binary_blob.html#ace72097ea38207d96b33fef69eab80ea',1,'YumBinaryBlob']]],
+  ['std_10',['std',['../namespacestd.html',1,'']]],
+  ['string_11',['STRING',['../class_yum_engine_1_1_variant.html#a4641ae441865203f0ed57ad19c1ed27ea48c6e4e9b5c3882cd4e59b3106715f87',1,'YumEngine::Variant']]],
+  ['subsystem_12',['Subsystem',['../class_yum_engine_1_1_subsystem.html',1,'YumEngine::Subsystem'],['../class_yum_engine_1_1_subsystem.html#a41705ce8aa8a4585c71524dbca5954a9',1,'YumEngine::Subsystem::Subsystem()']]],
+  ['subsystem_2eh_13',['subsystem.h',['../subsystem_8h.html',1,'']]],
+  ['subsystem_2ehpp_14',['subsystem.hpp',['../subsystem_8hpp.html',1,'']]]
 ];

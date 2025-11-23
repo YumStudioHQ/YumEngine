@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Yum C API: YumEngine::YumPinnable Struct Reference</title>
+<title>Yum C API: sig_posix.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('struct_yum_engine_1_1_yum_pinnable.html','','struct_yum_engine_1_1_yum_pinnable-members'); });
+$(function(){initNavTree('sig__posix_8hpp.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -88,72 +88,30 @@ $(function(){initNavTree('struct_yum_engine_1_1_yum_pinnable.html','','struct_yu
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">YumEngine::YumPinnable Struct Reference</div></div>
+  <div class="headertitle"><div class="title">sig_posix.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p><code>#include &lt;<a class="el" href="yumobject_8hpp_source.html">yumobject.hpp</a>&gt;</code></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;signal.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+</div>
+<p><a href="sig__posix_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a3a23099aaebedee6ce782628bdc32dc4" id="r_a3a23099aaebedee6ce782628bdc32dc4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_yum_engine_1_1_yum_object.html">YumObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a23099aaebedee6ce782628bdc32dc4">object</a></td></tr>
-<tr class="memitem:a3db7a216ffb3a0a0e0eb415a9a1b487b" id="r_a3db7a216ffb3a0a0e0eb415a9a1b487b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_yum_engine_1_1_yum_pinnable.html">YumPinnable</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3db7a216ffb3a0a0e0eb415a9a1b487b">org</a></td></tr>
-<tr class="memitem:a48c4068c00d16ae89bda15be1501dee1" id="r_a48c4068c00d16ae89bda15be1501dee1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48c4068c00d16ae89bda15be1501dee1">object_freed</a> = false</td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:YumEngine" id="r_YumEngine"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_yum_engine.html">YumEngine</a></td></tr>
+<tr class="memdesc:namespace_yum_engine"><td class="mdescLeft">&#160;</td><td class="mdescRight">brings a global type interface for global API-system management. <br /></td></tr>
+<tr class="memitem:YumEngine_3A_3Aos" id="r_YumEngine_3A_3Aos"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_yum_engine_1_1os.html">YumEngine::os</a></td></tr>
+<tr class="memitem:YumEngine_3A_3Aos_3A_3APOSIX_5FSYSTEMS" id="r_YumEngine_3A_3Aos_3A_3APOSIX_5FSYSTEMS"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_yum_engine_1_1os_1_1_p_o_s_i_x___s_y_s_t_e_m_s.html">YumEngine::os::POSIX_SYSTEMS</a></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a0dac6a52369b23cff786549f4ea87147" id="r_a0dac6a52369b23cff786549f4ea87147"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_yum_engine_1_1os_1_1_p_o_s_i_x___s_y_s_t_e_m_s.html#a0dac6a52369b23cff786549f4ea87147">YumEngine::os::POSIX_SYSTEMS::safe_write</a> (const char *s)</td></tr>
+<tr class="memitem:a21f0454dc4f71dbe877091f7f0b700e6" id="r_a21f0454dc4f71dbe877091f7f0b700e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_yum_engine_1_1os_1_1_p_o_s_i_x___s_y_s_t_e_m_s.html#a21f0454dc4f71dbe877091f7f0b700e6">YumEngine::os::POSIX_SYSTEMS::handler</a> (int sig, siginfo_t *info, void *uctx_raw)</td></tr>
+<tr class="memitem:a878b2fdb72a38ffe03e84a925a58096e" id="r_a878b2fdb72a38ffe03e84a925a58096e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_yum_engine_1_1os_1_1_p_o_s_i_x___s_y_s_t_e_m_s.html#a878b2fdb72a38ffe03e84a925a58096e">YumEngine::os::POSIX_SYSTEMS::setupSignals</a> ()</td></tr>
 </table>
-<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
-<a id="a3a23099aaebedee6ce782628bdc32dc4" name="a3a23099aaebedee6ce782628bdc32dc4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a23099aaebedee6ce782628bdc32dc4">&#9670;&#160;</a></span>object</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_yum_engine_1_1_yum_object.html">YumObject</a>* YumEngine::YumPinnable::object</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a48c4068c00d16ae89bda15be1501dee1" name="a48c4068c00d16ae89bda15be1501dee1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48c4068c00d16ae89bda15be1501dee1">&#9670;&#160;</a></span>object_freed</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool YumEngine::YumPinnable::object_freed = false</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel mutable">mutable</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3db7a216ffb3a0a0e0eb415a9a1b487b" name="a3db7a216ffb3a0a0e0eb415a9a1b487b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3db7a216ffb3a0a0e0eb415a9a1b487b">&#9670;&#160;</a></span>org</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_yum_engine_1_1_yum_pinnable.html">YumPinnable</a>* YumEngine::YumPinnable::org</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="yumobject_8hpp_source.html">yumobject.hpp</a></li>
-</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
@@ -167,7 +125,7 @@ Public Attributes</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespace_yum_engine.html">YumEngine</a></li><li class="navelem"><a href="struct_yum_engine_1_1_yum_pinnable.html">YumPinnable</a></li>
+    <li class="navelem"><a href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a href="dir_6bc6ad22483805bbbda55258ad2a62ea.html">inc</a></li><li class="navelem"><a href="dir_fd57f7b050d25a7915105edf94514a77.html">handler</a></li><li class="navelem"><a href="sig__posix_8hpp.html">sig_posix.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>
