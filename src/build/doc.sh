@@ -1,3 +1,3 @@
-cd /Users/wys/Documents/Yum\ Studio/Yum\ Engine/
+cd /Users/wys/Documents/Yum\ Studio/YumEngine/
 
 doxygen Doxyfile

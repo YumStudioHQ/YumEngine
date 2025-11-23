@@ -1,14 +1,14 @@
 #!/bin/bash
 set -e
 
-OUT="/Users/wys/Documents/Yum Studio/Yum Engine/src/build/out"
+OUT="/Users/wys/Documents/Yum Studio/YumEngine/src/build/out"
 
-cd "/Users/wys/Documents/Yum Studio/Yum Engine/src/build/linux"
+cd "/Users/wys/Documents/Yum Studio/YumEngine/src/build/linux"
 
 echo "LINUX 64-bit"
 docker run --rm -it \
   -e FORCE_COLOR=1 \
-  -v "/Users/wys/Documents/Yum Studio/Yum Engine":/src:ro \
+  -v "/Users/wys/Documents/Yum Studio/YumEngine":/src:ro \
   -v "$OUT":/out \
   yumengine-builder \
   bash -c "
@@ -24,7 +24,7 @@ docker run --rm -it \
 echo "LINUX 32-bit"
 docker run --rm -it \
   -e FORCE_COLOR=1 \
-  -v "/Users/wys/Documents/Yum Studio/Yum Engine":/src:ro \
+  -v "/Users/wys/Documents/Yum Studio/YumEngine":/src:ro \
   -v "$OUT":/out \
   yumengine-builder \
   bash -c "
