@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['freed_0',['freed',['../struct_yum_engine_1_1_yum_object_reference.html#a55f0901a2350eff0f0443a99fcb4ca15',1,'YumEngine::YumObjectReference']]]
+  ['object_0',['object',['../struct_yum_engine_1_1_yum_pinnable.html#a3a23099aaebedee6ce782628bdc32dc4',1,'YumEngine::YumPinnable']]],
+  ['object_5ffreed_1',['object_freed',['../struct_yum_engine_1_1_yum_pinnable.html#a48c4068c00d16ae89bda15be1501dee1',1,'YumEngine::YumPinnable']]],
+  ['org_2',['org',['../struct_yum_engine_1_1_yum_pinnable.html#a3db7a216ffb3a0a0e0eb415a9a1b487b',1,'YumEngine::YumPinnable']]]
 ];

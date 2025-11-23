@@ -12,12 +12,15 @@
 #pragma once
 
 namespace YumEngine {
+  struct YumPinnable;
+
   /**
    * @brief Base type of each YumEngine's types since V2.1.x minor fix.
    */
   class YumObject {
   private:
     mutable bool freed = false;
+    mutable YumPinnable *pinptr;
 
   protected:
     inline virtual void _free() const {}
@@ -33,15 +36,15 @@ namespace YumEngine {
         _free();
       }
     }
+
+    inline YumPinnable *get_pin() const { return pinptr; }
+    inline void set_pin(YumPinnable *pin) const { pinptr = pin; }
   };
 
-  struct YumObjectReference {
+  struct YumPinnable {
     YumObject *object;
-    mutable bool freed;
-  };
-
-  struct YumListElement {
-    YumListElement     *child;
-    YumObjectReference *current;
+    YumPinnable *child;
+    YumPinnable *org; // This one points to the first element.
+    mutable bool object_freed = false;
   };
 }

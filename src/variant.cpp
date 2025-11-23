@@ -72,16 +72,14 @@ extern "C" {
 
 YUM_OUTATR YumVariant *YumVariant_new(void) {
   auto var = new YumVariant();
-  YumEngine::G_yglob().get().pin(new YumEngine::YumObjectReference(YumEngine::YumObjectReference{
-    .object = var,
-    .freed = false,
-  }));
+  YumEngine::G_yglob().get().pin(var);
 
   return var;
 }
 
 YUM_OUTATR void YumVariant_delete(YumVariant *var) {
   var->free();
+  if (var->get_pin()) var->get_pin()->object_freed = true;
   delete var;
 }
 
