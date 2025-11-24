@@ -1,4 +1,5 @@
 #!/usr/bin/env lua
+---@diagnostic disable
 
 ------------------------------------------------------------
 --  FILE SYSTEM HELPERS
@@ -37,7 +38,7 @@ end
 local ROOT = "."                    -- build.lua location
 local SRC  = fs.join(ROOT, "src")
 local LUA  = fs.join(ROOT, "lua")
-local OUT  = fs.join(ROOT, "src/build/out")
+local OUT  = fs.join(ROOT, "src/build")
 
 ------------------------------------------------------------
 --  VERSIONING CONFIG
@@ -193,8 +194,8 @@ local CXX = os.getenv("CXX") or "g++"
 local internal_compilers = {
     windows32 = { cc="i686-w64-mingw32-gcc",  cxx="i686-w64-mingw32-g++" },
     windows64 = { cc="x86_64-w64-mingw32-gcc", cxx="x86_64-w64-mingw32-g++" },
-    linux32   = { cc="gcc -m32",  cxx="g++ -m32" },
-    linux64   = { cc="gcc",       cxx="g++" },
+    linux64   = { cc="./src/build/linux64.sh", cxx="echo 'already done'" },
+    linux32   = { cc="./src/build/linux64.sh", cxx="echo 'already done'" },
     macos     = { cc="gcc",       cxx="g++" },
 }
 
