@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-OUT="out"
+OUT="./src/build"
 
 echo "LINUX 32-bit"
 docker run --rm -it \
