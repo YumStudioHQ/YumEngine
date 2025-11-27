@@ -18,9 +18,11 @@
 #include "inc/yumsys.hpp"
 
 extern "C" {
+#ifndef YUM_CXX_API_NO_C_EXPORT
   YUM_OUTATR YumCTable *YumCTable_new(void) {
     auto table = new YumCTable();
     YumEngine::G_yglob().get().pin(table);
+    table->setorg(YumEngine::C_API);
     return table;
   }
 
@@ -34,6 +36,7 @@ extern "C" {
       auto val = table->at(*key);
       auto ptr = new YumVariant(std::move(val));
       YumEngine::G_yglob().get().pin(ptr);
+      ptr->setorg(YumEngine::C_API_AT);
 
       return ptr;
     }
@@ -78,4 +81,5 @@ extern "C" {
 
     return 0;
   }
+#endif // YUM_CXX_API_NO_C_EXPORT
 }

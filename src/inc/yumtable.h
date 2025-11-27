@@ -34,6 +34,8 @@
 extern "C" {
 #endif // __cplusplus
 
+#ifndef YUM_CXX_API_NO_C_EXPORT
+
 /**
  * @brief Opaque handle representing a Yum Table object.
  *
@@ -109,5 +111,5 @@ YUM_OUTATR YumVector *YumCTable_values(const YumCTable *table);
 #ifdef __cplusplus
 }
 #endif // __cplusplus
-
+#endif // YUM_CXX_API_NO_C_EXPORT
 #endif // ___YUM_C_TABLE_H___

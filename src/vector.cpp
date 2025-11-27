@@ -18,6 +18,7 @@
 #include "inc/variant.hpp"
 #include "inc/vector.hpp"
 #include "inc/yumdec.h"
+#include "inc/yumobject.hpp"
 #include "inc/exceptions.hpp"
 
 namespace YumEngine {
@@ -37,9 +38,13 @@ namespace YumEngine {
 
 extern "C" {
 
+#ifndef YUM_CXX_API_NO_C_EXPORT
+
+
 YUM_OUTATR YumVector *YumVector_new(void) {
   auto vec = new YumVector();
-
+  vec->setorg(YumEngine::C_API);
+  
   YumEngine::G_yglob().get().pin(vec);
   return vec;
 }
@@ -84,4 +89,6 @@ YUM_OUTATR const YumVariant *YumVector_at_const(const YumVector *vec, int64_t in
     return nullptr;
   }
 }
+
+#endif // ?YUM_CXX_API_NO_C_EXPORT
 }

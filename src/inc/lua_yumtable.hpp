@@ -53,7 +53,7 @@ namespace YumEngine::utils {
       case Variant::TABLE: {
         set_table(L, (*key.as_table())); // Variant::as_table() returns a std::shared_ptr<T>
       } break;
-      case Variant::UID: push_uid(L, key.as_uid());
+      case Variant::UID: push_uid(L, key.as_uid()); break;
       case Variant::NIL: lua_pushnil(L); break; // Todo?
       default: break;
     }

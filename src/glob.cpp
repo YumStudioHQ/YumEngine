@@ -71,6 +71,7 @@ public:
 
 
 extern "C" {
+#ifndef YUM_CXX_API_NO_C_EXPORT
   YUM_OUTATR void Yum_open_G_out(const char *path) {
     (*G_out()).rdbuf(std::ofstream(path).rdbuf());
   }
@@ -94,4 +95,5 @@ extern "C" {
       cb(s.c_str());
     });
   }
+#endif // YUM_CXX_API_NO_C_EXPORT
 }

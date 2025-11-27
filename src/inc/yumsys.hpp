@@ -40,7 +40,6 @@ namespace YumEngine {
       std::stringstream ss ( dump_registers() );
       std::ostringstream oss ( "" );
       std::string line;
-      int c = 1;
 
       while ( ! ( ss.eof() ) ) {
         for (int i = 0; i < 4; i++) {

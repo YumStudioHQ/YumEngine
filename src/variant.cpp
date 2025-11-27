@@ -70,8 +70,11 @@ namespace YumEngine {
 
 extern "C" {
 
+#ifndef YUM_CXX_API_NO_C_EXPORT
+
 YUM_OUTATR YumVariant *YumVariant_new(void) {
   auto var = new YumVariant();
+  var->setorg(YumEngine::C_API);
   YumEngine::G_yglob().get().pin(var);
 
   return var;
@@ -226,3 +229,5 @@ YUM_OUTATR int32_t YumVariant_isUid(const YumVariant *var) {
 }
 
 } // extern "C"
+
+#endif // ? YUM_CXX_API_NO_C_EXPORT

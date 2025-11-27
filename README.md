@@ -3,9 +3,9 @@
 ## Version
 
 <!-- YUM_VERSION_START -->
-- **Engine version:** `2.5.8`
+- **Engine version:** `2.6.0`
 - **Studio:** `yum-official`
-- **Branch:** `stable`
+- **Branch:** `master-stable`
 <!-- YUM_VERSION_END -->
 
 ---

@@ -21,6 +21,8 @@
 extern "C" {
 #endif // __cplusplus
 
+#ifndef YUM_CXX_API_NO_C_EXPORT
+
 typedef struct YumSubsystem YumSubsystem;
 typedef struct YumLuaSubsystem YumLuaSubsystem;
 
@@ -144,5 +146,5 @@ YUM_OUTATR int32_t YumLuaSubsystem_hasMethod(
 #ifdef __cplusplus
 }
 #endif // __cplusplus
-
+#endif // YUM_CXX_API_NO_C_EXPORT
 #endif // ___YUM_SUBSYSTEM_H___
