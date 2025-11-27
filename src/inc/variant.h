@@ -32,6 +32,8 @@
 extern "C" {
 #endif
 
+#ifndef YUM_CXX_API_NO_C_EXPORT /* If true: Compiles for the C++ API (so doesn't need to export C API) */
+
 /**
  * @brief Opaque handle to a Yum Variant.
  */
@@ -183,4 +185,5 @@ YUM_OUTATR int32_t YumVariant_isString(const YumVariant* var);
 #ifdef __cplusplus
 }
 #endif
+#endif // YUM_CXX_API_NO_C_EXPORT
 #endif // ___YUMGUARD_VARIANT_H___

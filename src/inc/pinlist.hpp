@@ -63,7 +63,7 @@ namespace YumEngine {
             if (it->object_freed) {
               (*G_out()) << "already freed" << std::endl;
             } else {
-              (*G_out()) << "not freed, freeing: " << std::flush;
+              (*G_out()) << " not freed. Origin: " << it->object->getorg() << ", freeing: " << std::flush;
               it->object->free();
               delete it->object;
               (*G_out()) << "ok" << std::endl;

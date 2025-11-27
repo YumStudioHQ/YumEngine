@@ -10,3 +10,4 @@ src/lua/src/release
 src/lua/src/build
 *.o
 _local.sh
+bin/

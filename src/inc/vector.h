@@ -31,6 +31,8 @@
 extern "C" {
 #endif
 
+#ifndef YUM_CXX_API_NO_C_EXPORT
+
 /**
  * @brief Opaque handle to a Yum Vector.
  */
@@ -104,4 +106,5 @@ YUM_OUTATR const YumVariant* YumVector_at_const(const YumVector* vec, int64_t in
 #ifdef __cplusplus
 }
 #endif
+#endif // YUM_CXX_API_NO_C_EXPORT
 #endif // ___YUM_VECTOR_H___

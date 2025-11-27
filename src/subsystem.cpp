@@ -286,6 +286,8 @@ namespace YumEngine {
 
 #pragma region C Interface 
 
+#ifndef YUM_CXX_API_NO_C_EXPORT
+
 extern "C" {
   /**
    * @brief creates a new subsystem.
@@ -331,6 +333,7 @@ extern "C" {
       auto ptr = new YumEngine::Vector(std::move(v));
       auto list = lua->get_pinlist();
       list->pin(ptr);
+      ptr->setorg(YumEngine::FUNCTION_CALL);
 
       return ptr;
     } catch (const std::bad_function_call &e) {
@@ -400,5 +403,7 @@ extern "C" {
     (*G_out()) << "yum: bye." << std::endl;
   }
 }
+
+#endif // YUM_CXX_API_NO_C_EXPORT?
 
 #pragma endregion

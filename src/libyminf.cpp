@@ -16,6 +16,7 @@
 #include "inc/engine_version.h"
 
 extern "C" {
+#ifndef YUM_CXX_API_NO_C_EXPORT
   /* Promised in all version since 1.6.X */
   YUM_OUTATR const char *YumEngineInfo_name() {
     static std::string name = std::format(
@@ -38,4 +39,5 @@ extern "C" {
   YUM_OUTATR int32_t YumEngineInfo_versionPatch() { return YUM_ENGINE_VERSION_PATCH;  }
   /* Promised in all version since 1.6.X */
   YUM_OUTATR int64_t YumEngineInfo_longVersion() { return YUM_ENGINE_VERSION_INT; }
+#endif // YUM_CXX_API_NO_C_EXPORT
 }
