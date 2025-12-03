@@ -53,6 +53,7 @@ namespace YumEngine {
     inline void finalize() {
       (*G_out()) << "yum: finalizing" << std::endl;
       uint64_t count = 0;
+      uint64_t skiped = 0;
       
       if (pintab) {
         YumPinnable *it = pintab->org;
@@ -61,16 +62,17 @@ namespace YumEngine {
           if (it->object) {
             (*G_out()) << "yum: ref<" << std::hex << it->object << std::setfill('0') << std::setw(16) << "> " << std::flush;
             if (it->object_freed) {
-              (*G_out()) << "already freed" << std::endl;
+              (*G_out()) << "already freed : Skiping" << std::endl;
+              skiped++;
             } else {
-              (*G_out()) << " not freed. Origin: " << it->object->getorg() << ", freeing: " << std::flush;
+              (*G_out()) << "not freed. Origin: " << it->object->getorg() << ", freeing: " << std::flush;
               it->object->free();
               delete it->object;
               (*G_out()) << "ok" << std::endl;
               it->object_freed = true;
+              count++;
             }
-            count++;
-          } else (*G_out()) << "yum: one element skipped" << std::endl;
+          } else { (*G_out()) << "yum: one element skipped" << std::endl; skiped++; }
 
           it = it->org;
         }
@@ -85,7 +87,9 @@ namespace YumEngine {
       }
 
       finalized = true;
-      (*G_out()) << "yum: finalized " << std::dec << count << " resources" << std::endl;
+      (*G_out()) << "yum: destroyed " << std::dec << count << " resources" << std::endl;
+      (*G_out()) << "yum: skiped " << std::dec << skiped << " resources" << std::endl;
+      (*G_out()) << "yum: traced " << std::dec << skiped + count << " resources" << std::endl;
     }
 
     inline void pin(YumObject *element) {

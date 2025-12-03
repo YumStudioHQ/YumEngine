@@ -15,6 +15,7 @@
  * @brief brings a global type interface for global API-system management.
 */
 
+#include "yumdec.h"
 #include "pinlist.hpp"
 #include "yumdump.hpp"
 #include "asm/dumper.hpp"
@@ -126,7 +127,11 @@ namespace YumEngine {
   extern bool is_engine_init();
 }
 
+#ifndef YUM_CXX_API_NO_C_EXPORT
+
 extern "C" {
   /* C function */
-  void YumEngine_init(void);
+  YUM_OUTATR void YumEngine_init(void);
 }
+
+#endif // YUM_CXX_API_NO_C_EXPORT
