@@ -20,39 +20,29 @@
  *                                                                                   *
  *************************************************************************************/
 
-#pragma once
+#ifndef YUM_INCLUDE_GUARD_STATE_C_H
+#define YUM_INCLUDE_GUARD_STATE_C_H
 
-#include "err.h"
-#include "managers/lstring_utils.h"
-#include "utils/ystringutils.h"
-#include <stdexcept>
+#include "_byumlibc.h"
+#include "inc/types/base/types.h"
+#include "inc/types/base/array.h"
+#include "inc/types/system/err.h"
+#include "inc/types/base/callbacks.h"
 
-namespace YumEngine::xV1 {
-  class sysexception : public std::exception {
-  private:  syserr_t    err = {
-              .category = err.UNKNOWN_ERROR,
-              .source = { .file = lstring_from_string("uknown"), .func = lstring_from_string("unknown"), .line = -1},
-              .comment = lstring_from_string("unknown exception")
-            };
-            lstring_t   fmtmsg;
+typedef yumlibc_callback_type yumcallback_t;
+typedef struct YumState YumState;
 
-  public:   inline sysexception() {}
+yumlibcxx_c_header_decoration_begin
 
-            inline sysexception(const syserr_t &_err)
-              : err(_err) {
-                fmtmsg = yumfmterr(err);
-              }
-    
-            inline const char *what() const noexcept override {
-              return fmtmsg.start;
-            }
+syserr_t  yum_move_cxx_function(push_callback)(YumState *state, const lstring_t *name, const yumcallback_t callback);
+syserr_t  yum_move_cxx_function(call)(YumState *state, const lstring_t *path, const vararray_t *args, vararray_t *out);
+syserr_t  yum_move_cxx_function(push_variant)(YumState *state, ascii name, const variant_t *var);
+syserr_t  yum_move_cxx_function(push_table)(YumState *state, ascii name);
+syserr_t  yum_move_cxx_function(new_table)(YumState *state, ascii name);
+syserr_t  yum_move_cxx_function(run)(YumState *state, ascii source, boolean_t isfile);
+syserr_t  yum_move_cxx_function(load)(YumState *state, const lstring_t *source, boolean_t isfile);
+void      yum_move_cxx_function(clear)(YumState *state);
 
-            inline ~sysexception() {
-              free_lstring(fmtmsg);
-            }
+yumlibcxx_c_header_decoration_end
 
-            inline syserr_t geterr() const { return err; }
-  };
-}
-
-#define yumlibcxx_throw(what, kind, ...) throw yummakeerror_x(what, kind, __VA_ARGS__)
+#endif // !YUM_INCLUDE_GUARD_STATE_C_H

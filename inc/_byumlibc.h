@@ -25,8 +25,12 @@
 
 #ifdef __cplusplus
 #define yumlibc_cfun extern "C"
+#define yumlibcxx_c_header_decoration_begin   extern "C" {
+#define yumlibcxx_c_header_decoration_end     }
 #else
 #define yumlibc_cfun extern 
+#define yumlibcxx_c_header_decoration_begin
+#define yumlibcxx_c_header_decoration_end
 #endif // __cplusplus
 
 #ifdef _WIN32
@@ -39,5 +43,7 @@
 
 #define yumtrue   1
 #define yumfalse  0
+
+#define yum_move_cxx_function(n) yumengine_##n
 
 #endif // YUM_INCLUDE_GUARD_BACKEND_YUMLIB_C_H

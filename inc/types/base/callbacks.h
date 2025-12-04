@@ -20,39 +20,14 @@
  *                                                                                   *
  *************************************************************************************/
 
-#pragma once
+#ifndef YUM_INCLUDE_GUARD_CALLBACK_TYPEDEF_H
+#define YUM_INCLUDE_GUARD_CALLBACK_TYPEDEF_H
 
-#include "err.h"
-#include "managers/lstring_utils.h"
-#include "utils/ystringutils.h"
-#include <stdexcept>
+#include "_byumlibc.h"
+#include "inc/types/base/types.h"
+#include "inc/types/base/array.h"
+#include "inc/types/system/err.h"
 
-namespace YumEngine::xV1 {
-  class sysexception : public std::exception {
-  private:  syserr_t    err = {
-              .category = err.UNKNOWN_ERROR,
-              .source = { .file = lstring_from_string("uknown"), .func = lstring_from_string("unknown"), .line = -1},
-              .comment = lstring_from_string("unknown exception")
-            };
-            lstring_t   fmtmsg;
+typedef vararray_t (*yumlibc_callback_type)(vararray_t);
 
-  public:   inline sysexception() {}
-
-            inline sysexception(const syserr_t &_err)
-              : err(_err) {
-                fmtmsg = yumfmterr(err);
-              }
-    
-            inline const char *what() const noexcept override {
-              return fmtmsg.start;
-            }
-
-            inline ~sysexception() {
-              free_lstring(fmtmsg);
-            }
-
-            inline syserr_t geterr() const { return err; }
-  };
-}
-
-#define yumlibcxx_throw(what, kind, ...) throw yummakeerror_x(what, kind, __VA_ARGS__)
+#endif // !YUM_INCLUDE_GUARD_CALLBACK_TYPEDEF_H

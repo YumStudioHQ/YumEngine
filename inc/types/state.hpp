@@ -27,13 +27,14 @@
 #include "lua/lua.hpp"
 #include "base/types.h"
 #include "base/array.h"
+#include "base/callbacks.h"
 #include "system/err.h"
 
 #include <string>
 
 namespace YumEngine::xV1 {
   /** @brief Represents a Yum callback. Takes an array of variant as input, and returns an array of variant. */
-  typedef vararray_t (*yum_callback)(vararray_t);
+  using yum_callback = yumlibc_callback_type;
 
   class State {
   private:
@@ -51,9 +52,8 @@ namespace YumEngine::xV1 {
      * @param name The name of the callback.
      * @param callback The callback that will get pushed.
      * @note You may push a table before pushing a callback (or you will end with UBs!)
-     * @return Error state (syserr type).
      */
-    syserr_t push_callback(const lstring_t &name, const yum_callback &callback);
+    void push_callback(const lstring_t &name, const yum_callback &callback);
 
     /**
      * @brief Calls a Lua function.
@@ -88,7 +88,7 @@ namespace YumEngine::xV1 {
      * @param source Path to the file or a string containing Lua code.
      * @return Error state (syserr type).
      */
-    syserr_t run(const lstring_t &source, boolean_t isfile);
+    syserr_t run(ascii source, boolean_t isfile);
 
     /**
      * @brief Loads a string or a file
@@ -104,3 +104,5 @@ namespace YumEngine::xV1 {
     void clear();
   };
 }
+
+using YumState = YumEngine::xV1::State;

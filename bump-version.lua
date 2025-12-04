@@ -5,7 +5,7 @@
 -- CONFIG
 ------------------------------------------------------------
 
-local VERSION_FILE = "src/inc/engine_version.h"
+local VERSION_FILE = "inc/version/engine_version.h"
 local README_FILE  = "README.md"
 local CONFIG_FILE  = "version_config.lua" -- must return {studio="X", branch="Y"}
 local VERSION_PREFIX = "YUM_ENGINE"
@@ -54,7 +54,8 @@ end
 local function write_version(major, minor, patch)
     local out = io.open(VERSION_FILE, "w")
     if not out then error("Cannot write version header") end
-    out:write("#pragma once\n")
+    out:write(string.format("#ifndef %s_INCLUDE_GUARD\n", VERSION_PREFIX))
+    out:write(string.format("#define %s_INCLUDE_GUARD\n", VERSION_PREFIX))
     out:write(string.format("#define %s_VERSION_MAJOR %d\n", VERSION_PREFIX, major))
     out:write(string.format("#define %s_VERSION_MINOR %d\n", VERSION_PREFIX, minor))
     out:write(string.format("#define %s_VERSION_PATCH %d\n", VERSION_PREFIX, patch))
@@ -62,6 +63,7 @@ local function write_version(major, minor, patch)
                             VERSION_PREFIX, major, minor, patch))
     out:write(string.format("#define %s_VERSION_BRANCH \"%s\"\n", VERSION_PREFIX, BRANCH))
     out:write(string.format("#define %s_VERSION_STUDIO \"%s\"\n", VERSION_PREFIX, STUDIO))
+    out:write("#endif")
     out:close()
 end
 
