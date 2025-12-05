@@ -1,4 +1,3 @@
-
-[submodule "lua"]
-	path = lua
+[submodule "inc/lua"]
+	path = inc/lua
 	url = https://github.com/YumStudioHQ/lua4yum.git

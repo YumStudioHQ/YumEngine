@@ -1,74 +1,70 @@
-# YumEngine — Lua & Godot Runtime
-
-## Version
+# YumEngine
 
 <!-- YUM_VERSION_START -->
-- **Engine version:** `2.6.5`
+- **Engine version:** `3.0.8`
 - **Studio:** `yum-official`
 - **Branch:** `master-stable`
 <!-- YUM_VERSION_END -->
 
----
+**[Website](https://yumstudiohq.github.io/YumEngine/)** | **[Documentation](./docs/html/)**
 
-**[Website](https://yumstudiohq.github.io/YumEngine/)**
-**[Documentation](./docs/html/)**
+---
 
 ## Overview
 
-YumEngine is a lightweight, cross-language runtime and engine bridging **C++ / C** with **Lua** and **Godot**.  
-It is designed for easy integration, extensibility, and rapid game development or scripting automation.
+YumEngine is a lightweight, cross-language runtime and engine designed to make **Lua integration with Godot** simple, flexible, and programmatic.
 
-Key goals:  
-- Minimal overhead  
-- Maximum flexibility  
-- Cross-language interoperability  
+Originally built to support Lua in Godot through the C# API, YumEngine has evolved into a **general-purpose Lua runtime** with **multi-language interoperability**, focusing on usability and modern scripting workflows without requiring deep Lua stack management.
+
+**Key goals:**
+
+* Minimal overhead
+* Maximum flexibility
+* Easy cross-language integration (C, C++, Lua, C#)
+* Simplified Lua usage in Godot and other applications
 
 ---
 
 ## Features
 
-- **Dynamic Library (Yum)**: Provides core utilities accessible from C, C++, Lua, and C#.  
-- **YumEngine**: Full engine with linked Yum library, including API and internal classes.  
-- **YumiEngine**: Engine only, depends on Yum library.  
-- **Variant & Vector**: Type-safe, C-compatible containers for multi-language data exchange.  
-- **Cross-Language Callbacks**: Register functions callable from Lua, C#, or other languages.  
+* **Dynamic Library (Yum)** — Core utilities accessible from C, C++, Lua, and C#.
+* **YumEngine** — Complete engine with linked Yum library, APIs, and internal classes.
+* **YumiEngine** — Engine-only build, depends on Yum library.
+* **Variant & Vector** — Type-safe, C-compatible containers for cross-language data exchange.
+* **Cross-Language Callbacks** — Register functions callable from Lua, C#, or other languages.
+* **Simplified Lua Integration** — Focus on programmatic Lua usage without manual stack management.
 
 ---
 
 ## Requirements
 
-- C++20 compiler (or higher, e.g., `g++-15` on macOS)  
-- C17 compatible compiler  
-- Optional: Lua interpreter to run scripts  
+* **C++20 compiler** (or higher, e.g., `g++-15` on macOS)
+* **C17-compatible compiler**
+* Lua interpreter to run scripts
+* Python interpreter
+
+**Notes:**
+- I, MONOE, by default, use zig compiler for other platforms, and g++ compiler for macOS as I'm working on macOS. You can and may change these. I might change this build system in further versions!
 
 ---
 
 ## Installation & Building
 
-Official builds are precompiled. You usually **don’t need to compile** anything manually.  
+Official builds are **precompiled**, so you usually **don’t need to compile manually**.
 
-To build manually:
+To build from source:
 
 ```bash
-lua release.lua [patch|minor|major]
-````
-
-**Notes:**
-
-* Adjust compiler paths or flags in `release.lua` if needed.
-* Version bumping is handled automatically via `release.lua version [patch|minor|major]`.
-* A `version.js` file is generated for website integration.
-* release [file](./src/release/release.lua)
+python yumengine.py [patch|minor|major]
+```
 
 ---
 
 ## Downloads
 
-Get the latest builds here:
-
 [Download YumEngine](https://yumstudiohq.github.io/YumEngine/pages/download.html)
 
-For source code and contributions, see the GitHub repository.
+Source code and contributions are available on the GitHub repository.
 
 ---
 
@@ -76,21 +72,20 @@ For source code and contributions, see the GitHub repository.
 
 **Yum Studio** is the team behind YumEngine:
 
-* Studio: `yum-official`
-* Branch: `stable`
+* **Studio:** `yum-official`
+* **Branch:** `stable`
 
-We are a small, experimental studio passionate about cross-language runtime engines and anime-inspired development tools.
+We are a small, experimental studio passionate about **cross-language runtime engines** and **developer-friendly scripting tools** inspired by modern game development workflows.
 
 ---
 
 ## Contributors
 
 * **MONOE** — Lead Developer ([GitHub](https://github.com/wys-prog))
-* **YumStudio** — Someone ... ([GitHub](https://github.com/yumstudiohq))
+* **YumStudio** — Contributor ([GitHub](https://github.com/yumstudiohq))
 
 ---
 
 ## License
 
-[License](./LICENSE)
-
+[MIT License](./LICENSE)
