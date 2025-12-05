@@ -32,7 +32,7 @@
 #include <sstream>
 #include <iomanip>
 
-using namespace YumEngine;
+using namespace YumEngine::xV1;
 
 yumlibc_cfun const char *category_to_ascii(syserr_t err) {
   thread_local std::string _mstr = "unknown error: #";

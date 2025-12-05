@@ -36,8 +36,10 @@ lstring_t alloc_lstring(integer_t size) {
   lstring_t lstring = {
     .start = yumalloc(size * sizeof(char)),
     .length = size,
-    .owns = true
+    .owns = 1
   };
+
+  return lstring;
 }
 
 void free_lstring(lstring_t lstring) {

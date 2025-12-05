@@ -42,7 +42,7 @@ namespace YumEngine::xV1 {
       case LUA_TSTRING: {
         size_t len;
         const char *cstr = lua_tolstring(L, idx, &len);
-        return Variant(lstring_t{.start = cstr, .length = (integer_t)len, .owns = false});
+        return Variant(lstring_t{.start = cstr, .length = len, .owns = false});
       }
       case LUA_TNUMBER: {
         if (lua_isinteger(L, idx)) {
@@ -65,7 +65,7 @@ namespace YumEngine::xV1 {
           size_t len;
           const char *data = lua_tolstring(L, -1, &len);
           lua_pop(L, 1);
-          return Variant(binary_t{.start = (const uint8_t*)data, .length = (integer_t)len, .owns = false});
+          return Variant(binary_t{.start = (const uint8_t*)data, .length = len, .owns = false});
         }
         lua_pop(L, 1); // pop nil
 

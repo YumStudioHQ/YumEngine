@@ -24,12 +24,16 @@
 
 template <typename T>
 inline T *yumalloc() {
-  return yumalloc(sizeof(T));
+  return malloc(sizeof(T));
 }
 
 template <typename T>
-inline T *yumalloc(unsigned long long int  s) {
-  return yumalloc(sizeof(T) * ns);
+inline T *yumalloc(unsigned long long int s) {
+  return malloc(sizeof(T) * s);
+}
+
+inline void *yumalloc(unsigned long long int s) {
+  return malloc(s);
 }
 
 template <typename T>

@@ -34,6 +34,8 @@ typedef struct YumState YumState;
 
 yumlibcxx_c_header_decoration_begin
 
+YumState *yum_move_cxx_function(new)(void);
+void      yum_move_cxx_function(delete)(const YumState *state);
 syserr_t  yum_move_cxx_function(push_callback)(YumState *state, const lstring_t *name, const yumcallback_t callback);
 syserr_t  yum_move_cxx_function(call)(YumState *state, const lstring_t *path, const vararray_t *args, vararray_t *out);
 syserr_t  yum_move_cxx_function(push_variant)(YumState *state, ascii name, const variant_t *var);

@@ -43,7 +43,7 @@ typedef struct {
 
 typedef struct {
   const char *start;
-  integer_t   length;
+  uint64_t    length;
   boolean_t   owns;
 } lstring_t;
 
@@ -51,7 +51,7 @@ typedef const char *ascii;
 
 typedef struct {
   const uint8_t *start;
-  integer_t      length;
+  uint64_t       length;
   boolean_t      owns;
 } binary_t;
 
