@@ -20,15 +20,19 @@
  *                                                                                   *
  *************************************************************************************/
 
-#ifndef YUM_INCLUDE_GUARD_CALLBACK_TYPEDEF_H
-#define YUM_INCLUDE_GUARD_CALLBACK_TYPEDEF_H
+#ifndef YUM_INCLUDE_GUARD_LIBYUM_H
+#define YUM_INCLUDE_GUARD_LIBYUM_H
 
-#include "inc/_byumlibc.h"
-#include "inc/types/base/types.h"
+#include "inc/api/ystatec.h"
+#include "inc/managers/lstring_utils.h"
 #include "inc/types/base/array.h"
+#include "inc/types/base/callbacks.h"
+#include "inc/types/base/types.h"
+#include "inc/types/base/vardef.h"
+#include "inc/utils/ystringutils.h"
+#include "inc/types/variant.h"
 #include "inc/types/system/err.h"
+#include "inc/version/engine_version.h"
+#include "inc/yummem.h"
 
-typedef vararray_t (*yumlibc_callback_type)(vararray_t);
-
-
-#endif // !YUM_INCLUDE_GUARD_CALLBACK_TYPEDEF_H
+#endif // !YUM_INCLUDE_GUARD_LIBYUM_H
