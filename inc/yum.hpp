@@ -20,15 +20,35 @@
  *                                                                                   *
  *************************************************************************************/
 
-#ifndef YUM_INCLUDE_GUARD_CALLBACK_TYPEDEF_H
-#define YUM_INCLUDE_GUARD_CALLBACK_TYPEDEF_H
+#pragma once
 
-#include "inc/_byumlibc.h"
-#include "inc/types/base/types.h"
+#include "inc/yumem.hpp"
 #include "inc/types/base/array.h"
-#include "inc/types/system/err.h"
+#include "inc/types/base/callbacks.h"
+#include "inc/types/base/types.h"
+#include "inc/types/base/vardef.h"
+#include "inc/types/containers/enumerable.hpp"
+#include "inc/types/containers/memoryslice.hpp"
+#include "inc/types/containers/span.hpp"
+#include "inc/types/containers/string.hpp"
+#include "inc/types/system/exception.hpp"
+#include "inc/types/variant.hpp"
+#include "inc/types/state.hpp"
+#include "inc/utils/ystringutils.hpp"
+#include "inc/version/engine_version.h"
 
-typedef vararray_t (*yumlibc_callback_type)(vararray_t);
+namespace YumEngine {
+  namespace YumEngineSdkContent {
+    using namespace YumEngine::xV1;
+    using namespace YumEngine::xV1::containers;
+    using namespace YumEngine::xV1::Sdk;
 
+    using CVariant = variant_t;
+    using CVariantArray = vararray_t;
+  }
 
-#endif // !YUM_INCLUDE_GUARD_CALLBACK_TYPEDEF_H
+  namespace Sdk = YumEngineSdkContent;
+  namespace ApiSdk = YumEngineSdkContent;
+  namespace Api = YumEngineSdkContent;
+  // Or whatever people call it !
+}
