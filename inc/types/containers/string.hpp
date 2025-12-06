@@ -32,10 +32,10 @@ namespace YumEngine::xV1::containers {
   public:
     inline stringlookup() 
       :memoryslice<CharT>() {}
-    inline stringlookup(const char *start, uint64_t s)
+    inline stringlookup(const CharT *start, uint64_t s)
       : memoryslice<CharT>(start, s) {}
 
-    list<stringlookup<CharT>> split(const char &del) const {
+    list<stringlookup<CharT>> split(const CharT &del) const {
       list<stringlookup<CharT>> views;
 
       uint64_t last = 0;
@@ -85,7 +85,7 @@ namespace YumEngine::xV1::containers {
     }
 
     template <typename Callback>
-    void split(const char &del, Callback callback) const {
+    void split(const CharT &del, Callback callback) const {
       uint64_t last = 0;
       for (uint64_t i = 0; i < this->_length; i++) {
         if (this->start[i] == del) {

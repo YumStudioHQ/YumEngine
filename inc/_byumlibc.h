@@ -45,5 +45,6 @@
 #define yumfalse  0
 
 #define yum_move_cxx_function(n) yumengine_##n
+#define yumlibc_library_member(n) libyum_##n
 
 #endif // YUM_INCLUDE_GUARD_BACKEND_YUMLIB_C_H

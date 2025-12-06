@@ -1,7 +1,7 @@
 # YumEngine
 
 <!-- YUM_VERSION_START -->
-- **Engine version:** `3.0.8`
+- **Engine version:** `3.0.9`
 - **Studio:** `yum-official`
 - **Branch:** `master-stable`
 <!-- YUM_VERSION_END -->
@@ -28,9 +28,6 @@ Originally built to support Lua in Godot through the C# API, YumEngine has evolv
 ## Features
 
 * **Dynamic Library (Yum)** — Core utilities accessible from C, C++, Lua, and C#.
-* **YumEngine** — Complete engine with linked Yum library, APIs, and internal classes.
-* **YumiEngine** — Engine-only build, depends on Yum library.
-* **Variant & Vector** — Type-safe, C-compatible containers for cross-language data exchange.
 * **Cross-Language Callbacks** — Register functions callable from Lua, C#, or other languages.
 * **Simplified Lua Integration** — Focus on programmatic Lua usage without manual stack management.
 

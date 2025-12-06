@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-import os, sys, time, subprocess, shutil
+import os
+import sys
+import time
+import subprocess
+import shutil
+from typing import List, Dict, Optional
 
 # ──────────────────────────────────────────────────────────────
 # STYLISH ANSI UI
@@ -15,53 +20,61 @@ CYAN  = "\033[36m"
 CLEAR  = "\033[2K"
 UP     = "\033[A"
 
-def bar(p, size=24):
+def bar(p: float, size: int = 24) -> str:
     fill = "█" * int(p * size)
     empty = "░" * (size - int(p * size))
     return f"{fill}{empty}"
 
-def multiline(lines):
+def multiline(lines: List[str]) -> None:
     for l in lines:
         print(f"{CLEAR}{l}")
     print(UP * len(lines), end="", flush=True)
 
-def header(title):
+def header(title: str|None) -> None:
     print(f"\n{BOLD}{CYAN}==> {title}{RESET}")
 
-def success(msg):
+def success(msg: str|None) -> None:
     print(f"{CLEAR}{GREEN}{msg}{RESET}")
 
-def fail(msg):
+def fail(msg: str|None) -> None:
     print(f"{CLEAR}{RED}{msg}{RESET}")
+
 
 # ──────────────────────────────────────────────────────────────
 # CONFIG
 # ──────────────────────────────────────────────────────────────
-FLAGS_CC  = "-std=c17 -Wall -Wextra -fPIC -O2 -c -I./ -I../ -I./inc/ -I./inc/lua"
-FLAGS_CXX = "-std=c++23 -Wall -Wextra -fPIC -O2 -c -shared -I./ -I../ -I./inc/ -I./inc/lua"
+FLAGS_CC_RELEASE  = "-std=c17 -Wall -Wextra -fPIC -O2 -c -I./ -I../ -I./inc/ -I./inc/lua"
+FLAGS_CXX_RELEASE = "-std=c++23 -Wall -Wextra -fPIC -O2 -c -shared -I./ -I../ -I./inc/ -I./inc/lua"
+
+FLAGS_CC_DEBUG  = "-std=c17 -Wall -Wextra -fPIC -g -O0 -c -I./ -I../ -I./inc/ -I./inc/lua"
+FLAGS_CXX_DEBUG = "-std=c++23 -Wall -Wextra -fPIC -g -O0 -c -shared -I./ -I../ -I./inc/ -I./inc/lua"
 
 ZIG_CC  = "zig cc"
 ZIG_CXX = "zig c++"
 
-OUTPUT_DIR = "bin"
-TMP = "tmp"
+OUTPUT_DIR_RELEASE = "bin/release"
+OUTPUT_DIR_DEBUG   = "bin/debug"
+TMP = "temp"
 
 LINK_FLAGS_MACOS   = "-dynamiclib"
 LINK_FLAGS_WINDOWS = "-shared -static -static-libstdc++ -static-libgcc"
 LINK_FLAGS_LINUX   = "-shared"
 
-PLATFORMS = [
-    # macOS universal
+
+# Types for clarity
+Platform = Dict[str, Optional[str]]
+
+
+PLATFORMS: List[Platform] = [
     {
         "name": "macOS (Universal)",
-        "target": None,  # native macOS clang
+        "target": None,
         "cc":  "gcc",
         "cxx": "g++",
         "extra": "-arch x86_64 -arch arm64",
         "out": "libyum.dylib",
         "link": LINK_FLAGS_MACOS,
     },
-    # Windows x64
     {
         "name": "Windows x64",
         "target": "x86_64-windows-gnu",
@@ -71,7 +84,6 @@ PLATFORMS = [
         "out": "winyum64.dll",
         "link": LINK_FLAGS_WINDOWS,
     },
-    # Windows x86
     {
         "name": "Windows x86",
         "target": "x86-windows-gnu",
@@ -81,17 +93,15 @@ PLATFORMS = [
         "out": "winyum32.dll",
         "link": LINK_FLAGS_WINDOWS,
     },
-    # Windows ARM64
     {
         "name": "Windows ARM64",
         "target": "aarch64-windows-gnu",
         "cc":  ZIG_CC,
         "cxx": ZIG_CXX,
         "extra": "",
-        "out": "winyum_arm64.dll", 
+        "out": "winyum_arm64.dll",
         "link": LINK_FLAGS_WINDOWS,
     },
-    # Linux x86_64
     {
         "name": "Linux x86_64",
         "target": "x86_64-linux-gnu",
@@ -101,7 +111,6 @@ PLATFORMS = [
         "out": "libyum64.so",
         "link": LINK_FLAGS_LINUX,
     },
-    # Linux x86
     {
         "name": "Linux x86",
         "target": "x86-linux-gnu",
@@ -111,7 +120,6 @@ PLATFORMS = [
         "out": "libyum32.so",
         "link": LINK_FLAGS_LINUX,
     },
-    # Linux ARM64
     {
         "name": "Linux ARM64",
         "target": "aarch64-linux-gnu",
@@ -123,34 +131,42 @@ PLATFORMS = [
     },
 ]
 
+
 # ──────────────────────────────────────────────────────────────
 # UTILITIES
 # ──────────────────────────────────────────────────────────────
-def run(cmd):
+
+def run(cmd: str) -> bool:
     try:
         subprocess.check_call(cmd, shell=True)
         return True
-    except:
+    except subprocess.CalledProcessError:
         return False
 
-def find_files(ext):
-    out = []
-    for root, dirs, files in os.walk("."):
+def find_files(ext: str) -> List[str]:
+    out: List[str] = []
+    for root, _dirs, files in os.walk("."):
         for f in files:
             if f.endswith(ext):
                 out.append(os.path.join(root, f))
     return out
 
-def compile_files(files, compiler, flags, target=None, extra=""):
-    objs = []
+def compile_files(
+    files: List[str],
+    compiler: str,
+    flags: str,
+    target: Optional[str] = None,
+    extra: str = ""
+) -> List[str]:
+
+    objs: List[str] = []
     n = len(files)
 
     for i, src in enumerate(files):
-        pct = (i+1)/n
+        pct = (i + 1) / n
         obj = os.path.join(TMP, os.path.basename(src) + ".o")
         objs.append(obj)
 
-        # UI
         lines = [
             f"{BOLD}{CYAN}Compiling...{RESET}{' ' * 20}",
             f"[{bar(pct)}]  {int(pct*100)}%",
@@ -158,7 +174,6 @@ def compile_files(files, compiler, flags, target=None, extra=""):
         ]
         multiline(lines)
 
-        # actual command
         tgt = f"-target {target}" if target else ""
         cmd = f'{compiler} {flags} {tgt} {extra} "{src}" -o "{obj}"'
 
@@ -171,27 +186,44 @@ def compile_files(files, compiler, flags, target=None, extra=""):
     print("\n", end="")
     return objs
 
-def link_binary(objlist:str, compiler:str, out:str, link:str, target: str|None = None, extra: str=""):
-    header(f"Linking{' ' * 20}")
+def link_binary(
+    objlist: List[str],
+    compiler: str|None,
+    out: str,
+    link: str|None,
+    target: Optional[str] = None,
+    extra: str|None = "",
+    output_dir: str = OUTPUT_DIR_RELEASE,
+) -> None:
+
+    header("Linking")
 
     tgt = f"-target {target}" if target else ""
     objs = " ".join(f'"{o}"' for o in objlist)
-    cmd = f'{compiler} {link} {tgt} {extra} {objs} -o {OUTPUT_DIR}/{out}'
+    output_path = os.path.join(output_dir, out)
+
+    cmd = f'{compiler} {link} {tgt} {extra} {objs} -o "{output_path}"'
 
     if not run(cmd):
         fail("Link failed")
         sys.exit(1)
 
-    success(f"Built → {GREEN}{out}{RESET}")
+    success(f"Built → {GREEN}{output_path}{RESET}")
+
 
 # ──────────────────────────────────────────────────────────────
 # MAIN BUILD
 # ──────────────────────────────────────────────────────────────
-def main():
-    # prepare
-    shutil.rmtree(OUTPUT_DIR, ignore_errors=True)
+
+def build_all(
+    flags_c: str,
+    flags_cpp: str,
+    output_dir: str,
+) -> None:
+
+    shutil.rmtree(output_dir, ignore_errors=True)
     shutil.rmtree(TMP, ignore_errors=True)
-    os.makedirs(OUTPUT_DIR)
+    os.makedirs(output_dir)
     os.makedirs(TMP)
 
     cfiles = find_files(".c")
@@ -200,45 +232,65 @@ def main():
     total = len(PLATFORMS)
 
     for i, plat in enumerate(PLATFORMS):
-        p = (i+1)/total
+        p = (i + 1) / total
 
         header(plat["name"])
 
-        # platform progress bar
         lines = [
             f"{CYAN}{plat['name']}{RESET}",
             f"[{bar(p)}] {int(p*100)}%",
             f"{DIM}Setting up...{RESET}"
         ]
-        
         multiline(lines)
 
-        # compile C
         objs_c = compile_files(
             cfiles,
             plat["cc"],
-            FLAGS_CC,
+            flags_c,
             plat["target"],
             plat["extra"]
         )
 
-        # compile C++
         objs_cpp = compile_files(
             cppfiles,
             plat["cxx"],
-            FLAGS_CXX,
+            flags_cpp,
             plat["target"],
             plat["extra"]
         )
 
-        # link
-        link_binary(objs_c + objs_cpp, plat["cxx"], plat["out"], plat["link"], plat["target"], plat["extra"])
+        link_binary(
+            objs_c + objs_cpp,
+            plat["cxx"],
+            plat["out"],
+            plat["link"],
+            plat["target"],
+            plat["extra"],
+            output_dir,
+        )
 
         print("\n")
 
     success("ALL BUILDS COMPLETED SUCCESSFULLY.\n")
 
-if __name__ == "__main__":
-    run(f"lua ./bump-version.lua {" ".join(sys.argv[1:])}")
+
+# ──────────────────────────────────────────────────────────────
+# ENTRYPOINT
+# ──────────────────────────────────────────────────────────────
+
+def main() -> None:
+    # version bump & docs
+    run(f"lua ./bump-version.lua {' '.join(sys.argv[1:])}")
     run("doxygen Doxyfile")
+
+    # Release
+    header("BUILD: RELEASE")
+    build_all(FLAGS_CC_RELEASE, FLAGS_CXX_RELEASE, OUTPUT_DIR_RELEASE)
+
+    # Debug
+    header("BUILD: DEBUG")
+    build_all(FLAGS_CC_DEBUG, FLAGS_CXX_DEBUG, OUTPUT_DIR_DEBUG)
+
+
+if __name__ == "__main__":
     main()

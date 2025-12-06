@@ -11,3 +11,4 @@ src/lua/src/build
 *.o
 _local.sh
 bin/
+temp/
