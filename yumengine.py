@@ -196,7 +196,7 @@ def link_binary(
     output_dir: str = OUTPUT_DIR_RELEASE,
 ) -> None:
 
-    header("Linking")
+    header(f"Linking{' ' * 20}")
 
     tgt = f"-target {target}" if target else ""
     objs = " ".join(f'"{o}"' for o in objlist)
