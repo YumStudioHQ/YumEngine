@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YumEngine</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="website/style.css">
 </head>
 <body>
   <div class="vignette"></div>
@@ -89,7 +89,7 @@
   </footer>
 
   <script>
-    fetch('news.json')
+    fetch('website/news.json')
     .then(res => res.json())
     .then(data => {
       const container = document.getElementById('news-list');
@@ -105,7 +105,7 @@
       });
     });
 
-    fetch('version.txt')
+    fetch('website/version.txt')
     .then(res => res.text())
     .then(res => {
       const place = document.getElementById('version')
