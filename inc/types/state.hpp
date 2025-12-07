@@ -53,7 +53,7 @@ namespace YumEngine::xV1 {
      * @param callback The callback that will get pushed.
      * @note You may push a table before pushing a callback (or you will end with UBs!)
      */
-    void push_callback(const lstring_t &name, const yum_callback &callback);
+    void push_callback(ascii name, const yum_callback &callback);
 
     /**
      * @brief Calls a Lua function.
@@ -102,6 +102,9 @@ namespace YumEngine::xV1 {
      * @note You may call this function when catching an exception.
      */
     void clear();
+
+    /** @brief Opens Lua's standard libraries. */
+    void open_stdlibs();
   };
 }
 
