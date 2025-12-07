@@ -121,11 +121,11 @@ namespace YumEngine::xV1 {
     lua_close(L);
   }
 
-  void State::push_callback(const lstring_t &name, const yum_callback &callback) {
-    if (name.length == 0) yumlibcxx_throw(expected a function name, syserr_t::NULL_OR_EMPTY_ARGUMENT, argument const lstring &name);
+  void State::push_callback(ascii name, const yum_callback &callback) {
+    if (!name) yumlibcxx_throw(expected a function name, syserr_t::NULL_OR_EMPTY_ARGUMENT, argument const lstring &name);
 
     thread_local std::unordered_map<std::string, yum_callback> _callbacks;
-    _callbacks[name.start] = callback;
+    _callbacks[name] = callback;
 
     thread_local auto static_lua_callback = [](lua_State *L) -> int {
       const char *cstrname = lua_tostring(L, lua_upvalueindex(1));
@@ -150,7 +150,7 @@ namespace YumEngine::xV1 {
     };
 
     lua_pushcclosure(L, static_lua_callback, 1);
-    lua_setfield(L, -2, name.start);
+    lua_setfield(L, -2, name);
   }
 
   vararray_t State::call(const lstring_t &path, const vararray_t &args) {
@@ -209,10 +209,10 @@ namespace YumEngine::xV1 {
   syserr_t State::run(ascii source, boolean_t isfile) {
     if (isfile) {
       if (luaL_dofile(L, source) != LUA_OK)
-        return yummakeerror("execution error", syserr_t::LUA_EXECUTION_ERROR, (luaL_dofile(L, source) != LUA_OK) is not true);
+        return yummakeerror_runtime(lua_tostring(L, -1), syserr_t::LUA_EXECUTION_ERROR);
     } else {
       if (luaL_dostring(L, source) != LUA_OK)
-        return yummakeerror("execution error", syserr_t::LUA_EXECUTION_ERROR, (luaL_dofile(L, source) != LUA_OK) is not true);
+        return yummakeerror_runtime(lua_tostring(L, -1), syserr_t::LUA_EXECUTION_ERROR);
     }
 
     return yumsuccess;
@@ -221,10 +221,10 @@ namespace YumEngine::xV1 {
   syserr_t State::load(const lstring_t &source, boolean_t isfile) {
     if (isfile) {
       if (luaL_loadfile(L, source.start) != LUA_OK)
-        return yummakeerror("execution error", syserr_t::LUA_EXECUTION_ERROR, (luaL_dofile(L, source) != LUA_OK) is not true);
+        return yummakeerror_runtime(lua_tostring(L, -1), syserr_t::LUA_EXECUTION_ERROR);
     } else {
       if (luaL_loadbuffer(L, source.start, source.length, "yumlibcxx_loadbuffer_api") != LUA_OK)
-        return yummakeerror("execution error", syserr_t::LUA_EXECUTION_ERROR, (luaL_dofile(L, source) != LUA_OK) is not true);
+        return yummakeerror_runtime(lua_tostring(L, -1), syserr_t::LUA_EXECUTION_ERROR);
     }
 
     return yumsuccess;
@@ -232,5 +232,9 @@ namespace YumEngine::xV1 {
 
   void State::clear() {
     lua_getglobal(L, "_G");
+  }
+
+  void State::open_stdlibs() {
+    luaL_openlibs(L);
   }
 }

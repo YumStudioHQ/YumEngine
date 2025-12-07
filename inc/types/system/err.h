@@ -60,6 +60,10 @@ typedef struct {
   .comment = lstring_from_string(YUM_IMTOSTRING(what, __VA_ARGS__)) };
 
 #define yummakeerror(what,cat,...) yummakeerror_x(what, cat, __VA_ARGS__);
+#define yummakeerror_runtime(what,cat) syserr_t {                        \
+  .category = cat,                                                   \
+  .source = { .func = lstring_from_string(__func__), .file = lstring_from_string(__FILE__), .line = __LINE__}, \
+  .comment = lstring_from_string(what) };
 
 #define yumsuccess syserr_t {.category = syserr_t::OK, .source = {}, .comment = { .start = nullptr, .length = 0, .owns = false } };
 

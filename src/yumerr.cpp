@@ -46,6 +46,8 @@ yumlibc_cfun const char *category_to_ascii(syserr_t err) {
     case err.NOT_A_TABLE: return "not a table";
     case err.INVALID_TYPE: return "invalid type";
     case err.NULL_OR_EMPTY_ARGUMENT: return "null or invalid argument";
+    case err.LUA_EXECUTION_ERROR: return "lua execution error";
+    case err.ILL_FUNCTION_PATH: return "ill function path";
     default: _mstr += std::to_string((int)err.category);
              return _mstr.c_str();
   }
@@ -53,7 +55,7 @@ yumlibc_cfun const char *category_to_ascii(syserr_t err) {
 
 yumlibc_cfun lstring_t yumfmterr(syserr_t err) {
   std::ostringstream oss;
-  oss << category_to_ascii(err) << " : " << lstring2cxxstring(err.comment)
+  oss << category_to_ascii(err) << '#' << (int)err.category << " : " << lstring2cxxstring(err.comment)
       << "\nfrom " << 
         lstring2cxxstring(err.source.file)
         << ':' << err.source.line << '.'

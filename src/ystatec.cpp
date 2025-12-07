@@ -38,10 +38,14 @@ void yumlibc_library_member(delete)(const YumState *state) {
   if (state) delete state;
 }
 
-syserr_t yumlibc_library_member(push_callback)(YumState *state, const lstring_t *name, const yum_callback callback) {
+void yumlibc_library_member(open_libs)(YumState *state) {
+  if (state) state->open_stdlibs();
+}
+
+syserr_t yumlibc_library_member(push_callback)(YumState *state, ascii name, const yum_callback callback) {
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   try {
-    state->push_callback(*name, callback);
+    state->push_callback(name, callback);
   } catch (const sysexception &e) {
     return e.geterr();
   }
