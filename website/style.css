@@ -135,3 +135,16 @@ footer {
   color: #111;
   box-shadow: 0 0 15px #f6c;
 }
+
+.btn-glow:hover {
+  text-shadow: 0 0 10px #ffb6c1, 0 0 20px #ffb6c1;
+  box-shadow: 0 0 20px #ffb6c1;
+  transform: scale(1.05);
+}
+
+@keyframes dreamShift {
+  0% {background: #1a1a2e;}
+  50% {background: #2e1a3f;}
+  100% {background: #1a1a2e;}
+}
+body { animation: dreamShift 60s infinite alternate; }
