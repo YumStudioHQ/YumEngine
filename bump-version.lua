@@ -7,6 +7,7 @@
 
 local VERSION_FILE = "inc/version/engine_version.h"
 local README_FILE  = "README.md"
+local WEBSITE_FILE = "website/version.txt"
 local CONFIG_FILE  = "version_config.lua" -- must return {studio="X", branch="Y"}
 local VERSION_PREFIX = "YUM_ENGINE"
 
@@ -65,6 +66,13 @@ local function write_version(major, minor, patch)
     out:write(string.format("#define %s_VERSION_STUDIO \"%s\"\n", VERSION_PREFIX, STUDIO))
     out:write("#endif")
     out:close()
+
+    -- Idk where to put it, so let's make it here!
+    -- Updates the website's version file (so website can also get last version)
+    local webout = io.open(WEBSITE_FILE, "w")
+    if not webout then error("Cannot write version in webout") end
+    webout:write(string.format("v%d.%d.%d", major, minor, patch))
+    webout:close()
 end
 
 local function parse_version(M, m, p, bump)
