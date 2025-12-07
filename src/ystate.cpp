@@ -149,8 +149,10 @@ namespace YumEngine::xV1 {
       return result.length;
     };
 
+    lua_pushstring(L, name);
     lua_pushcclosure(L, static_lua_callback, 1);
     lua_setfield(L, -2, name);
+    lua_pop(L, 1);
   }
 
   vararray_t State::call(const lstring_t &path, const vararray_t &args) {
@@ -199,11 +201,15 @@ namespace YumEngine::xV1 {
 
   void State::new_table(ascii name) {
     lua_newtable(L);
-    lua_setfield(L, -1, name);
+    lua_setfield(L, -2, name);
   }
 
   void State::push_table(ascii name) {
     lua_getfield(L, -1, name);
+  }
+
+  void State::push_global(ascii name) {
+    lua_getglobal(L, name);
   }
 
   syserr_t State::run(ascii source, boolean_t isfile) {
@@ -231,7 +237,7 @@ namespace YumEngine::xV1 {
   }
 
   void State::clear() {
-    lua_getglobal(L, "_G");
+    lua_pop(L, 0);
   }
 
   void State::open_stdlibs() {

@@ -102,6 +102,10 @@ syserr_t yumlibc_library_member(push_table)(YumState *state, ascii name) {
   return yumsuccess;
 }
 
+void yumlibc_library_member(push_global)(YumState *state, ascii name) {
+  if (state) state->push_global(name);
+}
+
 syserr_t yumlibc_library_member(new_table)(YumState *state, ascii name) {
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   if (!name) {

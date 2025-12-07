@@ -84,6 +84,12 @@ namespace YumEngine::xV1 {
     void new_table(ascii name);
 
     /**
+     * @brief Pushes a global value onto the stack.
+     * @param name the name of the global value.
+     */
+    void push_global(ascii name);
+
+    /**
      * @brief Runs a string or a file
      * @param source Path to the file or a string containing Lua code.
      * @return Error state (syserr type).
