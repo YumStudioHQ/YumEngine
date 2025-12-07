@@ -1,0 +1,137 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #111;
+  color: #eee;
+  line-height: 1.6;
+  position: relative;
+}
+
+.vignette {
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.8) 100%);
+  pointer-events: none;
+}
+
+header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+}
+
+header h1 {
+  font-size: 3rem;
+  color: #f6c;
+  text-shadow: 0 0 10px #f6c, 0 0 20px #f9c;
+}
+
+header p {
+  color: #ccc;
+}
+
+nav {
+  margin-top: 1rem;
+}
+
+nav a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: #ccc;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #f6c;
+  text-shadow: 0 0 5px #f6c;
+}
+
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.panel {
+  margin-bottom: 3rem;
+  padding: 1rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 10px;
+}
+
+.features-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.feature-card {
+  flex: 1 1 30%;
+  padding: 1rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.feature-card:hover {
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 0 15px #f6c;
+}
+
+.btn-glow {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  margin-top: 1rem;
+  background: #f6c;
+  color: #111;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 0 10px #f6c;
+  transition: 0.3s;
+}
+
+.btn-glow:hover {
+  box-shadow: 0 0 20px #f9c;
+  transform: translateY(-2px);
+}
+
+.news-list .news-card {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: rgba(255,255,255,0.05);
+  border-left: 4px solid #f6c;
+  border-radius: 5px;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #777;
+}
+
+.download-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.download-buttons button {
+  background: #111;
+  color: #f6c;
+  border: 2px solid #f6c;
+  border-radius: 10px;
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.download-buttons button:hover {
+  background: #f6c;
+  color: #111;
+  box-shadow: 0 0 15px #f6c;
+}

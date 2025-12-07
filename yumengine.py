@@ -64,7 +64,6 @@ LINK_FLAGS_LINUX   = "-shared"
 # Types for clarity
 Platform = Dict[str, Optional[str]]
 
-
 PLATFORMS: List[Platform] = [
     {
         "name": "macOS (Universal)",
@@ -72,7 +71,7 @@ PLATFORMS: List[Platform] = [
         "cc":  "gcc",
         "cxx": "g++",
         "extra": "-arch x86_64 -arch arm64",
-        "out": "libyum.dylib",
+        "out": "libyum_apple.dylib",
         "link": LINK_FLAGS_MACOS,
     },
     {
@@ -81,7 +80,7 @@ PLATFORMS: List[Platform] = [
         "cc":  ZIG_CC,
         "cxx": ZIG_CXX,
         "extra": "",
-        "out": "winyum64.dll",
+        "out": "libyum_win_x64.dll",
         "link": LINK_FLAGS_WINDOWS,
     },
     {
@@ -90,7 +89,7 @@ PLATFORMS: List[Platform] = [
         "cc":  ZIG_CC,
         "cxx": ZIG_CXX,
         "extra": "",
-        "out": "winyum32.dll",
+        "out": "libyum_win_x86.dll",
         "link": LINK_FLAGS_WINDOWS,
     },
     {
@@ -99,7 +98,7 @@ PLATFORMS: List[Platform] = [
         "cc":  ZIG_CC,
         "cxx": ZIG_CXX,
         "extra": "",
-        "out": "winyum_arm64.dll",
+        "out": "libyum_win_arm64.dll",
         "link": LINK_FLAGS_WINDOWS,
     },
     {
@@ -108,7 +107,7 @@ PLATFORMS: List[Platform] = [
         "cc":  ZIG_CC,
         "cxx": ZIG_CXX,
         "extra": "",
-        "out": "libyum64.so",
+        "out": "libyum_linux_x64.so",
         "link": LINK_FLAGS_LINUX,
     },
     {
@@ -117,7 +116,7 @@ PLATFORMS: List[Platform] = [
         "cc":  ZIG_CC,
         "cxx": ZIG_CXX,
         "extra": "",
-        "out": "libyum32.so",
+        "out": "libyum_linux_x86.so",
         "link": LINK_FLAGS_LINUX,
     },
     {
@@ -126,7 +125,7 @@ PLATFORMS: List[Platform] = [
         "cc":  ZIG_CC,
         "cxx": ZIG_CXX,
         "extra": "",
-        "out": "libyum_arm64.so",
+        "out": "libyum_linux_arm64.so",
         "link": LINK_FLAGS_LINUX,
     },
 ]

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YumEngine</title>
+  <link rel="stylesheet" href="website/style.css">
+</head>
+<body>
+  <div class="vignette"></div>
+
+  <header>
+    <div class="hero">
+      <h1>YumEngine</h1>
+      <p>Lua runtime & cross-language engine<br><span id="version"></span></p>
+      <a href="#download" class="btn-glow">Get it now</a>
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#news">News</a>
+      <a href="#download">Download</a>
+      <a href="#contact">Studio & Contributors</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about" class="panel">
+      <h2>About YumEngine</h2>
+      <p>
+        YumEngine is a lightweight, multi-language runtime designed to make <strong>Lua integration in Godot</strong> simple and programmatic. 
+        Built by <a href="https://github.com/wys-prog" target="_blank">MONOE</a> and contributors, it now supports C, C++, Lua, and C# seamlessly.
+      </p>
+    </section>
+
+    <section id="features" class="panel">
+      <h2>Core Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Dynamic Library</h3>
+          <p>Core utilities accessible from multiple languages.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Cross-Language Callbacks</h3>
+          <p>Register functions callable from Lua, C#, or others.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Simplified Lua Integration</h3>
+          <p>Programmatic Lua usage without manual stack management.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="news" class="panel">
+      <h2>What's happening</h2>
+      <div id="news-list" class="news-list"></div>
+    </section>
+
+    <section id="download" class="panel">
+      <h2>Download YumEngine</h2>
+      <p>Click your platform to download the latest release:</p>
+
+      <div class="download-buttons">
+        <button data-file="libyum_win_x64.dll">Windows x64</button>
+        <button data-file="libyum_win_x86.dll">Windows x86</button>
+        <button data-file="libyum_win_arm64.dll">Windws ARM64</button>
+        <button data-file="libyum_linux_x64.so">Linux x64</button>
+        <button data-file="libyum_linux_x86.so">Linux x86</button>
+        <button data-file="libyum_linux_arm64.so">Linux ARM64</button>
+        <button data-file="libyum_apple.dylib">macOS (universal)</button>
+        <button data-file="source">source code</button>
+      </div>
+
+      <p class="note">Release builds only. Debug builds are available through source compilation.</p>
+    </section>
+
+    <section id="contact" class="panel">
+      <h2>Studio & Contributors</h2>
+      <ul>
+        <li>Lead: <a href="https://github.com/wys-prog" target="_blank">MONOE</a></li>
+        <li>Contributor: <a href="https://github.com/yumstudiohq" target="_blank">YumStudio</a></li>
+      </ul>
+      <p>Feel free to fork, open issues, or contact us on GitHub.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 YumStudioHQ — YumEngine | <a href="./LICENSE">MIT License</a></p>
+  </footer>
+
+  <script>
+    fetch('website/news.json')
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById('news-list');
+      data.forEach(entry => {
+        const card = document.createElement('div');
+        card.className = 'news-card';
+        card.innerHTML = `
+          <h3>${entry.title}</h3>
+          <small>${entry.date}</small>
+          <p>${entry.content}</p>
+        `;
+        container.appendChild(card);
+      });
+    });
+
+    fetch('website/version.txt')
+    .then(res => res.text())
+    .then(res => {
+      const place = document.getElementById('version')
+      place.setHTMLUnsafe(res)
+    });
+
+    const buttons = document.querySelectorAll('.download-buttons button');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const fileName = btn.getAttribute('data-file');
+        if (fileName === "source") {
+          window.location.href = "https://github.com/YumStudioHQ/YumEngine";
+        } else {
+          const url = `https://github.com/YumStudioHQ/YumEngine/releases/latest/download/${fileName}`;
+          window.location.href = url;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
