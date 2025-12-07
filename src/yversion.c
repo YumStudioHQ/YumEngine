@@ -11,7 +11,7 @@ yumlibc_vdllmember uint64_t yumlibc_library_member(version_minor)() {
   return YUM_ENGINE_VERSION_MINOR;
 }
 
-yumlibc_vdllmember uint64_t yumlibc_library_member(version_path)() {
+yumlibc_vdllmember uint64_t yumlibc_library_member(version_patch)() {
   return YUM_ENGINE_VERSION_PATCH;
 }
 
