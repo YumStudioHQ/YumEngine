@@ -26,7 +26,6 @@
 #include "variant.hpp"
 #include "lua/lua.hpp"
 #include "base/types.h"
-#include "base/array.h"
 #include "base/callbacks.h"
 #include "system/err.h"
 
@@ -58,10 +57,13 @@ namespace YumEngine::xV1 {
     /**
      * @brief Calls a Lua function.
      * @param path The path of the function in a string (e.g. sometable.anotherone.funcname)
-     * @param args Arguments that you will give to the function.
+     * @param pathlen Size of the path.
+     * @param argc Count of arguments.
+     * @param argv Arguments that you will give to the function.
+     * @param outc [Out] count of returned arguments
      * @warning path **should not** contain null characters, and **should end** with a null-terminator.
      */
-    vararray_t call(const lstring_t &path, const vararray_t &args);
+    variant_t *call(ascii path, uint64_t pathlen, uint64_t argc, const variant_t *argv, uint64_t &outc);
 
     /**
      * @brief Pushes a value.

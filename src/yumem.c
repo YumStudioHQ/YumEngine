@@ -23,12 +23,13 @@
 #include <stdlib.h>
 
 #include "inc/types/base/types.h"
+#include "inc/_byumlibc.h"
 
-void *yumalloc(unsigned long long int s) {
+yumlibc_vdllmember void *yumalloc(uint64_t s) {
   return malloc(s);
 }
 
-void yumfree(void *p) {
+yumlibc_vdllmember void yumfree(void *p) {
   free(p); 
 }
 

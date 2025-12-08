@@ -21,22 +21,19 @@
  *************************************************************************************/
 
 #include <cstdlib>
+#include "inc/_byumlibc.h"
 
 template <typename T>
-inline T *yumalloc() {
+T *yumalloc() {
   return malloc(sizeof(T));
 }
 
 template <typename T>
-inline T *yumalloc(unsigned long long int s) {
+T *yumalloc(unsigned long long int s) {
   return malloc(sizeof(T) * s);
 }
 
-inline void *yumalloc(unsigned long long int s) {
-  return malloc(s);
-}
-
 template <typename T>
-inline void yumfree(const T *p) {
+void yumfree(const T *p) {
   yumfree((void*)p);
 }

@@ -20,16 +20,14 @@
  *                                                                                   *
  *************************************************************************************/
 
-#ifndef YUM_INCLUDE_GUARD_ARRAY_H
-#define YUM_INCLUDE_GUARD_ARRAY_H
+#ifdef DEBUG
+#include <stdio.h>
 
-#include "types.h"
-#include "vardef.h"
+inline void yum_debug_point(const char *file, const char *func, unsigned int line) {
+  printf("YUM-DEBUG-POINT-REACHED:\t%s:%u:%s\n", file, line, func);
+}
 
-typedef struct {
-  variant_t *var;
-  integer_t  length;
-  boolean_t  owns;
-} vararray_t;
-
-#endif // !YUM_INCLUDE_GUARD_ARRAY_H
+#define YUM_DEBUG_HERE yum_debug_point(__FILE__, __func__, __LINE__);
+#else
+#define YUM_DEBUG_HERE
+#endif

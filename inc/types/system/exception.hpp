@@ -28,12 +28,13 @@
 #include <stdexcept>
 
 namespace YumEngine::xV1 {
-  class sysexception : public std::exception {
+  class sysexception : public std::exception, public syserr_t {
   private:  syserr_t    err = {
               .category = err.UNKNOWN_ERROR,
               .source = { .file = lstring_from_string("uknown"), .func = lstring_from_string("unknown"), .line = -1},
               .comment = lstring_from_string("unknown exception")
             };
+            
             lstring_t   fmtmsg;
 
   public:   inline sysexception() {}
