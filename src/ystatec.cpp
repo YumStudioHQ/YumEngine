@@ -21,7 +21,6 @@
  *************************************************************************************/
 
 #include "inc/types/variant.h"
-#include "inc/types/base/array.h"
 #include "inc/types/state.hpp"
 #include "inc/types/system/err.h"
 #include "inc/types/system/exception.hpp"
@@ -53,16 +52,14 @@ syserr_t yumlibc_library_member(push_callback)(YumState *state, ascii name, cons
   return yumsuccess;
 }
 
-syserr_t yumlibc_library_member(call)(YumState *state, const lstring_t *path, const vararray_t *args, vararray_t *out) {
+syserr_t yumlibc_library_member(call)(YumState *state, ascii path, uint64_t pathlen, uint64_t argc, const variant_t *argv, variant_t *out, uint64_t *outc) {
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
-  if (!path->start || path->length == 0) {
+  if (!path || pathlen == 0) {
     return yummakeerror("(lstring_t)path is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
-  } else if (!out) {
-    return yummakeerror("*out is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   }
 
   try {
-    (*out) = state->call(*path, *args);
+    out = state->call(path, pathlen, argc, argv, *outc);
   } catch (const sysexception &e) {
     return e.geterr();
   }

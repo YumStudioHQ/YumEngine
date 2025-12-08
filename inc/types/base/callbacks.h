@@ -25,10 +25,8 @@
 
 #include "inc/_byumlibc.h"
 #include "inc/types/base/types.h"
-#include "inc/types/base/array.h"
 #include "inc/types/system/err.h"
 
-typedef vararray_t (*yumlibc_callback_type)(vararray_t);
-
+typedef variant_t *(*yumlibc_callback_type)(uint64_t, const variant_t*, uint64_t*);
 
 #endif // !YUM_INCLUDE_GUARD_CALLBACK_TYPEDEF_H

@@ -25,6 +25,7 @@
 #include "inc/types/state.hpp"
 #include "inc/types/variant.h"
 #include "inc/types/variant.hpp"
+#include "inc/debug/dbgpoints.h"
 #include "inc/types/system/err.h"
 #include "inc/utils/ystringutils.h"
 #include "inc/utils/ystringutils.hpp"
@@ -34,7 +35,7 @@
 #include <vector>
 #include <unordered_map>
 
-namespace YumEngine::xV1 {
+namespace YumEngine::xV1 {  
   static variant_t variant_from_lua(lua_State *L, int idx) {
     int type = lua_type(L, idx);
     switch (type) {
@@ -107,13 +108,43 @@ namespace YumEngine::xV1 {
     }
   }
 
-  static void push_vararray_to_lua(lua_State *L, vararray_t array) {
-    for (integer_t i = 0; i < array.length; i++) {
-      push_variant_to_lua(L, array.var[i]);
+  static void push_vararray_to_lua(lua_State *L, uint64_t argc, variant_t *argv) {
+    for (uint64_t i = 0; i < argc; i++) {
+      push_variant_to_lua(L, argv[i]);
+    }
+  }
+
+  namespace _static_units {
+    thread_local std::unordered_map<std::string, yum_callback> _callbacks;
+
+    static int static_lua_callback(lua_State* L) {
+      const char* cstrname = lua_tostring(L, lua_upvalueindex(1));
+      if (!cstrname) return 0;
+
+      auto it = _callbacks.find(cstrname);
+      if (it == _callbacks.end()) return 0;
+
+      int nargs = lua_gettop(L);
+      variant_t* arguments_from_lua = (variant_t*)yumalloc(sizeof(variant_t) * nargs);
+
+      for (int i = 0; i < nargs; i++) {
+        arguments_from_lua[i] = variant_from_lua(L, i + 1);
+      }
+
+      uint64_t outc;
+      variant_t* result = it->second(nargs, arguments_from_lua, &outc);
+      
+      push_vararray_to_lua(L, outc, result);
+      
+      yumfree((void*)arguments_from_lua);
+      // TODO: queue_free
+      
+      return static_cast<int>(outc);
     }
   }
 
   State::State() {
+    YUM_DEBUG_HERE
     L = luaL_newstate();
   }
 
@@ -122,75 +153,52 @@ namespace YumEngine::xV1 {
   }
 
   void State::push_callback(ascii name, const yum_callback &callback) {
+    YUM_DEBUG_HERE
+
     if (!name) yumlibcxx_throw(expected a function name, syserr_t::NULL_OR_EMPTY_ARGUMENT, argument const lstring &name);
-
-    thread_local std::unordered_map<std::string, yum_callback> _callbacks;
-    _callbacks[name] = callback;
-
-    thread_local auto static_lua_callback = [](lua_State *L) -> int {
-      const char *cstrname = lua_tostring(L, lua_upvalueindex(1));
-      if (!cstrname) return 0;
-
-      auto it = _callbacks.find(cstrname);
-      if (it == _callbacks.end()) return 0;
-      
-      int nargs = lua_gettop(L);
-      vararray_t arguments_from_lua = {
-        .var    = (variant_t*)yumalloc(sizeof(variant_t) * nargs),
-        .length = nargs,
-        .owns   = true
-      };
-
-      for (int i = 1; i < nargs; i++)
-        arguments_from_lua.var[i] = variant_from_lua(L, i);
-      
-      vararray_t result = it->second(arguments_from_lua);
-      push_vararray_to_lua(L, result);
-      return result.length;
-    };
+    
+    _static_units::_callbacks[name] = callback;
 
     lua_pushstring(L, name);
-    lua_pushcclosure(L, static_lua_callback, 1);
+    lua_pushcclosure(L, _static_units::static_lua_callback, 1);
     lua_setfield(L, -2, name);
     lua_pop(L, 1);
   }
 
-  vararray_t State::call(const lstring_t &path, const vararray_t &args) {
+  variant_t* State::call(ascii path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& outc) {
+    YUM_DEBUG_HERE
     lua_getglobal(L, "_G");
-
-    vararray_t arguments_from_lua = { };
-    bool found_function = false;
-
-    Sdk::strview(path.start, path.length).split('.', [&](Sdk::strview view) {
-      if (found_function)
-        yumlibcxx_throw("Ill formed function path", syserr_t::ILL_FUNCTION_PATH, function already called (found_function == true))
-
+    variant_t* results = nullptr;
+    YUM_DEBUG_HERE
+    Sdk::strview(path, pathlen).split('.', [&](Sdk::strview view) {
+      YUM_DEBUG_HERE
       lua_getfield(L, -1, view.head());
       lua_remove(L, -2);
 
-      if (lua_isfunction(L, -1)) {
-        found_function = true;
-
-        if (lua_pcall(L, args.length, LUA_MULTRET, 0) != LUA_OK) {
-          yumlibcxx_throw(lua_tostring(L, -1), syserr_t::LUA_EXECUTION_ERROR, "when calling lua function from C++");
-          // For later: Why not implement a traceback ?
-        } else {
-          int nargs = lua_gettop(L);
-
-          arguments_from_lua.var = (variant_t*)yumalloc(sizeof(variant_t) * nargs);
-          arguments_from_lua.length = nargs;
-          arguments_from_lua.owns = true;
-
-          for (int i = 1; i <= nargs; i++)
-            arguments_from_lua.var[i-1] = variant_from_lua(L, i);
-        }
+      if (!lua_istable(L, -1) && !lua_isfunction(L, -1)) {
+        yumlibcxx_throw("Expected table or function in path", syserr_t::INVALID_TYPE, "Lua call path invalid");
       }
 
-      if (!lua_istable(L, -1))
-        yumlibcxx_throw("expected table", syserr_t::INVALID_TYPE, lua_istable(L, -1) returned false);
+      if (lua_isfunction(L, -1)) {
+        for (uint64_t i = 0; i < argc; i++) {
+          push_variant_to_lua(L, args[i]);
+        }
+
+        if (lua_pcall(L, static_cast<int>(argc), LUA_MULTRET, 0) != LUA_OK) {
+          yumlibcxx_throw(lua_tostring(L, -1), syserr_t::LUA_EXECUTION_ERROR, "Lua function call failed");
+        }
+
+        int nresults = lua_gettop(L);
+        outc = static_cast<uint64_t>(nresults);
+        results = (variant_t*)yumalloc(sizeof(variant_t) * outc);
+        for (int i = 0; i < nresults; i++) {
+          results[i] = variant_from_lua(L, i + 1);
+        }
+      }
     });
     
-    return arguments_from_lua;
+    YUM_DEBUG_HERE
+    return results;
   }
 
   void State::push_variant(ascii name, const variant_t &var) {
