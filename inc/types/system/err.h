@@ -41,7 +41,8 @@ typedef struct {
     INVALID_TYPE,
     NULL_OR_EMPTY_ARGUMENT,
     LUA_EXECUTION_ERROR,
-    ILL_FUNCTION_PATH
+    ILL_FUNCTION_PATH,
+    PROMOTED_CXX_EXCEPTION,
   } category;
 
   struct {
@@ -57,7 +58,7 @@ typedef struct {
 #define yummakeerror_x(what,cat,...) syserr_t {                        \
   .category = cat,                                                   \
   .source = { .func = lstring_from_string(__func__), .file = lstring_from_string(__FILE__), .line = __LINE__}, \
-  .comment = lstring_from_string(YUM_IMTOSTRING(what, __VA_ARGS__)) };
+  .comment = lstring_from_string(YUM_IMTOSTRING(what, __VA_ARGS__)) }
 
 #define yummakeerror(what,cat,...) yummakeerror_x(what, cat, __VA_ARGS__);
 #define yummakeerror_runtime(what,cat) syserr_t {                        \

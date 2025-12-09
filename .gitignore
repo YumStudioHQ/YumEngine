@@ -12,3 +12,4 @@ src/lua/src/build
 _local.sh
 bin/
 temp/
+tests/

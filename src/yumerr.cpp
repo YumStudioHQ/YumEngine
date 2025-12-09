@@ -48,6 +48,7 @@ yumlibc_cfun const char *category_to_ascii(syserr_t err) {
     case err.NULL_OR_EMPTY_ARGUMENT: return "null or invalid argument";
     case err.LUA_EXECUTION_ERROR: return "lua execution error";
     case err.ILL_FUNCTION_PATH: return "ill function path";
+    case err.PROMOTED_CXX_EXCEPTION: return "promoted C++ exception";
     default: _mstr += std::to_string((int)err.category);
              return _mstr.c_str();
   }

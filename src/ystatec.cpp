@@ -25,6 +25,8 @@
 #include "inc/types/system/err.h"
 #include "inc/types/system/exception.hpp"
 
+#include <typeinfo>
+
 using namespace YumEngine::xV1;
 
 yumlibcxx_c_header_decoration_begin
@@ -47,6 +49,8 @@ syserr_t yumlibc_library_member(push_callback)(YumState *state, ascii name, cons
     state->push_callback(name, callback);
   } catch (const sysexception &e) {
     return e.geterr();
+  } catch (const std::exception &e) {
+    return yumlibcxx_promote_this_exception(e);
   }
 
   return yumsuccess;
@@ -62,6 +66,8 @@ syserr_t yumlibc_library_member(call)(YumState *state, ascii path, uint64_t path
     out = state->call(path, pathlen, argc, argv, *outc);
   } catch (const sysexception &e) {
     return e.geterr();
+  } catch (const std::exception &e) {
+    return yumlibcxx_promote_this_exception(e);
   }
 
   return yumsuccess;
@@ -79,6 +85,8 @@ syserr_t yumlibc_library_member(push_variant)(YumState *state, ascii name, const
     state->push_variant(name, *var);
   } catch (const sysexception &e) {
     return e.geterr();
+  } catch (const std::exception &e) {
+    return yumlibcxx_promote_this_exception(e);
   }
 
   return yumsuccess;
@@ -94,6 +102,8 @@ syserr_t yumlibc_library_member(push_table)(YumState *state, ascii name) {
     state->push_table(name);
   } catch (const sysexception &e) {
     return e.geterr();
+  } catch (const std::exception &e) {
+    return yumlibcxx_promote_this_exception(e);
   }
 
   return yumsuccess;
@@ -113,6 +123,8 @@ syserr_t yumlibc_library_member(new_table)(YumState *state, ascii name) {
     state->new_table(name);
   } catch (const sysexception &e) {
     return e.geterr();
+  } catch (const std::exception &e) {
+    return yumlibcxx_promote_this_exception(e);
   }
 
   return yumsuccess;

@@ -34,16 +34,16 @@ typedef struct YumState YumState;
 
 yumlibcxx_c_header_decoration_begin
 
-YumState *yum_move_cxx_function(new)(void);
-void      yum_move_cxx_function(delete)(const YumState *state);
-syserr_t  yum_move_cxx_function(push_callback)(YumState *state, const lstring_t *name, const yumcallback_t callback);
-syserr_t  yumlibc_library_member(call)(YumState *state, const lstring_t *path, uint64_t argc, const variant_t *argv, variant_t *out, uint64_t *outc);
-syserr_t  yum_move_cxx_function(push_variant)(YumState *state, ascii name, const variant_t *var);
-syserr_t  yum_move_cxx_function(push_table)(YumState *state, ascii name);
-syserr_t  yum_move_cxx_function(new_table)(YumState *state, ascii name);
-syserr_t  yum_move_cxx_function(run)(YumState *state, ascii source, boolean_t isfile);
-syserr_t  yum_move_cxx_function(load)(YumState *state, const lstring_t *source, boolean_t isfile);
-void      yum_move_cxx_function(clear)(YumState *state);
+YumState *yumlibc_library_member(new)(void);
+void      yumlibc_library_member(delete)(const YumState *state);
+syserr_t  yumlibc_library_member(push_callback)(YumState *state, ascii name, const yumcallback_t callback);
+syserr_t  yumlibc_library_member(call)(YumState *state, ascii path, uint64_t pathlen, uint64_t argc, const variant_t *argv, variant_t *out, uint64_t *outc);
+syserr_t  yumlibc_library_member(push_variant)(YumState *state, ascii name, const variant_t *var);
+syserr_t  yumlibc_library_member(push_table)(YumState *state, ascii name);
+syserr_t  yumlibc_library_member(new_table)(YumState *state, ascii name);
+syserr_t  yumlibc_library_member(run)(YumState *state, ascii source, boolean_t isfile);
+syserr_t  yumlibc_library_member(load)(YumState *state, const lstring_t *source, boolean_t isfile);
+void      yumlibc_library_member(clear)(YumState *state);
 
 yumlibcxx_c_header_decoration_end
 

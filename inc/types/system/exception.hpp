@@ -56,4 +56,15 @@ namespace YumEngine::xV1 {
   };
 }
 
-#define yumlibcxx_throw(what, kind, ...) throw yummakeerror_x(what, kind, __VA_ARGS__)
+#define yumlibcxx_throw(what, kind, ...) throw sysexception(yummakeerror_x(what, kind, __VA_ARGS__))
+
+#define yumlibcxx_make_exception_from(syserr) throw YumEngine::xV1::sysexception(syserr)
+#define yumlibcxx_promote_this_exception(e) syserr_t{ \
+    .category = syserr_t::PROMOTED_CXX_EXCEPTION, \
+    .source = { \
+      .func = lstring_from_string(__func__), \
+      .file = lstring_from_string(__FILE__), \
+      .line = __LINE__, \
+    }, \
+    .comment = lstring_from_string((e.what() + std::string(typeid(e).name())).c_str()) \
+  }

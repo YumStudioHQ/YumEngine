@@ -137,7 +137,7 @@ namespace YumEngine::xV1 {
       push_vararray_to_lua(L, outc, result);
       
       yumfree((void*)arguments_from_lua);
-      // TODO: queue_free
+      // TODO: queue_free?
       
       return static_cast<int>(outc);
     }
@@ -183,11 +183,11 @@ namespace YumEngine::xV1 {
         for (uint64_t i = 0; i < argc; i++) {
           push_variant_to_lua(L, args[i]);
         }
-
+      
         if (lua_pcall(L, static_cast<int>(argc), LUA_MULTRET, 0) != LUA_OK) {
           yumlibcxx_throw(lua_tostring(L, -1), syserr_t::LUA_EXECUTION_ERROR, "Lua function call failed");
         }
-
+      
         int nresults = lua_gettop(L);
         outc = static_cast<uint64_t>(nresults);
         results = (variant_t*)yumalloc(sizeof(variant_t) * outc);
@@ -196,7 +196,6 @@ namespace YumEngine::xV1 {
         }
       }
     });
-    
     YUM_DEBUG_HERE
     return results;
   }
