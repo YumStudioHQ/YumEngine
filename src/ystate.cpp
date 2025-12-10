@@ -108,7 +108,7 @@ namespace YumEngine::xV1 {
     }
   }
 
-  static void push_vararray_to_lua(lua_State *L, uint64_t argc, variant_t *argv) {
+  static void push_vararray_to_lua(lua_State *L, uint64_t argc, const variant_t *argv) {
     for (uint64_t i = 0; i < argc; i++) {
       push_variant_to_lua(L, argv[i]);
     }
@@ -141,6 +141,22 @@ namespace YumEngine::xV1 {
       
       return static_cast<int>(outc);
     }
+
+    void cd(lua_State *L, const Sdk::strview &view) {
+      YUM_DEBUG_HERE
+      bool first = true;
+
+      view.split('.', [&L, &first](Sdk::strview key_view) {
+        if (first) {
+          lua_getglobal(L, key_view.head());
+          first = false;
+        } else {
+          lua_getfield(L, -1, key_view.head());
+          lua_remove(L, -2);
+        }
+      });
+      YUM_DEBUG_HERE
+    }
   }
 
   State::State() {
@@ -162,42 +178,34 @@ namespace YumEngine::xV1 {
     lua_pushstring(L, name);
     lua_pushcclosure(L, _static_units::static_lua_callback, 1);
     lua_setfield(L, -2, name);
-    lua_pop(L, 1);
+    // TODO: clear?
   }
 
-  variant_t* State::call(ascii path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& outc) {
+  syserr_t State::call(ascii path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& nargs, variant_t *out) {
     YUM_DEBUG_HERE
-    lua_getglobal(L, "_G");
-    variant_t* results = nullptr;
-    YUM_DEBUG_HERE
-    Sdk::strview(path, pathlen).split('.', [&](Sdk::strview view) {
-      YUM_DEBUG_HERE
-      lua_getfield(L, -1, view.head());
-      lua_remove(L, -2);
+    int top_before = lua_gettop(L);
+    out = nullptr;
+    
+    _static_units::cd(L, Sdk::strview(path, pathlen));
 
-      if (!lua_istable(L, -1) && !lua_isfunction(L, -1)) {
-        yumlibcxx_throw("Expected table or function in path", syserr_t::INVALID_TYPE, "Lua call path invalid");
-      }
+    // Push arguments on Lua's stack (ig lol)
+    push_vararray_to_lua(L, argc, args);
 
-      if (lua_isfunction(L, -1)) {
-        for (uint64_t i = 0; i < argc; i++) {
-          push_variant_to_lua(L, args[i]);
-        }
-      
-        if (lua_pcall(L, static_cast<int>(argc), LUA_MULTRET, 0) != LUA_OK) {
-          yumlibcxx_throw(lua_tostring(L, -1), syserr_t::LUA_EXECUTION_ERROR, "Lua function call failed");
-        }
-      
-        int nresults = lua_gettop(L);
-        outc = static_cast<uint64_t>(nresults);
-        results = (variant_t*)yumalloc(sizeof(variant_t) * outc);
-        for (int i = 0; i < nresults; i++) {
-          results[i] = variant_from_lua(L, i + 1);
-        }
-      }
-    });
+    if (lua_pcall(L, argc, LUA_MULTRET, 0) != LUA_OK) {
+      return yummakeerror_runtime(lua_tostring(L, -1), syserr_t::LUA_EXECUTION_ERROR);
+    }
+
+    nargs = lua_gettop(L) - top_before;
+
+    if (nargs > 0) {
+      out = (variant_t*)yumalloc(nargs);
+      for (int i = 0; i < nargs; i++) out[i] = variant_from_lua(L, i);
+    }
+
+    lua_settop(L, top_before);
+
     YUM_DEBUG_HERE
-    return results;
+    return yumsuccess;
   }
 
   void State::push_variant(ascii name, const variant_t &var) {

@@ -60,10 +60,11 @@ namespace YumEngine::xV1 {
      * @param pathlen Size of the path.
      * @param argc Count of arguments.
      * @param argv Arguments that you will give to the function.
-     * @param outc [Out] count of returned arguments
+     * @param outc [Out] count of returned arguments.
+     * @param out [Out] output of the call.
      * @warning path **should not** contain null characters, and **should end** with a null-terminator.
      */
-    variant_t *call(ascii path, uint64_t pathlen, uint64_t argc, const variant_t *argv, uint64_t &outc);
+    syserr_t call(ascii path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& nargs, variant_t *out);
 
     /**
      * @brief Pushes a value.
