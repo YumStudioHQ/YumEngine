@@ -63,7 +63,7 @@ syserr_t yumlibc_library_member(call)(YumState *state, ascii path, uint64_t path
   }
 
   try {
-    out = state->call(path, pathlen, argc, argv, *outc);
+    return state->call(path, pathlen, argc, argv, *outc, out);
   } catch (const sysexception &e) {
     return e.geterr();
   } catch (const std::exception &e) {

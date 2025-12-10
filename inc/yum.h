@@ -25,7 +25,6 @@
 
 #include "inc/api/ystatec.h"
 #include "inc/managers/lstring_utils.h"
-#include "inc/types/base/array.h"
 #include "inc/types/base/callbacks.h"
 #include "inc/types/base/types.h"
 #include "inc/types/base/vardef.h"
