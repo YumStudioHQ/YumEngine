@@ -23,8 +23,10 @@
 #pragma once
 
 extern "C" {
+  #include "yummem.h"
+
   void *yumalloc(unsigned long long int s);
-  void yumfree(void *p);
+  void  yumfree(void *p);
 }
 
 template <typename T>  T*      yumalloc();

@@ -22,8 +22,15 @@
 
 #ifdef DEBUG
 #include <stdio.h>
-
-#define YUM_DEBUG_HERE printf("YUM-DEBUG-POINT-REACHED:\t%s:%u:%s\n", __FILE__, __LINE__, __func__);
+#define YUM_DEBUG_HERE      printf("YUM-DEBUG-POINT-REACHED:\t%s:%u:%s\n", __FILE__, __LINE__, __func__);
+#define YUM_DEBUG_PUTS(w)   printf("YUM-DEBUG-POINT-REACHED:\t%s:%u:%s:%s\n", __FILE__, __LINE__, __func__, w);
+#define YUM_DEBUG_PUTL(s,l) printf("YUM-DEBUG-POINT-REACHED:\t%s:%u:%s:'%.*s'\n", __FILE__, __LINE__, __func__, l, s);
+#define YUM_DEBUG_OUTF      printf("YUM-DEBUG-POINT-REACHED:\t%s:%u:%s: exiting function\n", __FILE__, __LINE__, __func__);
+#define YUM_DEBUG_CHECKP(n) printf("YUM-DEBUG-POINT-REACHED:\t%s:%u:%s: check-point '%s'\n", __FILE__, __LINE__, __func__, n);
 #else
 #define YUM_DEBUG_HERE
+#define YUM_DEBUG_PUTS(w)
+#define YUM_DEBUG_PUTL(s,l)
+#define YUM_DEBUG_OUTF
+#define YUM_DEBUG_CHECKP(n)
 #endif

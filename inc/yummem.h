@@ -26,6 +26,7 @@
 #include "_byumlibc.h"
 
 yumlibc_cfun void *yumalloc(unsigned long long int s);
-yumlibc_cfun void yumfree(void *p);
+yumlibc_cfun void  yumfree(void *p);
+yumlibc_cfun char *yumstrcpy(const char *src, unsigned long long int len);
 
 #endif // YUM_INCLUDE_GUARD_YUM_C_MEMORY_H

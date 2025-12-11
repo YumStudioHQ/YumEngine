@@ -77,7 +77,7 @@ namespace YumEngine::xV1::containers {
         }
       }
 
-      if (last <= this->_length) {
+      if (last < this->_length) {
         views.append(stringlookup(this->start + last, this->_length - last));
       }
 
@@ -94,7 +94,7 @@ namespace YumEngine::xV1::containers {
         }
       }
 
-      if (last != this->_length) callback(stringlookup<CharT>(this->start + last, last)); // WAIT?
+      if (last != this->_length) callback(stringlookup<CharT>(this->start + last, this->_length - last));
     }
 
     template <typename Callback>
@@ -146,6 +146,9 @@ namespace YumEngine::xV1::containers {
     
     ~basic_string() {
       if (start) delete[] start;
+      start = nullptr;
+      _size = 0;
+      capacity = 0;
     }
 
     auto _enumerable_head_impl() const {
@@ -211,7 +214,7 @@ namespace YumEngine::xV1::containers {
     }
 
     auto _enumerable_append_impl(const CharT &e) {
-      if (_size + 1 > capacity) realloc((uint64_t)capacity * 1.2f);
+      if (_size + 1 > capacity) realloc(std::max((uint64_t)(capacity * 1.2f), _size + 1));
       start[_size] = e;
       _size++;
     }

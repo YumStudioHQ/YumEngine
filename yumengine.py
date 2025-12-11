@@ -5,6 +5,7 @@ import time
 import subprocess
 import shutil
 from typing import List, Dict, Optional
+import zipfile
 
 # ──────────────────────────────────────────────────────────────
 # STYLISH ANSI UI
@@ -17,8 +18,8 @@ GREEN = "\033[32m"
 YELLOW= "\033[33m"
 CYAN  = "\033[36m"
 
-CLEAR  = "\033[2K"
-UP     = "\033[A"
+CLEAR = "\033[2K"
+UP    = "\033[A"
 
 def bar(p: float, size: int = 24) -> str:
     fill = "█" * int(p * size)
@@ -41,13 +42,13 @@ def fail(msg: str|None) -> None:
 
 
 # ──────────────────────────────────────────────────────────────
-# CONFIG
+# BUILD CONFIG
 # ──────────────────────────────────────────────────────────────
 FLAGS_CC_RELEASE  = "-std=c17 -Wall -Wextra -fPIC -O2 -c -I./ -I../ -I./inc/ -I./inc/lua"
 FLAGS_CXX_RELEASE = "-std=c++23 -Wall -Wextra -fPIC -O2 -c -shared -I./ -I../ -I./inc/ -I./inc/lua"
 
 FLAGS_CC_DEBUG  = "-std=c17 -Wall -Wextra -fPIC -g -O0 -c -I./ -I../ -I./inc/ -I./inc/lua -DDEBUG"
-FLAGS_CXX_DEBUG = "-std=c++23 -Wall -Wextra -fPIC -g -O0 -c -shared -I./ -I../ -I./inc/ -I./inc/lua  -DDEBUG"
+FLAGS_CXX_DEBUG = "-std=c++23 -Wall -Wextra -fPIC -g -O0 -c -shared -I./ -I../ -I./inc/ -I./inc/lua -DDEBUG"
 
 ZIG_CC  = "zig cc"
 ZIG_CXX = "zig c++"
@@ -60,74 +61,29 @@ LINK_FLAGS_MACOS   = "-dynamiclib"
 LINK_FLAGS_WINDOWS = "-shared -static -static-libstdc++ -static-libgcc"
 LINK_FLAGS_LINUX   = "-shared"
 
-
-# Types for clarity
 Platform = Dict[str, Optional[str]]
 
 PLATFORMS: List[Platform] = [
-    {
-        "name": "macOS (Universal)",
-        "target": None,
-        "cc":  "gcc",
-        "cxx": "g++",
-        "extra": "-arch x86_64 -arch arm64",
-        "out": "libyum_apple.dylib",
-        "link": LINK_FLAGS_MACOS,
-    },
-    {
-        "name": "Windows x64",
-        "target": "x86_64-windows-gnu",
-        "cc":  ZIG_CC,
-        "cxx": ZIG_CXX,
-        "extra": "",
-        "out": "libyum_win_x64.dll",
-        "link": LINK_FLAGS_WINDOWS,
-    },
-    {
-        "name": "Windows x86",
-        "target": "x86-windows-gnu",
-        "cc":  ZIG_CC,
-        "cxx": ZIG_CXX,
-        "extra": "",
-        "out": "libyum_win_x86.dll",
-        "link": LINK_FLAGS_WINDOWS,
-    },
-    {
-        "name": "Windows ARM64",
-        "target": "aarch64-windows-gnu",
-        "cc":  ZIG_CC,
-        "cxx": ZIG_CXX,
-        "extra": "",
-        "out": "libyum_win_arm64.dll",
-        "link": LINK_FLAGS_WINDOWS,
-    },
-    {
-        "name": "Linux x86_64",
-        "target": "x86_64-linux-gnu",
-        "cc":  ZIG_CC,
-        "cxx": ZIG_CXX,
-        "extra": "",
-        "out": "libyum_linux_x64.so",
-        "link": LINK_FLAGS_LINUX,
-    },
-    {
-        "name": "Linux x86",
-        "target": "x86-linux-gnu",
-        "cc":  ZIG_CC,
-        "cxx": ZIG_CXX,
-        "extra": "",
-        "out": "libyum_linux_x86.so",
-        "link": LINK_FLAGS_LINUX,
-    },
-    {
-        "name": "Linux ARM64",
-        "target": "aarch64-linux-gnu",
-        "cc":  ZIG_CC,
-        "cxx": ZIG_CXX,
-        "extra": "",
-        "out": "libyum_linux_arm64.so",
-        "link": LINK_FLAGS_LINUX,
-    },
+    { "name": "macOS (Universal)", "target": None, "cc": "gcc", "cxx": "g++",
+      "extra": "-arch x86_64 -arch arm64", "out": "libyum_apple.dylib", "link": LINK_FLAGS_MACOS },
+
+    { "name": "Windows x64",   "target": "x86_64-windows-gnu",  "cc": ZIG_CC, "cxx": ZIG_CXX,
+      "extra": "", "out": "libyum_win_x64.dll", "link": LINK_FLAGS_WINDOWS },
+
+    { "name": "Windows x86",   "target": "x86-windows-gnu",     "cc": ZIG_CC, "cxx": ZIG_CXX,
+      "extra": "", "out": "libyum_win_x86.dll", "link": LINK_FLAGS_WINDOWS },
+
+    { "name": "Windows ARM64", "target": "aarch64-windows-gnu", "cc": ZIG_CC, "cxx": ZIG_CXX,
+      "extra": "", "out": "libyum_win_arm64.dll", "link": LINK_FLAGS_WINDOWS },
+
+    { "name": "Linux x86_64",  "target": "x86_64-linux-gnu",    "cc": ZIG_CC, "cxx": ZIG_CXX,
+      "extra": "", "out": "libyum_linux_x64.so", "link": LINK_FLAGS_LINUX },
+
+    { "name": "Linux x86",     "target": "x86-linux-gnu",       "cc": ZIG_CC, "cxx": ZIG_CXX,
+      "extra": "", "out": "libyum_linux_x86.so", "link": LINK_FLAGS_LINUX },
+
+    { "name": "Linux ARM64",   "target": "aarch64-linux-gnu",   "cc": ZIG_CC, "cxx": ZIG_CXX,
+      "extra": "", "out": "libyum_linux_arm64.so", "link": LINK_FLAGS_LINUX },
 ]
 
 
@@ -150,14 +106,8 @@ def find_files(ext: str) -> List[str]:
                 out.append(os.path.join(root, f))
     return out
 
-def compile_files(
-    files: List[str],
-    compiler: str,
-    flags: str,
-    target: Optional[str] = None,
-    extra: str = ""
-) -> List[str]:
 
+def compile_files(files: List[str], compiler: str, flags: str, target: Optional[str] = None, extra: str = "") -> List[str]:
     objs: List[str] = []
     n = len(files)
 
@@ -167,7 +117,7 @@ def compile_files(
         objs.append(obj)
 
         lines = [
-            f"{BOLD}{CYAN}Compiling...{RESET}{' ' * 20}",
+            f"{BOLD}{CYAN}Compiling...{RESET}{' '*20}",
             f"[{bar(pct)}]  {int(pct*100)}%",
             f"{DIM}{src}{RESET}"
         ]
@@ -185,18 +135,9 @@ def compile_files(
     print("\n", end="")
     return objs
 
-def link_binary(
-    objlist: List[str],
-    compiler: str|None,
-    out: str,
-    link: str|None,
-    target: Optional[str] = None,
-    extra: str|None = "",
-    output_dir: str = OUTPUT_DIR_RELEASE,
-) -> None:
 
-    header(f"Linking{' ' * 20}")
-
+def link_binary(objlist: List[str], compiler: str, out: str, link: str, target: Optional[str], extra: str, output_dir: str):
+    header(f"Linking{' '*20}")
     tgt = f"-target {target}" if target else ""
     objs = " ".join(f'"{o}"' for o in objlist)
     output_path = os.path.join(output_dir, out)
@@ -211,15 +152,10 @@ def link_binary(
 
 
 # ──────────────────────────────────────────────────────────────
-# MAIN BUILD
+# BUILD ALL
 # ──────────────────────────────────────────────────────────────
 
-def build_all(
-    flags_c: str,
-    flags_cpp: str,
-    output_dir: str,
-) -> None:
-
+def build_all(flags_c: str, flags_cpp: str, output_dir: str):
     shutil.rmtree(output_dir, ignore_errors=True)
     shutil.rmtree(TMP, ignore_errors=True)
     os.makedirs(output_dir)
@@ -242,21 +178,8 @@ def build_all(
         ]
         multiline(lines)
 
-        objs_c = compile_files(
-            cfiles,
-            plat["cc"],
-            flags_c,
-            plat["target"],
-            plat["extra"]
-        )
-
-        objs_cpp = compile_files(
-            cppfiles,
-            plat["cxx"],
-            flags_cpp,
-            plat["target"],
-            plat["extra"]
-        )
+        objs_c = compile_files(cfiles,   plat["cc"],  flags_c,  plat["target"], plat["extra"])
+        objs_cpp = compile_files(cppfiles, plat["cxx"], flags_cpp, plat["target"], plat["extra"])
 
         link_binary(
             objs_c + objs_cpp,
@@ -274,22 +197,101 @@ def build_all(
 
 
 # ──────────────────────────────────────────────────────────────
+# ZIP PACKAGING (from script #1, rewritten with UI)
+# ──────────────────────────────────────────────────────────────
+
+def zip_with_progress(zipname: str, filelist: List[str], rootdir: str):
+    header(f"Packaging → {zipname}.zip")
+
+    with zipfile.ZipFile(f"{zipname}.zip", "w", zipfile.ZIP_DEFLATED) as zipf:
+        n = len(filelist)
+
+        for i, f in enumerate(filelist):
+            pct = (i + 1) / n
+            rel = os.path.relpath(f, rootdir)
+
+            lines = [
+                f"{CYAN}Adding files...{RESET}",
+                f"[{bar(pct)}] {int(pct*100)}%",
+                f"{DIM}{rel}{RESET}",
+            ]
+            multiline(lines)
+
+            zipf.write(f, rel)
+            time.sleep(0.02)
+
+    print("")
+    success(f"Wrote {zipname}.zip")
+
+
+def package_outputs(debug_dir: str, release_dir: str):
+    header("PACKAGING LIBYUM")
+
+    # DEBUG ZIP
+    if os.path.isdir(debug_dir):
+        files = [os.path.join(dp, f) for dp,_,fs in os.walk(debug_dir) for f in fs]
+        zip_with_progress("bin/libyum_debug", files, debug_dir)
+
+    # RELEASE ZIP
+    if os.path.isdir(release_dir):
+        files = [os.path.join(dp, f) for dp,_,fs in os.walk(release_dir) for f in fs]
+        zip_with_progress("bin/libyum_release", files, release_dir)
+
+    # PRODUCTION ZIP
+    header("Packaging Production Bundle")
+    prod_files = []
+
+    for base in [debug_dir, release_dir]:
+        if not os.path.isdir(base):
+            continue
+        for dp, _dirs, fs in os.walk(base):
+            for f in fs:
+                full = os.path.join(dp, f)
+                rel = os.path.join(os.path.basename(base), os.path.relpath(full, base))
+                prod_files.append((full, rel))
+
+    zipname = "bin/libyum_production"
+    header(f"Packaging → {zipname}.zip")
+
+    with zipfile.ZipFile(f"{zipname}.zip", "w", zipfile.ZIP_DEFLATED) as zipf:
+        n = len(prod_files)
+        for i, (src, rel) in enumerate(prod_files):
+            pct = (i + 1) / n
+            lines = [
+                f"{CYAN}Adding files...{RESET}",
+                f"[{bar(pct)}] {int(pct*100)}%",
+                f"{DIM}{rel}{RESET}",
+            ]
+            multiline(lines)
+
+            zipf.write(src, rel)
+            time.sleep(0.02)
+
+    print("")
+    success(f"Wrote {zipname}.zip")
+    print("")
+
+
+# ──────────────────────────────────────────────────────────────
 # ENTRYPOINT
 # ──────────────────────────────────────────────────────────────
 
-def main() -> None:
-    # version bump & docs
-    run(f"lua ./bump-version.lua {' '.join(sys.argv[1:])}")
-    run("doxygen Doxyfile")
+def main():
+    if "--release" in sys.argv:
+        run(f"lua ./bump-version.lua {' '.join(sys.argv[1:])}")
+        run("doxygen Doxyfile")
 
-    # Release
-    header("BUILD: RELEASE")
-    build_all(FLAGS_CC_RELEASE, FLAGS_CXX_RELEASE, OUTPUT_DIR_RELEASE)
+        header("BUILD: RELEASE")
+        build_all(FLAGS_CC_RELEASE, FLAGS_CXX_RELEASE, OUTPUT_DIR_RELEASE)
 
-    # Debug
-    header("BUILD: DEBUG")
-    build_all(FLAGS_CC_DEBUG, FLAGS_CXX_DEBUG, OUTPUT_DIR_DEBUG)
+        header("BUILD: DEBUG")
+        build_all(FLAGS_CC_DEBUG, FLAGS_CXX_DEBUG, OUTPUT_DIR_DEBUG)
 
+        package_outputs(OUTPUT_DIR_DEBUG, OUTPUT_DIR_RELEASE)
+
+        success("DONE.\n")
+    else:
+        build_all(FLAGS_CC_DEBUG, FLAGS_CXX_DEBUG, OUTPUT_DIR_DEBUG)
 
 if __name__ == "__main__":
     main()

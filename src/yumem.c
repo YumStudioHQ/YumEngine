@@ -48,3 +48,9 @@ void free_lstring(lstring_t lstring) {
     yumfree((void*)lstring.start);
   }
 }
+
+yumlibc_vdllmember char *yumstrcpy(const char *src, uint64_t len) {
+  char *buff = (char*)yumalloc(sizeof(char) * len);
+  for (uint64_t i = 0; i < len; i++) buff[i] = src[i];
+  return buff;
+}

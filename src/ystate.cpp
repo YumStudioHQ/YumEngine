@@ -43,7 +43,13 @@ namespace YumEngine::xV1 {
       case LUA_TSTRING: {
         size_t len;
         const char *cstr = lua_tolstring(L, idx, &len);
-        return Variant(lstring_t{.start = cstr, .length = len, .owns = false});
+        lstring_t lstring {
+          .start = yumstrcpy(cstr, len),
+          .length = len, 
+          .owns = true
+        };
+
+        return Variant(lstring);
       }
       case LUA_TNUMBER: {
         if (lua_isinteger(L, idx)) {
@@ -155,7 +161,7 @@ namespace YumEngine::xV1 {
           lua_remove(L, -2);
         }
       });
-      YUM_DEBUG_HERE
+      YUM_DEBUG_OUTF
     }
   }
 
@@ -192,14 +198,29 @@ namespace YumEngine::xV1 {
     push_vararray_to_lua(L, argc, args);
 
     if (lua_pcall(L, argc, LUA_MULTRET, 0) != LUA_OK) {
-      return yummakeerror_runtime(lua_tostring(L, -1), syserr_t::LUA_EXECUTION_ERROR);
+      std::string msg = lua_tostring(L, -1);
+      msg += "* when calling function:\tL`" + std::string(path) + '`';
+      syserr_t err = syserr_t {
+        .category = syserr_t::LUA_EXECUTION_ERROR,
+        .source = { .file = lstring_from_string(__FILE__), .func = lstring_from_string(__func__), .line = __LINE__, },
+        .comment = cxxstring2lstring(msg)
+      };
+      return err;
     }
 
     nargs = lua_gettop(L) - top_before;
+    int first_ret = top_before + 1; // You sure??
+    for (int i = 0; i < nargs; i++) {
+      out[i] = variant_from_lua(L, first_ret + i);
+    }
+
 
     if (nargs > 0) {
-      out = (variant_t*)yumalloc(nargs);
-      for (int i = 0; i < nargs; i++) out[i] = variant_from_lua(L, i);
+      out = (variant_t*)yumalloc(nargs * sizeof(variant_t));
+      for (int i = 0; i < nargs; i++) {
+        out[i] = variant_from_lua(L, i);
+        YUM_DEBUG_PUTS("smth")
+      }
     }
 
     lua_settop(L, top_before);

@@ -1,11 +1,7 @@
 [
   {
-    "date": "2025-12-05",
-    "title": "First commit for website",
-    "content": "The static website is live on GitHub Pages."
-  },{
-    "date": "2025-12-05",
-    "title": "Binaries are not avaible!",
-    "content": "Please, wait few days or hours to download binaries, or, download from Github."
+    "date": "2025-12-11",
+    "title": "A horrible release...",
+    "content": "Binaries are maintained but still deployed... They might not working properly... Ouf! We thought that the major v3.x.x would be much better than the 2.x.x !"
   }
 ]

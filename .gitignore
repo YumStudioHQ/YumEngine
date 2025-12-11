@@ -13,3 +13,4 @@ _local.sh
 bin/
 temp/
 tests/
+*.dSYM
