@@ -70,9 +70,9 @@ namespace YumEngine::xV1 {
         lua_getfield(L, idx, "__yumbytes");
         if (!lua_isnil(L, -1)) {
           size_t len;
-          const char *data = lua_tolstring(L, -1, &len);
+          const char *data = yumstrcpy(lua_tolstring(L, -1, &len), len);
           lua_pop(L, 1);
-          return Variant(binary_t{.start = (const uint8_t*)data, .length = len, .owns = false});
+          return Variant(binary_t{.start = (const uint8_t*)data, .length = len, .owns = true});
         }
         lua_pop(L, 1); // pop nil
 
@@ -187,45 +187,58 @@ namespace YumEngine::xV1 {
     // TODO: clear?
   }
 
-  syserr_t State::call(ascii path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& nargs, variant_t *out) {
-    YUM_DEBUG_HERE
+  syserr_t State::call(ascii path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& nargs, variant_t** out) {
+    YUM_DEBUG_HERE;
+
+    nargs = 0;
+
     int top_before = lua_gettop(L);
-    out = nullptr;
-    
+
+    // Push function onto stack
     _static_units::cd(L, Sdk::strview(path, pathlen));
 
-    // Push arguments on Lua's stack (ig lol)
+    if (!lua_isfunction(L, -1)) {
+      lua_settop(L, top_before);
+      return yummakeerror_runtime("Not a Lua function", syserr_t::LUA_EXECUTION_ERROR);
+    }
+
+    // Push args AFTER function is already at stack top
     push_vararray_to_lua(L, argc, args);
 
+    // Call
+    YUM_DEBUG_PUTS("calling lua function")
     if (lua_pcall(L, argc, LUA_MULTRET, 0) != LUA_OK) {
       std::string msg = lua_tostring(L, -1);
-      msg += "* when calling function:\tL`" + std::string(path) + '`';
-      syserr_t err = syserr_t {
+      msg += "* when calling: `" + std::string(path) + "`";
+
+      lua_settop(L, top_before);
+
+      return syserr_t{
         .category = syserr_t::LUA_EXECUTION_ERROR,
-        .source = { .file = lstring_from_string(__FILE__), .func = lstring_from_string(__func__), .line = __LINE__, },
-        .comment = cxxstring2lstring(msg)
+        .source   = { .file = lstring_from_string(__FILE__),
+                      .func = lstring_from_string(__func__),
+                      .line = __LINE__ },
+        .comment  = cxxstring2lstring(msg)
       };
-      return err;
     }
 
-    nargs = lua_gettop(L) - top_before;
-    int first_ret = top_before + 1; // You sure??
-    for (int i = 0; i < nargs; i++) {
-      out[i] = variant_from_lua(L, first_ret + i);
-    }
-
-
+    // Calculate returned values
+    int top_after = lua_gettop(L);
+    nargs = top_after - top_before;
+    YUM_DEBUG_PUTS("translating args")
     if (nargs > 0) {
-      out = (variant_t*)yumalloc(nargs * sizeof(variant_t));
-      for (int i = 0; i < nargs; i++) {
-        out[i] = variant_from_lua(L, i);
-        YUM_DEBUG_PUTS("smth")
+      YUM_DEBUG_HERE
+      (*out) = (variant_t*)yumalloc(nargs * sizeof(variant_t));
+      YUM_DEBUG_HERE
+      int first_ret = top_after - nargs + 1;
+      YUM_DEBUG_HERE
+      for (uint64_t i = 0; i < nargs; ++i) {
+        (*out)[i] = variant_from_lua(L, first_ret + i);
       }
     }
 
     lua_settop(L, top_before);
-
-    YUM_DEBUG_HERE
+    YUM_DEBUG_OUTF
     return yumsuccess;
   }
 

@@ -64,7 +64,7 @@ namespace YumEngine::xV1 {
      * @param out [Out] output of the call.
      * @warning path **should not** contain null characters, and **should end** with a null-terminator.
      */
-    syserr_t call(ascii path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& nargs, variant_t *out);
+    syserr_t call(ascii path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& nargs, variant_t **out);
 
     /**
      * @brief Pushes a value.

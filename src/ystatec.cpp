@@ -56,7 +56,7 @@ syserr_t yumlibc_library_member(push_callback)(YumState *state, ascii name, cons
   return yumsuccess;
 }
 
-syserr_t yumlibc_library_member(call)(YumState *state, ascii path, uint64_t pathlen, uint64_t argc, const variant_t *argv, variant_t *out, uint64_t *outc) {
+syserr_t yumlibc_library_member(call)(YumState *state, ascii path, uint64_t pathlen, uint64_t argc, const variant_t *argv, uint64_t *outc, variant_t **out) {
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   if (!path || pathlen == 0) {
     return yummakeerror("(lstring_t)path is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
