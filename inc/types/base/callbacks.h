@@ -24,6 +24,7 @@
 #define YUM_INCLUDE_GUARD_CALLBACK_TYPEDEF_H
 
 #include "inc/_byumlibc.h"
+#include "inc/types/base/vardef.h"
 #include "inc/types/base/types.h"
 #include "inc/types/system/err.h"
 

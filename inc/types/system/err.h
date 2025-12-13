@@ -66,7 +66,7 @@ typedef struct {
   .source = { .func = lstring_from_string(__func__), .file = lstring_from_string(__FILE__), .line = __LINE__}, \
   .comment = lstring_from_string(what) };
 
-#define yumsuccess syserr_t {.category = syserr_t::OK, .source = {}, .comment = { .start = nullptr, .length = 0, .owns = false } };
+#define yumsuccess yummakeerror_x("success!", syserr_t::OK)
 
 /** 
  * @brief Formats an error. The given lstring owns the string.
@@ -79,5 +79,10 @@ yumlibc_cfun lstring_t yumfmterr(syserr_t);
  * @return A const char* string, you may not free it. (Literal string)
  */
 yumlibc_cfun const char *category_to_ascii(syserr_t);
+
+/**
+ * @brief Prints a formated error to STDOUT.
+ */
+yumlibc_cfun void yumprinterr(syserr_t);
 
 #endif // !YUM_INCLUDE_GUARD_SYSERR_H

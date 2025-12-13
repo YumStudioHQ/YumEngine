@@ -34,4 +34,15 @@
 #include "inc/version/engine_version.h"
 #include "inc/yummem.h"
 
+#undef    yum_move_cxx_function
+#undef    yumlibc_cfun
+#undef    yumlibc_dllattribute
+#undef    yumlibc_vdllmember
+#undef    yumlibcxx_c_header_decoration_begin
+#undef    yumlibcxx_c_header_decoration_end
+#undef    yummakeerror
+#undef    yummakeerror_runtime
+#undef    yummakeerror_x
+#undef    yumsuccess
+
 #endif // !YUM_INCLUDE_GUARD_LIBYUM_H

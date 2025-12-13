@@ -63,3 +63,11 @@ yumlibc_cfun lstring_t yumfmterr(syserr_t err) {
         << lstring2cxxstring(err.source.func);
   return cxxstring2lstring(oss.str());
 }
+
+yumlibc_cfun void yumprinterr(syserr_t err) {
+  lstring_t lstr = yumfmterr(err);
+
+  printf("%.*s\n", (int)lstr.length, lstr.start);
+
+  free_lstring(lstr);
+}

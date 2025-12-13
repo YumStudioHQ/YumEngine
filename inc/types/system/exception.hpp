@@ -24,6 +24,7 @@
 
 #include "err.h"
 #include "managers/lstring_utils.h"
+#include "utils/ystringutils.hpp"
 #include "utils/ystringutils.h"
 #include <stdexcept>
 
@@ -31,7 +32,7 @@ namespace YumEngine::xV1 {
   class sysexception : public std::exception, public syserr_t {
   private:  syserr_t    err = {
               .category = err.UNKNOWN_ERROR,
-              .source = { .file = lstring_from_string("uknown"), .func = lstring_from_string("unknown"), .line = -1},
+              .source = { .func = lstring_from_string("unknown"), .file = lstring_from_string("uknown"), .line = -1},
               .comment = lstring_from_string("unknown exception")
             };
             
@@ -62,9 +63,9 @@ namespace YumEngine::xV1 {
 #define yumlibcxx_promote_this_exception(e) syserr_t{ \
     .category = syserr_t::PROMOTED_CXX_EXCEPTION, \
     .source = { \
-      .file = lstring_from_string(__FILE__), \
       .func = lstring_from_string(__func__), \
+      .file = lstring_from_string(__FILE__), \
       .line = __LINE__, \
     }, \
-    .comment = lstring_from_string((e.what() + std::string(typeid(e).name())).c_str()) \
+    .comment = YumEngine::xV1::cxxstring2lstring(e.what() + std::string(" * ") + typeid(e).name()) \
   }

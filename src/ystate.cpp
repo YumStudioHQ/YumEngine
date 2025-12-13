@@ -123,6 +123,13 @@ namespace YumEngine::xV1 {
   namespace _static_units {
     thread_local std::unordered_map<std::string, yum_callback> _callbacks;
 
+    static void dump_lua(lua_State *L) {
+      ascii code = "for k, v in pairs(_G) do"
+                   "  print(k, v)"
+                   "end";
+      luaL_dostring(L, code);
+    }
+
     static int static_lua_callback(lua_State* L) {
       const char* cstrname = lua_tostring(L, lua_upvalueindex(1));
       if (!cstrname) return 0;
@@ -151,14 +158,17 @@ namespace YumEngine::xV1 {
     void cd(lua_State *L, const Sdk::strview &view) {
       YUM_DEBUG_HERE
       bool first = true;
+      lua_getglobal(L, "_G");
 
-      view.split('.', [&L, &first](Sdk::strview key_view) {
-        if (first) {
-          lua_getglobal(L, key_view.head());
-          first = false;
-        } else {
-          lua_getfield(L, -1, key_view.head());
-          lua_remove(L, -2);
+      view.split('.', [&L](Sdk::strview key_view) {
+        lua_pushlstring(L, key_view.head(), key_view.length());
+        lua_gettable(L, -2);
+        lua_remove(L, -2);
+
+        if (lua_isnil(L, -1)) {
+          std::runtime_error err("got nil");
+          YUM_DEBUG_CALL(dump_lua(L))
+          yumlibcxx_make_exception_from(yumlibcxx_promote_this_exception(err));
         }
       });
       YUM_DEBUG_OUTF
@@ -180,11 +190,14 @@ namespace YumEngine::xV1 {
     if (!name) yumlibcxx_throw(expected a function name, syserr_t::NULL_OR_EMPTY_ARGUMENT, argument const lstring &name);
     
     _static_units::_callbacks[name] = callback;
+    
+    int top_before = lua_gettop(L);
 
     lua_pushstring(L, name);
     lua_pushcclosure(L, _static_units::static_lua_callback, 1);
     lua_setfield(L, -2, name);
-    // TODO: clear?
+    
+    lua_settop(L, top_before);
   }
 
   syserr_t State::call(ascii path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& nargs, variant_t** out) {
@@ -293,3 +306,5 @@ namespace YumEngine::xV1 {
     luaL_openlibs(L);
   }
 }
+
+// TODO: Lua.Debug utilities.
