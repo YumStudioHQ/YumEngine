@@ -102,7 +102,7 @@ def find_files(ext: str) -> List[str]:
     out: List[str] = []
     for root, _dirs, files in os.walk("."):
         for f in files:
-            if f.endswith(ext):
+            if f.endswith(ext) and not "docs/" in root: # exclude docs folder... This is dirty but should work lol.
                 out.append(os.path.join(root, f))
     return out
 

@@ -26,6 +26,8 @@
 #include "memoryslice.hpp"
 #include "span.hpp"
 
+#include <string>
+
 namespace YumEngine::xV1::containers {
   template <typename CharT>
   class stringlookup : public memoryslice<CharT> {
@@ -71,7 +73,7 @@ namespace YumEngine::xV1::containers {
         }
 
         if (match) {
-          views.append(stringlookup(this->start + last, i - last));
+          views.append(stringlookup<CharT>(this->start + last, i - last));
           i += del._length - 1;
           last = i + 1;
         }
@@ -123,7 +125,7 @@ namespace YumEngine::xV1::containers {
         }
       }
 
-      if (last <= this->_length) {
+      if (last < this->_length) {
         callback(stringlookup(this->start + last, this->_length - last));
       }
     }
@@ -144,6 +146,12 @@ namespace YumEngine::xV1::containers {
         for (uint64_t i = 0; i < len; i++) start[i] = source[i];
       }
     
+    basic_string(const stringlookup<CharT> &lookup) 
+      : start(nullptr), capacity(lookup.length()), _size(lookup.length()) {
+        start = new CharT[lookup.length()];
+        for (uint64_t i = 0; i < lookup.length(); i++) start[i] = lookup[i];
+      }
+
     ~basic_string() {
       if (start) delete[] start;
       start = nullptr;
@@ -285,6 +293,10 @@ namespace YumEngine::xV1::containers {
       return li;
     }
 
+    std::basic_string<CharT> tostdstring() const {
+      return std::basic_string<CharT>(this->start, this->_size);
+    }
+
     memoryslice<CharT> duplicate() const {
       return memoryslice<CharT>(start, _size, true);
     }
@@ -313,7 +325,7 @@ namespace YumEngine::xV1 {
      * @tparam The character type.
      */
     template <typename CharT>
-    using str = YumEngine::xV1::containers::stringlookup<CharT>;
+    using str = YumEngine::xV1::containers::basic_string<CharT>;
 
     /**
      * @brief Guarantees that the type does not hold the string, and does not copy when creating it.

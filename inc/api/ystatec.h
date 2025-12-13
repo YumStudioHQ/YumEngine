@@ -38,7 +38,7 @@ YumState *yumlibc_library_member(new)(void);
 void      yumlibc_library_member(open_libs)(YumState *state);
 void      yumlibc_library_member(delete)(const YumState *state);
 syserr_t  yumlibc_library_member(push_callback)(YumState *state, ascii name, const yumcallback_t callback);
-syserr_t  yumlibc_library_member(call)(YumState *state, ascii path, uint64_t pathlen, uint64_t argc, const variant_t *argv, uint64_t *outc, variant_t **out);
+syserr_t  yumlibc_library_member(call)(YumState *state, ascii path, uint64_t argc, const variant_t *argv, uint64_t *outc, variant_t **out);
 syserr_t  yumlibc_library_member(push_variant)(YumState *state, ascii name, const variant_t *var);
 syserr_t  yumlibc_library_member(push_table)(YumState *state, ascii name);
 void      yumlibc_library_member(push_global)(YumState *state, ascii name);
@@ -50,5 +50,3 @@ void      yumlibc_library_member(clear)(YumState *state);
 yumlibcxx_c_header_decoration_end
 
 #endif // !YUM_INCLUDE_GUARD_STATE_C_H
-
-// TODO: Github + Issues + Issue.Label(API/DOC/.../)
