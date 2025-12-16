@@ -20,55 +20,55 @@
  *                                                                                   *
  *************************************************************************************/
 
-#include "inc/types/base/types.h"
-#include "inc/types/system/err.h"
-#include "inc/utils/ystringutils.h"
-#include "inc/utils/ystringutils.hpp"
-#include "inc/yumem.hpp"
-#include "inc/managers/lstring_utils.h"
+#pragma once
 
-#include <string>
-#include <cstring>
-#include <sstream>
-#include <iomanip>
+#include "inc/types/state.hpp"
+#include "inc/types/containers/memoryslice.hpp"
+#include "inc/types/variant.hpp"
 
-using namespace YumEngine::xV1;
+namespace YumEngine::xV1::Sdk {
+  template <typename T>
+  class Buffer : public containers::memoryslice<T> {
+  public:
+    Buffer() {}
+    Buffer(const T *from, uint64_t len, bool copy = false)
+      : containers::memoryslice<T>(from, len, copy) {}
+    
+    Buffer(const containers::memoryslice<T> &slc) 
+      : containers::memoryslice<T>(slc) {}
+    
+    Buffer(const containers::memoryslice<T> &slc, uint64_t len) 
+      : containers::memoryslice<T>(slc, len) {}
+    
+    Buffer(uint64_t len) 
+      : containers::memoryslice<T>(len) {}
+    
+    Buffer(const containers::list<T> &li, bool copy = false) 
+      : containers::memoryslice<T>(li.data(), li.length(), copy) {}
 
-yumlibc_cfun const char *category_to_ascii(syserr_t err) {
-  thread_local std::string _mstr = "unknown error: #";
-  _mstr = "unknown error: #";
-  switch (err.category) {
-    case err.OK: return "ok";
-    case err.ERROR: return "error";
-    case err.UNKNOWN_ERROR: return "unknown error";
-    case err.INVALID_POINTER: return "invalid pointer";
-    case err.FILE_NOT_FOUND: return "file not found";
-    case err.NOT_A_TABLE: return "not a table";
-    case err.INVALID_TYPE: return "invalid type";
-    case err.NULL_OR_EMPTY_ARGUMENT: return "null or invalid argument";
-    case err.LUA_EXECUTION_ERROR: return "lua execution error";
-    case err.ILL_FUNCTION_PATH: return "ill function path";
-    case err.PROMOTED_CXX_EXCEPTION: return "promoted C++ exception";
-    case err.SDK_EXCEPTION: return "SDK exception";
-    default: _mstr += std::to_string((int)err.category);
-             return _mstr.c_str();
-  }
-}
+    Buffer<T> &join(const Buffer<T> &buff) {
+      uint64_t nsize = this->_length + buff.length();
+      T *nbuff = new T[nsize];
 
-yumlibc_cfun lstring_t yumfmterr(syserr_t err) {
-  std::ostringstream oss;
-  oss << category_to_ascii(err) << '#' << (int)err.category << " : " << lstring2cxxstring(err.comment)
-      << "\nfrom " << 
-        lstring2cxxstring(err.source.file)
-        << ':' << err.source.line << '.'
-        << lstring2cxxstring(err.source.func);
-  return cxxstring2lstring(oss.str());
-}
+      for (uint64_t i = 0; i < this->_length; i++) nbuff[i] = this->start[i];
+      for (uint64_t i = this->_length; i < nsize; i++) nbuff[i] = buff.copy(i - this->_length);
 
-yumlibc_cfun void yumprinterr(syserr_t err) {
-  lstring_t lstr = yumfmterr(err);
+      if (this->owns) delete[] this->start;
+      this->owns = true;
+      this->readonly = false;
+      this->start = nbuff;
+      this->_length = nsize;
+      return *this;
+    }
 
-  printf("%.*s\n", (int)lstr.length, lstr.start);
+    Buffer<T> &join(const containers::list<Buffer<T>> &buffers) {
+      for (uint64_t i = 0; i < buffers.length(); i++) this->join(buffers._enumerable_at_const(i));
+      return *this;
+    }
 
-  free_lstring(lstr);
+    Buffer<T> &join(const containers::memoryslice<Buffer<T>> &buffers) {
+      for (uint64_t i = 0; i < buffers.length(); i++) this->join(buffers[i]);
+      return *this;
+    }
+  };
 }
