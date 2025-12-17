@@ -39,7 +39,7 @@ namespace YumEngine::xV1 {
   static variant_t variant_from_lua(lua_State *L, int idx) {
     int type = lua_type(L, idx);
     switch (type) {
-      case LUA_TBOOLEAN: return Variant((boolean_t)lua_toboolean(L, idx)).c();
+      case LUA_TBOOLEAN: return CVariant((boolean_t)lua_toboolean(L, idx)).c();
       case LUA_TSTRING: {
         size_t len;
         const char *cstr = lua_tolstring(L, idx, &len);
@@ -49,12 +49,12 @@ namespace YumEngine::xV1 {
           .owns = true
         };
 
-        return Variant(lstring);
+        return CVariant(lstring);
       }
       case LUA_TNUMBER: {
         if (lua_isinteger(L, idx)) {
-          return Variant((integer_t)lua_tointeger(L, idx));
-        } return Variant((number_t)lua_tonumber(L, idx));
+          return CVariant((integer_t)lua_tointeger(L, idx));
+        } return CVariant((number_t)lua_tonumber(L, idx));
       }
       case LUA_TTABLE: {
         // Check if it's a UID table
@@ -62,7 +62,7 @@ namespace YumEngine::xV1 {
         if (!lua_isnil(L, -1)) {
           uint64_t bytes = lua_tointeger(L, -1);
           lua_pop(L, 1);
-          return Variant(vuid_t{.bytes = bytes});
+          return CVariant(vuid_t{.bytes = bytes});
         }
 
         lua_pop(L, 1); // pop nil
@@ -72,7 +72,7 @@ namespace YumEngine::xV1 {
           size_t len;
           const char *data = yumstrcpy(lua_tolstring(L, -1, &len), len);
           lua_pop(L, 1);
-          return Variant(binary_t{.start = (const uint8_t*)data, .length = len, .owns = true});
+          return CVariant(binary_t{.start = (const uint8_t*)data, .length = len, .owns = true});
         }
         lua_pop(L, 1); // pop nil
 
@@ -157,7 +157,6 @@ namespace YumEngine::xV1 {
 
     void cd(lua_State *L, const Sdk::strview &view) {
       YUM_DEBUG_HERE
-      bool first = true;
       lua_getglobal(L, "_G");
 
       view.split('.', [&L](Sdk::strview key_view) {
@@ -196,8 +195,9 @@ namespace YumEngine::xV1 {
     lua_pushstring(L, name);
     lua_pushcclosure(L, _static_units::static_lua_callback, 1);
     lua_setfield(L, -2, name);
-    
     lua_settop(L, top_before);
+    
+    YUM_DEBUG_OUTF
   }
 
   syserr_t State::call(ascii path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& nargs, variant_t** out) {
@@ -209,6 +209,7 @@ namespace YumEngine::xV1 {
 
     // Push function onto stack
     _static_units::cd(L, Sdk::strview(path, pathlen));
+    YUM_DEBUG_HERE
 
     if (!lua_isfunction(L, -1)) {
       lua_settop(L, top_before);

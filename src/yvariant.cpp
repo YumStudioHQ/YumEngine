@@ -20,40 +20,43 @@
  *                                                                                   *
  *************************************************************************************/
 
-#pragma once
+#include "inc/types/base/types.h"
+#include "inc/types/base/vardef.h"
 
-#include "inc/types/state.hpp"
-#include "inc/sdk/lbuffer.hpp"
-#include "inc/sdk/lstring.hpp"
-#include "inc/types/variant.hpp"
+#include "inc/_byumlibc.h"
 
-namespace YumEngine::xV1::Sdk {
+#include <string>
 
-  /**
-   * @brief A higher-level implementation of State. Manages a Lua state.
-   */
-  class SdkState {
-  private:
-    State mstate;
+/**
+ * @warning Not a part of the C API ! This implementation provides a viewable string until the next call on the same thread.
+ */
+extern "C" {
+  ascii yumlibc_dllattribute yumlibc_library_member(variant2strview)(const variant_t var) {
+    thread_local std::string mbuff;
+    mbuff = "<nil>";
 
-  public:
-    /**
-     * @brief Calls a Lua function.
-     * 
-     * @param name The name of the function (can contain dots!)
-     * @param buff Arguments of the call.
-     * @return The returned values of the Lua function in a buffer. The Lua function cannot return a table!
-     */
-    Buffer<CVariant> call(const StringView &name, const Buffer<CVariant> &buff);
+    switch (var.type) {
+      case variant_t::VARIANT_INTEGER:
+        mbuff = std::to_string(var.hold.integer);
+        break;
+      case variant_t::VARIANT_NUMBER:
+        mbuff = std::to_string(var.hold.number);
+        break;
+      case variant_t::VARIANT_BOOL:
+        mbuff = var.hold.boolean ? "true" : "false";
+        break;
+      case variant_t::VARIANT_UID:
+        mbuff = std::to_string(var.hold.uid.bytes);
+        break;
+      case variant_t::VARIANT_STRING:
+        mbuff = std::string(var.hold.lstring.start, var.hold.lstring.length);
+        break;
+      case variant_t::VARIANT_BINARY:
+        mbuff = std::string((char*)var.hold.binary.start, var.hold.binary.length);
+        break;
+      default: break;
+    }
 
-    /**
-     * @brief Pushes a value inside the Lua VM.
-     * 
-     * @param name The name of the value. (can contain dots!)
-     * @param var A Variant value.
-     */
-    void            push(const StringView &name, const CVariant &var);
-
-    
-  };
+    return mbuff.c_str();
+  }
 }

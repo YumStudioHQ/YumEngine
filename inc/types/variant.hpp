@@ -33,7 +33,7 @@ namespace YumEngine::xV1 {
   /**
    * @brief Extends the variant_t C type, providing easier variant management.
    */
-  class Variant {
+  class CVariant {
   private:
     variant_t raw;
 
@@ -66,86 +66,86 @@ namespace YumEngine::xV1 {
     }
 
   public:
-    inline Variant() {
+    inline CVariant() {
       this->raw.hold.binary = {};
       this->raw.type = this->raw.VARIANT_NIL;
     }
 
-    inline Variant(const variant_t &var) { raw = var; }
+    inline CVariant(const variant_t &var) { raw = var; }
 
-    inline Variant(const integer_t &in) {
+    inline CVariant(const integer_t &in) {
       this->raw.hold.integer = in;
       this->raw.type = this->raw.VARIANT_INTEGER;
     }
 
-    inline Variant(const number_t &in) {
+    inline CVariant(const number_t &in) {
       this->raw.hold.number = in;
       this->raw.type = this->raw.VARIANT_NUMBER;
     }
 
-    inline Variant(const boolean_t &in) {
+    inline CVariant(const boolean_t &in) {
       this->raw.hold.boolean = in;
       this->raw.type = this->raw.VARIANT_BOOL;
     }
 
-    inline Variant(const vuid_t &in) {
+    inline CVariant(const vuid_t &in) {
       this->raw.hold.uid = in;
       this->raw.type = this->raw.VARIANT_UID;
     }
 
-    inline Variant(const lstring_t &in) {
+    inline CVariant(const lstring_t &in) {
       this->raw.hold.lstring = in;
       this->raw.type = this->raw.VARIANT_STRING;
     }
 
-    inline Variant(const binary_t &in) {
+    inline CVariant(const binary_t &in) {
       this->raw.hold.binary = in;
       this->raw.type = this->raw.VARIANT_BINARY;
     }
 
-    Variant &operator=(const integer_t &in) {
+    CVariant &operator=(const integer_t &in) {
       on_type_changes();
       this->raw.hold.integer = in;
       this->raw.type = this->raw.VARIANT_INTEGER;
       return (*this);
     }
 
-    Variant &operator=(const number_t &in) {
+    CVariant &operator=(const number_t &in) {
       on_type_changes();
       this->raw.hold.number = in;
       this->raw.type = this->raw.VARIANT_NUMBER;
       return (*this);
     }
 
-    Variant &operator=(const lstring_t &in) {
+    CVariant &operator=(const lstring_t &in) {
       on_type_changes();
       this->raw.hold.lstring = in;
       this->raw.type = this->raw.VARIANT_STRING;
       return (*this);
     }
 
-    Variant &operator=(const binary_t &in) {
+    CVariant &operator=(const binary_t &in) {
       on_type_changes();
       this->raw.hold.binary = in;
       this->raw.type = this->raw.VARIANT_BINARY;
       return (*this);
     }
 
-    Variant &operator=(const vuid_t &in) {
+    CVariant &operator=(const vuid_t &in) {
       on_type_changes();
       this->raw.hold.uid = in;
       this->raw.type = this->raw.VARIANT_UID;
       return (*this);
     }
 
-    Variant &operator=(const boolean_t &in) {
+    CVariant &operator=(const boolean_t &in) {
       on_type_changes();
       this->raw.hold.boolean = in;
       this->raw.type = this->raw.VARIANT_BOOL;
       return (*this);
     }
 
-    bool operator==(const Variant &left) const {
+    bool operator==(const CVariant &left) const {
       if (left.raw.type != this->raw.type) return false;
       switch (this->raw.type) {
         case variant_t::VARIANT_INTEGER: 

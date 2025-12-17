@@ -22,38 +22,14 @@
 
 #pragma once
 
-#include "inc/types/state.hpp"
-#include "inc/sdk/lbuffer.hpp"
-#include "inc/sdk/lstring.hpp"
 #include "inc/types/variant.hpp"
 
 namespace YumEngine::xV1::Sdk {
-
-  /**
-   * @brief A higher-level implementation of State. Manages a Lua state.
-   */
-  class SdkState {
+  class Variant {
   private:
-    State mstate;
-
+    CVariant cvar;
+    
   public:
-    /**
-     * @brief Calls a Lua function.
-     * 
-     * @param name The name of the function (can contain dots!)
-     * @param buff Arguments of the call.
-     * @return The returned values of the Lua function in a buffer. The Lua function cannot return a table!
-     */
-    Buffer<CVariant> call(const StringView &name, const Buffer<CVariant> &buff);
-
-    /**
-     * @brief Pushes a value inside the Lua VM.
-     * 
-     * @param name The name of the value. (can contain dots!)
-     * @param var A Variant value.
-     */
-    void            push(const StringView &name, const CVariant &var);
-
     
   };
 }
