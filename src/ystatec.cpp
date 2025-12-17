@@ -25,6 +25,8 @@
 #include "inc/types/system/err.h"
 #include "inc/types/system/exception.hpp"
 
+#include "inc/debug/dbgpoints.h"
+
 #include <typeinfo>
 
 using namespace YumEngine::xV1;
@@ -93,6 +95,7 @@ syserr_t yumlibc_library_member(push_variant)(YumState *state, ascii name, const
 }
 
 syserr_t yumlibc_library_member(push_table)(YumState *state, ascii name) {
+  YUM_DEBUG_HERE
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   if (!name) {
     return yummakeerror("(ascii)name is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
@@ -106,14 +109,18 @@ syserr_t yumlibc_library_member(push_table)(YumState *state, ascii name) {
     return yumlibcxx_promote_this_exception(e);
   }
 
+  YUM_DEBUG_OUTF
   return yumsuccess;
 }
 
 void yumlibc_library_member(push_global)(YumState *state, ascii name) {
+  YUM_DEBUG_HERE
   if (state) state->push_global(name);
+  YUM_DEBUG_OUTF
 }
 
 syserr_t yumlibc_library_member(new_table)(YumState *state, ascii name) {
+  YUM_DEBUG_HERE
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   if (!name) {
     return yummakeerror("(ascii)name is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
@@ -131,15 +138,39 @@ syserr_t yumlibc_library_member(new_table)(YumState *state, ascii name) {
 }
 
 syserr_t yumlibc_library_member(run)(YumState *state, ascii source, boolean_t isfile) {
+  YUM_DEBUG_HERE
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
 
-  return state->run(source, isfile);
+  syserr_t err;
+
+  try {
+    err = state->run(source, isfile);
+  } catch (const sysexception &e) {
+    err = e.geterr();
+  } catch (const std::exception &e) {
+    err = yumlibcxx_promote_this_exception(e);
+  }
+  
+  YUM_DEBUG_OUTF
+  return err;
 }
 
 syserr_t yumlibc_library_member(load)(YumState *state, const lstring_t *source, boolean_t isfile) {
+  YUM_DEBUG_HERE
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
 
-  return state->load(*source, isfile);
+  syserr_t err;
+
+  try {
+    err = state->load(*source, isfile);
+  } catch (const sysexception &e) {
+    err = e.geterr();
+  } catch (const std::exception &e) {
+    err = yumlibcxx_promote_this_exception(e);
+  }
+  
+  YUM_DEBUG_OUTF
+  return err;
 }
 
 void yumlibc_library_member(clear)(YumState *state) {

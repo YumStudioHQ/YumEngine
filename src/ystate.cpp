@@ -275,6 +275,7 @@ namespace YumEngine::xV1 {
   }
 
   syserr_t State::run(ascii source, boolean_t isfile) {
+    YUM_DEBUG_HERE
     if (isfile) {
       if (luaL_dofile(L, source) != LUA_OK)
         return yummakeerror_runtime(lua_tostring(L, -1), syserr_t::LUA_EXECUTION_ERROR);
@@ -283,6 +284,7 @@ namespace YumEngine::xV1 {
         return yummakeerror_runtime(lua_tostring(L, -1), syserr_t::LUA_EXECUTION_ERROR);
     }
 
+    YUM_DEBUG_OUTF
     return yumsuccess;
   }
 
