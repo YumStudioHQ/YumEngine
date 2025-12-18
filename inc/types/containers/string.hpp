@@ -66,7 +66,7 @@ namespace YumEngine::xV1::containers {
      * @param del Delimiter character.
      * @return List of stringlookup views.
      */
-    list<stringlookup<CharT>> split(const CharT &del) const {
+    inline list<stringlookup<CharT>> split(const CharT &del) const {
       list<stringlookup<CharT>> views;
 
       uint64_t last = 0;
@@ -89,7 +89,7 @@ namespace YumEngine::xV1::containers {
      * @param del Delimiter string.
      * @return List of stringlookup views.
      */
-    list<stringlookup<CharT>> split(const stringlookup<CharT> &del) const {
+    inline list<stringlookup<CharT>> split(const stringlookup<CharT> &del) const {
       list<stringlookup<CharT>> views;
 
       if (del._length == 0) {
@@ -130,7 +130,7 @@ namespace YumEngine::xV1::containers {
      * @param callback Function called for each substring.
      */
     template <typename Callback>
-    void split(const CharT &del, Callback callback) const {
+    inline void split(const CharT &del, Callback callback) const {
       uint64_t last = 0;
       for (uint64_t i = 0; i < this->_length; i++) {
         if (this->start[i] == del) {
@@ -151,7 +151,7 @@ namespace YumEngine::xV1::containers {
      * @param callback Function called for each substring.
      */
     template <typename Callback>
-    void split(const stringlookup<CharT> &del, Callback callback) const {
+    inline void split(const stringlookup<CharT> &del, Callback callback) const {
 
       if (del._length == 0) {
         callback(*this);
@@ -179,6 +179,69 @@ namespace YumEngine::xV1::containers {
       if (last < this->_length) {
         callback(stringlookup(this->start + last, this->_length - last));
       }
+    }
+
+    /**
+     * @brief Returns the index of an element by starting at the end.
+     * 
+     * @param c The char to find.
+     * @return The index of c.
+     */
+    inline uint64_t rfind(const CharT &c) const {
+      for (uint64_t i = this->_length; i-- > 0;) {
+        if (this->start[i] == c)
+          return i;
+      }
+      return this->_enumerable_end_impl();
+    }
+
+    /**
+     * @brief Returns the index of an element by starting at the end.
+     * 
+     * @param str The string to find.
+     * @return The index of str.
+     */
+    inline uint64_t rfind(const stringlookup<CharT> &str) const {
+      if (str.length() == 0 || str.length() > this->_length)
+        return this->_enumerable_end_impl();
+
+      for (uint64_t i = this->_length - str.length(); i-- + 1 > 0;) {
+        bool match = true;
+        for (uint64_t j = 0; j < str.length(); j++) {
+          if (this->start[i + j] != str[j]) {
+            match = false;
+            break;
+          }
+        }
+        if (match)
+          return i;
+      }
+      return this->_enumerable_end_impl();
+    }
+
+    inline uint64_t find(const CharT &c) const {
+      for (uint64_t i = 0; i < this->_length; i++) {
+        if (this->start[i] == c) return i;
+      }
+      return this->_enumerable_end_impl();
+    }
+
+    inline uint64_t find(const stringlookup<CharT> &s) const {
+      if (s.length() == 0 || s.length() > this->_length)
+        return this->_enumerable_end_impl();
+
+      for (uint64_t i = 0; i + s.length() <= this->_length; i++) {
+        bool match = true;
+        for (uint64_t j = 0; j < s.length(); j++) {
+          if (this->start[i + j] != s[j]) {
+            match = false;
+            break;
+          }
+        }
+        if (match)
+          return i;
+      }
+      return this->_enumerable_end_impl();
     }
   };
 
@@ -549,6 +612,59 @@ namespace YumEngine::xV1::containers {
      */
     auto append(const basic_string<CharT> &base, uint64_t times) {
       return this->_enumerable_append_impl(base, times);
+    }
+
+    basic_string<CharT> replace(const CharT &old, const CharT &n) const {
+      basic_string<CharT> bastring;
+      bastring.realloc(this->_size);
+
+      this->foreach([&bastring, &old, &n](char c) {
+        if (c == old) bastring.append(n);
+        else bastring.append(c);
+      });
+
+      return bastring;
+    }
+
+    basic_string<CharT> replace(const stringlookup<CharT> &old, const stringlookup<CharT> &n) const {
+      basic_string<CharT> result;
+
+      if (old.length() == 0) {
+        result.append(*this);
+        return result;
+      }
+
+      uint64_t last = 0;
+      for (uint64_t i = 0; i + old.length() <= this->_size; i++) {
+        bool match = true;
+        for (uint64_t j = 0; j < old.length(); j++) {
+          if (this->start[i + j] != old[j]) {
+          match = false;
+          break;
+          }
+        }
+
+        if (match) {
+          result.append(this->start + last, i - last);
+          result.append(n.head(), n.length());
+          i += old.length() - 1;
+          last = i + 1;
+        }
+      }
+
+      if (last < this->_size) {
+        result.append(this->start + last, this->_size - last);
+      }
+
+      return result;
+    }
+
+    basic_string<CharT> replace(const CharT *old, const CharT *n) const {
+      return replace(stringlookup<CharT>(old, strlen(old)), stringlookup<CharT>(n, strlen(n)));
+    }
+
+    basic_string<CharT> replace(const basic_string<CharT> &old, const basic_string<CharT> &n) const {
+      return replace(stringlookup<CharT>(old.head(), old.length()), stringlookup<CharT>(n.head(), n.length()));
     }
   };
 }

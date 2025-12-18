@@ -20,61 +20,61 @@
  *                                                                                   *
  *************************************************************************************/
 
-#pragma once
-
 #include "inc/types/state.hpp"
 #include "inc/sdk/lbuffer.hpp"
 #include "inc/sdk/lstring.hpp"
 #include "inc/types/variant.hpp"
+#include "inc/sdk/lsdk.hpp"
+
+#include "inc/types/system/exception.hpp"
 
 #include <functional> // Include std::function<R(Args...)> type.
 
 namespace YumEngine::xV1::Sdk {
+  /* Working on
+   * class SdkState; */
 
-  /**
-   * @brief A higher-level implementation of State. Manages a Lua state.
-   */
-  class SdkState {
-  private:
-    State mstate;
+  containers::list<CVariant> SdkState::call(const StringView &name, const Buffer<CVariant> &buff) {
+    uint64_t nargs;
+    variant_t *out;
+    containers::list<variant_t> variants;
+    variants.reserve(buff.length());
+    buff.foreach([&variants](CVariant var) { variants.append(var.c()); });
 
-  public:
-    /**
-     * @brief Calls a Lua function.
-     * 
-     * @param name The name of the function.
-     * @param buff Arguments of the call.
-     * @return The returned values of the Lua function in a buffer. The Lua function cannot return a table!
-     */
-    containers::list<CVariant> call(const StringView &name, const Buffer<CVariant> &buff);
+    syserr_t err = mstate.call(name.ascii(), name.length(), variants.length(), variants.data(), nargs, &out);
+    
+    if (err.category != err.OK) yumlibcxx_make_exception_from(err);
 
-    /**
-     * @brief Pushes a value inside the Lua VM.
-     * 
-     * @param name The name of the value.
-     * @param var A Variant value.
-     */
-    void                       push(const StringView &name, const CVariant &var);
+    containers::list<CVariant> cvars;
+    cvars.reserve(nargs);
+    containers::memoryslice<variant_t>(out, nargs, false)
+              .foreach([&cvars](variant_t var) { cvars.append(var); });
+    
+    return cvars;
+  }
 
-    /**
-     * @brief Pushes a callback to the Lua VM.
-     * 
-     * @param name The name of the function.
-     * @param callback A function pointer.
-     */
-    void                       push_callback(const StringView &name, yum_callback callback);
+  void SdkState::push(const StringView &name, const CVariant &var) {
+    mstate.push_global("_G");
+    auto end = name.rfind('.');
 
-    /**
-     * @brief Returns the value of the specified name.
-     * 
-     * @param name The name of the item.
-     * @return The value of the item.
-     */
-    CVariant                   get(const StringView &name);
+    StringView(name.slice(0, end))
+              .split('.')
+              .foreach([this](StringView view) {
+                mstate.push_table(view.move().ascii());
+              });
+    auto lname = StringView(name.slice(end, name.length() - end)).move().ascii();
+    mstate.push_variant(lname, var.c());
+  }
 
-    /**
-     * @brief Opens Lua's standard library.
-     */
-    void                       open_libs();
-  };
+  void SdkState::push_callback(const StringView &name, yum_callback callback) {
+    mstate.push_callback(name.move().ascii(), callback);
+  }
+
+  CVariant SdkState::get(const StringView &name) {
+
+  }
+
+  void SdkState::open_libs() {
+
+  }
 }

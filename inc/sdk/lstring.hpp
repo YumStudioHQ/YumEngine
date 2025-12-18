@@ -31,8 +31,13 @@
 #include <string_view>
 
 namespace YumEngine::xV1::Sdk {
+  class String;
+
   class StringView : public containers::stringlookup<char> {
   public:
+    using containers::stringlookup<char>::find;
+    using containers::stringlookup<char>::rfind;
+
     inline StringView() 
       : containers::stringlookup<char>() {}
     inline StringView(const std::string &string) 
@@ -46,12 +51,20 @@ namespace YumEngine::xV1::Sdk {
     inline StringView(const containers::basic_string<char> &string) 
       : containers::stringlookup<char>(string.head(), string.length()) {}
 
+    inline StringView(const containers::stringlookup<char> &look_down_HAHAHAH)
+      : containers::stringlookup<char>(look_down_HAHAHAH) {}
+
+    StringView(const String&);
+
     StringView(const std::string&&) = delete;
 
+    inline const char *ascii() const { return this->start; }
+    inline String move() const;
   };
 
   class String : public containers::basic_string<char> {
   public:
+
     inline String() {}
     inline String(const Buffer<char> &buff)
       : containers::basic_string<char>(buff.head(), buff.length()) {}
@@ -63,10 +76,17 @@ namespace YumEngine::xV1::Sdk {
       : containers::basic_string<char>(span.head(), span.length()) {}
     
     inline String(const containers::list<char> &list)
-      : containers::basic_string<char>(list.head(), list.length()) {}
+      : containers::basic_string<char>() {
+        list.foreach([this](char c) {
+          this->append(c);
+        });
+      }
 
     inline String(const char *cstr)
       : containers::basic_string<char>(cstr, std::strlen(cstr)) {}
+
+    inline String(const char *cstr, uint64_t len)
+      : containers::basic_string<char>(cstr, len) {}
 
     template <typename Enumerable>
     String(const Enumerable &enumerable)
@@ -101,6 +121,20 @@ namespace YumEngine::xV1::Sdk {
       *this = (*this) * times;
       return *this;
     }
+
+    inline const char *ascii() const {
+      return this->start;
+    }
+
+    template <typename SearchKind>
+    inline uint64_t find(const SearchKind &view) {
+      return StringView(*this).find(view);
+    }
+
+    template <typename SearchKind>
+    inline uint64_t rfind(const SearchKind &view) {
+      return StringView(*this).rfind(view);
+    }
   };
 
   inline String operator+(const StringView &vA, const StringView &vB) {
@@ -108,5 +142,12 @@ namespace YumEngine::xV1::Sdk {
     s.append(vB);
     return s;
   }
+
+  String StringView::move() const {
+    return String(*this);
+  }
+
+  StringView::StringView(const String &s) 
+    : containers::stringlookup<char>(s.head(), s.length()) {}
 }
 

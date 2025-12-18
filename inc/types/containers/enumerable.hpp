@@ -228,6 +228,8 @@ namespace YumEngine::xV1::containers {
     EnumerableT as() const {
       return EnumerableT((const Cast*)head(), length());
     }
+
+    virtual ~enumerable() {}
   };
 
   /**

@@ -213,10 +213,10 @@ namespace YumEngine::xV1::containers {
      * @brief Implementation of slice().
      */
     auto _enumerable_slice_impl(uint64_t start, uint64_t count) const {
-      if (start >= this->size())
+      if (start >= this->_length)
         throw std::out_of_range("Start index out of range");
       list<T> result;
-      auto end = std::min(start + count, this->size());
+      auto end = std::min(start + count, this->_length);
       for (uint64_t i = start; i < end; ++i)
         result.push_back((*this)[i]);
       return result;
