@@ -47,7 +47,7 @@ typedef struct {
   boolean_t   owns;
 } lstring_t;
 
-typedef const char *ascii;
+typedef const char *utf8;
 
 typedef struct {
   const uint8_t *start;

@@ -58,7 +58,7 @@ namespace YumEngine::xV1::Sdk {
 
     inline StringView(const std::string&&) = delete;
 
-    inline const char *ascii() const { return this->start; }
+    inline const char *utf8() const { return this->start; }
     inline String move() const;
   };
 
@@ -120,10 +120,6 @@ namespace YumEngine::xV1::Sdk {
     inline String& operator*=(int times) {
       *this = (*this) * times;
       return *this;
-    }
-
-    inline const char *ascii() const {
-      return this->start;
     }
 
     template <typename SearchKind>

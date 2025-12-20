@@ -41,7 +41,7 @@ namespace YumEngine::xV1::Sdk {
     variants.reserve(buff.length());
     buff.foreach([&variants](CVariant var) { variants.append(var.c()); });
 
-    syserr_t err = mstate.call(name.ascii(), name.length(), variants.length(), variants.data(), nargs, &out);
+    syserr_t err = mstate.call(name.utf8(), name.length(), variants.length(), variants.data(), nargs, &out);
     
     if (err.category != err.OK) yumlibcxx_make_exception_from(err);
 
@@ -64,14 +64,14 @@ namespace YumEngine::xV1::Sdk {
     StringView(name.slice(0, end))
               .split('.')
               .foreach([this](StringView view) {
-                mstate.push_table(view.move().ascii());
+                mstate.push_table(view.move().utf8());
               });
-    auto lname = StringView(name.slice(end, name.length() - end)).move().ascii();
+    auto lname = StringView(name.slice(end, name.length() - end)).move().utf8();
     mstate.push_variant(lname, var.c());
   }
 
   void SdkState::push_callback(const StringView &name, yum_callback callback) {
-    mstate.push_callback(name.move().ascii(), callback);
+    mstate.push_callback(name.move().utf8(), callback);
   }
 
   void SdkState::open_libs() {
@@ -79,6 +79,6 @@ namespace YumEngine::xV1::Sdk {
   }
 
   void SdkState::run(const StringView &code, bool isFile) {
-    mstate.run(code.move().ascii(), isFile);
+    mstate.run(code.move().utf8(), isFile);
   }
 }

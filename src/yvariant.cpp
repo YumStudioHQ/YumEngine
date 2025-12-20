@@ -31,7 +31,7 @@
  * @warning Not a part of the C API ! This implementation provides a viewable string until the next call on the same thread.
  */
 extern "C" {
-  ascii yumlibc_dllattribute yumlibc_library_member(variant2strview)(const variant_t var) {
+  utf8 yumlibc_dllattribute yumlibc_library_member(variant2strview)(const variant_t var) {
     thread_local std::string mbuff;
     mbuff = "<nil>";
 

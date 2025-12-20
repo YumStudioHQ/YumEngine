@@ -45,7 +45,7 @@ void yumlibc_library_member(open_libs)(YumState *state) {
   if (state) state->open_stdlibs();
 }
 
-syserr_t yumlibc_library_member(push_callback)(YumState *state, ascii name, const yum_callback callback) {
+syserr_t yumlibc_library_member(push_callback)(YumState *state, utf8 name, const yum_callback callback) {
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   try {
     state->push_callback(name, callback);
@@ -58,10 +58,10 @@ syserr_t yumlibc_library_member(push_callback)(YumState *state, ascii name, cons
   return yumsuccess;
 }
 
-syserr_t yumlibc_library_member(call)(YumState *state, ascii path, uint64_t argc, const variant_t *argv, uint64_t *outc, variant_t **out) {
+syserr_t yumlibc_library_member(call)(YumState *state, utf8 path, uint64_t argc, const variant_t *argv, uint64_t *outc, variant_t **out) {
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   if (!path) {
-    return yummakeerror("(ascii)path is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
+    return yummakeerror("(utf8)path is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   }
 
   try {
@@ -75,10 +75,10 @@ syserr_t yumlibc_library_member(call)(YumState *state, ascii path, uint64_t argc
   return yumsuccess;
 }
 
-syserr_t yumlibc_library_member(push_variant)(YumState *state, ascii name, const variant_t *var) {
+syserr_t yumlibc_library_member(push_variant)(YumState *state, utf8 name, const variant_t *var) {
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   if (!name) {
-    return yummakeerror("(ascii)name is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
+    return yummakeerror("(utf8)name is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   } else if (!var) {
     return yummakeerror("*var is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   }
@@ -94,11 +94,11 @@ syserr_t yumlibc_library_member(push_variant)(YumState *state, ascii name, const
   return yumsuccess;
 }
 
-syserr_t yumlibc_library_member(push_table)(YumState *state, ascii name) {
+syserr_t yumlibc_library_member(push_table)(YumState *state, utf8 name) {
   YUM_DEBUG_HERE
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   if (!name) {
-    return yummakeerror("(ascii)name is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
+    return yummakeerror("(utf8)name is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   }
 
   try {
@@ -113,17 +113,17 @@ syserr_t yumlibc_library_member(push_table)(YumState *state, ascii name) {
   return yumsuccess;
 }
 
-void yumlibc_library_member(push_global)(YumState *state, ascii name) {
+void yumlibc_library_member(push_global)(YumState *state, utf8 name) {
   YUM_DEBUG_HERE
   if (state) state->push_global(name);
   YUM_DEBUG_OUTF
 }
 
-syserr_t yumlibc_library_member(new_table)(YumState *state, ascii name) {
+syserr_t yumlibc_library_member(new_table)(YumState *state, utf8 name) {
   YUM_DEBUG_HERE
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   if (!name) {
-    return yummakeerror("(ascii)name is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
+    return yummakeerror("(utf8)name is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   }
 
   try {
@@ -137,7 +137,13 @@ syserr_t yumlibc_library_member(new_table)(YumState *state, ascii name) {
   return yumsuccess;
 }
 
-syserr_t yumlibc_library_member(run)(YumState *state, ascii source, boolean_t isfile) {
+void yumlibc_library_member(ensure_path)(YumState *state, utf8 path) {
+  if (!state) return;
+
+  state->ensure_path(path);
+}
+
+syserr_t yumlibc_library_member(run)(YumState *state, utf8 source, boolean_t isfile) {
   YUM_DEBUG_HERE
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
 

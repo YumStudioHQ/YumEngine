@@ -33,6 +33,7 @@
 #include "inc/types/containers/string.hpp"
 
 #include <vector>
+#include <cassert>
 #include <unordered_map>
 
 namespace YumEngine::xV1 {
@@ -129,11 +130,10 @@ namespace YumEngine::xV1 {
       }
     }
 
-
     thread_local std::unordered_map<std::string, yum_callback> _callbacks;
 
     static void dump_lua(lua_State *L) {
-      ascii code = "for k, v in pairs(_G) do"
+      utf8 code = "for k, v in pairs(_G) do"
                    "  print(k, v)"
                    "end";
       luaL_dostring(L, code);
@@ -159,7 +159,7 @@ namespace YumEngine::xV1 {
       push_vararray_to_lua(L, outc, result);
       
       yumfree((void*)arguments_from_lua);
-      // TODO: queue_free?
+      yumfree((void*)result); // Yup, you may allocate returned values with yumalloc.
       
       return static_cast<int>(outc);
     }
@@ -179,8 +179,29 @@ namespace YumEngine::xV1 {
           yumlibcxx_make_exception_from(yumlibcxx_promote_this_exception(err));
         }
       });
+      YUM_DEBUG_PUTS(("(unsafe) walked at " + std::string(view.head(), view.length())).c_str())
       YUM_DEBUG_OUTF
     }
+
+    void safe_walk(lua_State *L, const Sdk::strview &view) {
+      lua_getglobal(L, "_G"); // stack: [_G]
+
+      view.split('.', [&L](Sdk::strview key) {
+        lua_getfield(L, -1, Sdk::str<char>(key).utf8());
+
+        if (lua_isnil(L, -1)) {
+          lua_pop(L, 1);
+          lua_newtable(L);
+          lua_setfield(L, -2, Sdk::str<char>(key).utf8());
+          lua_getfield(L, -1, Sdk::str<char>(key).utf8());
+        }
+
+        lua_remove(L, -2); // remove parent
+      });
+
+      YUM_DEBUG_PUTS(("(safe) walked at " + std::string(view.head(), view.length())).c_str())
+    }
+
   }
 
   State::State() {
@@ -192,12 +213,14 @@ namespace YumEngine::xV1 {
     lua_close(L);
   }
 
-  void State::push_callback(ascii name, const yum_callback &callback) {
+  void State::push_callback(utf8 name, const yum_callback &callback) {
     YUM_DEBUG_HERE
 
     if (!name) yumlibcxx_throw(expected a function name, syserr_t::NULL_OR_EMPTY_ARGUMENT, argument const lstring &name);
+    assert(lua_istable(L, -1));
     
     _static_units::_callbacks[name] = callback;
+    YUM_DEBUG_PUTS(std::string("pushed callback " + std::string(name)).c_str())
     
     int top_before = lua_gettop(L);
 
@@ -209,7 +232,7 @@ namespace YumEngine::xV1 {
     YUM_DEBUG_OUTF
   }
 
-  syserr_t State::call(ascii path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& nargs, variant_t** out) {
+  syserr_t State::call(utf8 path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& nargs, variant_t** out) {
     YUM_DEBUG_HERE;
 
     nargs = 0;
@@ -265,26 +288,26 @@ namespace YumEngine::xV1 {
     return yumsuccess;
   }
 
-  void State::push_variant(ascii name, const variant_t &var) {
+  void State::push_variant(utf8 name, const variant_t &var) {
     _static_units::push_variant_to_lua(L, var);
     lua_setfield(L, -2, name);
     lua_pop(L, 1);
   }
 
-  void State::new_table(ascii name) {
+  void State::new_table(utf8 name) {
     lua_newtable(L);
     lua_setfield(L, -2, name);
   }
 
-  void State::push_table(ascii name) {
+  void State::push_table(utf8 name) {
     lua_getfield(L, -1, name);
   }
 
-  void State::push_global(ascii name) {
+  void State::push_global(utf8 name) {
     lua_getglobal(L, name);
   }
 
-  syserr_t State::run(ascii source, boolean_t isfile) {
+  syserr_t State::run(utf8 source, boolean_t isfile) {
     YUM_DEBUG_HERE
     if (isfile) {
       if (luaL_dofile(L, source) != LUA_OK)
@@ -310,8 +333,12 @@ namespace YumEngine::xV1 {
     return yumsuccess;
   }
 
+  void State::ensure_path(utf8 path) {
+    _static_units::safe_walk(L, Sdk::strview(path, strlen(path)));
+  }
+
   void State::clear() {
-    lua_pop(L, 0);
+    lua_settop(L, 0);
   }
 
   void State::open_stdlibs() {

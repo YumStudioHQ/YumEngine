@@ -66,7 +66,7 @@ yumlibc_vdllmember void yumfree_all(variant_t *vars, uint64_t length) {
   for (uint64_t i = 0; i < length; i++) {
     variant_t var = vars[i];
     if (var.type == VARIANT_STRING) yumfree_lstring(var.hold.lstring);
-    else if (var.type == VARIANT_BINARY) yumfree_binary(var.hold.binary);
+    else if (var.type == VARIANT_BINARY) free_binary(var.hold.binary);
   }
 }
 

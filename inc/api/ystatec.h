@@ -37,13 +37,14 @@ yumlibcxx_c_header_decoration_begin
 YumState *yumlibc_library_member(new)(void);
 void      yumlibc_library_member(open_libs)(YumState *state);
 void      yumlibc_library_member(delete)(const YumState *state);
-syserr_t  yumlibc_library_member(push_callback)(YumState *state, ascii name, const yumcallback_t callback);
-syserr_t  yumlibc_library_member(call)(YumState *state, ascii path, uint64_t argc, const variant_t *argv, uint64_t *outc, variant_t **out);
-syserr_t  yumlibc_library_member(push_variant)(YumState *state, ascii name, const variant_t *var);
-syserr_t  yumlibc_library_member(push_table)(YumState *state, ascii name);
-void      yumlibc_library_member(push_global)(YumState *state, ascii name);
-syserr_t  yumlibc_library_member(new_table)(YumState *state, ascii name);
-syserr_t  yumlibc_library_member(run)(YumState *state, ascii source, boolean_t isfile);
+syserr_t  yumlibc_library_member(push_callback)(YumState *state, utf8 name, const yumcallback_t callback);
+syserr_t  yumlibc_library_member(call)(YumState *state, utf8 path, uint64_t argc, const variant_t *argv, uint64_t *outc, variant_t **out);
+syserr_t  yumlibc_library_member(push_variant)(YumState *state, utf8 name, const variant_t *var);
+syserr_t  yumlibc_library_member(push_table)(YumState *state, utf8 name);
+void      yumlibc_library_member(push_global)(YumState *state, utf8 name);
+syserr_t  yumlibc_library_member(new_table)(YumState *state, utf8 name);
+void      yumlibc_library_member(ensure_path)(YumState *state, utf8 path);
+syserr_t  yumlibc_library_member(run)(YumState *state, utf8 source, boolean_t isfile);
 syserr_t  yumlibc_library_member(load)(YumState *state, const lstring_t *source, boolean_t isfile);
 void      yumlibc_library_member(clear)(YumState *state);
 

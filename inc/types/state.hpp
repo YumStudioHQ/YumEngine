@@ -52,7 +52,7 @@ namespace YumEngine::xV1 {
      * @param callback The callback that will get pushed.
      * @note You may push a table before pushing a callback (or you will end with UBs!)
      */
-    void push_callback(ascii name, const yum_callback &callback);
+    void push_callback(utf8 name, const yum_callback &callback);
 
     /**
      * @brief Calls a Lua function.
@@ -64,7 +64,7 @@ namespace YumEngine::xV1 {
      * @param out [Out] output of the call.
      * @warning path **should not** contain null characters, and **should end** with a null-terminator.
      */
-    syserr_t call(ascii path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& nargs, variant_t **out);
+    syserr_t call(utf8 path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& nargs, variant_t **out);
 
     /**
      * @brief Pushes a value.
@@ -72,32 +72,32 @@ namespace YumEngine::xV1 {
      * @param var  A variant. Will push its holded value.
      * @note You might free this by yourself in higher languages. (Depending on how you call functions)
      */
-    void push_variant(ascii name, const variant_t &var);
+    void push_variant(utf8 name, const variant_t &var);
 
     /**
      * @brief Changes the stack to the table, and if not created, creates it.
      * @param name The name of the table.
      */
-    void push_table(ascii name);
+    void push_table(utf8 name);
 
     /**
      * @brief Creates a new table.
      * @param name The name of the table.
      */
-    void new_table(ascii name);
+    void new_table(utf8 name);
 
     /**
      * @brief Pushes a global value onto the stack.
      * @param name the name of the global value.
      */
-    void push_global(ascii name);
+    void push_global(utf8 name);
 
     /**
      * @brief Runs a string or a file
      * @param source Path to the file or a string containing Lua code.
      * @return Error state (syserr type).
      */
-    syserr_t run(ascii source, boolean_t isfile);
+    syserr_t run(utf8 source, boolean_t isfile);
 
     /**
      * @brief Loads a string or a file
@@ -105,6 +105,12 @@ namespace YumEngine::xV1 {
      * @return Error state (syserr type).
      */
     syserr_t load(const lstring_t &source, boolean_t isfile);
+
+    /**
+     * @brief Ensures a path. If a table does not exists, it creates the table.
+     * @param path The path.
+     */
+    void ensure_path(utf8 path);
 
     /**
      * @brief Clears the internal Lua stack.

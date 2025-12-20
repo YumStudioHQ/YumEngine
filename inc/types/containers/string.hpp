@@ -281,8 +281,9 @@ namespace YumEngine::xV1::containers {
      */
     basic_string(const CharT *source, uint64_t len) 
       : start(nullptr), capacity(len), _size(len) {
-        start = new CharT[len];
+        start = new CharT[len+1];
         for (uint64_t i = 0; i < len; i++) start[i] = source[i];
+        start[_size] = '\0';
       }
     
     /**
@@ -294,16 +295,18 @@ namespace YumEngine::xV1::containers {
      */
     basic_string(const stringlookup<CharT> &lookup) 
       : start(nullptr), capacity(lookup.length()), _size(lookup.length()) {
-        start = new CharT[lookup.length()];
+        start = new CharT[lookup.length() + 1];
         for (uint64_t i = 0; i < lookup.length(); i++) start[i] = lookup[i];
+        start[_size] = '\0';
       }
 
     basic_string(const basic_string& other)
       : start(nullptr), capacity(other._size), _size(other._size)
     {
       if (_size) {
-        start = new CharT[_size];
+        start = new CharT[_size+1];
         std::copy(other.start, other.start + _size, start);
+        start[_size] = '\0';
       }
     }
 
@@ -317,8 +320,9 @@ namespace YumEngine::xV1::containers {
       capacity = other._size;
 
       if (_size) {
-        start = new CharT[_size];
+        start = new CharT[_size + 1];
         std::copy(other.start, other.start + _size, start);
+        start[_size] = '\0';
       }
       return *this;
     }
@@ -665,6 +669,10 @@ namespace YumEngine::xV1::containers {
 
     basic_string<CharT> replace(const basic_string<CharT> &old, const basic_string<CharT> &n) const {
       return replace(stringlookup<CharT>(old.head(), old.length()), stringlookup<CharT>(n.head(), n.length()));
+    }
+
+    inline const char *utf8() const {
+      return this->start;
     }
   };
 }
