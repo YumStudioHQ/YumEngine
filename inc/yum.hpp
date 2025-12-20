@@ -23,7 +23,6 @@
 #pragma once
 
 #include "inc/yumem.hpp"
-#include "inc/types/base/array.h"
 #include "inc/types/base/callbacks.h"
 #include "inc/types/base/types.h"
 #include "inc/types/base/vardef.h"
@@ -42,9 +41,6 @@ namespace YumEngine {
     using namespace YumEngine::xV1;
     using namespace YumEngine::xV1::containers;
     using namespace YumEngine::xV1::Sdk;
-
-    using CVariant = variant_t;
-    using CVariantArray = vararray_t;
   }
 
   namespace Sdk = YumEngineSdkContent;

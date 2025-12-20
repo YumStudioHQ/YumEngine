@@ -31,6 +31,8 @@
 
 namespace YumEngine::xV1::Sdk {
 
+  typedef Buffer<CVariant>(*SdkCallback)(Buffer<CVariant>);
+
   /**
    * @brief A higher-level implementation of State. Manages a Lua state.
    */
@@ -49,6 +51,14 @@ namespace YumEngine::xV1::Sdk {
     containers::list<CVariant> call(const StringView &name, const Buffer<CVariant> &buff);
 
     /**
+     * @brief Calls a Lua function without passing any arguments.
+     * 
+     * @param name The name of the function.
+     * @return The returned values of the Lua function in a buffer. The Lua function cannot return a table!
+     */
+    containers::list<CVariant> call(const StringView &name);
+
+    /**
      * @brief Pushes a value inside the Lua VM.
      * 
      * @param name The name of the value.
@@ -65,16 +75,24 @@ namespace YumEngine::xV1::Sdk {
     void                       push_callback(const StringView &name, yum_callback callback);
 
     /**
-     * @brief Returns the value of the specified name.
+     * @brief Pushes a callback to the Lua VM.
      * 
-     * @param name The name of the item.
-     * @return The value of the item.
+     * @param name The name of the function.
+     * @param callback A function.
      */
-    CVariant                   get(const StringView &name);
+    void                       push_callback(const StringView &name, SdkCallback callback);
 
     /**
      * @brief Opens Lua's standard library.
      */
     void                       open_libs();
+
+    /**
+     * @brief Runs a lua code.
+     * 
+     * @param code The code or the file name.
+     * @param isFile True when it is a file.
+     */
+    void                       run(const StringView &code, bool isFile = false);
   };
 }

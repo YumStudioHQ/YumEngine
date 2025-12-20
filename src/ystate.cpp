@@ -35,92 +35,101 @@
 #include <vector>
 #include <unordered_map>
 
-namespace YumEngine::xV1 {  
-  static variant_t variant_from_lua(lua_State *L, int idx) {
-    int type = lua_type(L, idx);
-    switch (type) {
-      case LUA_TBOOLEAN: return CVariant((boolean_t)lua_toboolean(L, idx)).c();
-      case LUA_TSTRING: {
-        size_t len;
-        const char *cstr = lua_tolstring(L, idx, &len);
-        lstring_t lstring {
-          .start = yumstrcpy(cstr, len),
-          .length = len, 
-          .owns = true
-        };
-
-        return CVariant(lstring);
-      }
-      case LUA_TNUMBER: {
-        if (lua_isinteger(L, idx)) {
-          return CVariant((integer_t)lua_tointeger(L, idx));
-        } return CVariant((number_t)lua_tonumber(L, idx));
-      }
-      case LUA_TTABLE: {
-        // Check if it's a UID table
-        lua_getfield(L, idx, "__yumuid");
-        if (!lua_isnil(L, -1)) {
-          uint64_t bytes = lua_tointeger(L, -1);
-          lua_pop(L, 1);
-          return CVariant(vuid_t{.bytes = bytes});
-        }
-
-        lua_pop(L, 1); // pop nil
-        // Check if it's a binary table
-        lua_getfield(L, idx, "__yumbytes");
-        if (!lua_isnil(L, -1)) {
-          size_t len;
-          const char *data = yumstrcpy(lua_tolstring(L, -1, &len), len);
-          lua_pop(L, 1);
-          return CVariant(binary_t{.start = (const uint8_t*)data, .length = len, .owns = true});
-        }
-        lua_pop(L, 1); // pop nil
-
-        // Well tables not for now.
-        return variant_t{.type = variant_t::VARIANT_NIL};
-      }
-
-      default: return variant_t{.type = variant_t::VARIANT_NIL};
-    }
-  }
-
-  static void push_variant_to_lua(lua_State *L, const variant_t &var) {
-    switch (var.type) {
-      case variant_t::VARIANT_INTEGER: 
-        lua_pushinteger(L, var.hold.integer);
-        break;
-      case variant_t::VARIANT_NUMBER: 
-        lua_pushnumber(L, var.hold.number);
-        break;
-      case variant_t::VARIANT_BOOL: 
-        lua_pushboolean(L, var.hold.boolean);
-        break;
-      case variant_t::VARIANT_STRING: 
-        lua_pushlstring(L, var.hold.lstring.start, var.hold.lstring.length);
-        break;
-      case variant_t::VARIANT_BINARY: 
-        lua_newtable(L);
-        lua_pushstring(L, "__yumbin");
-        lua_pushlstring(L, (const char*)var.hold.binary.start, var.hold.binary.length);
-        lua_settable(L, -3);
-        break;
-      case variant_t::VARIANT_UID: 
-        lua_newtable(L);
-        lua_pushstring(L, "__yumuid");
-        lua_pushinteger(L, var.hold.uid.bytes);
-        lua_settable(L, -3);
-        break;
-      default: lua_pushnil(L); break;
-    }
-  }
-
-  static void push_vararray_to_lua(lua_State *L, uint64_t argc, const variant_t *argv) {
-    for (uint64_t i = 0; i < argc; i++) {
-      push_variant_to_lua(L, argv[i]);
-    }
-  }
-
+namespace YumEngine::xV1 {
   namespace _static_units {
+    /**
+     * @brief Internal function : Converts Lua variables to C values.
+     * 
+     * @warning You may free returned values! You can use the yumfree_array() function (or yumfree for C++) since the 3.5 (coming with the C++ SDK).
+     * @param L lua state.
+     * @param idx Index.
+     * @return A C variant.
+     */
+    static variant_t variant_from_lua(lua_State *L, int idx) {
+      int type = lua_type(L, idx);
+      switch (type) {
+        case LUA_TBOOLEAN: return CVariant((boolean_t)lua_toboolean(L, idx)).c();
+        case LUA_TSTRING: {
+          size_t len;
+          const char *cstr = lua_tolstring(L, idx, &len);
+          lstring_t lstring {
+            .start = yumstrcpy(cstr, len),
+            .length = len, 
+            .owns = true
+          };
+
+          return CVariant(lstring);
+        }
+        case LUA_TNUMBER: {
+          if (lua_isinteger(L, idx)) {
+            return CVariant((integer_t)lua_tointeger(L, idx));
+          } return CVariant((number_t)lua_tonumber(L, idx));
+        }
+        case LUA_TTABLE: {
+          // Check if it's a UID table
+          lua_getfield(L, idx, "__yumuid");
+          if (!lua_isnil(L, -1)) {
+            uint64_t bytes = lua_tointeger(L, -1);
+            lua_pop(L, 1);
+            return CVariant(vuid_t{.bytes = bytes});
+          }
+
+          lua_pop(L, 1); // pop nil
+          // Check if it's a binary table
+          lua_getfield(L, idx, "__yumbytes");
+          if (!lua_isnil(L, -1)) {
+            size_t len;
+            const char *data = yumstrcpy(lua_tolstring(L, -1, &len), len);
+            lua_pop(L, 1);
+            return CVariant(binary_t{.start = (const uint8_t*)data, .length = len, .owns = true});
+          }
+          lua_pop(L, 1); // pop nil
+
+          // Well tables not for now.
+          return variant_t{.type = variant_t::VARIANT_NIL};
+        }
+
+        default: return variant_t{.type = variant_t::VARIANT_NIL};
+      }
+    }
+
+    static void push_variant_to_lua(lua_State *L, const variant_t &var) {
+      switch (var.type) {
+        case variant_t::VARIANT_INTEGER: 
+          lua_pushinteger(L, var.hold.integer);
+          break;
+        case variant_t::VARIANT_NUMBER: 
+          lua_pushnumber(L, var.hold.number);
+          break;
+        case variant_t::VARIANT_BOOL: 
+          lua_pushboolean(L, var.hold.boolean);
+          break;
+        case variant_t::VARIANT_STRING: 
+          lua_pushlstring(L, var.hold.lstring.start, var.hold.lstring.length);
+          break;
+        case variant_t::VARIANT_BINARY: 
+          lua_newtable(L);
+          lua_pushstring(L, "__yumbin");
+          lua_pushlstring(L, (const char*)var.hold.binary.start, var.hold.binary.length);
+          lua_settable(L, -3);
+          break;
+        case variant_t::VARIANT_UID: 
+          lua_newtable(L);
+          lua_pushstring(L, "__yumuid");
+          lua_pushinteger(L, var.hold.uid.bytes);
+          lua_settable(L, -3);
+          break;
+        default: lua_pushnil(L); break;
+      }
+    }
+
+    static void push_vararray_to_lua(lua_State *L, uint64_t argc, const variant_t *argv) {
+      for (uint64_t i = 0; i < argc; i++) {
+        push_variant_to_lua(L, argv[i]);
+      }
+    }
+
+
     thread_local std::unordered_map<std::string, yum_callback> _callbacks;
 
     static void dump_lua(lua_State *L) {
@@ -165,7 +174,7 @@ namespace YumEngine::xV1 {
         lua_remove(L, -2);
 
         if (lua_isnil(L, -1)) {
-          std::runtime_error err("got nil");
+          std::runtime_error err("got nil (pushed table is nil) when pushing: " + std::string(key_view.head(), key_view.length()));
           YUM_DEBUG_CALL(dump_lua(L))
           yumlibcxx_make_exception_from(yumlibcxx_promote_this_exception(err));
         }
@@ -217,7 +226,7 @@ namespace YumEngine::xV1 {
     }
 
     // Push args AFTER function is already at stack top
-    push_vararray_to_lua(L, argc, args);
+    _static_units::push_vararray_to_lua(L, argc, args);
 
     // Call
     YUM_DEBUG_PUTS("calling lua function")
@@ -247,7 +256,7 @@ namespace YumEngine::xV1 {
       int first_ret = top_after - nargs + 1;
       YUM_DEBUG_HERE
       for (uint64_t i = 0; i < nargs; ++i) {
-        (*out)[i] = variant_from_lua(L, first_ret + i);
+        (*out)[i] = _static_units::variant_from_lua(L, first_ret + i);
       }
     }
 
@@ -257,7 +266,7 @@ namespace YumEngine::xV1 {
   }
 
   void State::push_variant(ascii name, const variant_t &var) {
-    push_variant_to_lua(L, var);
+    _static_units::push_variant_to_lua(L, var);
     lua_setfield(L, -2, name);
     lua_pop(L, 1);
   }

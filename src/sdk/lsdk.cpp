@@ -53,6 +53,10 @@ namespace YumEngine::xV1::Sdk {
     return cvars;
   }
 
+  containers::list<CVariant> SdkState::call(const StringView &name) {
+    return call(name, Buffer<CVariant>());
+  }
+
   void SdkState::push(const StringView &name, const CVariant &var) {
     mstate.push_global("_G");
     auto end = name.rfind('.');
@@ -70,11 +74,11 @@ namespace YumEngine::xV1::Sdk {
     mstate.push_callback(name.move().ascii(), callback);
   }
 
-  CVariant SdkState::get(const StringView &name) {
-
+  void SdkState::open_libs() {
+    mstate.open_stdlibs();
   }
 
-  void SdkState::open_libs() {
-
+  void SdkState::run(const StringView &code, bool isFile) {
+    mstate.run(code.move().ascii(), isFile);
   }
 }

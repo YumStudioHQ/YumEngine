@@ -24,6 +24,7 @@
 
 #include <cstring>
 #include <cstdlib>
+#include <string>
 
 #include "base/types.h"
 #include "base/vardef.h"
@@ -199,5 +200,27 @@ namespace YumEngine::xV1 {
     inline const variant_t &c() const { return this->raw; }
 
     operator variant_t() { return this->raw; }
+
+    inline std::string to_string() const {
+      switch (raw.type) {
+        case variant_t::VARIANT_INTEGER:
+          return std::to_string(raw.hold.integer);
+        case variant_t::VARIANT_NUMBER:
+          return std::to_string(raw.hold.number);
+        case variant_t::VARIANT_BOOL:
+          return raw.hold.boolean ? "true" : "false";
+        case variant_t::VARIANT_NIL:
+          return "nil";
+        case variant_t::VARIANT_STRING:
+          return std::string(raw.hold.lstring.start, raw.hold.lstring.length);
+        case variant_t::VARIANT_BINARY:
+          return "<binary data>";
+        case variant_t::VARIANT_UID: {
+          return std::to_string(raw.hold.uid.bytes);
+        }
+      }
+
+      return "<unknown>";
+    }
   };
 }

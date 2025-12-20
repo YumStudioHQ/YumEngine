@@ -54,9 +54,9 @@ namespace YumEngine::xV1::Sdk {
     inline StringView(const containers::stringlookup<char> &look_down_HAHAHAH)
       : containers::stringlookup<char>(look_down_HAHAHAH) {}
 
-    StringView(const String&);
+    inline StringView(const String&);
 
-    StringView(const std::string&&) = delete;
+    inline StringView(const std::string&&) = delete;
 
     inline const char *ascii() const { return this->start; }
     inline String move() const;
