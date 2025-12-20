@@ -1,7 +1,7 @@
 # YumEngine
 
 <!-- YUM_VERSION_START -->
-- **Engine version:** `3.4.0`
+- **Engine version:** `3.4.1`
 - **Studio:** `yum-official`
 - **Branch:** `master-stable`
 <!-- YUM_VERSION_END -->

@@ -278,7 +278,7 @@ def package_outputs(debug_dir: str, release_dir: str):
 
 def main():
     if "--release" in sys.argv:
-        run(f"lua ./bump-version.lua {' '.join(sys.argv[1:])}")
+        run(f"lua ./bump-version.lua {' '.join(sys.argv[2:])}")
         run("doxygen Doxyfile")
 
         header("BUILD: RELEASE")

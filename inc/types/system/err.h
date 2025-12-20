@@ -43,6 +43,7 @@ typedef struct {
     LUA_EXECUTION_ERROR,
     ILL_FUNCTION_PATH,
     PROMOTED_CXX_EXCEPTION,
+    SDK_EXCEPTION,
   } category;
 
   struct {

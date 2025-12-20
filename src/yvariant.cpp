@@ -20,31 +20,43 @@
  *                                                                                   *
  *************************************************************************************/
 
-#pragma once
-
-#include "inc/yumem.hpp"
-#include "inc/types/base/callbacks.h"
 #include "inc/types/base/types.h"
 #include "inc/types/base/vardef.h"
-#include "inc/types/containers/enumerable.hpp"
-#include "inc/types/containers/memoryslice.hpp"
-#include "inc/types/containers/span.hpp"
-#include "inc/types/containers/string.hpp"
-#include "inc/types/system/exception.hpp"
-#include "inc/types/variant.hpp"
-#include "inc/types/state.hpp"
-#include "inc/utils/ystringutils.hpp"
-#include "inc/version/engine_version.h"
 
-namespace YumEngine {
-  namespace YumEngineSdkContent {
-    using namespace YumEngine::xV1;
-    using namespace YumEngine::xV1::containers;
-    using namespace YumEngine::xV1::Sdk;
+#include "inc/_byumlibc.h"
+
+#include <string>
+
+/**
+ * @warning Not a part of the C API ! This implementation provides a viewable string until the next call on the same thread.
+ */
+extern "C" {
+  ascii yumlibc_dllattribute yumlibc_library_member(variant2strview)(const variant_t var) {
+    thread_local std::string mbuff;
+    mbuff = "<nil>";
+
+    switch (var.type) {
+      case variant_t::VARIANT_INTEGER:
+        mbuff = std::to_string(var.hold.integer);
+        break;
+      case variant_t::VARIANT_NUMBER:
+        mbuff = std::to_string(var.hold.number);
+        break;
+      case variant_t::VARIANT_BOOL:
+        mbuff = var.hold.boolean ? "true" : "false";
+        break;
+      case variant_t::VARIANT_UID:
+        mbuff = std::to_string(var.hold.uid.bytes);
+        break;
+      case variant_t::VARIANT_STRING:
+        mbuff = std::string(var.hold.lstring.start, var.hold.lstring.length);
+        break;
+      case variant_t::VARIANT_BINARY:
+        mbuff = std::string((char*)var.hold.binary.start, var.hold.binary.length);
+        break;
+      default: break;
+    }
+
+    return mbuff.c_str();
   }
-
-  namespace Sdk = YumEngineSdkContent;
-  namespace ApiSdk = YumEngineSdkContent;
-  namespace Api = YumEngineSdkContent;
-  // Or whatever people call it !
 }
