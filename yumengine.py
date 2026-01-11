@@ -45,10 +45,10 @@ def fail(msg: str|None) -> None:
 # BUILD CONFIG
 # ──────────────────────────────────────────────────────────────
 FLAGS_CC_RELEASE  = "-std=c17 -Wall -Wextra -fPIC -O2 -c -I./ -I../ -I./inc/ -I./inc/lua"
-FLAGS_CXX_RELEASE = "-std=c++23 -Wall -Wextra -fPIC -O2 -c -shared -I./ -I../ -I./inc/ -I./inc/lua"
+FLAGS_CXX_RELEASE = "-std=c++23 -Wall -Wextra -fPIC -O2 -c -I./ -I../ -I./inc/ -I./inc/lua"
 
 FLAGS_CC_DEBUG  = "-std=c17 -Wall -Wextra -fPIC -g -O0 -c -I./ -I../ -I./inc/ -I./inc/lua -DDEBUG"
-FLAGS_CXX_DEBUG = "-std=c++23 -Wall -Wextra -fPIC -g -O0 -c -shared -I./ -I../ -I./inc/ -I./inc/lua -DDEBUG"
+FLAGS_CXX_DEBUG = "-std=c++23 -Wall -Wextra -fPIC -g -O0 -c -I./ -I../ -I./inc/ -I./inc/lua -DDEBUG"
 
 ZIG_CC  = "zig cc"
 ZIG_CXX = "zig c++"
@@ -58,7 +58,7 @@ OUTPUT_DIR_DEBUG   = "bin/debug"
 TMP = "temp"
 
 LINK_FLAGS_MACOS   = "-dynamiclib"
-LINK_FLAGS_WINDOWS = "-shared -static -static-libstdc++ -static-libgcc"
+LINK_FLAGS_WINDOWS = "-shared -fPIC"
 LINK_FLAGS_LINUX   = "-shared"
 
 Platform = Dict[str, Optional[str]]

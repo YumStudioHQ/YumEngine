@@ -28,6 +28,7 @@
 #include "inc/debug/dbgpoints.h"
 
 #include <typeinfo>
+#include <iostream>
 
 using namespace YumEngine::xV1;
 
@@ -140,7 +141,11 @@ syserr_t yumlibc_library_member(new_table)(YumState *state, utf8 name) {
 void yumlibc_library_member(ensure_path)(YumState *state, utf8 path) {
   if (!state) return;
 
-  state->ensure_path(path);
+  try {
+    state->ensure_path(path);
+  } catch (const std::exception &e) {
+    std::cerr << "C++ exception:\t" << e.what() << std::endl;
+  }
 }
 
 syserr_t yumlibc_library_member(run)(YumState *state, utf8 source, boolean_t isfile) {

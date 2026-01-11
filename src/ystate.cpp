@@ -130,7 +130,7 @@ namespace YumEngine::xV1 {
       }
     }
 
-    thread_local std::unordered_map<std::string, yum_callback> _callbacks;
+    std::unordered_map<std::string, yum_callback> _callbacks;
 
     static void dump_lua(lua_State *L) {
       utf8 code = "for k, v in pairs(_G) do"
@@ -232,7 +232,7 @@ namespace YumEngine::xV1 {
     YUM_DEBUG_OUTF
   }
 
-  syserr_t State::call(utf8 path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& nargs, variant_t** out) {
+  syserr_t State::call(utf8 path, uint64_t pathlen, uint64_t argc, const variant_t* args, uint64_t& nargs, variant_t **out) {
     YUM_DEBUG_HERE;
 
     nargs = 0;
@@ -252,7 +252,7 @@ namespace YumEngine::xV1 {
     _static_units::push_vararray_to_lua(L, argc, args);
 
     // Call
-    YUM_DEBUG_PUTS("calling lua function")
+    YUM_DEBUG_PUTS(("calling lua function '" + std::string(path, pathlen) + "'").c_str())
     if (lua_pcall(L, argc, LUA_MULTRET, 0) != LUA_OK) {
       std::string msg = lua_tostring(L, -1);
       msg += "* when calling: `" + std::string(path) + "`";
