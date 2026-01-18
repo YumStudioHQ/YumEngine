@@ -345,5 +345,3 @@ namespace YumEngine::xV1 {
     luaL_openlibs(L);
   }
 }
-
-// TODO: Lua.Debug utilities.

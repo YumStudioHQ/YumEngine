@@ -26,7 +26,7 @@
 
 #include <string.h>
 
-yumlibc_cfun lstring_t lstring_from_string(const char *src) {
+yumlibc_cfun yumlibc_dllattribute lstring_t lstring_from_string(const char *src) {
   lstring_t lstring = {
     .start = src,
     .length = strlen(src),
@@ -36,13 +36,13 @@ yumlibc_cfun lstring_t lstring_from_string(const char *src) {
   return lstring; // Idk why this function actually exists... Like people can do it by themselves! (jk jk)
 }
 
-yumlibc_cfun const char *lstring_to_string(const lstring_t lstring) {
+yumlibc_cfun yumlibc_dllattribute const char *lstring_to_string(const lstring_t lstring) {
   char *buff = (char*)yumalloc(lstring.length * sizeof(char));
   for (uint64_t i = 0; i < lstring.length; i++) buff[i] = lstring.start[i];
   return buff;
 }
 
-yumlibc_cfun lstring_t surelstring_from_string(const char *src) {
+yumlibc_cfun yumlibc_dllattribute lstring_t surelstring_from_string(const char *src) {
   integer_t length = strlen(src);
   lstring_t lstring = {
     .start  = (const char*)yumalloc(length),
