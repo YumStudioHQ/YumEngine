@@ -25,8 +25,8 @@
 
 #ifdef __cplusplus
 #define yumlibc_cfun extern "C"
-#define yumlibcxx_c_header_decoration_begin   extern "C" {
-#define yumlibcxx_c_header_decoration_end     }
+#define yumlibcxx_c_header_decoration_begin //  extern "C" {
+#define yumlibcxx_c_header_decoration_end   //  }
 #else
 #define yumlibc_cfun extern 
 #define yumlibcxx_c_header_decoration_begin
@@ -46,5 +46,6 @@
 
 #define yum_move_cxx_function(n) yumengine_##n
 #define yumlibc_library_member(n) libyum_##n
+#define yumlibc_libexp yumlibc_cfun yumlibc_dllattribute
 
 #endif // YUM_INCLUDE_GUARD_BACKEND_YUMLIB_C_H

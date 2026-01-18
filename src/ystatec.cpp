@@ -32,21 +32,19 @@
 
 using namespace YumEngine::xV1;
 
-yumlibcxx_c_header_decoration_begin
-
-YumState *yumlibc_library_member(new)() {
+yumlibc_libexp YumState *yumlibc_library_member(new)() {
   return new YumState();
 }
 
-void yumlibc_library_member(delete)(const YumState *state) {
+yumlibc_libexp void yumlibc_library_member(delete)(const YumState *state) {
   if (state) delete state;
 }
 
-void yumlibc_library_member(open_libs)(YumState *state) {
+yumlibc_libexp void yumlibc_library_member(open_libs)(YumState *state) {
   if (state) state->open_stdlibs();
 }
 
-syserr_t yumlibc_library_member(push_callback)(YumState *state, utf8 name, const yum_callback callback) {
+yumlibc_libexp syserr_t yumlibc_library_member(push_callback)(YumState *state, utf8 name, const yum_callback callback) {
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   try {
     state->push_callback(name, callback);
@@ -59,7 +57,7 @@ syserr_t yumlibc_library_member(push_callback)(YumState *state, utf8 name, const
   return yumsuccess;
 }
 
-syserr_t yumlibc_library_member(call)(YumState *state, utf8 path, uint64_t argc, const variant_t *argv, uint64_t *outc, variant_t **out) {
+yumlibc_libexp syserr_t yumlibc_library_member(call)(YumState *state, utf8 path, uint64_t argc, const variant_t *argv, uint64_t *outc, variant_t **out) {
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   if (!path) {
     return yummakeerror("(utf8)path is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
@@ -76,7 +74,7 @@ syserr_t yumlibc_library_member(call)(YumState *state, utf8 path, uint64_t argc,
   return yumsuccess;
 }
 
-syserr_t yumlibc_library_member(push_variant)(YumState *state, utf8 name, const variant_t *var) {
+yumlibc_libexp syserr_t yumlibc_library_member(push_variant)(YumState *state, utf8 name, const variant_t *var) {
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   if (!name) {
     return yummakeerror("(utf8)name is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
@@ -95,7 +93,7 @@ syserr_t yumlibc_library_member(push_variant)(YumState *state, utf8 name, const 
   return yumsuccess;
 }
 
-syserr_t yumlibc_library_member(push_table)(YumState *state, utf8 name) {
+yumlibc_libexp syserr_t yumlibc_library_member(push_table)(YumState *state, utf8 name) {
   YUM_DEBUG_HERE
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   if (!name) {
@@ -114,13 +112,13 @@ syserr_t yumlibc_library_member(push_table)(YumState *state, utf8 name) {
   return yumsuccess;
 }
 
-void yumlibc_library_member(push_global)(YumState *state, utf8 name) {
+yumlibc_libexp void yumlibc_library_member(push_global)(YumState *state, utf8 name) {
   YUM_DEBUG_HERE
   if (state) state->push_global(name);
   YUM_DEBUG_OUTF
 }
 
-syserr_t yumlibc_library_member(new_table)(YumState *state, utf8 name) {
+yumlibc_libexp syserr_t yumlibc_library_member(new_table)(YumState *state, utf8 name) {
   YUM_DEBUG_HERE
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
   if (!name) {
@@ -138,7 +136,7 @@ syserr_t yumlibc_library_member(new_table)(YumState *state, utf8 name) {
   return yumsuccess;
 }
 
-void yumlibc_library_member(ensure_path)(YumState *state, utf8 path) {
+yumlibc_libexp void yumlibc_library_member(ensure_path)(YumState *state, utf8 path) {
   if (!state) return;
 
   try {
@@ -148,7 +146,7 @@ void yumlibc_library_member(ensure_path)(YumState *state, utf8 path) {
   }
 }
 
-syserr_t yumlibc_library_member(run)(YumState *state, utf8 source, boolean_t isfile) {
+yumlibc_libexp syserr_t yumlibc_library_member(run)(YumState *state, utf8 source, boolean_t isfile) {
   YUM_DEBUG_HERE
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
 
@@ -166,7 +164,7 @@ syserr_t yumlibc_library_member(run)(YumState *state, utf8 source, boolean_t isf
   return err;
 }
 
-syserr_t yumlibc_library_member(load)(YumState *state, const lstring_t *source, boolean_t isfile) {
+yumlibc_libexp syserr_t yumlibc_library_member(load)(YumState *state, const lstring_t *source, boolean_t isfile) {
   YUM_DEBUG_HERE
   if (!state) return yummakeerror("(YumState*)state pointer is null", syserr_t::NULL_OR_EMPTY_ARGUMENT);
 
@@ -184,10 +182,8 @@ syserr_t yumlibc_library_member(load)(YumState *state, const lstring_t *source, 
   return err;
 }
 
-void yumlibc_library_member(clear)(YumState *state) {
+yumlibc_libexp void yumlibc_library_member(clear)(YumState *state) {
   if (state) {
     state->clear();
   }
 }
-
-yumlibcxx_c_header_decoration_end

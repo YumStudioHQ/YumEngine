@@ -34,7 +34,7 @@
 
 using namespace YumEngine::xV1;
 
-yumlibc_cfun const char *category_to_ascii(syserr_t err) {
+yumlibc_cfun yumlibc_dllattribute const char *category_to_ascii(syserr_t err) {
   thread_local std::string _mstr = "unknown error: #";
   _mstr = "unknown error: #";
   switch (err.category) {
@@ -55,7 +55,7 @@ yumlibc_cfun const char *category_to_ascii(syserr_t err) {
   }
 }
 
-yumlibc_cfun lstring_t yumfmterr(syserr_t err) {
+yumlibc_cfun yumlibc_dllattribute lstring_t yumfmterr(syserr_t err) {
   std::ostringstream oss;
   oss << category_to_ascii(err) << '#' << (int)err.category << " : " << lstring2cxxstring(err.comment)
       << "\nfrom " << 
@@ -65,7 +65,7 @@ yumlibc_cfun lstring_t yumfmterr(syserr_t err) {
   return cxxstring2lstring(oss.str());
 }
 
-yumlibc_cfun void yumprinterr(syserr_t err) {
+yumlibc_cfun yumlibc_dllattribute void yumprinterr(syserr_t err) {
   lstring_t lstr = yumfmterr(err);
 
   printf("%.*s\n", (int)lstr.length, lstr.start);
